@@ -1,66 +1,66 @@
 # Evaluation repos. Pin each to a commit before writing its answer key,
 # so the answers stay correct as the repo moves on.
-# Names marked "check" have not been confirmed yet.
+# Commits pinned on 16 Nov 2026.
 
 [[repo]]
 url = "https://github.com/shivemn/credit-event-pipeline"
 kind = "service"
 language = "java"
 why = "Own repo: Spring Boot, Kafka, Ignite, Postgres. Answers known first-hand."
-commit = ""
+commit = "e308a8df583a1776f53afb64feec03354011eaf1"
 
 [[repo]]
-url = "https://github.com/shivemn/market-lab"   # check the name
+url = "https://github.com/shivemn/market-lab"
 kind = "service"
 language = "python"
 why = "Own repo: Python service with Postgres and a React front end."
-commit = ""
+commit = "129b31b76e87c0fe87bbdc8e8a649615e349e882"
 
 [[repo]]
 url = "https://github.com/shivemn/terminus"
 kind = "unknown"
 language = "typescript"
 why = "Own repo in an unsupported language: the report must say so, not guess."
-commit = ""
+commit = "e44ea146ab44ac013a6603801b17180200675612"
 
 [[repo]]
 url = "https://github.com/spring-projects/spring-petclinic"
 kind = "service"
 language = "java"
 why = "Well-known Spring Boot sample with a database."
-commit = ""
+commit = "500158f732419217507c7656904b8e6aa1bcc0d6"
 
 [[repo]]
 url = "https://github.com/fastapi/full-stack-fastapi-template"
 kind = "service"
 language = "python"
 why = "FastAPI, Postgres and Docker Compose: tests system design detection."
-commit = ""
+commit = "77e550a73bb49dd2967622c5ed11bf7a49603c93"
 
 [[repo]]
 url = "https://github.com/psf/requests"
 kind = "library"
 language = "python"
 why = "Library with no running system."
-commit = ""
+commit = "3c7baaa05ab4aa49cc819ce3a819d260de19c157"
 
 [[repo]]
 url = "https://github.com/pallets/click"
 kind = "library"
 language = "python"
 why = "Library for building command-line tools."
-commit = ""
+commit = "e38188e9e205005d5af5f9e59df51904c984586a"
 
 [[repo]]
 url = "https://github.com/jhy/jsoup"
 kind = "library"
 language = "java"
 why = "Java library with no running system."
-commit = ""
+commit = "d90d57521d931db7bf7ee464a4c0a1a9293db088"
 
 [[repo]]
 url = "https://github.com/sindresorhus/awesome"
 kind = "docs"
 language = "none"
 why = "A list, not code: the report must not draw a diagram."
-commit = ""
+commit = "bc98e517ddca672f55f9857d714fc3ea3c3540b2"
