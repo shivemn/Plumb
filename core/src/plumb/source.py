@@ -124,13 +124,19 @@ def _clone(
 
 
 def _check_size(path: Path, limits: Limits) -> None:
+    # ls-tree -l gives each file's size and works on every git version in use;
+    # `ls-files --format` needs git 2.38 or later.
     files = 0
     total = 0
-    for line in git("ls-files", "-z", "--format=%(objectsize)", cwd=path).split("\0"):
-        if not line:
+    for entry in git("ls-tree", "-r", "-l", "-z", "HEAD", cwd=path).split("\0"):
+        if not entry:
             continue
+        meta, _, _path = entry.partition("\t")
+        fields = meta.split()
+        if len(fields) != 4 or fields[1] != "blob":
+            continue  # submodules have no size
         files += 1
-        total += int(line) if line.isdigit() else 0
+        total += int(fields[3]) if fields[3].isdigit() else 0
         if files > limits.max_files:
             raise SourceError(f"repo has more than {limits.max_files} tracked files")
     if total > limits.max_bytes:
