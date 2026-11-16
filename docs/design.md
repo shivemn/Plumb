@@ -56,6 +56,16 @@ was not determined.
 | Python and Java first | Depth over breadth; the eval repos have known answers. |
 | Repo text is data, never instructions | READMEs and comments can contain text aimed at the model. |
 
+## Known limits of the analysis so far
+
+- Only Python and Java imports are read. Other languages are counted but
+  not linked, so a TypeScript front end does not show in the code map yet.
+- Python imports made through `importlib` or plugin lookups are not seen.
+- Java references come from imports and from type names used in the same
+  package. Fully qualified names written inline are not read yet.
+- History needs a full clone. A shallow clone skips hot spots rather than
+  reporting wrong counts.
+
 ## Security
 
 - Repo code is never executed.

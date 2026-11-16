@@ -5,7 +5,9 @@ where it changes most, and how to start contributing. Every claim in a
 report links to the file, commit or issue it came from. Anything the
 repo does not show is marked "not determined" instead of guessed.
 
-**Status:** early development. Nothing works end to end yet.
+**Status:** early development. The analysis stage works for Python and
+Java repos (`plumb analyse`); there is no AI writing step or website yet.
+See [docs/roadmap.md](docs/roadmap.md).
 
 ## How it works
 
@@ -36,9 +38,15 @@ Needs Python 3.12 and [uv](https://docs.astral.sh/uv/).
 ```
 cd core
 uv sync
-uv run plumb --version
 uv run pytest
+uv run plumb analyse pallets/click        # or a GitHub URL, or a local folder
+uv run python ../eval/run.py              # analyse and score the evaluation repos
 ```
+
+`plumb analyse` writes `<repo>.facts.json`: languages, skipped files,
+build and deploy files, which parts of the code use which, the most used
+files, hot spots and files that change together. Every fact cites the
+files, lines or commits it came from.
 
 ## Licence
 
