@@ -1,0 +1,79 @@
+# Answer key: shivemn/credit-event-pipeline
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "shivemn/credit-event-pipeline"
+commit = "e308a8df583a1776f53afb64feec03354011eaf1"
+kind = "service"
+languages = ["java", "typescript"]
+
+[[runs]]
+name = "Spring Boot app"
+source = "src/main/java/com/shivemn/ccp/CreditPipelineApplication.java"
+note = "One JVM. Apache Ignite runs embedded in it, not as a separate service."
+
+[[runs]]
+name = "React dashboard"
+source = "dashboard/package.json"
+note = "Vite dev server in development; also a static page in src/main/resources/static."
+
+[[stores]]
+name = "Apache Kafka"
+source = "docker-compose.yml"
+note = "Topic credit-events, 3 partitions, plus credit-events.DLT for unreadable messages."
+
+[[stores]]
+name = "Apache Ignite (embedded)"
+source = "src/main/java/com/shivemn/ccp/config/IgniteConfig.java"
+note = "Holds one credit profile per borrower; disk persistence on by default."
+
+[[stores]]
+name = "PostgreSQL 16"
+source = "docker-compose.yml"
+note = "Permanent archive of every event; schema in src/main/resources/db/migration (Flyway). Can be turned off."
+
+[[outside]]
+name = "Prometheus and Grafana"
+source = "docker-compose.yml"
+note = "Monitoring only. Prometheus scrapes the app's /actuator/prometheus."
+
+[[entry_points]]
+kind = "http"
+items = ["POST /api/events", "POST /api/events/generate", "GET /api/archive", "GET /api/history/{borrowerId}",
+         "POST /api/archive/rebuild", "GET /api/live (server-sent events)", "GET /api/profiles/{borrowerId}",
+         "GET /api/profiles", "GET /api/analytics", "GET /api/stats", "GET /api/recent",
+         "GET /api/replay", "POST /api/replay/start", "POST /api/replay/stop"]
+source = "src/main/java/com/shivemn/ccp/web"
+
+[[entry_points]]
+kind = "queue consumer"
+items = ["CreditEventConsumer (group credit-profile-builder)", "ArchiveConsumer (group credit-event-archiver)"]
+source = "src/main/java/com/shivemn/ccp/pipeline/CreditEventConsumer.java"
+
+[[modules]]
+path = "src/main/java/com/shivemn/ccp/pipeline"
+purpose = "Publishes events to Kafka and consumes them into Ignite profiles."
+
+[[modules]]
+path = "src/main/java/com/shivemn/ccp/archive"
+purpose = "Writes every event to PostgreSQL and rebuilds Ignite from it."
+
+[[modules]]
+path = "src/main/java/com/shivemn/ccp/replay"
+purpose = "Replays a Lending Club style loan CSV as events."
+
+[[modules]]
+path = "src/main/java/com/shivemn/ccp/web"
+purpose = "REST endpoints and the live event stream for the dashboard."
+
+[commands]
+start_services = "docker compose up -d"
+run = "mvn spring-boot:run"
+test = "mvn -B verify"
+dashboard = "cd dashboard && npm ci && npm run dev"
+
+must_not_claim = [
+  "Ignite runs as a separate service or container",
+  "the dashboard writes to the database directly",
+  "Grafana is required for the app to run",
+  "the load-test results are produced by CI",
+]

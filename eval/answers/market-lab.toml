@@ -1,0 +1,73 @@
+# Answer key: shivemn/market-lab
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "shivemn/market-lab"
+commit = "129b31b76e87c0fe87bbdc8e8a649615e349e882"
+kind = "service"
+languages = ["python", "typescript"]
+
+[[runs]]
+name = "marketlab serve (FastAPI)"
+source = "Dockerfile"
+note = "One Python process serves the API and the built React page. The Dockerfile builds the page first."
+
+[[runs]]
+name = "marketlab cluster"
+source = "src/marketlab/cluster.py"
+note = "Several worker processes; needs DATABASE_URL."
+
+[[stores]]
+name = "PostgreSQL"
+source = "render.yaml"
+note = "Used when DATABASE_URL is set (Neon in the hosted demo). Otherwise SQLite in a file."
+
+[[stores]]
+name = "SQLite"
+source = "Dockerfile"
+note = "Default store for practice accounts at /data/practice.db."
+
+[[outside]]
+name = "Render"
+source = "render.yaml"
+note = "Hosting for the demo, Docker runtime, health check /api/health."
+
+[[entry_points]]
+kind = "command"
+items = ["marketlab run", "marketlab show", "marketlab serve", "marketlab costs", "marketlab replay"]
+source = "src/marketlab/cli.py"
+
+[[entry_points]]
+kind = "http"
+items = ["27 FastAPI routes"]
+source = "src/marketlab/api/app.py"
+
+[[modules]]
+path = "src/marketlab/core"
+purpose = "The exchange: order book, auction, commands, events, validation."
+
+[[modules]]
+path = "src/marketlab/ledger"
+purpose = "Double-entry ledger, fills, statements and the storage backend for practice accounts."
+
+[[modules]]
+path = "src/marketlab/sim"
+purpose = "Simulated traders and the random processes that drive prices."
+
+[[modules]]
+path = "web/src"
+purpose = "React dashboard."
+
+[commands]
+install = "pip install -e .[api,postgres,dev]"
+run = "marketlab serve"
+test = "pytest"
+web = "cd web && npm ci && npm run build"
+
+must_not_claim = [
+  "the root node_modules folder is part of the application",
+  "the app needs PostgreSQL to run",
+  "the exchange core depends on FastAPI",
+]
+
+# Note for the owner: node_modules/ (999 files) and a root package.json for the
+# Neon CLI are committed at this commit. Plumb must skip vendored folders.

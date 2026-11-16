@@ -1,0 +1,59 @@
+# Answer key: spring-projects/spring-petclinic
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "spring-projects/spring-petclinic"
+commit = "500158f732419217507c7656904b8e6aa1bcc0d6"
+kind = "service"
+languages = ["java"]
+
+[[runs]]
+name = "Spring Boot web app"
+source = "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java"
+note = "Server-rendered pages (Thymeleaf), port 8080."
+
+[[stores]]
+name = "H2 (in memory)"
+source = "pom.xml"
+note = "Default when no profile is set."
+
+[[stores]]
+name = "MySQL"
+source = "src/main/resources/application-mysql.properties"
+note = "Optional, with the mysql profile; container in docker-compose.yml."
+
+[[stores]]
+name = "PostgreSQL"
+source = "src/main/resources/application-postgres.properties"
+note = "Optional, with the postgres profile; container in docker-compose.yml."
+
+[[outside]]
+name = "Kubernetes"
+source = "k8s/petclinic.yml"
+note = "Example deployment files, not required to run."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/owner"
+purpose = "Owners, pets and visits: controllers, entities, repository."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/vet"
+purpose = "Vets and specialties."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/system"
+purpose = "Cache, welcome page, language settings and a page that triggers a demo error."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/model"
+purpose = "Base entity classes."
+
+[commands]
+run = "./mvnw spring-boot:run"
+run_gradle = "./gradlew bootRun"
+database = "docker compose up mysql (or postgres)"
+
+must_not_claim = [
+  "MySQL or PostgreSQL is required",
+  "the app exposes a JSON REST API as its main interface",
+  "it is a microservices system",
+]
