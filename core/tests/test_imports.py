@@ -1,6 +1,6 @@
 from collections.abc import Callable
 
-from plumb.imports import Import, PythonIndex, python_edges, python_imports
+from plumb.imports import Import, PythonIndex, java_edges, python_edges, python_imports, read_java
 from plumb.inventory import build_inventory
 from tests.conftest import RepoBuilder
 
@@ -86,4 +86,57 @@ def test_python_edges(make_repo: Callable[[str], RepoBuilder]) -> None:
     assert edges == {
         ("shop/api.py", "shop/db.py", 1),
         ("tests/test_api.py", "shop/api.py", 1),
+    }
+
+
+JAVA = b"""\
+package com.shop.web;
+
+import com.shop.service.OrderService;
+import com.shop.model.*;
+import static com.shop.util.Money.format;
+import java.util.List;
+
+public class OrderController {
+    private final OrderService service;
+    private OrderView view;
+    List<Order> all() { return List.of(); }
+}
+"""
+
+
+def test_read_java() -> None:
+    info = read_java(JAVA)
+    assert info.package == "com.shop.web"
+    assert info.imports == (
+        ("com.shop.service.OrderService", False, False, 3),
+        ("com.shop.model", False, True, 4),
+        ("com.shop.util.Money.format", True, False, 5),
+        ("java.util.List", False, False, 6),
+    )
+    assert info.type_names["OrderView"] == 10
+
+
+def test_java_edges(make_repo: Callable[[str], RepoBuilder]) -> None:
+    root = "src/main/java/com/shop"
+    repo = make_repo("shop")
+    repo.commit(
+        {
+            f"{root}/web/OrderController.java": JAVA.decode(),
+            f"{root}/web/OrderView.java": "package com.shop.web;\nclass OrderView {}\n",
+            f"{root}/service/OrderService.java": "package com.shop.service;\nclass OrderService {}",
+            f"{root}/model/Order.java": "package com.shop.model;\nclass Order {}\n",
+            f"{root}/model/Unused.java": "package com.shop.model;\nclass Unused {}\n",
+            f"{root}/util/Money.java": "package com.shop.util;\nclass Money {}\n",
+        }
+    )
+    edges = {
+        (e.target.removeprefix(f"{root}/"), e.line)
+        for e in java_edges(repo.path, build_inventory(repo.path))
+    }
+    assert edges == {
+        ("service/OrderService.java", 3),
+        ("model/Order.java", 4),  # from the wildcard, because Order is used
+        ("util/Money.java", 5),  # static import of a method resolves to its class
+        ("web/OrderView.java", 10),  # same package, no import needed
     }

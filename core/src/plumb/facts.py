@@ -6,7 +6,9 @@ from collections import Counter, defaultdict
 from collections.abc import Sequence
 from pathlib import PurePosixPath
 
+from plumb.graph import component_edges, most_used, mutual_components
 from plumb.history import History
+from plumb.imports import Edge
 from plumb.inventory import Category, FileInfo
 from plumb.model import (
     CommitEvidence,
@@ -43,12 +45,15 @@ def build_facts(
     checkout: Checkout,
     files: list[FileInfo],
     history: History | None,
+    edges: list[Edge] | None = None,
     kind: RepoKind = RepoKind.UNKNOWN,
 ) -> FactSet:
     builder = FactBuilder()
     add_language_facts(builder, files)
     add_skipped_facts(builder, files)
     add_build_file_facts(builder, files)
+    if edges:
+        add_graph_facts(builder, edges)
     if history is not None:
         add_history_facts(builder, history)
     return FactSet(
@@ -98,6 +103,33 @@ def add_build_file_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
             builder.add(f"Build or deploy file {info.path}", [FileEvidence(path=info.path)])
         elif pure.parts[:2] == (".github", "workflows") and pure.suffix in (".yml", ".yaml"):
             builder.add(f"GitHub Actions workflow {info.path}", [FileEvidence(path=info.path)])
+
+
+def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) -> None:
+    components = component_edges(edges)
+    for item in components[:limit]:
+        builder.add(
+            f"Code in {item.source} uses code in {item.target} "
+            f"({_plural(item.count, 'reference')})",
+            [_line(e) for e in item.examples],
+        )
+    for forward, back in mutual_components(components):
+        builder.add(
+            f"{forward.source} and {forward.target} each use the other",
+            [_line(forward.examples[0]), _line(back.examples[0])],
+        )
+    for target, users in most_used(edges):
+        sources = len({e.source for e in users})
+        if sources < 3:
+            break
+        builder.add(
+            f"{target} is used by {_plural(sources, 'other file')}",
+            [FileEvidence(path=target), *(_line(e) for e in users[:2])],
+        )
+
+
+def _line(edge: Edge) -> FileEvidence:
+    return FileEvidence(path=edge.source, start_line=edge.line, end_line=edge.line)
 
 
 # A file has to change at least this often to count as a hot spot.

@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from functools import cache
 from pathlib import Path, PurePosixPath
 
+import tree_sitter_java
 import tree_sitter_python
 from tree_sitter import Language, Node, Parser
 
@@ -39,6 +40,11 @@ class Edge:
 @cache
 def _python_parser() -> Parser:
     return Parser(Language(tree_sitter_python.language()))
+
+
+@cache
+def _java_parser() -> Parser:
+    return Parser(Language(tree_sitter_java.language()))
 
 
 def _text(node: Node | None) -> str:
@@ -160,4 +166,80 @@ def python_edges(repo: Path, files: list[FileInfo]) -> list[Edge]:
     for path in paths:
         for item in python_imports((repo / path).read_bytes()):
             edges.extend(Edge(path, target, item.line) for target in index.resolve(path, item))
+    return edges
+
+
+_JAVA_NAMES = ("scoped_identifier", "identifier")
+
+
+@dataclass(frozen=True)
+class JavaFile:
+    package: str
+    imports: tuple[tuple[str, bool, bool, int], ...]  # (name, is_static, is_wildcard, line)
+    type_names: dict[str, int]  # simple type names used, with the first line each appears on
+
+
+def read_java(source: bytes) -> JavaFile:
+    """Package, imports and the type names a Java file mentions."""
+    tree = _java_parser().parse(source)
+    package = ""
+    imports: list[tuple[str, bool, bool, int]] = []
+    type_names: dict[str, int] = {}
+    stack = [tree.root_node]
+    while stack:
+        node = stack.pop()
+        if node.type == "package_declaration":
+            for child in node.named_children:
+                if child.type in _JAVA_NAMES:
+                    package = _text(child)
+        elif node.type == "import_declaration":
+            names = [
+                c for c in node.named_children if c.type in ("scoped_identifier", "identifier")
+            ]
+            is_static = any(c.type == "static" for c in node.children)
+            is_wildcard = any(c.type == "asterisk" for c in node.children)
+            if names:
+                imports.append((_text(names[0]), is_static, is_wildcard, node.start_point.row + 1))
+        else:
+            if node.type == "type_identifier":
+                type_names.setdefault(_text(node), node.start_point.row + 1)
+            stack.extend(reversed(node.children))
+    return JavaFile(package, tuple(imports), type_names)
+
+
+def java_edges(repo: Path, files: list[FileInfo]) -> list[Edge]:
+    """Edges between the repo's own Java files: imports, plus types used from the same package."""
+    paths = [
+        f.path
+        for f in files
+        if f.language == "java" and f.category in (Category.SOURCE, Category.TEST)
+    ]
+    parsed = {path: read_java((repo / path).read_bytes()) for path in paths}
+    by_class: dict[str, str] = {}
+    by_package: dict[str, dict[str, str]] = {}
+    for path, info in parsed.items():
+        simple = PurePosixPath(path).stem
+        qualified = f"{info.package}.{simple}" if info.package else simple
+        by_class.setdefault(qualified, path)
+        by_package.setdefault(info.package, {}).setdefault(simple, path)
+
+    edges: list[Edge] = []
+    for path, info in parsed.items():
+        targets: dict[str, int] = {}
+        for name, is_static, is_wildcard, line in info.imports:
+            if is_wildcard and not is_static:
+                for simple, target in by_package.get(name, {}).items():
+                    if simple in info.type_names:
+                        targets.setdefault(target, line)
+                continue
+            parts = name.split(".")
+            for end in range(len(parts), 0, -1):
+                hit = by_class.get(".".join(parts[:end]))
+                if hit:
+                    targets.setdefault(hit, line)
+                    break
+        for simple, target in by_package.get(info.package, {}).items():
+            if simple in info.type_names:
+                targets.setdefault(target, info.type_names[simple])
+        edges.extend(Edge(path, t, line) for t, line in targets.items() if t != path)
     return edges
