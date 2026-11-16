@@ -1,0 +1,647 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "shivemn",
+    "name": "credit-event-pipeline",
+    "commit": "e308a8df583a1776f53afb64feec03354011eaf1"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "27 source files in java, 1,827 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "30 source files in typescript, 1,696 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "dashboard/src/App.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "dashboard/src/components/FlowDiagram.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "dashboard/src/types.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "2 source files in html, 649 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/static/index.html",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "dashboard/index.html",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "1 source file in css, 279 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "dashboard/src/styles.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "1 source file in sql, 18 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/migration/V1__create_credit_events.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "1 generated file left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "dashboard/package-lock.json",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "GitHub Actions workflow .github/workflows/ci.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "Build or deploy file dashboard/package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "dashboard/package.json",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "Build or deploy file docker-compose.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docker-compose.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "Build or deploy file pom.xml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/model (12 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/service (5 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/service (5 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/IgnitePersistenceTest.java",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/PipelineIntegrationTest.java",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "Code in src/main/java/com/shivemn/ccp/archive uses code in src/main/java/com/shivemn/ccp/model (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/ArchiveConsumer.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/model (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/CreditEventConsumer.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/SyntheticEventGenerator.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "Code in src/main/java/com/shivemn/ccp/service uses code in src/main/java/com/shivemn/ccp/model (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/PipelineMetrics.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/config (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/IgnitePersistenceTest.java",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "Code in src/main/java/com/shivemn/ccp/config uses code in src/main/java/com/shivemn/ccp/service (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/KafkaErrorConfig.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/MetricsConfig.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/MetricsConfig.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/service (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/CreditEventConsumer.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/CreditEventConsumer.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "Code in src/main/java/com/shivemn/ccp/replay uses code in src/main/java/com/shivemn/ccp/model (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/LoanEventMapper.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/LoanEventMapper.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/archive (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ArchiveController.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ArchiveController.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/model (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/pipeline (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/archive (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Code in src/test/java/com/shivemn/ccp/replay uses code in src/main/java/com/shivemn/ccp/model (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/replay/LoanEventMapperTest.java",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/com/shivemn/ccp/replay/LoanEventMapperTest.java",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "src/main/java/com/shivemn/ccp/archive and src/main/java/com/shivemn/ccp/service each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/StatsService.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "src/main/java/com/shivemn/ccp/model/CreditEvent.java is used by 17 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/model/CreditEvent.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/ArchiveConsumer.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "src/main/java/com/shivemn/ccp/model/EventType.java is used by 11 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/model/EventType.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/model/CreditEvent.java",
+          "start_line": 13,
+          "end_line": 13
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "src/main/java/com/shivemn/ccp/service/ProfileService.java is used by 9 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/MetricsConfig.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "src/main/java/com/shivemn/ccp/service/PipelineMetrics.java is used by 8 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/PipelineMetrics.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/KafkaErrorConfig.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/MetricsConfig.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "src/main/java/com/shivemn/ccp/model/CreditProfile.java is used by 7 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/model/CreditProfile.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/config/IgniteConfig.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "5 commits between 01 Aug 2026 and 30 Oct 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "e308a8df583a1776f53afb64feec03354011eaf1"
+        },
+        {
+          "kind": "commit",
+          "sha": "b32f0ce533c0b1b915d5bf62c7dbbcde0df73a0c"
+        },
+        {
+          "kind": "commit",
+          "sha": "04b2ad8b56cf265eca2992ca6411c9432a220b1c"
+        }
+      ]
+    }
+  ]
+}

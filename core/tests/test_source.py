@@ -69,3 +69,14 @@ def test_fetch_rejects_folder_without_git(tmp_path: Path) -> None:
 def test_fetch_rejects_other_hosts(tmp_path: Path) -> None:
     with pytest.raises(SourceError, match="not a local folder or a GitHub repo"):
         fetch("https://gitlab.com/a/b", workdir=tmp_path / "work")
+
+
+def test_local_folder_must_already_be_at_commit(
+    make_repo: Callable[[str], RepoBuilder], tmp_path: Path
+) -> None:
+    repo = make_repo("demo")
+    first = repo.commit({"a.py": "1\n"})
+    second = repo.commit({"a.py": "2\n"})
+    assert fetch(str(repo.path), tmp_path, commit=second[:7]).commit == second
+    with pytest.raises(SourceError, match=f"not {first[:7]}"):
+        fetch(str(repo.path), tmp_path, commit=first)

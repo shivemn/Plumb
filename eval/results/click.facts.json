@@ -1,0 +1,1007 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "pallets",
+    "name": "click",
+    "commit": "e38188e9e205005d5af5f9e59df51904c984586a"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "32 source files in python, 13,983 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/core.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/click/types.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "1 source file in shell, 7 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".devcontainer/on-create-command.sh",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "1 generated file left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "uv.lock",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "GitHub Actions workflow .github/workflows/lock.yaml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/lock.yaml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "GitHub Actions workflow .github/workflows/nightly.yaml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/nightly.yaml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "GitHub Actions workflow .github/workflows/pre-commit.yaml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/pre-commit.yaml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "GitHub Actions workflow .github/workflows/publish.yaml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yaml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "GitHub Actions workflow .github/workflows/tests.yaml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/tests.yaml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "GitHub Actions workflow .github/workflows/zizmor.yaml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/zizmor.yaml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "Build or deploy file examples/aliases/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/aliases/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "Build or deploy file examples/colors/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/colors/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "Build or deploy file examples/completion/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/completion/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "Build or deploy file examples/complex/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/complex/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "Build or deploy file examples/imagepipe/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/imagepipe/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "Build or deploy file examples/inout/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/inout/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "Build or deploy file examples/naval/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/naval/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "Build or deploy file examples/repo/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/repo/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "Build or deploy file examples/termui/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/termui/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "Build or deploy file examples/validation/pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/validation/pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "Build or deploy file pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "Code in tests uses code in src/click (74 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_abort_interrupt.py",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_arguments.py",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "Code in tests/test_utils uses code in src/click (20 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_utils/test_KeepOpenFile.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_utils/test_LazyFile.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_utils/test__detect_program_name.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "Code in tests/typing uses code in src/click (13 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/typing/typing_aliased_group.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "tests/typing/typing_confirmation_option.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "tests/typing/typing_edit.py",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Code in tests/test_types uses code in src/click (8 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_types/test_Choice.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_types/test_File.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_types/test_FloatRange.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Code in examples/completion uses code in src/click (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/completion/completion.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "examples/completion/completion.py",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "Code in examples/complex/complex/commands uses code in examples/complex/complex (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/complex/complex/commands/cmd_init.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "examples/complex/complex/commands/cmd_status.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "Code in examples/complex/complex/commands uses code in src/click (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/complex/complex/commands/cmd_init.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "examples/complex/complex/commands/cmd_status.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "Code in examples/aliases uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/aliases/aliases.py",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "Code in examples/colors uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/colors/colors.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "Code in examples/complex/complex uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/complex/complex/cli.py",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "Code in examples/imagepipe uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/imagepipe/imagepipe.py",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "Code in examples/inout uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/inout/inout.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "statement": "Code in examples/naval uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/naval/naval.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "statement": "Code in examples/repo uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/repo/repo.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "statement": "Code in examples/termui uses code in src/click (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/termui/termui.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "statement": "src/click/__init__.py is used by 63 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "examples/aliases/aliases.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "examples/colors/colors.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "statement": "src/click/_compat.py is used by 17 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/_compat.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": 23,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "statement": "src/click/core.py is used by 12 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/core.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "statement": "src/click/utils.py is used by 12 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/utils.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": 70,
+          "end_line": 70
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": 71,
+          "end_line": 71
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "statement": "src/click/exceptions.py is used by 9 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/exceptions.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": 31,
+          "end_line": 31
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "statement": "48 commits between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "a2b9b2f29580aa253fdbc210718f047a1e98b916"
+        },
+        {
+          "kind": "commit",
+          "sha": "cad975587f91ca2c9dde0ccaaaa75aa33a39554c"
+        },
+        {
+          "kind": "commit",
+          "sha": "7996a89c5a4ce1c451e2e1c9c5a00eb0c844d4ce"
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "statement": "src/click/core.py changed in 13 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/core.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a2b9b2f29580aa253fdbc210718f047a1e98b916"
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "c4dd0cd968f61d0ee7a163af810bd695ed893ec3"
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "statement": "tests/test_options.py changed in 9 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_options.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a2b9b2f29580aa253fdbc210718f047a1e98b916"
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "c53d3732b98c764932e146c007146ad402acb229"
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "statement": "src/click/_termui_impl.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "a1d87858abd77fa8e3ffc204670ccd75b96c4781"
+        },
+        {
+          "kind": "commit",
+          "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4"
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "statement": "tests/test_arguments.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_arguments.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "9f0bcdf0d868edfc71435cd0aac2dcc08cf94828"
+        },
+        {
+          "kind": "commit",
+          "sha": "b90faad1788bc030bb3320938f07c9189f42d7d0"
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "statement": "tests/test_termui.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_termui.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "90a2973f85fffc4d8a20effb2bcdff3f394c5e62"
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "a1d87858abd77fa8e3ffc204670ccd75b96c4781"
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "statement": "tests/test_deprecations.py changed in 4 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_deprecations.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "9f0bcdf0d868edfc71435cd0aac2dcc08cf94828"
+        },
+        {
+          "kind": "commit",
+          "sha": "b90faad1788bc030bb3320938f07c9189f42d7d0"
+        },
+        {
+          "kind": "commit",
+          "sha": "d036881798e34289a49b18a5c550c7cf687e5a7a"
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "statement": "tests/test_basic.py changed in 3 commits by 2 authors between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_basic.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a2b9b2f29580aa253fdbc210718f047a1e98b916"
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "b8a4486d52083981babc1642449420db6b09662e"
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "statement": "src/click/testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/testing.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "90a2973f85fffc4d8a20effb2bcdff3f394c5e62"
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "f8c5a8efc17d01a9fb10bba961def4c3215ce369"
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "statement": "tests/test_testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_testing.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "90a2973f85fffc4d8a20effb2bcdff3f394c5e62"
+        },
+        {
+          "kind": "commit",
+          "sha": "df7fe0b97297d07748dc2f88008e2bd136e0cf43"
+        },
+        {
+          "kind": "commit",
+          "sha": "f8c5a8efc17d01a9fb10bba961def4c3215ce369"
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "statement": "src/click/core.py and tests/test_options.py changed in the same commit 8 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/core.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_options.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "statement": "src/click/core.py and tests/test_arguments.py changed in the same commit 7 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/core.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_arguments.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "statement": "src/click/_termui_impl.py and tests/test_termui.py changed in the same commit 6 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_termui.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "statement": "tests/test_arguments.py and tests/test_options.py changed in the same commit 5 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_arguments.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_options.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "statement": "src/click/core.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/core.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_deprecations.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "statement": "tests/test_arguments.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_arguments.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_deprecations.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "statement": "tests/test_deprecations.py and tests/test_options.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_deprecations.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_options.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "statement": "src/click/testing.py and tests/test_testing.py changed in the same commit 3 times between 14 Aug 2026 and 12 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/testing.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_testing.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    }
+  ]
+}

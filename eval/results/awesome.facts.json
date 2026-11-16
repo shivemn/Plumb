@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "sindresorhus",
+    "name": "awesome",
+    "commit": "bc98e517ddca672f55f9857d714fc3ea3c3540b2"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "GitHub Actions workflow .github/workflows/main.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/main.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "7 commits between 04 Jun 2026 and 02 Sep 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "bc98e517ddca672f55f9857d714fc3ea3c3540b2"
+        },
+        {
+          "kind": "commit",
+          "sha": "d35bcd9c5c83f2652b0d2b5f91a320009c8f29a3"
+        },
+        {
+          "kind": "commit",
+          "sha": "d2c9dbbbf85207cdf629a6e66a4f2186a7b4fbd3"
+        }
+      ]
+    }
+  ]
+}

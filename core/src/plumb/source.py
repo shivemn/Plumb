@@ -51,17 +51,28 @@ def parse_github(ref: str) -> tuple[str, str] | None:
     return None
 
 
-def fetch(ref: str, workdir: Path, limits: Limits | None = None) -> Checkout:
-    """Return a checkout of `ref`, which is a local path, a GitHub URL or owner/name."""
+def fetch(
+    ref: str,
+    workdir: Path,
+    limits: Limits | None = None,
+    commit: str | None = None,
+) -> Checkout:
+    """Return a checkout of `ref`, which is a local path, a GitHub URL or owner/name.
+
+    With `commit`, a cloned repo is moved to that commit. A local folder is
+    never changed: it must already be at that commit.
+    """
     limits = limits or Limits()
     local = Path(ref).expanduser()
     if local.is_dir():
         checkout = _use_local(local.resolve())
+        if commit and not checkout.commit.startswith(commit):
+            raise SourceError(f"{local} is at {checkout.commit[:7]}, not {commit[:7]}")
     else:
         parsed = parse_github(ref)
         if parsed is None:
             raise SourceError(f"not a local folder or a GitHub repo: {ref}")
-        checkout = _clone(*parsed, workdir=workdir, limits=limits)
+        checkout = _clone(*parsed, workdir=workdir, limits=limits, commit=commit)
     _check_size(checkout.path, limits)
     return checkout
 
@@ -83,9 +94,16 @@ def _use_local(path: Path) -> Checkout:
     return Checkout(owner=owner, name=name, commit=commit, path=top)
 
 
-def _clone(owner: str, name: str, workdir: Path, limits: Limits) -> Checkout:
+def _clone(
+    owner: str, name: str, workdir: Path, limits: Limits, commit: str | None = None
+) -> Checkout:
     dest = workdir / f"{owner}__{name}"
-    if not (dest / ".git").is_dir():
+    if (dest / ".git").is_dir():
+        # A clone from an earlier run: bring it up to date before use.
+        git("fetch", "-q", "origin", cwd=dest, timeout=limits.clone_timeout_s)
+        if not commit:
+            git("checkout", "-q", "--detach", "origin/HEAD", cwd=dest)
+    else:
         workdir.mkdir(parents=True, exist_ok=True)
         git(
             "clone",
@@ -96,8 +114,13 @@ def _clone(owner: str, name: str, workdir: Path, limits: Limits) -> Checkout:
             str(dest),
             timeout=limits.clone_timeout_s,
         )
-    commit = git("rev-parse", "HEAD", cwd=dest).strip()
-    return Checkout(owner=owner, name=name, commit=commit, path=dest)
+    if commit:
+        try:
+            git("checkout", "-q", "--detach", commit, cwd=dest, timeout=limits.clone_timeout_s)
+        except GitError as error:
+            raise SourceError(f"commit {commit[:7]} not found in {owner}/{name}") from error
+    head = git("rev-parse", "HEAD", cwd=dest).strip()
+    return Checkout(owner=owner, name=name, commit=head, path=dest)
 
 
 def _check_size(path: Path, limits: Limits) -> None:

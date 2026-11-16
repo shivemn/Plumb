@@ -30,7 +30,12 @@ PROVIDERS = (
     Provider(
         "Anthropic",
         "https://api.anthropic.com/v1/messages",
-        ("x-api-key", "anthropic-version", "content-type", "anthropic-dangerous-direct-browser-access"),
+        (
+            "x-api-key",
+            "anthropic-version",
+            "content-type",
+            "anthropic-dangerous-direct-browser-access",
+        ),
     ),
     Provider(
         "OpenAI",

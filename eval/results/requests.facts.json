@@ -1,0 +1,485 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "psf",
+    "name": "requests",
+    "commit": "3c7baaa05ab4aa49cc819ce3a819d260de19c157"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "21 source files in python, 6,865 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/utils.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/sessions.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "1 source file in html, 33 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/_templates/sidebar.html",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "1 source file in css, 12 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/_static/custom.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "GitHub Actions workflow .github/workflows/close-issues.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/close-issues.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "GitHub Actions workflow .github/workflows/codeql-analysis.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/codeql-analysis.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "GitHub Actions workflow .github/workflows/lint.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/lint.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "GitHub Actions workflow .github/workflows/lock-issues.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/lock-issues.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "GitHub Actions workflow .github/workflows/publish.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "GitHub Actions workflow .github/workflows/run-tests.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/run-tests.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "GitHub Actions workflow .github/workflows/typecheck.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/typecheck.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "GitHub Actions workflow .github/workflows/zizmor.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/zizmor.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "Build or deploy file Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "Build or deploy file docs/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "Build or deploy file docs/requirements.txt",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/requirements.txt",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "Build or deploy file pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "Build or deploy file setup.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "setup.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "Build or deploy file tests/certs/expired/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/certs/expired/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "Build or deploy file tests/certs/expired/ca/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/certs/expired/ca/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "Build or deploy file tests/certs/expired/server/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/certs/expired/server/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "Build or deploy file tests/certs/mtls/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/certs/mtls/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "Build or deploy file tests/certs/mtls/client/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/certs/mtls/client/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "Build or deploy file tests/certs/valid/server/Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/certs/valid/server/Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "Code in tests uses code in src/requests (26 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_adapters.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_help.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Code in tests uses code in tests/testserver (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_lowlevel.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_requests.py",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_testserver.py",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Code in docs uses code in src/requests (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/conf.py",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "src/requests/compat.py is used by 14 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/compat.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/_internal_utils.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/adapters.py",
+          "start_line": 37,
+          "end_line": 37
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "src/requests/models.py is used by 11 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": 184,
+          "end_line": 184
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/_types.py",
+          "start_line": 66,
+          "end_line": 66
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "src/requests/structures.py is used by 9 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/structures.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/_types.py",
+          "start_line": 67,
+          "end_line": 67
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/adapters.py",
+          "start_line": 52,
+          "end_line": 52
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "src/requests/cookies.py is used by 8 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/cookies.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/_types.py",
+          "start_line": 65,
+          "end_line": 65
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/adapters.py",
+          "start_line": 38,
+          "end_line": 38
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "src/requests/_types.py is used by 7 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/_types.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/adapters.py",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/adapters.py",
+          "start_line": 77,
+          "end_line": 77
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "8 commits between 28 Jul 2026 and 26 Oct 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "3c7baaa05ab4aa49cc819ce3a819d260de19c157"
+        },
+        {
+          "kind": "commit",
+          "sha": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60"
+        },
+        {
+          "kind": "commit",
+          "sha": "dae7ef63b4df6eded86637f251fc4e3a06c3b479"
+        }
+      ]
+    }
+  ]
+}

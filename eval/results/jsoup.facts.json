@@ -1,0 +1,1337 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "jhy",
+    "name": "jsoup",
+    "commit": "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "105 source files in java, 31,559 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Element.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/TokeniserState.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "1 source file in html, 31 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/javadoc/overview.html",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "GitHub Actions workflow .github/workflows/build.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/build.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "GitHub Actions workflow .github/workflows/cifuzz.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/cifuzz.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "GitHub Actions workflow .github/workflows/codeql.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/codeql.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "Build or deploy file pom.xml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "Code in src/test/java/org/jsoup/parser uses code in src/main/java/org/jsoup/nodes (73 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "Code in src/test/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/nodes (70 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/AttributeTest.java",
+          "start_line": 14,
+          "end_line": 14
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/AttributeTest.java",
+          "start_line": 44,
+          "end_line": 44
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/AttributeTest.java",
+          "start_line": 45,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "Code in src/test/java/org/jsoup/parser uses code in src/main/java/org/jsoup/parser (65 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/AttributeParseTest.java",
+          "start_line": 125,
+          "end_line": 125
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/CharacterReaderTest.java",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/CharacterTokenTest.java",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "Code in src/main/java/org/jsoup/parser uses code in src/main/java/org/jsoup/nodes (57 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/ForeignNames.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/ForeignNames.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "Code in src/main/java/org/jsoup/select uses code in src/main/java/org/jsoup/nodes (52 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Collector.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Collector.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Collector.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "Code in src/test/java/org/jsoup/select uses code in src/main/java/org/jsoup/select (48 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/CompiledQueryTest.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/CompiledQueryTest.java",
+          "start_line": 43,
+          "end_line": 43
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/CompiledQueryTest.java",
+          "start_line": 62,
+          "end_line": 62
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "Code in src/test/java/org/jsoup/select uses code in src/main/java/org/jsoup/nodes (47 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/CompiledQueryTest.java",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/CompiledQueryTest.java",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/CompiledQueryTest.java",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "Code in src/main/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/internal (39 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attribute.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attribute.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attribute.java",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "Code in src/main/java/org/jsoup/parser uses code in src/main/java/org/jsoup/internal (28 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "Code in src/main/java/org/jsoup/select uses code in src/main/java/org/jsoup/internal (24 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/CombiningEvaluator.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Elements.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Evaluator.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "Code in src/test/java/org/jsoup/integration/routes uses code in src/test/java/org/jsoup/integration/netty (20 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/routes/CookieRoute.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/routes/CookieRoute.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/routes/DeflateRoute.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "Code in src/main/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/helper (19 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attribute.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attributes.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Document.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "Code in src/test/java/org/jsoup/nodes uses code in src/main/java/org/jsoup (19 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/AttributeTest.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/AttributesTest.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/BuildEntities.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "Code in src/main/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/parser (18 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attributes.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Comment.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Document.java",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "Code in src/test/java/org/jsoup/integration uses code in src/main/java/org/jsoup/nodes (18 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/ConnectIT.java",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/ConnectIT.java",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/ConnectTest.java",
+          "start_line": 16,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/helper each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Connection.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/helper/CookieUtil.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/internal each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Jsoup.java",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/internal/ControllableInputStream.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/nodes each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Connection.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Document.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/parser each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Connection.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/StreamParser.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/internal each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/helper/CookieUtil.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/internal/ControllableInputStream.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/nodes each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/helper/DataUtil.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attribute.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/parser each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/helper/CookieUtil.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/select each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/helper/DataUtil.java",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Elements.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "src/main/java/org/jsoup/internal and src/main/java/org/jsoup/nodes each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/internal/CssMatching.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attribute.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "src/main/java/org/jsoup/internal and src/main/java/org/jsoup/parser each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/internal/CssMatching.java",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "src/main/java/org/jsoup/nodes and src/main/java/org/jsoup/parser each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Attributes.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/ForeignNames.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "statement": "src/main/java/org/jsoup/nodes and src/main/java/org/jsoup/select each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Document.java",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Collector.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "statement": "src/main/java/org/jsoup/parser and src/main/java/org/jsoup/select each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/StreamParser.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/Evaluator.java",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "statement": "src/test/java/org/jsoup and src/test/java/org/jsoup/integration each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/JsoupTest.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/ConnectTest.java",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "statement": "src/test/java/org/jsoup/helper and src/test/java/org/jsoup/integration each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/helper/DataUtilTest.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/ConnectTest.java",
+          "start_line": 52,
+          "end_line": 52
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "statement": "src/test/java/org/jsoup/integration and src/test/java/org/jsoup/integration/netty each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/TestServer.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/netty/NettyProxyServer.java",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "statement": "src/test/java/org/jsoup/integration and src/test/java/org/jsoup/integration/routes each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/ConnectIT.java",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/integration/routes/FileRoute.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "statement": "src/test/java/org/jsoup/nodes and src/test/java/org/jsoup/select each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/ElementTest.java",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/select/TraversorTest.java",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "statement": "src/main/java/org/jsoup/nodes/Document.java is used by 99 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Document.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Connection.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Jsoup.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "statement": "src/main/java/org/jsoup/nodes/Element.java is used by 85 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Element.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Jsoup.java",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/examples/HtmlToPlainText.java",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "statement": "src/main/java/org/jsoup/Jsoup.java is used by 71 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Jsoup.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/examples/HtmlToPlainText.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/examples/ListLinks.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "statement": "src/main/java/org/jsoup/parser/Parser.java is used by 64 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/Parser.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Connection.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/Jsoup.java",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "statement": "src/main/java/org/jsoup/internal/StringUtil.java is used by 56 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/internal/StringUtil.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/examples/HtmlToPlainText.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/helper/CookieUtil.java",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "statement": "111 commits between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+        },
+        {
+          "kind": "commit",
+          "sha": "659b7d27d32a9bbe082bcc19224693bc1e957b4d"
+        },
+        {
+          "kind": "commit",
+          "sha": "b85c4ab23020632871216a3be9925e99bdead540"
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "statement": "src/test/java/org/jsoup/parser/HtmlParserTest.java changed in 23 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        },
+        {
+          "kind": "commit",
+          "sha": "0dc96b3b144c2eae59bcb1d5e1b412269ee50f2b"
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java changed in 18 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        },
+        {
+          "kind": "commit",
+          "sha": "f062a8abb0271bf3a98a698f9b74fb2ac8f0c1e3"
+        },
+        {
+          "kind": "commit",
+          "sha": "37aea49902972cec9a53dc2c65023729f1c3715b"
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java changed in 16 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        },
+        {
+          "kind": "commit",
+          "sha": "0719f9cf9242ec0da94eb488059917345c02d0a7"
+        },
+        {
+          "kind": "commit",
+          "sha": "37aea49902972cec9a53dc2c65023729f1c3715b"
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "statement": "src/main/java/org/jsoup/parser/TokeniserState.java changed in 10 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/TokeniserState.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+        },
+        {
+          "kind": "commit",
+          "sha": "0dc96b3b144c2eae59bcb1d5e1b412269ee50f2b"
+        },
+        {
+          "kind": "commit",
+          "sha": "1aa1234ef75311db6e0fc73504d2815d9b67b4ff"
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "statement": "src/main/java/org/jsoup/parser/Tokeniser.java changed in 9 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/Tokeniser.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+        },
+        {
+          "kind": "commit",
+          "sha": "0719f9cf9242ec0da94eb488059917345c02d0a7"
+        },
+        {
+          "kind": "commit",
+          "sha": "fcdb20f8f059b86a3ce1fc39bd93c8eed5e8893e"
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "statement": "src/main/java/org/jsoup/select/QueryParser.java changed in 9 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/select/QueryParser.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e1d48ba94bdd16fba82bf52a9baa18ca9e6fc878"
+        },
+        {
+          "kind": "commit",
+          "sha": "08d2572a25226b1d39e9e5770161234eacf99cf0"
+        },
+        {
+          "kind": "commit",
+          "sha": "bcf979840fdc986893cce9eb54b88cabe74b18ff"
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "statement": "src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in 9 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        },
+        {
+          "kind": "commit",
+          "sha": "f79f21d251453fcf9efc1fe98ca6878e25df5bfc"
+        },
+        {
+          "kind": "commit",
+          "sha": "387c6e1234bbcd175e371774b2f4d5962c07f1c0"
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "statement": "src/main/java/org/jsoup/nodes/Element.java changed in 8 commits by 2 authors between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/nodes/Element.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "659b7d27d32a9bbe082bcc19224693bc1e957b4d"
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        },
+        {
+          "kind": "commit",
+          "sha": "4f7d3838333049bc6867b93927594354bbe40423"
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "statement": "src/test/java/org/jsoup/nodes/ElementTest.java changed in 8 commits by 2 authors between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/nodes/ElementTest.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "659b7d27d32a9bbe082bcc19224693bc1e957b4d"
+        },
+        {
+          "kind": "commit",
+          "sha": "e1d48ba94bdd16fba82bf52a9baa18ca9e6fc878"
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "statement": "src/test/java/org/jsoup/parser/PositionTest.java changed in 8 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/PositionTest.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+        },
+        {
+          "kind": "commit",
+          "sha": "82aa791756e99272bd9c3052eaff008dbb6f8317"
+        },
+        {
+          "kind": "commit",
+          "sha": "0719f9cf9242ec0da94eb488059917345c02d0a7"
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 16 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 13 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java changed in the same commit 12 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/test/java/org/jsoup/parser/PositionTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/PositionTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java and src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f61",
+      "statement": "src/main/java/org/jsoup/parser/Tokeniser.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/Tokeniser.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f62",
+      "statement": "src/main/java/org/jsoup/parser/TokeniserState.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/TokeniserState.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f63",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/main/java/org/jsoup/parser/Tokeniser.java changed in the same commit 6 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/Tokeniser.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f64",
+      "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in the same commit 6 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f65",
+      "statement": "src/test/java/org/jsoup/parser/HtmlParserTest.java and src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in the same commit 6 times between 06 Aug 2026 and 04 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlParserTest.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    }
+  ]
+}

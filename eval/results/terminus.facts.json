@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "shivemn",
+    "name": "terminus",
+    "commit": "e44ea146ab44ac013a6603801b17180200675612"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "29 source files in typescript, 4,003 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/graph.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "6 source files in css, 1,006 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/styles/global.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/planner.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/route.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "1 source file in html, 514 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/prototypes/chat-design.html",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "1 source file in javascript, 11 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "astro.config.mjs",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "1 generated file left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package-lock.json",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "GitHub Actions workflow .github/workflows/ci.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "GitHub Actions workflow .github/workflows/link-check.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "GitHub Actions workflow .github/workflows/yearly-postings.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "Build or deploy file package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "68 commits between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "b3052cc1ab600e74d062a2e3ec7a537274772d79"
+        },
+        {
+          "kind": "commit",
+          "sha": "687a839b3b22d06bea4a5ecd0657af55501de3ee"
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "src/lib/schema.ts changed in 23 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "fdcb8226893ea2cbbe0b2a833e487a6e31aa81b3"
+        },
+        {
+          "kind": "commit",
+          "sha": "88bbd7a2249fda53b2d91e4d10ef763a79edf804"
+        },
+        {
+          "kind": "commit",
+          "sha": "ad97d41f473c6f5e411c2ee42ae0ab0ad7cb6922"
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "src/styles/global.css changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/styles/global.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "78efb91b9b91c01fcfdd18316736d4aebd37e66f"
+        },
+        {
+          "kind": "commit",
+          "sha": "ad97d41f473c6f5e411c2ee42ae0ab0ad7cb6922"
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "src/lib/content.ts changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/content.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "88bbd7a2249fda53b2d91e4d10ef763a79edf804"
+        },
+        {
+          "kind": "commit",
+          "sha": "79d52430450dd6027e101c32cf52a799be615e7f"
+        },
+        {
+          "kind": "commit",
+          "sha": "6b6f49983b2168b9ecc1e18b0e6405a8ee7ffa8c"
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "src/styles/planner.css changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/styles/planner.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "88341f6619420b332ca5beec3094937f942ab201"
+        },
+        {
+          "kind": "commit",
+          "sha": "df69c096109e3f05445afc091f22c765081658aa"
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "src/components/RolePlanner.tsx changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "88341f6619420b332ca5beec3094937f942ab201"
+        },
+        {
+          "kind": "commit",
+          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "src/lib/graph.ts changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/graph.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
+        },
+        {
+          "kind": "commit",
+          "sha": "3ab0911cb32a9af556c32150f01b3f6537f26e24"
+        },
+        {
+          "kind": "commit",
+          "sha": "671dff2694cd064adc50365a5e6b741c1093f476"
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "src/styles/route.css changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/styles/route.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "78efb91b9b91c01fcfdd18316736d4aebd37e66f"
+        },
+        {
+          "kind": "commit",
+          "sha": "e7847e613ded82671365eba467e36adbd285638f"
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "scripts/check-links.ts changed in 6 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "scripts/check-links.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "88bbd7a2249fda53b2d91e4d10ef763a79edf804"
+        },
+        {
+          "kind": "commit",
+          "sha": "ad97d41f473c6f5e411c2ee42ae0ab0ad7cb6922"
+        },
+        {
+          "kind": "commit",
+          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "scripts/validate.ts changed in 5 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "scripts/validate.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "c6f59c0ad444eea14692d1bf4a138a79b2afcd20"
+        },
+        {
+          "kind": "commit",
+          "sha": "eabadd278d29fd982fcc5ecdbfcc02c26d7beb25"
+        },
+        {
+          "kind": "commit",
+          "sha": "32bd220903aedd63b34748fb68e244f250006ac3"
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "src/components/StopPanel.tsx changed in 5 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/StopPanel.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "df69c096109e3f05445afc091f22c765081658aa"
+        },
+        {
+          "kind": "commit",
+          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "src/lib/content.ts and src/lib/schema.ts changed in the same commit 13 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/content.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "src/components/RolePlanner.tsx and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/planner.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "src/lib/schema.ts and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/planner.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "src/styles/global.css and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/styles/global.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/planner.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "src/lib/graph.ts and src/lib/schema.ts changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/graph.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "src/styles/global.css and src/styles/route.css changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/styles/global.css",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/route.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "src/components/RolePlanner.tsx and src/lib/schema.ts changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "src/lib/schema.ts and src/styles/global.css changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/global.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "src/components/RolePlanner.tsx and src/styles/global.css changed in the same commit 6 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/global.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "scripts/validate.ts and src/lib/schema.ts changed in the same commit 5 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "scripts/validate.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    }
+  ]
+}

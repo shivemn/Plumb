@@ -59,10 +59,13 @@ def analyse(
     window_days: Annotated[int, typer.Option(help="Days of history to mine.")] = 90,
     workdir: Annotated[Path, typer.Option(help="Where cloned repos are kept.")] = DEFAULT_WORKDIR,
     max_files: Annotated[int, typer.Option(help="Refuse repos with more tracked files.")] = 20_000,
+    commit: Annotated[
+        str | None, typer.Option(help="Analyse this commit instead of the newest.")
+    ] = None,
 ) -> None:
     """Analyse a repo without AI and write its facts as JSON."""
     try:
-        checkout = fetch(repo, workdir=workdir, limits=Limits(max_files=max_files))
+        checkout = fetch(repo, workdir=workdir, limits=Limits(max_files=max_files), commit=commit)
     except SourceError as error:
         typer.echo(f"Could not analyse {repo}: {error}", err=True)
         raise typer.Exit(1) from error
