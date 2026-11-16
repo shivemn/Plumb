@@ -9,7 +9,11 @@ from typing import Annotated
 import typer
 
 from plumb import __version__
+from plumb.facts import build_facts
+from plumb.history import is_shallow, mine
+from plumb.inventory import Category, build_inventory
 from plumb.model import FactSet
+from plumb.source import Limits, SourceError, fetch
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -40,3 +44,46 @@ def schema(
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(FactSet.model_json_schema(), indent=2) + "\n", encoding="utf-8")
     typer.echo(f"Wrote {out}")
+
+
+DEFAULT_WORKDIR = Path.home() / ".plumb" / "repos"
+
+
+@app.command()
+def analyse(
+    repo: Annotated[str, typer.Argument(help="A GitHub URL, owner/name, or a local folder.")],
+    out: Annotated[
+        Path | None, typer.Option(help="Where to write the facts. Defaults to <name>.facts.json.")
+    ] = None,
+    window_days: Annotated[int, typer.Option(help="Days of history to mine.")] = 90,
+    workdir: Annotated[Path, typer.Option(help="Where cloned repos are kept.")] = DEFAULT_WORKDIR,
+    max_files: Annotated[int, typer.Option(help="Refuse repos with more tracked files.")] = 20_000,
+) -> None:
+    """Analyse a repo without AI and write its facts as JSON."""
+    try:
+        checkout = fetch(repo, workdir=workdir, limits=Limits(max_files=max_files))
+    except SourceError as error:
+        typer.echo(f"Could not analyse {repo}: {error}", err=True)
+        raise typer.Exit(1) from error
+
+    files = build_inventory(checkout.path)
+    first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
+    if is_shallow(checkout.path):
+        history = None
+        typer.echo(
+            "This clone has only part of its history, so hot spots and files that change "
+            "together are left out. Use a full clone or pass a GitHub URL instead.",
+            err=True,
+        )
+    else:
+        history = mine(checkout.path, window_days=window_days, keep=first_party)
+    facts = build_facts(checkout, files, history)
+
+    target = out or Path(f"{checkout.name}.facts.json")
+    target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    typer.echo(
+        f"{checkout.owner}/{checkout.name} at {checkout.commit[:7]}: "
+        f"{len(files)} files, {len(first_party)} first-party, "
+        f"{len(history.commits) if history else 'no'} commits read, "
+        f"{len(facts.facts)} facts written to {target}"
+    )

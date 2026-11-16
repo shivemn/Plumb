@@ -138,6 +138,11 @@ def mine(
     return history
 
 
+def is_shallow(repo: Path) -> bool:
+    """True if the clone has only part of the history, so counts would be wrong."""
+    return git("rev-parse", "--is-shallow-repository", cwd=repo).strip() == "true"
+
+
 def read_commits_head_time(repo: Path) -> datetime:
     stamp = git("log", "-1", "--format=%ct", cwd=repo).strip()
     return datetime.fromtimestamp(int(stamp), tz=UTC)
