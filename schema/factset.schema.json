@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "CommitEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "commit",
+          "default": "commit",
+          "title": "Kind",
+          "type": "string"
+        },
+        "sha": {
+          "pattern": "^[0-9a-f]{7,40}$",
+          "title": "Sha",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha"
+      ],
+      "title": "CommitEvidence",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "description": "Something Plumb found without AI, with the evidence for it.",
+      "properties": {
+        "id": {
+          "pattern": "^f[0-9]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "statement": {
+          "minLength": 1,
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "commit": "#/$defs/CommitEvidence",
+                "file": "#/$defs/FileEvidence",
+                "issue": "#/$defs/IssueEvidence"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/FileEvidence"
+              },
+              {
+                "$ref": "#/$defs/CommitEvidence"
+              },
+              {
+                "$ref": "#/$defs/IssueEvidence"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "statement",
+        "evidence"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "FileEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "file",
+          "default": "file",
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "description": "Path from the repo root, with forward slashes.",
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "start_line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Line"
+        },
+        "end_line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Line"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "FileEvidence",
+      "type": "object"
+    },
+    "IssueEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "issue",
+          "default": "issue",
+          "title": "Kind",
+          "type": "string"
+        },
+        "number": {
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "number"
+      ],
+      "title": "IssueEvidence",
+      "type": "object"
+    },
+    "RepoKind": {
+      "description": "What kind of repo this is. Decides which section leads the report.",
+      "enum": [
+        "service",
+        "library",
+        "cli",
+        "data",
+        "docs",
+        "small",
+        "unknown"
+      ],
+      "title": "RepoKind",
+      "type": "string"
+    },
+    "RepoRef": {
+      "additionalProperties": false,
+      "properties": {
+        "owner": {
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "commit": {
+          "pattern": "^[0-9a-f]{7,40}$",
+          "title": "Commit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "owner",
+        "name",
+        "commit"
+      ],
+      "title": "RepoRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Everything the analysis stage hands to the writing stage.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "repo": {
+      "$ref": "#/$defs/RepoRef"
+    },
+    "kind": {
+      "$ref": "#/$defs/RepoKind"
+    },
+    "facts": {
+      "items": {
+        "$ref": "#/$defs/Fact"
+      },
+      "title": "Facts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "repo",
+    "kind",
+    "facts"
+  ],
+  "title": "FactSet",
+  "type": "object"
+}

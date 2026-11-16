@@ -1,0 +1,66 @@
+# Evaluation repos. Pin each to a commit before writing its answer key,
+# so the answers stay correct as the repo moves on.
+# Names marked "check" have not been confirmed yet.
+
+[[repo]]
+url = "https://github.com/shivemn/credit-event-pipeline"
+kind = "service"
+language = "java"
+why = "Own repo: Spring Boot, Kafka, Ignite, Postgres. Answers known first-hand."
+commit = ""
+
+[[repo]]
+url = "https://github.com/shivemn/market-lab"   # check the name
+kind = "service"
+language = "python"
+why = "Own repo: Python service with Postgres and a React front end."
+commit = ""
+
+[[repo]]
+url = "https://github.com/shivemn/terminus"
+kind = "unknown"
+language = "typescript"
+why = "Own repo in an unsupported language: the report must say so, not guess."
+commit = ""
+
+[[repo]]
+url = "https://github.com/spring-projects/spring-petclinic"
+kind = "service"
+language = "java"
+why = "Well-known Spring Boot sample with a database."
+commit = ""
+
+[[repo]]
+url = "https://github.com/fastapi/full-stack-fastapi-template"
+kind = "service"
+language = "python"
+why = "FastAPI, Postgres and Docker Compose: tests system design detection."
+commit = ""
+
+[[repo]]
+url = "https://github.com/psf/requests"
+kind = "library"
+language = "python"
+why = "Library with no running system."
+commit = ""
+
+[[repo]]
+url = "https://github.com/pallets/click"
+kind = "library"
+language = "python"
+why = "Library for building command-line tools."
+commit = ""
+
+[[repo]]
+url = "https://github.com/jhy/jsoup"
+kind = "library"
+language = "java"
+why = "Java library with no running system."
+commit = ""
+
+[[repo]]
+url = "https://github.com/sindresorhus/awesome"
+kind = "docs"
+language = "none"
+why = "A list, not code: the report must not draw a diagram."
+commit = ""
