@@ -141,6 +141,18 @@
     },
     {
       "id": "f9",
+      "statement": "Database, cache or queue: PostgreSQL (Prisma datasource, provider postgresql)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/schema.prisma",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f10",
       "statement": "Setting HOST is read from the environment in e2e/src/support/test-setup.ts",
       "evidence": [
         {
@@ -152,7 +164,7 @@
       ]
     },
     {
-      "id": "f10",
+      "id": "f11",
       "statement": "Setting JWT_SECRET is read from the environment in src/app/routes/auth/auth.ts, src/app/routes/auth/token.utils.ts",
       "evidence": [
         {
@@ -170,7 +182,7 @@
       ]
     },
     {
-      "id": "f11",
+      "id": "f12",
       "statement": "Setting NODE_ENV is read from the environment in src/prisma/prisma-client.ts",
       "evidence": [
         {
@@ -182,7 +194,7 @@
       ]
     },
     {
-      "id": "f12",
+      "id": "f13",
       "statement": "Setting PORT is read from the environment in e2e/src/support/test-setup.ts, src/main.ts",
       "evidence": [
         {
@@ -200,7 +212,7 @@
       ]
     },
     {
-      "id": "f13",
+      "id": "f14",
       "statement": "4 Prisma database migrations in src/prisma/migrations",
       "evidence": [
         {
@@ -218,7 +230,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f15",
       "statement": "20 http routes found",
       "evidence": [
         {
@@ -242,7 +254,7 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f16",
       "statement": "HTTP route GET /articles (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -254,7 +266,7 @@
       ]
     },
     {
-      "id": "f16",
+      "id": "f17",
       "statement": "HTTP route GET /articles/feed (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -266,7 +278,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f18",
       "statement": "HTTP route POST /articles (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -278,7 +290,7 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f19",
       "statement": "HTTP route GET /articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -290,7 +302,7 @@
       ]
     },
     {
-      "id": "f19",
+      "id": "f20",
       "statement": "HTTP route PUT /articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -302,7 +314,7 @@
       ]
     },
     {
-      "id": "f20",
+      "id": "f21",
       "statement": "HTTP route DELETE /articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -314,7 +326,7 @@
       ]
     },
     {
-      "id": "f21",
+      "id": "f22",
       "statement": "HTTP route GET /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -326,7 +338,7 @@
       ]
     },
     {
-      "id": "f22",
+      "id": "f23",
       "statement": "HTTP route POST /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -338,7 +350,7 @@
       ]
     },
     {
-      "id": "f23",
+      "id": "f24",
       "statement": "HTTP route DELETE /articles/:slug/comments/:id (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -350,7 +362,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f25",
       "statement": "HTTP route POST /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -362,7 +374,7 @@
       ]
     },
     {
-      "id": "f25",
+      "id": "f26",
       "statement": "HTTP route DELETE /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -374,7 +386,7 @@
       ]
     },
     {
-      "id": "f26",
+      "id": "f27",
       "statement": "HTTP route POST /users (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -386,7 +398,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f28",
       "statement": "HTTP route POST /users/login (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -398,7 +410,7 @@
       ]
     },
     {
-      "id": "f28",
+      "id": "f29",
       "statement": "HTTP route GET /user (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -410,7 +422,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f30",
       "statement": "HTTP route PUT /user (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -422,7 +434,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f31",
       "statement": "HTTP route GET /profiles/:username (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
@@ -434,7 +446,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f32",
       "statement": "HTTP route POST /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
@@ -446,7 +458,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f33",
       "statement": "HTTP route DELETE /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
@@ -458,7 +470,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f34",
       "statement": "HTTP route GET /tags (express) in src/app/routes/tag/tag.controller.ts",
       "evidence": [
         {
@@ -470,7 +482,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f35",
       "statement": "HTTP route GET / (express) in src/main.ts",
       "evidence": [
         {
@@ -482,7 +494,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f36",
       "statement": "3 package scripts found",
       "evidence": [
         {
@@ -506,7 +518,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f37",
       "statement": "Package script npm run start: nx serve (npm) in package.json",
       "evidence": [
         {
@@ -518,7 +530,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f38",
       "statement": "Package script npm run build: nx build (npm) in package.json",
       "evidence": [
         {
@@ -530,7 +542,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f39",
       "statement": "Package script npm run test: nx test (npm) in package.json",
       "evidence": [
         {
@@ -542,7 +554,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f40",
       "statement": "Code in src/tests/services uses code in src/tests (3 references)",
       "evidence": [
         {
@@ -566,7 +578,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f41",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -584,7 +596,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f42",
       "statement": "Code in src/app/routes/auth uses code in src/app/routes/article (2 references)",
       "evidence": [
         {
@@ -602,7 +614,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f43",
       "statement": "Code in src/app/routes/profile uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -620,7 +632,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f44",
       "statement": "Code in src/prisma uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -638,7 +650,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f45",
       "statement": "Code in src uses code in src/app/models (1 reference)",
       "evidence": [
         {
@@ -650,7 +662,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f46",
       "statement": "Code in src uses code in src/app/routes (1 reference)",
       "evidence": [
         {
@@ -662,7 +674,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f47",
       "statement": "Code in src/app/routes uses code in src/app/routes/article (1 reference)",
       "evidence": [
         {
@@ -674,7 +686,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f48",
       "statement": "Code in src/app/routes uses code in src/app/routes/auth (1 reference)",
       "evidence": [
         {
@@ -686,7 +698,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f49",
       "statement": "Code in src/app/routes uses code in src/app/routes/profile (1 reference)",
       "evidence": [
         {
@@ -698,7 +710,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f50",
       "statement": "Code in src/app/routes uses code in src/app/routes/tag (1 reference)",
       "evidence": [
         {
@@ -710,7 +722,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f51",
       "statement": "Code in src/app/routes/article uses code in src/app/models (1 reference)",
       "evidence": [
         {
@@ -722,7 +734,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f52",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/profile (1 reference)",
       "evidence": [
         {
@@ -734,7 +746,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f53",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/tag (1 reference)",
       "evidence": [
         {
@@ -746,7 +758,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f54",
       "statement": "Code in src/app/routes/article uses code in src/prisma (1 reference)",
       "evidence": [
         {
@@ -758,7 +770,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f55",
       "statement": "src/app/routes/article and src/app/routes/auth each use the other",
       "evidence": [
         {
@@ -776,7 +788,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f56",
       "statement": "src/app/routes/article and src/prisma each use the other",
       "evidence": [
         {
@@ -794,7 +806,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f57",
       "statement": "src/app/routes/auth and src/prisma each use the other",
       "evidence": [
         {
@@ -812,7 +824,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f58",
       "statement": "src/prisma/prisma-client.ts is used by 5 other files",
       "evidence": [
         {
@@ -836,7 +848,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f59",
       "statement": "src/app/models/http-exception.model.ts is used by 4 other files",
       "evidence": [
         {
@@ -860,7 +872,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f60",
       "statement": "src/app/routes/auth/auth.ts is used by 4 other files",
       "evidence": [
         {
@@ -884,7 +896,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f61",
       "statement": "src/app/routes/article/article.service.ts is used by 3 other files",
       "evidence": [
         {
@@ -908,7 +920,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f62",
       "statement": "src/app/routes/auth/auth.service.ts is used by 3 other files",
       "evidence": [
         {
@@ -932,7 +944,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f63",
       "statement": "4 commits between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
@@ -950,7 +962,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f64",
       "statement": "src/app/routes/auth/auth.service.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
@@ -974,7 +986,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f65",
       "statement": "src/main.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
@@ -998,7 +1010,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f66",
       "statement": "src/prisma/seed.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {

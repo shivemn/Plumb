@@ -5,17 +5,29 @@
     "name": "cli",
     "commit": "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345"
   },
-  "kind": "service",
+  "kind": "cli",
   "facts": [
     {
       "id": "f1",
-      "statement": "Looks like a service repo: 1 deployable service(s)",
+      "statement": "Looks like a cli repo: 3 command(s) and no routes or services",
       "evidence": [
         {
           "kind": "file",
-          "path": "extras/packaging/linux/Dockerfile",
-          "start_line": 3,
-          "end_line": 3
+          "path": "setup.cfg",
+          "start_line": 77,
+          "end_line": 77
+        },
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 78,
+          "end_line": 78
+        },
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 79,
+          "end_line": 79
         }
       ]
     },
@@ -291,18 +303,6 @@
     },
     {
       "id": "f23",
-      "statement": "Service run from this repo: linux (Dockerfile, runs [\"mv\", \"/app/extras/packaging/linux/dist/\", \"/artifacts\"])",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "extras/packaging/linux/Dockerfile",
-          "start_line": 3,
-          "end_line": 3
-        }
-      ]
-    },
-    {
-      "id": "f24",
       "statement": "Setting HTTPIE_BUILDING_MAN_PAGES is read from the environment in extras/scripts/generate_man_pages.py, httpie/cli/definition.py",
       "evidence": [
         {
@@ -320,7 +320,7 @@
       ]
     },
     {
-      "id": "f25",
+      "id": "f24",
       "statement": "Setting HTTPIE_COMMAND is read from the environment in extras/profiling/benchmarks.py",
       "evidence": [
         {
@@ -332,7 +332,7 @@
       ]
     },
     {
-      "id": "f26",
+      "id": "f25",
       "statement": "Setting HTTPIE_NO_MAN_PAGES is read from the environment in httpie/output/ui/man_pages.py",
       "evidence": [
         {
@@ -344,7 +344,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f26",
       "statement": "Setting HTTPIE_STDIN_READ_WARN_THRESHOLD is read from the environment in httpie/uploads.py",
       "evidence": [
         {
@@ -356,7 +356,67 @@
       ]
     },
     {
+      "id": "f27",
+      "statement": "3 commands found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 77,
+          "end_line": 77
+        },
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 78,
+          "end_line": 78
+        },
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 79,
+          "end_line": 79
+        }
+      ]
+    },
+    {
       "id": "f28",
+      "statement": "Command http (httpie.__main__:main) (package) in setup.cfg",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 77,
+          "end_line": 77
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "Command https (httpie.__main__:main) (package) in setup.cfg",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 78,
+          "end_line": 78
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "Command httpie (httpie.manager.__main__:main) (package) in setup.cfg",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "setup.cfg",
+          "start_line": 79,
+          "end_line": 79
+        }
+      ]
+    },
+    {
+      "id": "f31",
       "statement": "8 program entrys found",
       "evidence": [
         {
@@ -380,7 +440,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f32",
       "statement": "Program entry run as a script in extras/packaging/linux/build.py",
       "evidence": [
         {
@@ -392,7 +452,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f33",
       "statement": "Program entry run as a script in extras/packaging/linux/scripts/http_cli.py",
       "evidence": [
         {
@@ -404,7 +464,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f34",
       "statement": "Program entry run as a script in extras/packaging/linux/scripts/httpie_cli.py",
       "evidence": [
         {
@@ -416,7 +476,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f35",
       "statement": "Program entry run as a script in extras/profiling/benchmarks.py",
       "evidence": [
         {
@@ -428,7 +488,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f36",
       "statement": "Program entry run as a script in extras/profiling/run.py",
       "evidence": [
         {
@@ -440,7 +500,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f37",
       "statement": "Program entry run as a script in extras/scripts/generate_man_pages.py",
       "evidence": [
         {
@@ -452,7 +512,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f38",
       "statement": "Program entry run as a script in httpie/__main__.py",
       "evidence": [
         {
@@ -464,7 +524,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f39",
       "statement": "Program entry run as a script in httpie/manager/__main__.py",
       "evidence": [
         {
@@ -476,7 +536,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f40",
       "statement": "Code in tests uses code in httpie (43 references)",
       "evidence": [
         {
@@ -500,7 +560,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f41",
       "statement": "Code in tests uses code in tests/utils (35 references)",
       "evidence": [
         {
@@ -524,7 +584,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f42",
       "statement": "Code in tests uses code in httpie/cli (19 references)",
       "evidence": [
         {
@@ -548,7 +608,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f43",
       "statement": "Code in tests uses code in tests/fixtures (15 references)",
       "evidence": [
         {
@@ -572,7 +632,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f44",
       "statement": "Code in httpie/manager/tasks uses code in httpie (12 references)",
       "evidence": [
         {
@@ -596,7 +656,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f45",
       "statement": "Code in httpie/output uses code in httpie (10 references)",
       "evidence": [
         {
@@ -620,7 +680,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f46",
       "statement": "Code in tests uses code in httpie/plugins (10 references)",
       "evidence": [
         {
@@ -644,7 +704,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f47",
       "statement": "Code in httpie uses code in httpie/cli (9 references)",
       "evidence": [
         {
@@ -668,7 +728,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f48",
       "statement": "Code in tests/utils uses code in httpie (9 references)",
       "evidence": [
         {
@@ -692,7 +752,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f49",
       "statement": "Code in httpie/internal uses code in httpie (8 references)",
       "evidence": [
         {
@@ -716,7 +776,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f50",
       "statement": "Code in httpie/cli uses code in httpie (7 references)",
       "evidence": [
         {
@@ -740,7 +800,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f51",
       "statement": "Code in httpie/manager uses code in httpie (7 references)",
       "evidence": [
         {
@@ -764,7 +824,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f52",
       "statement": "Code in httpie/output/formatters uses code in httpie/plugins (4 references)",
       "evidence": [
         {
@@ -788,7 +848,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f53",
       "statement": "Code in httpie/plugins uses code in httpie/output/formatters (4 references)",
       "evidence": [
         {
@@ -812,7 +872,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f54",
       "statement": "Code in tests uses code in httpie/output/formatters (4 references)",
       "evidence": [
         {
@@ -836,7 +896,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f55",
       "statement": "httpie and httpie/cli each use the other",
       "evidence": [
         {
@@ -854,7 +914,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f56",
       "statement": "httpie and httpie/internal each use the other",
       "evidence": [
         {
@@ -872,7 +932,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f57",
       "statement": "httpie and httpie/legacy each use the other",
       "evidence": [
         {
@@ -890,7 +950,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f58",
       "statement": "httpie and httpie/output each use the other",
       "evidence": [
         {
@@ -908,7 +968,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f59",
       "statement": "httpie and httpie/output/ui each use the other",
       "evidence": [
         {
@@ -926,7 +986,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f60",
       "statement": "httpie and httpie/plugins each use the other",
       "evidence": [
         {
@@ -944,7 +1004,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f61",
       "statement": "httpie/cli and httpie/output/ui each use the other",
       "evidence": [
         {
@@ -962,7 +1022,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f62",
       "statement": "httpie/manager and httpie/manager/tasks each use the other",
       "evidence": [
         {
@@ -980,7 +1040,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f63",
       "statement": "httpie/output and httpie/output/formatters each use the other",
       "evidence": [
         {
@@ -998,7 +1058,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f64",
       "statement": "httpie/output/formatters and httpie/plugins each use the other",
       "evidence": [
         {
@@ -1016,7 +1076,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f65",
       "statement": "tests/utils/__init__.py is used by 35 other files",
       "evidence": [
         {
@@ -1040,7 +1100,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f66",
       "statement": "httpie/context.py is used by 26 other files",
       "evidence": [
         {
@@ -1064,7 +1124,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f67",
       "statement": "httpie/status.py is used by 24 other files",
       "evidence": [
         {
@@ -1088,7 +1148,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f68",
       "statement": "httpie/utils.py is used by 19 other files",
       "evidence": [
         {
@@ -1112,7 +1172,7 @@
       ]
     },
     {
-      "id": "f66",
+      "id": "f69",
       "statement": "httpie/compat.py is used by 17 other files",
       "evidence": [
         {
@@ -1136,7 +1196,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f70",
       "statement": "11 commits between 18 Sep 2024 and 17 Dec 2024",
       "evidence": [
         {
@@ -1154,7 +1214,7 @@
       ]
     },
     {
-      "id": "f68",
+      "id": "f71",
       "statement": "httpie/ssl_.py changed in 3 commits by 2 authors between 18 Sep 2024 and 17 Dec 2024",
       "evidence": [
         {

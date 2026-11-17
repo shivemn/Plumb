@@ -24,7 +24,10 @@ note = "Through Prisma; provider postgresql, address from DATABASE_URL."
 
 [[entry_points]]
 kind = "http"
-items = ["19 routes in four controllers, mounted under /api in src/app/routes/routes.ts"]
+items = [
+  "19 routes in four controllers, mounted under /api in src/app/routes/routes.ts",
+  "GET / in src/main.ts, a status message",
+]
 source = "src/app/routes/routes.ts"
 
 [[modules]]
@@ -50,5 +53,7 @@ test = "npm test"
 # Numbers the evaluation scores automatically (eval/run.py).
 [expect]
 kind = "service"
-http_routes = 19
+# Was 19 when first written: the key missed GET / in src/main.ts, which
+# Plumb found on its first run.
+http_routes = 20
 stores = ["PostgreSQL"]

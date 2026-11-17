@@ -9,7 +9,7 @@
   "facts": [
     {
       "id": "f1",
-      "statement": "Looks like a service repo: 2 deployable service(s) and 11 route(s), consumer(s) or scheduled job(s)",
+      "statement": "Looks like a service repo: 2 deployable service(s) and 19 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
           "kind": "file",
@@ -255,7 +255,7 @@
     },
     {
       "id": "f17",
-      "statement": "11 http routes found",
+      "statement": "19 http routes found",
       "evidence": [
         {
           "kind": "file",
@@ -279,7 +279,7 @@
     },
     {
       "id": "f18",
-      "statement": "HTTP route GET /articles/feed (fastapi) in app/api/routes/articles/articles_common.py",
+      "statement": "HTTP route GET /api/articles/feed (fastapi) in app/api/routes/articles/articles_common.py",
       "evidence": [
         {
           "kind": "file",
@@ -291,7 +291,7 @@
     },
     {
       "id": "f19",
-      "statement": "HTTP route POST /articles/{slug}/favorite (fastapi) in app/api/routes/articles/articles_common.py",
+      "statement": "HTTP route POST /api/articles/{slug}/favorite (fastapi) in app/api/routes/articles/articles_common.py",
       "evidence": [
         {
           "kind": "file",
@@ -303,7 +303,7 @@
     },
     {
       "id": "f20",
-      "statement": "HTTP route DELETE /articles/{slug}/favorite (fastapi) in app/api/routes/articles/articles_common.py",
+      "statement": "HTTP route DELETE /api/articles/{slug}/favorite (fastapi) in app/api/routes/articles/articles_common.py",
       "evidence": [
         {
           "kind": "file",
@@ -315,7 +315,31 @@
     },
     {
       "id": "f21",
-      "statement": "HTTP route GET /articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
+      "statement": "HTTP route GET /api/articles (fastapi) in app/api/routes/articles/articles_resource.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/articles/articles_resource.py",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "HTTP route POST /api/articles (fastapi) in app/api/routes/articles/articles_resource.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/articles/articles_resource.py",
+          "start_line": 53,
+          "end_line": 53
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "HTTP route GET /api/articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
           "kind": "file",
@@ -326,8 +350,8 @@
       ]
     },
     {
-      "id": "f22",
-      "statement": "HTTP route PUT /articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
+      "id": "f24",
+      "statement": "HTTP route PUT /api/articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
           "kind": "file",
@@ -338,8 +362,8 @@
       ]
     },
     {
-      "id": "f23",
-      "statement": "HTTP route DELETE /articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
+      "id": "f25",
+      "statement": "HTTP route DELETE /api/articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
           "kind": "file",
@@ -350,8 +374,8 @@
       ]
     },
     {
-      "id": "f24",
-      "statement": "HTTP route POST /users/login (fastapi) in app/api/routes/authentication.py",
+      "id": "f26",
+      "statement": "HTTP route POST /api/users/login (fastapi) in app/api/routes/authentication.py",
       "evidence": [
         {
           "kind": "file",
@@ -362,8 +386,44 @@
       ]
     },
     {
-      "id": "f25",
-      "statement": "HTTP route DELETE /articles/{slug}/comments/{comment_id} (fastapi) in app/api/routes/comments.py",
+      "id": "f27",
+      "statement": "HTTP route POST /api/users (fastapi) in app/api/routes/authentication.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/authentication.py",
+          "start_line": 56,
+          "end_line": 56
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "HTTP route GET /api/articles/{slug}/comments (fastapi) in app/api/routes/comments.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/comments.py",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "HTTP route POST /api/articles/{slug}/comments (fastapi) in app/api/routes/comments.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/comments.py",
+          "start_line": 40,
+          "end_line": 40
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "HTTP route DELETE /api/articles/{slug}/comments/{comment_id} (fastapi) in app/api/routes/comments.py",
       "evidence": [
         {
           "kind": "file",
@@ -374,8 +434,8 @@
       ]
     },
     {
-      "id": "f26",
-      "statement": "HTTP route GET /profiles/{username} (fastapi) in app/api/routes/profiles.py",
+      "id": "f31",
+      "statement": "HTTP route GET /api/profiles/{username} (fastapi) in app/api/routes/profiles.py",
       "evidence": [
         {
           "kind": "file",
@@ -386,8 +446,8 @@
       ]
     },
     {
-      "id": "f27",
-      "statement": "HTTP route POST /profiles/{username}/follow (fastapi) in app/api/routes/profiles.py",
+      "id": "f32",
+      "statement": "HTTP route POST /api/profiles/{username}/follow (fastapi) in app/api/routes/profiles.py",
       "evidence": [
         {
           "kind": "file",
@@ -398,8 +458,8 @@
       ]
     },
     {
-      "id": "f28",
-      "statement": "HTTP route DELETE /profiles/{username}/follow (fastapi) in app/api/routes/profiles.py",
+      "id": "f33",
+      "statement": "HTTP route DELETE /api/profiles/{username}/follow (fastapi) in app/api/routes/profiles.py",
       "evidence": [
         {
           "kind": "file",
@@ -410,7 +470,43 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f34",
+      "statement": "HTTP route GET /api/tags (fastapi) in app/api/routes/tags.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/tags.py",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "statement": "HTTP route GET /api/user (fastapi) in app/api/routes/users.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/users.py",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "statement": "HTTP route PUT /api/user (fastapi) in app/api/routes/users.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "app/api/routes/users.py",
+          "start_line": 38,
+          "end_line": 38
+        }
+      ]
+    },
+    {
+      "id": "f37",
       "statement": "Code in app/api/routes uses code in app/api/dependencies (11 references)",
       "evidence": [
         {
@@ -434,7 +530,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f38",
       "statement": "Code in tests/test_api/test_routes uses code in app/db/repositories (10 references)",
       "evidence": [
         {
@@ -458,7 +554,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f39",
       "statement": "Code in app/api/dependencies uses code in app/models/domain (8 references)",
       "evidence": [
         {
@@ -482,7 +578,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f40",
       "statement": "Code in app/db/repositories uses code in app/models/domain (8 references)",
       "evidence": [
         {
@@ -506,7 +602,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f41",
       "statement": "Code in tests/test_api/test_routes uses code in app/models/domain (8 references)",
       "evidence": [
         {
@@ -530,7 +626,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f42",
       "statement": "Code in app/api/routes uses code in app/models/domain (6 references)",
       "evidence": [
         {
@@ -554,7 +650,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f43",
       "statement": "Code in app/api/routes/articles uses code in app/api/dependencies (6 references)",
       "evidence": [
         {
@@ -578,7 +674,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f44",
       "statement": "Code in app/core uses code in app/core/settings (6 references)",
       "evidence": [
         {
@@ -602,7 +698,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f45",
       "statement": "Code in app/db/repositories uses code in app/db/queries (6 references)",
       "evidence": [
         {
@@ -626,7 +722,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f46",
       "statement": "Code in app/api/dependencies uses code in app/db/repositories (5 references)",
       "evidence": [
         {
@@ -650,7 +746,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f47",
       "statement": "Code in app/api/routes uses code in app/db/repositories (5 references)",
       "evidence": [
         {
@@ -674,7 +770,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f48",
       "statement": "Code in app/api/routes uses code in app/models/schemas (5 references)",
       "evidence": [
         {
@@ -698,7 +794,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f49",
       "statement": "Code in app/models/schemas uses code in app/models/domain (5 references)",
       "evidence": [
         {
@@ -722,7 +818,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f50",
       "statement": "Code in app/services uses code in app/models/domain (5 references)",
       "evidence": [
         {
@@ -746,7 +842,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f51",
       "statement": "Code in app/api/dependencies uses code in app/db (4 references)",
       "evidence": [
         {
@@ -770,7 +866,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f52",
       "statement": "app/core and app/core/settings each use the other",
       "evidence": [
         {
@@ -788,7 +884,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f53",
       "statement": "app/models/domain and app/services each use the other",
       "evidence": [
         {
@@ -806,7 +902,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f54",
       "statement": "app/models/domain/users.py is used by 25 other files",
       "evidence": [
         {
@@ -830,7 +926,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f55",
       "statement": "app/models/domain/articles.py is used by 12 other files",
       "evidence": [
         {
@@ -854,7 +950,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f56",
       "statement": "app/api/dependencies/database.py is used by 11 other files",
       "evidence": [
         {
@@ -878,7 +974,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f57",
       "statement": "app/db/errors.py is used by 11 other files",
       "evidence": [
         {
@@ -902,7 +998,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f58",
       "statement": "app/db/repositories/users.py is used by 11 other files",
       "evidence": [
         {
@@ -926,7 +1022,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f59",
       "statement": "23 commits between 23 May 2022 and 21 Aug 2022",
       "evidence": [
         {
