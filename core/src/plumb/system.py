@@ -394,3 +394,40 @@ def find_settings(repo: Path, files: list[FileInfo]) -> dict[str, list[Clue]]:
                 if len(clues) < 3 and all(c.path != info.path for c in clues):
                     clues.append(Clue(info.path, line, "reads it"))
     return dict(sorted(settings.items()))
+
+
+@dataclass(frozen=True)
+class Migrations:
+    tool: str
+    folder: str
+    files: tuple[str, ...]  # in name order, which is the order they run in
+
+
+_MIGRATION_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("Alembic", re.compile(r"^(?P<folder>(?:.*/)?(?:alembic|migrations)/versions)/[^/]+\.py$")),
+    ("Flyway", re.compile(r"^(?P<folder>(?:.*/)?db/migration)/[VRU][^/]*__[^/]+\.sql$")),
+    ("Django", re.compile(r"^(?P<folder>(?:.*/)?migrations)/\d{4}_[^/]+\.py$")),
+    ("Prisma", re.compile(r"^(?P<folder>(?:.*/)?prisma/migrations)/[^/]+/migration\.sql$")),
+    ("Liquibase", re.compile(r"^(?P<folder>(?:.*/)?db/changelog)/[^/]+\.(?:xml|ya?ml|sql)$")),
+    ("Knex", re.compile(r"^(?P<folder>(?:.*/)?migrations)/\d{8,}_[^/]+\.(?:js|ts)$")),
+)
+
+
+def find_migrations(files: list[FileInfo]) -> list[Migrations]:
+    """Folders of database migrations. These files are run by a tool, not imported,
+    so they never show up in the import graph on their own."""
+    found: dict[tuple[str, str], list[str]] = {}
+    for info in files:
+        if info.category in (Category.VENDORED, Category.GENERATED, Category.EXAMPLE):
+            continue
+        if PurePosixPath(info.path).name == "__init__.py":
+            continue
+        for tool, pattern in _MIGRATION_RULES:
+            match = pattern.match(info.path)
+            if match:
+                found.setdefault((tool, match["folder"]), []).append(info.path)
+                break
+    return [
+        Migrations(tool, folder, tuple(sorted(paths)))
+        for (tool, folder), paths in sorted(found.items(), key=lambda item: item[0][1])
+    ]

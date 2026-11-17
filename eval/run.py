@@ -32,7 +32,7 @@ from plumb.history import mine
 from plumb.inventory import Category, build_inventory
 from plumb.kind import decide_kind
 from plumb.source import SourceError, fetch
-from plumb.system import Role, find_settings, find_system
+from plumb.system import Role, find_migrations, find_settings, find_system
 
 EVAL = Path(__file__).resolve().parent
 RESULTS = EVAL / "results"
@@ -75,8 +75,9 @@ def main() -> int:
         system = find_system(checkout.path, files, checkout.name, deps)
         settings = find_settings(checkout.path, files)
         decision = decide_kind(files, entry_points, system, deps)
+        migrations = find_migrations(files)
         facts = build_facts(
-            checkout, files, history, edges, entry_points, system, settings, decision
+            checkout, files, history, edges, entry_points, system, settings, decision, migrations
         )
         (RESULTS / f"{name}.facts.json").write_text(
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"
@@ -86,6 +87,7 @@ def main() -> int:
         expect = cast("dict[str, object]", key.get("expect", {}))
         components = {component_of(e.source) for e in edges}
         components |= {component_of(e.target) for e in edges}
+        components |= {m.folder for m in migrations}
         routes = sum(1 for e in entry_points if e.kind is EntryKind.HTTP)
         stores = sorted(p.name for p in system.of(Role.STORE))
         seconds = time.monotonic() - started

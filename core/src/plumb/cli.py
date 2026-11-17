@@ -18,7 +18,7 @@ from plumb.inventory import Category, build_inventory
 from plumb.kind import decide_kind
 from plumb.model import FactSet
 from plumb.source import Limits, SourceError, fetch
-from plumb.system import find_settings, find_system
+from plumb.system import find_migrations, find_settings, find_system
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -91,7 +91,10 @@ def analyse(
     system = find_system(checkout.path, files, checkout.name, deps)
     settings = find_settings(checkout.path, files)
     decision = decide_kind(files, entry_points, system, deps)
-    facts = build_facts(checkout, files, history, edges, entry_points, system, settings, decision)
+    migrations = find_migrations(files)
+    facts = build_facts(
+        checkout, files, history, edges, entry_points, system, settings, decision, migrations
+    )
 
     target = out or Path(f"{checkout.name}.facts.json")
     target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")

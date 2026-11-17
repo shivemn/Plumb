@@ -1,7 +1,7 @@
 from collections.abc import Callable
 
 from plumb.deps import Dependency
-from plumb.inventory import build_inventory
+from plumb.inventory import Category, FileInfo, build_inventory
 from plumb.system import (
     Clue,
     Role,
@@ -11,6 +11,7 @@ from plumb.system import (
     dependency_part,
     dependency_parts,
     dockerfile_parts,
+    find_migrations,
     find_settings,
     find_system,
     image_part,
@@ -160,3 +161,25 @@ def test_find_settings(make_repo: Callable[[str], RepoBuilder]) -> None:
     settings = find_settings(repo.path, build_inventory(repo.path))
     assert list(settings) == ["API_KEY", "DATABASE_URL", "PORT", "VITE_API_URL"]
     assert [(c.path, c.line) for c in settings["PORT"]] == [("Dockerfile", 2), ("server.js", 1)]
+
+
+def test_find_migrations() -> None:
+    def info(path: str, category: Category = Category.SOURCE) -> FileInfo:
+        return FileInfo(path, None, category, 10, 100)
+
+    files = [
+        info("backend/app/alembic/versions/e2412789c190_initialize.py"),
+        info("backend/app/alembic/versions/1a31ce608336_add_cascade.py"),
+        info("backend/app/alembic/env.py"),
+        info("src/main/resources/db/migration/V1__create_events.sql", Category.DATA),
+        info("src/main/resources/db/migration/V2__add_index.sql", Category.DATA),
+        info("shop/migrations/0001_initial.py"),
+        info("shop/migrations/__init__.py"),
+        info("node_modules/x/migrations/0001_a.py", Category.VENDORED),
+    ]
+    found = [(m.tool, m.folder, len(m.files)) for m in find_migrations(files)]
+    assert found == [
+        ("Alembic", "backend/app/alembic/versions", 2),
+        ("Django", "shop/migrations", 1),
+        ("Flyway", "src/main/resources/db/migration", 2),
+    ]

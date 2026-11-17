@@ -22,7 +22,7 @@ from plumb.model import (
     RepoRef,
 )
 from plumb.source import Checkout
-from plumb.system import Clue, Role, System
+from plumb.system import Clue, Migrations, Role, System
 
 # Files that say how a repo is built, run or deployed. Later stages read
 # these to find services, databases and entry points.
@@ -53,6 +53,7 @@ def build_facts(
     system: System | None = None,
     settings: dict[str, list[Clue]] | None = None,
     decision: KindDecision | None = None,
+    migrations: list[Migrations] | None = None,
 ) -> FactSet:
     builder = FactBuilder()
     kind = decision.kind if decision else RepoKind.UNKNOWN
@@ -68,6 +69,12 @@ def build_facts(
         add_system_facts(builder, system)
     if settings:
         add_setting_facts(builder, settings)
+    for item in migrations or []:
+        first, last = item.files[0], item.files[-1]
+        builder.add(
+            f"{_plural(len(item.files), f'{item.tool} database migration')} in {item.folder}",
+            [FileEvidence(path=first)] + ([FileEvidence(path=last)] if last != first else []),
+        )
     if entry_points:
         add_entry_point_facts(builder, entry_points)
     if edges:
