@@ -43,7 +43,8 @@ answer a question, the report says "not determined".
 | small   | A short summary, no diagram |
 
 All kinds then show the code map, hot spots, how to contribute and what
-was not determined.
+was not determined. "How to contribute" is built from Makefile targets,
+the commands CI runs and the contribution guide's headings.
 
 ## Decisions
 
@@ -66,8 +67,8 @@ was not determined.
   package. Fully qualified names written inline are not read yet.
 - Spring placeholders are filled from the default settings files only;
   profile files (application-prod.yml) are not used.
-- Express routers mounted with `app.use("/api", router)` do not add their
-  prefix yet; FastAPI and Flask mounts do.
+- Express prefixes are followed through `.use()` calls and default
+  exports; routers passed around in other ways are not.
 - Plugins loaded by name are not seen. Migrations are found as folders, not
   through imports.
 - All twelve evaluation repos have now been used to fix detectors, so their

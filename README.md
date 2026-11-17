@@ -52,7 +52,8 @@ uv run plumb report pallets/click --model anthropic:claude-opus-5-5
 ```
 
 This writes `click.report.json` and `click.report.md`. The key is read
-from the environment and only sent to the provider.
+from the environment and only sent to the provider. If your Anthropic key
+is not scoped to one workspace, also set `ANTHROPIC_WORKSPACE_ID`.
 
 `plumb analyse` writes `<repo>.facts.json`: what kind of repo it is, the
 services it runs, the databases, queues and outside services it uses, the

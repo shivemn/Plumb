@@ -80,6 +80,15 @@ One answer key was wrong, not Plumb: the Express key missed `GET /` in
 `src/main.ts`. After the fixes these three repos have been tuned against
 too, so new held-out repos are needed for an honest score.
 
+## 18 November
+
+- [x] Express route prefixes from `app.use("/api", router)`, across files
+- [x] Anthropic keys not scoped to a workspace (`ANTHROPIC_WORKSPACE_ID`)
+- [x] Setup and test commands from Makefiles, CI workflows and contribution
+      guides, and a "How to contribute" section in every report
+- [x] Evaluation runs in CI on pull requests and weekly, and fails when a
+      check drops
+
 ## Weeks 10 to 12 (next)
 
 - [ ] First real reports with a model, and a published claim precision
