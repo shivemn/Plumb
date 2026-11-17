@@ -9,6 +9,7 @@ requires-python = ">=3.12"
 dependencies = [
     "networkx>=3.3",
     "pydantic>=2.9",
+    "pyyaml>=6.0",
     "tree-sitter>=0.23",
     "tree-sitter-java>=0.23",
     "tree-sitter-javascript>=0.23",
@@ -26,6 +27,7 @@ dev = [
     "ruff>=0.8",
     "pyright>=1.1.390",
     "types-networkx>=3.6.1.20261114",
+    "types-pyyaml>=6.0.12.20261113",
 ]
 
 [build-system]

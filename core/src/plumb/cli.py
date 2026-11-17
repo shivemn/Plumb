@@ -16,6 +16,7 @@ from plumb.history import is_shallow, mine
 from plumb.inventory import Category, build_inventory
 from plumb.model import FactSet
 from plumb.source import Limits, SourceError, fetch
+from plumb.system import find_system
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -84,7 +85,8 @@ def analyse(
         history = mine(checkout.path, window_days=window_days, keep=first_party)
     edges = all_edges(checkout.path, files)
     entry_points = find_entry_points(checkout.path, files)
-    facts = build_facts(checkout, files, history, edges, entry_points)
+    system = find_system(checkout.path, files, checkout.name)
+    facts = build_facts(checkout, files, history, edges, entry_points, system)
 
     target = out or Path(f"{checkout.name}.facts.json")
     target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")

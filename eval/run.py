@@ -23,6 +23,7 @@ from plumb.graph import all_edges, component_of
 from plumb.history import mine
 from plumb.inventory import Category, build_inventory
 from plumb.source import SourceError, fetch
+from plumb.system import find_system
 
 EVAL = Path(__file__).resolve().parent
 RESULTS = EVAL / "results"
@@ -46,7 +47,8 @@ def main() -> int:
         history = mine(checkout.path, keep=first_party)
         edges = all_edges(checkout.path, files)
         entry_points = find_entry_points(checkout.path, files)
-        facts = build_facts(checkout, files, history, edges, entry_points)
+        system = find_system(checkout.path, files, checkout.name)
+        facts = build_facts(checkout, files, history, edges, entry_points, system)
         (RESULTS / f"{name}.facts.json").write_text(
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"
         )

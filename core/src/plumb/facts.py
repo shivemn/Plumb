@@ -21,6 +21,7 @@ from plumb.model import (
     RepoRef,
 )
 from plumb.source import Checkout
+from plumb.system import Role, System
 
 # Files that say how a repo is built, run or deployed. Later stages read
 # these to find services, databases and entry points.
@@ -48,12 +49,15 @@ def build_facts(
     history: History | None,
     edges: list[Edge] | None = None,
     entry_points: list[EntryPoint] | None = None,
+    system: System | None = None,
     kind: RepoKind = RepoKind.UNKNOWN,
 ) -> FactSet:
     builder = FactBuilder()
     add_language_facts(builder, files)
     add_skipped_facts(builder, files)
     add_build_file_facts(builder, files)
+    if system is not None:
+        add_system_facts(builder, system)
     if entry_points:
         add_entry_point_facts(builder, entry_points)
     if edges:
@@ -107,6 +111,28 @@ def add_build_file_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
             builder.add(f"Build or deploy file {info.path}", [FileEvidence(path=info.path)])
         elif pure.parts[:2] == (".github", "workflows") and pure.suffix in (".yml", ".yaml"):
             builder.add(f"GitHub Actions workflow {info.path}", [FileEvidence(path=info.path)])
+
+
+_ROLE_LABELS = {
+    Role.SERVICE: "Service run from this repo",
+    Role.STORE: "Database, cache or queue",
+    Role.MONITORING: "Monitoring",
+    Role.OUTSIDE: "Outside service",
+    Role.CONTAINER: "Other container",
+}
+
+
+def add_system_facts(builder: FactBuilder, system: System) -> None:
+    for role, label in _ROLE_LABELS.items():
+        for part in system.of(role):
+            details = "; ".join(dict.fromkeys(c.detail for c in part.clues))
+            builder.add(
+                f"{label}: {part.name} ({details})",
+                [
+                    FileEvidence(path=c.path, start_line=c.line, end_line=c.line)
+                    for c in part.clues[:5]
+                ],
+            )
 
 
 _ENTRY_LABELS = {
