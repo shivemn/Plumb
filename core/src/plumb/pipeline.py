@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+from plumb.contrib import find_steps
 from plumb.deps import Dependency, find_dependencies
 from plumb.entrypoints import EntryPoint, find_entry_points
 from plumb.facts import build_facts
@@ -60,8 +61,9 @@ def analyse_repo(
     settings = find_settings(checkout.path, files)
     decision = decide_kind(files, entry_points, system, deps)
     migrations = find_migrations(files)
+    steps = find_steps(checkout.path, files)
     facts = build_facts(
-        checkout, files, history, edges, entry_points, system, settings, decision, migrations
+        checkout, files, history, edges, entry_points, system, settings, decision, migrations, steps
     )
     return Analysis(
         checkout, files, history, edges, entry_points, deps, system, decision, migrations, facts

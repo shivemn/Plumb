@@ -43,6 +43,7 @@ class Topic(StrEnum):
     ENTRY_POINTS = "entry_points"
     STRUCTURE = "structure"
     HISTORY = "history"
+    CONTRIBUTE = "contribute"
     GENERAL = "general"
 
 

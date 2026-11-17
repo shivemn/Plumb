@@ -44,7 +44,13 @@ class FakeClient:
 
 def test_plan_picks_sections_by_kind_and_facts_by_topic() -> None:
     tasks = plan_report(FACTS, nonce="abc")
-    assert [t.section.id for t in tasks] == ["overview", "system", "entry_points", "structure"]
+    assert [t.section.id for t in tasks] == [
+        "overview",
+        "system",
+        "entry_points",
+        "structure",
+        "contribute",
+    ]
     system = tasks[1]
     assert [f.id for f in system.facts] == ["f3", "f6"]
     assert "<<<facts abc>>>" in system.prompt and "<<<end facts abc>>>" in system.prompt

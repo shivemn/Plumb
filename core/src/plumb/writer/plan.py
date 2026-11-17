@@ -50,6 +50,13 @@ SECTIONS: dict[str, SectionSpec] = {
         "Describe how the code is organised: which parts use which, and which files "
         "most of the code depends on.",
     ),
+    "contribute": SectionSpec(
+        "contribute",
+        "How to contribute",
+        (Topic.CONTRIBUTE, Topic.ENTRY_POINTS),
+        "Say how to set up, run and test the project, using the commands the facts show. "
+        "Prefer commands that CI runs. Mention the contribution guide if there is one.",
+    ),
     "hot_spots": SectionSpec(
         "hot_spots",
         "Hot spots",
@@ -59,14 +66,21 @@ SECTIONS: dict[str, SectionSpec] = {
 }
 
 SECTIONS_BY_KIND: dict[RepoKind, tuple[str, ...]] = {
-    RepoKind.SERVICE: ("overview", "system", "entry_points", "structure", "hot_spots"),
-    RepoKind.WEBSITE: ("overview", "entry_points", "structure", "hot_spots"),
-    RepoKind.CLI: ("overview", "entry_points", "structure", "hot_spots"),
-    RepoKind.LIBRARY: ("overview", "structure", "hot_spots"),
-    RepoKind.DATA: ("overview", "structure", "hot_spots"),
-    RepoKind.SMALL: ("overview", "structure"),
-    RepoKind.DOCS: ("overview",),
-    RepoKind.UNKNOWN: ("overview", "structure", "hot_spots"),
+    RepoKind.SERVICE: (
+        "overview",
+        "system",
+        "entry_points",
+        "structure",
+        "hot_spots",
+        "contribute",
+    ),
+    RepoKind.WEBSITE: ("overview", "entry_points", "structure", "hot_spots", "contribute"),
+    RepoKind.CLI: ("overview", "entry_points", "structure", "hot_spots", "contribute"),
+    RepoKind.LIBRARY: ("overview", "structure", "hot_spots", "contribute"),
+    RepoKind.DATA: ("overview", "structure", "hot_spots", "contribute"),
+    RepoKind.SMALL: ("overview", "structure", "contribute"),
+    RepoKind.DOCS: ("overview", "contribute"),
+    RepoKind.UNKNOWN: ("overview", "structure", "hot_spots", "contribute"),
 }
 
 MAX_FACTS_PER_SECTION = 80

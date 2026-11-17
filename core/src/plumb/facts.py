@@ -6,6 +6,7 @@ from collections import Counter, defaultdict
 from collections.abc import Sequence
 from pathlib import PurePosixPath
 
+from plumb.contrib import Step
 from plumb.entrypoints import EntryKind, EntryPoint
 from plumb.graph import component_edges, most_used, mutual_components
 from plumb.history import History
@@ -57,6 +58,7 @@ def build_facts(
     settings: dict[str, list[Clue]] | None = None,
     decision: KindDecision | None = None,
     migrations: list[Migrations] | None = None,
+    steps: list[Step] | None = None,
 ) -> FactSet:
     builder = FactBuilder()
     kind = decision.kind if decision else RepoKind.UNKNOWN
@@ -82,6 +84,8 @@ def build_facts(
         )
     if entry_points:
         add_entry_point_facts(builder, entry_points)
+    if steps:
+        add_step_facts(builder, steps)
     if edges:
         add_graph_facts(builder, edges)
     if history is not None:
@@ -206,6 +210,22 @@ def add_entry_point_facts(builder: FactBuilder, entry_points: list[EntryPoint]) 
                 [FileEvidence(path=entry.path, start_line=entry.line, end_line=entry.line)]
                 + settings,
             )
+
+
+def add_step_facts(builder: FactBuilder, steps: list[Step], limit: int = 24) -> None:
+    builder.topic = Topic.CONTRIBUTE
+    seen: set[str] = set()
+    for step in steps:
+        if len(seen) >= limit or (step.command and step.command in seen):
+            continue
+        seen.add(step.command or f"{step.path}:{step.name}")
+        where = [FileEvidence(path=step.path, start_line=step.line, end_line=step.line)]
+        if step.kind == "make":
+            builder.add(f"Makefile target {step.name} runs: {step.command}", where)
+        elif step.kind == "ci":
+            builder.add(f'CI step "{step.name}" in {step.path} runs: {step.command}', where)
+        else:
+            builder.add(f'Contribution guide {step.path} has a section "{step.name}"', where)
 
 
 def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) -> None:
