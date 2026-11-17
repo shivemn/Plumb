@@ -7,7 +7,7 @@ how the repo itself is put together.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cache
 from pathlib import Path, PurePosixPath
 
@@ -26,6 +26,8 @@ class Import:
     names: tuple[str, ...]  # names after "from x import", empty for "import x"
     level: int  # number of leading dots in a relative import
     line: int  # 1-based
+    # The local name each of `names` is bound to ("x as y" binds y).
+    local_names: tuple[str, ...] = field(default=(), compare=False)
 
 
 @dataclass(frozen=True)
@@ -90,9 +92,12 @@ def _from_import(node: Node) -> Import:
     else:
         module = _text(module_node)
     names: list[str] = []
+    local: list[str] = []
     for child in node.children_by_field_name("name"):
         names.append(_text(_unalias(child)))
-    return Import(module, tuple(names), level, node.start_point.row + 1)
+        alias = child.child_by_field_name("alias") if child.type == "aliased_import" else None
+        local.append(_text(alias) if alias is not None else names[-1])
+    return Import(module, tuple(names), level, node.start_point.row + 1, tuple(local))
 
 
 class PythonIndex:

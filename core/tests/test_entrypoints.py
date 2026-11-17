@@ -191,11 +191,12 @@ def test_prefixes_from_mounts_in_other_files(make_repo: Callable[[str], RepoBuil
         {
             "app/__init__.py": "",
             "app/core/__init__.py": "",
-            "app/core/config.py": 'class Settings:\n    API_V1_STR: str = "/api/v1"\n',
+            "app/core/config.py": 'class Settings:\n    api_prefix: str = "/api/v1"\n',
             "app/api/__init__.py": "",
             "app/api/routes/__init__.py": "",
             "app/api/routes/items.py": (
                 'router = APIRouter(prefix="/items")\n\n@router.get("/{id}")\ndef read(): ...\n'
+                '@router.get("")\ndef all(): ...\n'
             ),
             "app/api/routes/login.py": (
                 'router = APIRouter()\n\n@router.post("/login")\ndef go(): ...\n'
@@ -207,13 +208,18 @@ def test_prefixes_from_mounts_in_other_files(make_repo: Callable[[str], RepoBuil
                 'api_router.include_router(login.router, prefix="/auth")\n'
             ),
             "app/main.py": (
-                "from app.api.main import api_router\n"
+                "from app.api.main import api_router as routes\n"
                 "from app.core.config import settings\n"
                 "app = FastAPI()\n"
-                "app.include_router(api_router, prefix=settings.API_V1_STR)\n"
+                "app.include_router(routes, prefix=settings.api_prefix)\n"
                 '@app.get("/health")\ndef health(): ...\n'
             ),
         }
     )
     names = sorted(e.name for e in find_entry_points(repo.path, build_inventory(repo.path)))
-    assert names == ["GET /api/v1/items/{id}", "GET /health", "POST /api/v1/auth/login"]
+    assert names == [
+        "GET /api/v1/items",
+        "GET /api/v1/items/{id}",
+        "GET /health",
+        "POST /api/v1/auth/login",
+    ]

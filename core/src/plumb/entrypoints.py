@@ -161,7 +161,8 @@ def _from_decorators(
         first = _py_string(positional[0]) if positional else None
 
         if call is not None and method in _HTTP_METHODS | {"route", "api_route"}:
-            if first is None or not first.startswith("/"):
+            # "" is a real path in a decorator: the route sits at the router's prefix.
+            if first is None or (first and not first.startswith("/")):
                 continue
             verb = method.upper() if method in _HTTP_METHODS else _route_methods(keywords)
             full = prefixes.get(owner, "") + first

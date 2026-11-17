@@ -25,7 +25,7 @@ RouterKey = tuple[str, str]  # (file, variable name)
 
 _MOUNT_CALLS = {"include_router": "prefix", "register_blueprint": "url_prefix"}
 _SETTING_DEFAULT = re.compile(
-    rb"^\s*([A-Z][A-Z0-9_]*)\s*(?::[^=\n]+)?=\s*[\"']([^\"'\n]*)[\"']", re.M
+    rb"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*(?::[^=\n]+)?=\s*[\"']([^\"'\n]*)[\"']", re.M
 )
 
 
@@ -43,14 +43,15 @@ def _local_names(path: str, source: bytes, index: PythonIndex) -> dict[str, Rout
         if not item.names:
             continue
         base = index.resolve(path, Import(item.module, (), item.level, item.line))
-        for name in item.names:
+        local_names = item.local_names or item.names
+        for name, local in zip(item.names, local_names, strict=False):
             as_module = index.resolve(path, Import(item.module, (name,), item.level, item.line))
             # "from app.api.routes import items" names a module file; "from
             # app.api.main import api_router" names something inside one.
             if as_module and (not base or as_module[0] != base[0]):
-                names[name] = as_module[0]
+                names[local] = as_module[0]
             elif base:
-                names[name] = (base[0], name)
+                names[local] = (base[0], name)
     return names
 
 
@@ -109,7 +110,7 @@ def find_mounts(repo: Path, files: list[FileInfo]) -> tuple[list[Mount], dict[st
 
 
 def _resolve_setting(prefix: str, settings: dict[str, str]) -> str:
-    match = re.fullmatch(r"\{\w+\.([A-Z][A-Z0-9_]*)\}", prefix)
+    match = re.fullmatch(r"\{\w+\.([A-Za-z_][A-Za-z0-9_]*)\}", prefix)
     if match and match.group(1) in settings:
         return settings[match.group(1)]
     return prefix

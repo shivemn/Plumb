@@ -140,3 +140,9 @@ def test_java_edges(make_repo: Callable[[str], RepoBuilder]) -> None:
         ("util/Money.java", 5),  # static import of a method resolves to its class
         ("web/OrderView.java", 10),  # same package, no import needed
     }
+
+
+def test_aliases_are_kept() -> None:
+    (item,) = python_imports(b"from app.api import router as api_router, deps\n")
+    assert item.names == ("router", "deps")
+    assert item.local_names == ("api_router", "deps")
