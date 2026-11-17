@@ -9,6 +9,7 @@ from typing import Annotated
 import typer
 
 from plumb import __version__
+from plumb.entrypoints import find_entry_points
 from plumb.facts import build_facts
 from plumb.graph import all_edges
 from plumb.history import is_shallow, mine
@@ -82,13 +83,15 @@ def analyse(
     else:
         history = mine(checkout.path, window_days=window_days, keep=first_party)
     edges = all_edges(checkout.path, files)
-    facts = build_facts(checkout, files, history, edges)
+    entry_points = find_entry_points(checkout.path, files)
+    facts = build_facts(checkout, files, history, edges, entry_points)
 
     target = out or Path(f"{checkout.name}.facts.json")
     target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")
     typer.echo(
         f"{checkout.owner}/{checkout.name} at {checkout.commit[:7]}: "
         f"{len(files)} files, {len(first_party)} first-party, {len(edges)} import links, "
+        f"{len(entry_points)} entry points, "
         f"{len(history.commits) if history else 'no'} commits read, "
         f"{len(facts.facts)} facts written to {target}"
     )

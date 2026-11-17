@@ -6,6 +6,7 @@ from collections import Counter, defaultdict
 from collections.abc import Sequence
 from pathlib import PurePosixPath
 
+from plumb.entrypoints import EntryKind, EntryPoint
 from plumb.graph import component_edges, most_used, mutual_components
 from plumb.history import History
 from plumb.imports import Edge
@@ -46,12 +47,15 @@ def build_facts(
     files: list[FileInfo],
     history: History | None,
     edges: list[Edge] | None = None,
+    entry_points: list[EntryPoint] | None = None,
     kind: RepoKind = RepoKind.UNKNOWN,
 ) -> FactSet:
     builder = FactBuilder()
     add_language_facts(builder, files)
     add_skipped_facts(builder, files)
     add_build_file_facts(builder, files)
+    if entry_points:
+        add_entry_point_facts(builder, entry_points)
     if edges:
         add_graph_facts(builder, edges)
     if history is not None:
@@ -103,6 +107,35 @@ def add_build_file_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
             builder.add(f"Build or deploy file {info.path}", [FileEvidence(path=info.path)])
         elif pure.parts[:2] == (".github", "workflows") and pure.suffix in (".yml", ".yaml"):
             builder.add(f"GitHub Actions workflow {info.path}", [FileEvidence(path=info.path)])
+
+
+_ENTRY_LABELS = {
+    EntryKind.HTTP: "HTTP route",
+    EntryKind.COMMAND: "Command",
+    EntryKind.CONSUMER: "Queue consumer",
+    EntryKind.SCHEDULED: "Scheduled job",
+    EntryKind.TASK: "Background task",
+    EntryKind.MAIN: "Program entry",
+    EntryKind.SCRIPT: "Package script",
+}
+
+
+def add_entry_point_facts(builder: FactBuilder, entry_points: list[EntryPoint]) -> None:
+    """One fact per kind with a count, then one per entry point, up to a limit per kind."""
+    for kind, label in _ENTRY_LABELS.items():
+        found = [e for e in entry_points if e.kind is kind]
+        if not found:
+            continue
+        builder.add(
+            f"{_plural(len(found), label.lower())} found",
+            [FileEvidence(path=e.path, start_line=e.line, end_line=e.line) for e in found[:3]],
+        )
+        for entry in found[:40]:
+            via = f" ({entry.framework})" if entry.framework else ""
+            builder.add(
+                f"{label} {entry.name}{via} in {entry.path}",
+                [FileEvidence(path=entry.path, start_line=entry.line, end_line=entry.line)],
+            )
 
 
 def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) -> None:

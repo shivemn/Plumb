@@ -17,6 +17,7 @@ import time
 import tomllib
 from pathlib import Path
 
+from plumb.entrypoints import find_entry_points
 from plumb.facts import build_facts
 from plumb.graph import all_edges, component_of
 from plumb.history import mine
@@ -44,7 +45,8 @@ def main() -> int:
         first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
         history = mine(checkout.path, keep=first_party)
         edges = all_edges(checkout.path, files)
-        facts = build_facts(checkout, files, history, edges)
+        entry_points = find_entry_points(checkout.path, files)
+        facts = build_facts(checkout, files, history, edges, entry_points)
         (RESULTS / f"{name}.facts.json").write_text(
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"
         )
