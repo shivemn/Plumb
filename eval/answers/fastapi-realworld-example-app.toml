@@ -1,0 +1,58 @@
+# Answer key: nsidnev/fastapi-realworld-example-app (held out)
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "nsidnev/fastapi-realworld-example-app"
+commit = "029eb7781c60d5f563ee8990a0cbfb79b244538c"
+kind = "service"
+languages = ["python"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "it uses an ORM such as SQLAlchemy models",
+  "it has a front end",
+]
+
+[[runs]]
+name = "app (FastAPI)"
+source = "docker-compose.yml"
+note = "Compose service app, built from the Dockerfile at the root."
+
+[[stores]]
+name = "PostgreSQL"
+source = "docker-compose.yml"
+note = "Compose service db, image postgres:11.5-alpine; queries are plain SQL files read with aiosql."
+
+[[entry_points]]
+kind = "http"
+items = ["19 routes, all under /api; users, profiles, articles, comments and tags"]
+source = "app/api/routes/api.py"
+
+[[modules]]
+path = "app/api/routes"
+purpose = "Route handlers, mounted under prefixes in app/api/routes/api.py."
+
+[[modules]]
+path = "app/db/repositories"
+purpose = "Database access, one repository per table."
+
+[[modules]]
+path = "app/db/queries"
+purpose = "Loads the SQL files in app/db/queries/sql with aiosql."
+
+[[modules]]
+path = "app/services"
+purpose = "Business rules: JWT handling, password hashing, article and user checks."
+
+[[modules]]
+path = "app/db/migrations/versions"
+purpose = "Alembic migrations."
+
+[commands]
+run = "docker compose up"
+test = "scripts/test"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "service"
+http_routes = 19
+stores = ["PostgreSQL"]
