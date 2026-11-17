@@ -20,6 +20,7 @@ from plumb.model import (
     FileEvidence,
     RepoKind,
     RepoRef,
+    Topic,
 )
 from plumb.source import Checkout
 from plumb.system import Clue, Migrations, Role, System
@@ -37,10 +38,12 @@ _BUILD_FILES = (
 class FactBuilder:
     def __init__(self) -> None:
         self.facts: list[Fact] = []
+        self.topic = Topic.GENERAL  # set by each add_*_facts function
 
     def add(self, statement: str, evidence: Sequence[Evidence]) -> str:
         fact_id = f"f{len(self.facts) + 1}"
-        self.facts.append(Fact(id=fact_id, statement=statement, evidence=list(evidence)))
+        fact = Fact(id=fact_id, topic=self.topic, statement=statement, evidence=list(evidence))
+        self.facts.append(fact)
         return fact_id
 
 
@@ -57,6 +60,7 @@ def build_facts(
 ) -> FactSet:
     builder = FactBuilder()
     kind = decision.kind if decision else RepoKind.UNKNOWN
+    builder.topic = Topic.KIND
     if decision is not None and decision.clues:
         builder.add(
             f"Looks like a {decision.kind.value} repo: {decision.reason}",
@@ -69,6 +73,7 @@ def build_facts(
         add_system_facts(builder, system)
     if settings:
         add_setting_facts(builder, settings)
+    builder.topic = Topic.MIGRATIONS
     for item in migrations or []:
         first, last = item.files[0], item.files[-1]
         builder.add(
@@ -89,6 +94,7 @@ def build_facts(
 
 
 def add_language_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
+    builder.topic = Topic.LANGUAGES
     by_language: defaultdict[str, list[FileInfo]] = defaultdict(list)
     for info in files:
         if info.language and info.category is Category.SOURCE:
@@ -104,6 +110,7 @@ def add_language_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
 
 
 def add_skipped_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
+    builder.topic = Topic.SKIPPED
     for category in (Category.VENDORED, Category.GENERATED, Category.EXAMPLE):
         skipped = [f for f in files if f.category is category]
         if not skipped:
@@ -120,6 +127,7 @@ def add_skipped_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
 
 
 def add_build_file_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
+    builder.topic = Topic.BUILD
     for info in files:
         if info.category in (Category.VENDORED, Category.GENERATED):
             continue
@@ -140,6 +148,7 @@ _ROLE_LABELS = {
 
 
 def add_system_facts(builder: FactBuilder, system: System) -> None:
+    builder.topic = Topic.SYSTEM
     for role, label in _ROLE_LABELS.items():
         for part in system.of(role):
             details = "; ".join(dict.fromkeys(c.detail for c in part.clues))
@@ -155,6 +164,7 @@ def add_system_facts(builder: FactBuilder, system: System) -> None:
 def add_setting_facts(
     builder: FactBuilder, settings: dict[str, list[Clue]], limit: int = 30
 ) -> None:
+    builder.topic = Topic.SETTINGS
     for name, clues in list(settings.items())[:limit]:
         places = ", ".join(c.path for c in clues)
         builder.add(
@@ -176,6 +186,7 @@ _ENTRY_LABELS = {
 
 def add_entry_point_facts(builder: FactBuilder, entry_points: list[EntryPoint]) -> None:
     """One fact per kind with a count, then one per entry point, up to a limit per kind."""
+    builder.topic = Topic.ENTRY_POINTS
     for kind, label in _ENTRY_LABELS.items():
         found = [e for e in entry_points if e.kind is kind]
         if not found:
@@ -198,6 +209,7 @@ def add_entry_point_facts(builder: FactBuilder, entry_points: list[EntryPoint]) 
 
 
 def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) -> None:
+    builder.topic = Topic.STRUCTURE
     components = component_edges(edges)
     for item in components[:limit]:
         builder.add(
@@ -229,6 +241,7 @@ MIN_HOT_COMMITS = 3
 
 
 def add_history_facts(builder: FactBuilder, history: History, limit: int = 10) -> None:
+    builder.topic = Topic.HISTORY
     window = f"between {history.since:%d %b %Y} and {history.until:%d %b %Y}"
     if history.commits:
         builder.add(

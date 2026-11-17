@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a library repo: a package definition and no commands, routes or services",
       "evidence": [
         {
@@ -27,6 +28,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "19 source files in python, 6,394 lines in all",
       "evidence": [
         {
@@ -51,6 +53,7 @@
     },
     {
       "id": "f3",
+      "topic": "skipped",
       "statement": "4 example files left out of the analysis",
       "evidence": [
         {
@@ -63,6 +66,7 @@
     },
     {
       "id": "f4",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/close-issues.yml",
       "evidence": [
         {
@@ -75,6 +79,7 @@
     },
     {
       "id": "f5",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/codeql-analysis.yml",
       "evidence": [
         {
@@ -87,6 +92,7 @@
     },
     {
       "id": "f6",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/lint.yml",
       "evidence": [
         {
@@ -99,6 +105,7 @@
     },
     {
       "id": "f7",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/lock-issues.yml",
       "evidence": [
         {
@@ -111,6 +118,7 @@
     },
     {
       "id": "f8",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/publish.yml",
       "evidence": [
         {
@@ -123,6 +131,7 @@
     },
     {
       "id": "f9",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/run-tests.yml",
       "evidence": [
         {
@@ -135,6 +144,7 @@
     },
     {
       "id": "f10",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/typecheck.yml",
       "evidence": [
         {
@@ -147,6 +157,7 @@
     },
     {
       "id": "f11",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/zizmor.yml",
       "evidence": [
         {
@@ -159,6 +170,7 @@
     },
     {
       "id": "f12",
+      "topic": "build",
       "statement": "Build or deploy file Makefile",
       "evidence": [
         {
@@ -171,6 +183,7 @@
     },
     {
       "id": "f13",
+      "topic": "build",
       "statement": "Build or deploy file docs/Makefile",
       "evidence": [
         {
@@ -183,6 +196,7 @@
     },
     {
       "id": "f14",
+      "topic": "build",
       "statement": "Build or deploy file docs/requirements.txt",
       "evidence": [
         {
@@ -195,6 +209,7 @@
     },
     {
       "id": "f15",
+      "topic": "build",
       "statement": "Build or deploy file pyproject.toml",
       "evidence": [
         {
@@ -207,6 +222,7 @@
     },
     {
       "id": "f16",
+      "topic": "build",
       "statement": "Build or deploy file setup.py",
       "evidence": [
         {
@@ -219,6 +235,7 @@
     },
     {
       "id": "f17",
+      "topic": "build",
       "statement": "Build or deploy file tests/certs/expired/Makefile",
       "evidence": [
         {
@@ -231,6 +248,7 @@
     },
     {
       "id": "f18",
+      "topic": "build",
       "statement": "Build or deploy file tests/certs/expired/ca/Makefile",
       "evidence": [
         {
@@ -243,6 +261,7 @@
     },
     {
       "id": "f19",
+      "topic": "build",
       "statement": "Build or deploy file tests/certs/expired/server/Makefile",
       "evidence": [
         {
@@ -255,6 +274,7 @@
     },
     {
       "id": "f20",
+      "topic": "build",
       "statement": "Build or deploy file tests/certs/mtls/Makefile",
       "evidence": [
         {
@@ -267,6 +287,7 @@
     },
     {
       "id": "f21",
+      "topic": "build",
       "statement": "Build or deploy file tests/certs/mtls/client/Makefile",
       "evidence": [
         {
@@ -279,6 +300,7 @@
     },
     {
       "id": "f22",
+      "topic": "build",
       "statement": "Build or deploy file tests/certs/valid/server/Makefile",
       "evidence": [
         {
@@ -291,6 +313,7 @@
     },
     {
       "id": "f23",
+      "topic": "settings",
       "statement": "Setting CURL_CA_BUNDLE is read from the environment in src/requests/sessions.py",
       "evidence": [
         {
@@ -303,6 +326,7 @@
     },
     {
       "id": "f24",
+      "topic": "settings",
       "statement": "Setting NETRC is read from the environment in src/requests/utils.py",
       "evidence": [
         {
@@ -315,6 +339,7 @@
     },
     {
       "id": "f25",
+      "topic": "settings",
       "statement": "Setting REQUESTS_CA_BUNDLE is read from the environment in src/requests/sessions.py",
       "evidence": [
         {
@@ -327,6 +352,7 @@
     },
     {
       "id": "f26",
+      "topic": "entry_points",
       "statement": "2 program entrys found",
       "evidence": [
         {
@@ -345,6 +371,7 @@
     },
     {
       "id": "f27",
+      "topic": "entry_points",
       "statement": "Program entry run as a script in src/requests/certs.py",
       "evidence": [
         {
@@ -357,6 +384,7 @@
     },
     {
       "id": "f28",
+      "topic": "entry_points",
       "statement": "Program entry run as a script in src/requests/help.py",
       "evidence": [
         {
@@ -369,6 +397,7 @@
     },
     {
       "id": "f29",
+      "topic": "structure",
       "statement": "Code in tests uses code in src/requests (26 references)",
       "evidence": [
         {
@@ -393,6 +422,7 @@
     },
     {
       "id": "f30",
+      "topic": "structure",
       "statement": "Code in tests uses code in tests/testserver (3 references)",
       "evidence": [
         {
@@ -417,6 +447,7 @@
     },
     {
       "id": "f31",
+      "topic": "structure",
       "statement": "src/requests/compat.py is used by 14 other files",
       "evidence": [
         {
@@ -441,6 +472,7 @@
     },
     {
       "id": "f32",
+      "topic": "structure",
       "statement": "src/requests/models.py is used by 11 other files",
       "evidence": [
         {
@@ -465,6 +497,7 @@
     },
     {
       "id": "f33",
+      "topic": "structure",
       "statement": "src/requests/structures.py is used by 9 other files",
       "evidence": [
         {
@@ -489,6 +522,7 @@
     },
     {
       "id": "f34",
+      "topic": "structure",
       "statement": "src/requests/cookies.py is used by 8 other files",
       "evidence": [
         {
@@ -513,6 +547,7 @@
     },
     {
       "id": "f35",
+      "topic": "structure",
       "statement": "src/requests/_types.py is used by 7 other files",
       "evidence": [
         {
@@ -537,6 +572,7 @@
     },
     {
       "id": "f36",
+      "topic": "history",
       "statement": "8 commits between 28 Jul 2026 and 26 Oct 2026",
       "evidence": [
         {

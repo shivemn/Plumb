@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a docs repo: no source code, only documents",
       "evidence": [
         {
@@ -33,6 +34,7 @@
     },
     {
       "id": "f2",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/main.yml",
       "evidence": [
         {
@@ -45,6 +47,7 @@
     },
     {
       "id": "f3",
+      "topic": "history",
       "statement": "7 commits between 04 Jun 2026 and 02 Sep 2026",
       "evidence": [
         {

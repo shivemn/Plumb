@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a library repo: a package definition and no commands, routes or services",
       "evidence": [
         {
@@ -21,6 +22,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "17 source files in python, 12,829 lines in all",
       "evidence": [
         {
@@ -45,6 +47,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "1 source file in shell, 7 lines in all",
       "evidence": [
         {
@@ -57,6 +60,7 @@
     },
     {
       "id": "f4",
+      "topic": "skipped",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -69,6 +73,7 @@
     },
     {
       "id": "f5",
+      "topic": "skipped",
       "statement": "38 example files left out of the analysis",
       "evidence": [
         {
@@ -87,6 +92,7 @@
     },
     {
       "id": "f6",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/lock.yaml",
       "evidence": [
         {
@@ -99,6 +105,7 @@
     },
     {
       "id": "f7",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/nightly.yaml",
       "evidence": [
         {
@@ -111,6 +118,7 @@
     },
     {
       "id": "f8",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/pre-commit.yaml",
       "evidence": [
         {
@@ -123,6 +131,7 @@
     },
     {
       "id": "f9",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/publish.yaml",
       "evidence": [
         {
@@ -135,6 +144,7 @@
     },
     {
       "id": "f10",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/tests.yaml",
       "evidence": [
         {
@@ -147,6 +157,7 @@
     },
     {
       "id": "f11",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/zizmor.yaml",
       "evidence": [
         {
@@ -159,6 +170,7 @@
     },
     {
       "id": "f12",
+      "topic": "build",
       "statement": "Build or deploy file examples/aliases/pyproject.toml",
       "evidence": [
         {
@@ -171,6 +183,7 @@
     },
     {
       "id": "f13",
+      "topic": "build",
       "statement": "Build or deploy file examples/colors/pyproject.toml",
       "evidence": [
         {
@@ -183,6 +196,7 @@
     },
     {
       "id": "f14",
+      "topic": "build",
       "statement": "Build or deploy file examples/completion/pyproject.toml",
       "evidence": [
         {
@@ -195,6 +209,7 @@
     },
     {
       "id": "f15",
+      "topic": "build",
       "statement": "Build or deploy file examples/complex/pyproject.toml",
       "evidence": [
         {
@@ -207,6 +222,7 @@
     },
     {
       "id": "f16",
+      "topic": "build",
       "statement": "Build or deploy file examples/imagepipe/pyproject.toml",
       "evidence": [
         {
@@ -219,6 +235,7 @@
     },
     {
       "id": "f17",
+      "topic": "build",
       "statement": "Build or deploy file examples/inout/pyproject.toml",
       "evidence": [
         {
@@ -231,6 +248,7 @@
     },
     {
       "id": "f18",
+      "topic": "build",
       "statement": "Build or deploy file examples/naval/pyproject.toml",
       "evidence": [
         {
@@ -243,6 +261,7 @@
     },
     {
       "id": "f19",
+      "topic": "build",
       "statement": "Build or deploy file examples/repo/pyproject.toml",
       "evidence": [
         {
@@ -255,6 +274,7 @@
     },
     {
       "id": "f20",
+      "topic": "build",
       "statement": "Build or deploy file examples/termui/pyproject.toml",
       "evidence": [
         {
@@ -267,6 +287,7 @@
     },
     {
       "id": "f21",
+      "topic": "build",
       "statement": "Build or deploy file examples/validation/pyproject.toml",
       "evidence": [
         {
@@ -279,6 +300,7 @@
     },
     {
       "id": "f22",
+      "topic": "build",
       "statement": "Build or deploy file pyproject.toml",
       "evidence": [
         {
@@ -291,6 +313,7 @@
     },
     {
       "id": "f23",
+      "topic": "settings",
       "statement": "Setting COMP_CWORD is read from the environment in src/click/shell_completion.py",
       "evidence": [
         {
@@ -303,6 +326,7 @@
     },
     {
       "id": "f24",
+      "topic": "settings",
       "statement": "Setting COMP_WORDS is read from the environment in src/click/shell_completion.py",
       "evidence": [
         {
@@ -315,6 +339,7 @@
     },
     {
       "id": "f25",
+      "topic": "settings",
       "statement": "Setting LESS is read from the environment in src/click/_termui_impl.py",
       "evidence": [
         {
@@ -327,6 +352,7 @@
     },
     {
       "id": "f26",
+      "topic": "settings",
       "statement": "Setting PAGER is read from the environment in src/click/_termui_impl.py",
       "evidence": [
         {
@@ -339,6 +365,7 @@
     },
     {
       "id": "f27",
+      "topic": "settings",
       "statement": "Setting TERM is read from the environment in src/click/_termui_impl.py",
       "evidence": [
         {
@@ -351,6 +378,7 @@
     },
     {
       "id": "f28",
+      "topic": "settings",
       "statement": "Setting XDG_CONFIG_HOME is read from the environment in src/click/utils.py",
       "evidence": [
         {
@@ -363,6 +391,7 @@
     },
     {
       "id": "f29",
+      "topic": "structure",
       "statement": "Code in tests uses code in src/click (74 references)",
       "evidence": [
         {
@@ -387,6 +416,7 @@
     },
     {
       "id": "f30",
+      "topic": "structure",
       "statement": "Code in tests/test_utils uses code in src/click (20 references)",
       "evidence": [
         {
@@ -411,6 +441,7 @@
     },
     {
       "id": "f31",
+      "topic": "structure",
       "statement": "Code in tests/typing uses code in src/click (13 references)",
       "evidence": [
         {
@@ -435,6 +466,7 @@
     },
     {
       "id": "f32",
+      "topic": "structure",
       "statement": "Code in tests/test_types uses code in src/click (8 references)",
       "evidence": [
         {
@@ -459,6 +491,7 @@
     },
     {
       "id": "f33",
+      "topic": "structure",
       "statement": "Code in tests/test_exceptions uses code in src/click (1 reference)",
       "evidence": [
         {
@@ -471,6 +504,7 @@
     },
     {
       "id": "f34",
+      "topic": "structure",
       "statement": "src/click/__init__.py is used by 51 other files",
       "evidence": [
         {
@@ -495,6 +529,7 @@
     },
     {
       "id": "f35",
+      "topic": "structure",
       "statement": "src/click/_compat.py is used by 17 other files",
       "evidence": [
         {
@@ -519,6 +554,7 @@
     },
     {
       "id": "f36",
+      "topic": "structure",
       "statement": "src/click/core.py is used by 12 other files",
       "evidence": [
         {
@@ -543,6 +579,7 @@
     },
     {
       "id": "f37",
+      "topic": "structure",
       "statement": "src/click/utils.py is used by 12 other files",
       "evidence": [
         {
@@ -567,6 +604,7 @@
     },
     {
       "id": "f38",
+      "topic": "structure",
       "statement": "src/click/exceptions.py is used by 9 other files",
       "evidence": [
         {
@@ -591,6 +629,7 @@
     },
     {
       "id": "f39",
+      "topic": "history",
       "statement": "48 commits between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -609,6 +648,7 @@
     },
     {
       "id": "f40",
+      "topic": "history",
       "statement": "src/click/core.py changed in 13 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -633,6 +673,7 @@
     },
     {
       "id": "f41",
+      "topic": "history",
       "statement": "tests/test_options.py changed in 9 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -657,6 +698,7 @@
     },
     {
       "id": "f42",
+      "topic": "history",
       "statement": "src/click/_termui_impl.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -681,6 +723,7 @@
     },
     {
       "id": "f43",
+      "topic": "history",
       "statement": "tests/test_arguments.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -705,6 +748,7 @@
     },
     {
       "id": "f44",
+      "topic": "history",
       "statement": "tests/test_termui.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -729,6 +773,7 @@
     },
     {
       "id": "f45",
+      "topic": "history",
       "statement": "tests/test_deprecations.py changed in 4 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -753,6 +798,7 @@
     },
     {
       "id": "f46",
+      "topic": "history",
       "statement": "tests/test_basic.py changed in 3 commits by 2 authors between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -777,6 +823,7 @@
     },
     {
       "id": "f47",
+      "topic": "history",
       "statement": "src/click/testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -801,6 +848,7 @@
     },
     {
       "id": "f48",
+      "topic": "history",
       "statement": "tests/test_testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -825,6 +873,7 @@
     },
     {
       "id": "f49",
+      "topic": "history",
       "statement": "src/click/core.py and tests/test_options.py changed in the same commit 8 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -843,6 +892,7 @@
     },
     {
       "id": "f50",
+      "topic": "history",
       "statement": "src/click/core.py and tests/test_arguments.py changed in the same commit 7 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -861,6 +911,7 @@
     },
     {
       "id": "f51",
+      "topic": "history",
       "statement": "src/click/_termui_impl.py and tests/test_termui.py changed in the same commit 6 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -879,6 +930,7 @@
     },
     {
       "id": "f52",
+      "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_options.py changed in the same commit 5 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -897,6 +949,7 @@
     },
     {
       "id": "f53",
+      "topic": "history",
       "statement": "src/click/core.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -915,6 +968,7 @@
     },
     {
       "id": "f54",
+      "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -933,6 +987,7 @@
     },
     {
       "id": "f55",
+      "topic": "history",
       "statement": "tests/test_deprecations.py and tests/test_options.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -951,6 +1006,7 @@
     },
     {
       "id": "f56",
+      "topic": "history",
       "statement": "src/click/testing.py and tests/test_testing.py changed in the same commit 3 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {

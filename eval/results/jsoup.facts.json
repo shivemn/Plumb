@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a library repo: a package definition and no commands, routes or services",
       "evidence": [
         {
@@ -21,6 +22,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "105 source files in java, 31,559 lines in all",
       "evidence": [
         {
@@ -45,6 +47,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "1 source file in html, 31 lines in all",
       "evidence": [
         {
@@ -57,6 +60,7 @@
     },
     {
       "id": "f4",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/build.yml",
       "evidence": [
         {
@@ -69,6 +73,7 @@
     },
     {
       "id": "f5",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/cifuzz.yml",
       "evidence": [
         {
@@ -81,6 +86,7 @@
     },
     {
       "id": "f6",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/codeql.yml",
       "evidence": [
         {
@@ -93,6 +99,7 @@
     },
     {
       "id": "f7",
+      "topic": "build",
       "statement": "Build or deploy file pom.xml",
       "evidence": [
         {
@@ -105,6 +112,7 @@
     },
     {
       "id": "f8",
+      "topic": "entry_points",
       "statement": "3 program entrys found",
       "evidence": [
         {
@@ -129,6 +137,7 @@
     },
     {
       "id": "f9",
+      "topic": "entry_points",
       "statement": "Program entry HtmlToPlainText in src/main/java/org/jsoup/examples/HtmlToPlainText.java",
       "evidence": [
         {
@@ -141,6 +150,7 @@
     },
     {
       "id": "f10",
+      "topic": "entry_points",
       "statement": "Program entry ListLinks in src/main/java/org/jsoup/examples/ListLinks.java",
       "evidence": [
         {
@@ -153,6 +163,7 @@
     },
     {
       "id": "f11",
+      "topic": "entry_points",
       "statement": "Program entry Wikipedia in src/main/java/org/jsoup/examples/Wikipedia.java",
       "evidence": [
         {
@@ -165,6 +176,7 @@
     },
     {
       "id": "f12",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/parser uses code in src/main/java/org/jsoup/nodes (73 references)",
       "evidence": [
         {
@@ -189,6 +201,7 @@
     },
     {
       "id": "f13",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/nodes (70 references)",
       "evidence": [
         {
@@ -213,6 +226,7 @@
     },
     {
       "id": "f14",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/parser uses code in src/main/java/org/jsoup/parser (65 references)",
       "evidence": [
         {
@@ -237,6 +251,7 @@
     },
     {
       "id": "f15",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/parser uses code in src/main/java/org/jsoup/nodes (57 references)",
       "evidence": [
         {
@@ -261,6 +276,7 @@
     },
     {
       "id": "f16",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/select uses code in src/main/java/org/jsoup/nodes (52 references)",
       "evidence": [
         {
@@ -285,6 +301,7 @@
     },
     {
       "id": "f17",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/select uses code in src/main/java/org/jsoup/select (48 references)",
       "evidence": [
         {
@@ -309,6 +326,7 @@
     },
     {
       "id": "f18",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/select uses code in src/main/java/org/jsoup/nodes (47 references)",
       "evidence": [
         {
@@ -333,6 +351,7 @@
     },
     {
       "id": "f19",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/internal (39 references)",
       "evidence": [
         {
@@ -357,6 +376,7 @@
     },
     {
       "id": "f20",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/parser uses code in src/main/java/org/jsoup/internal (28 references)",
       "evidence": [
         {
@@ -381,6 +401,7 @@
     },
     {
       "id": "f21",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/select uses code in src/main/java/org/jsoup/internal (24 references)",
       "evidence": [
         {
@@ -405,6 +426,7 @@
     },
     {
       "id": "f22",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/integration/routes uses code in src/test/java/org/jsoup/integration/netty (20 references)",
       "evidence": [
         {
@@ -429,6 +451,7 @@
     },
     {
       "id": "f23",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/helper (19 references)",
       "evidence": [
         {
@@ -453,6 +476,7 @@
     },
     {
       "id": "f24",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/nodes uses code in src/main/java/org/jsoup (19 references)",
       "evidence": [
         {
@@ -477,6 +501,7 @@
     },
     {
       "id": "f25",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/jsoup/nodes uses code in src/main/java/org/jsoup/parser (18 references)",
       "evidence": [
         {
@@ -501,6 +526,7 @@
     },
     {
       "id": "f26",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/jsoup/integration uses code in src/main/java/org/jsoup/nodes (18 references)",
       "evidence": [
         {
@@ -525,6 +551,7 @@
     },
     {
       "id": "f27",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/helper each use the other",
       "evidence": [
         {
@@ -543,6 +570,7 @@
     },
     {
       "id": "f28",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/internal each use the other",
       "evidence": [
         {
@@ -561,6 +589,7 @@
     },
     {
       "id": "f29",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/nodes each use the other",
       "evidence": [
         {
@@ -579,6 +608,7 @@
     },
     {
       "id": "f30",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup and src/main/java/org/jsoup/parser each use the other",
       "evidence": [
         {
@@ -597,6 +627,7 @@
     },
     {
       "id": "f31",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/internal each use the other",
       "evidence": [
         {
@@ -615,6 +646,7 @@
     },
     {
       "id": "f32",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/nodes each use the other",
       "evidence": [
         {
@@ -633,6 +665,7 @@
     },
     {
       "id": "f33",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/parser each use the other",
       "evidence": [
         {
@@ -651,6 +684,7 @@
     },
     {
       "id": "f34",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/helper and src/main/java/org/jsoup/select each use the other",
       "evidence": [
         {
@@ -669,6 +703,7 @@
     },
     {
       "id": "f35",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/internal and src/main/java/org/jsoup/nodes each use the other",
       "evidence": [
         {
@@ -687,6 +722,7 @@
     },
     {
       "id": "f36",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/internal and src/main/java/org/jsoup/parser each use the other",
       "evidence": [
         {
@@ -705,6 +741,7 @@
     },
     {
       "id": "f37",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/nodes and src/main/java/org/jsoup/parser each use the other",
       "evidence": [
         {
@@ -723,6 +760,7 @@
     },
     {
       "id": "f38",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/nodes and src/main/java/org/jsoup/select each use the other",
       "evidence": [
         {
@@ -741,6 +779,7 @@
     },
     {
       "id": "f39",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/parser and src/main/java/org/jsoup/select each use the other",
       "evidence": [
         {
@@ -759,6 +798,7 @@
     },
     {
       "id": "f40",
+      "topic": "structure",
       "statement": "src/test/java/org/jsoup and src/test/java/org/jsoup/integration each use the other",
       "evidence": [
         {
@@ -777,6 +817,7 @@
     },
     {
       "id": "f41",
+      "topic": "structure",
       "statement": "src/test/java/org/jsoup/helper and src/test/java/org/jsoup/integration each use the other",
       "evidence": [
         {
@@ -795,6 +836,7 @@
     },
     {
       "id": "f42",
+      "topic": "structure",
       "statement": "src/test/java/org/jsoup/integration and src/test/java/org/jsoup/integration/netty each use the other",
       "evidence": [
         {
@@ -813,6 +855,7 @@
     },
     {
       "id": "f43",
+      "topic": "structure",
       "statement": "src/test/java/org/jsoup/integration and src/test/java/org/jsoup/integration/routes each use the other",
       "evidence": [
         {
@@ -831,6 +874,7 @@
     },
     {
       "id": "f44",
+      "topic": "structure",
       "statement": "src/test/java/org/jsoup/nodes and src/test/java/org/jsoup/select each use the other",
       "evidence": [
         {
@@ -849,6 +893,7 @@
     },
     {
       "id": "f45",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/nodes/Document.java is used by 99 other files",
       "evidence": [
         {
@@ -873,6 +918,7 @@
     },
     {
       "id": "f46",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/nodes/Element.java is used by 85 other files",
       "evidence": [
         {
@@ -897,6 +943,7 @@
     },
     {
       "id": "f47",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/Jsoup.java is used by 71 other files",
       "evidence": [
         {
@@ -921,6 +968,7 @@
     },
     {
       "id": "f48",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/parser/Parser.java is used by 64 other files",
       "evidence": [
         {
@@ -945,6 +993,7 @@
     },
     {
       "id": "f49",
+      "topic": "structure",
       "statement": "src/main/java/org/jsoup/internal/StringUtil.java is used by 56 other files",
       "evidence": [
         {
@@ -969,6 +1018,7 @@
     },
     {
       "id": "f50",
+      "topic": "history",
       "statement": "111 commits between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -987,6 +1037,7 @@
     },
     {
       "id": "f51",
+      "topic": "history",
       "statement": "src/test/java/org/jsoup/parser/HtmlParserTest.java changed in 23 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1011,6 +1062,7 @@
     },
     {
       "id": "f52",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java changed in 18 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1035,6 +1087,7 @@
     },
     {
       "id": "f53",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java changed in 16 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1059,6 +1112,7 @@
     },
     {
       "id": "f54",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/TokeniserState.java changed in 10 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1083,6 +1137,7 @@
     },
     {
       "id": "f55",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/Tokeniser.java changed in 9 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1107,6 +1162,7 @@
     },
     {
       "id": "f56",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/select/QueryParser.java changed in 9 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1131,6 +1187,7 @@
     },
     {
       "id": "f57",
+      "topic": "history",
       "statement": "src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in 9 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1155,6 +1212,7 @@
     },
     {
       "id": "f58",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/nodes/Element.java changed in 8 commits by 2 authors between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1179,6 +1237,7 @@
     },
     {
       "id": "f59",
+      "topic": "history",
       "statement": "src/test/java/org/jsoup/nodes/ElementTest.java changed in 8 commits by 2 authors between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1203,6 +1262,7 @@
     },
     {
       "id": "f60",
+      "topic": "history",
       "statement": "src/test/java/org/jsoup/parser/PositionTest.java changed in 8 commits by 1 author between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1227,6 +1287,7 @@
     },
     {
       "id": "f61",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 16 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1245,6 +1306,7 @@
     },
     {
       "id": "f62",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 13 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1263,6 +1325,7 @@
     },
     {
       "id": "f63",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java changed in the same commit 12 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1281,6 +1344,7 @@
     },
     {
       "id": "f64",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/test/java/org/jsoup/parser/PositionTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1299,6 +1363,7 @@
     },
     {
       "id": "f65",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java and src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1317,6 +1382,7 @@
     },
     {
       "id": "f66",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/Tokeniser.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1335,6 +1401,7 @@
     },
     {
       "id": "f67",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/TokeniserState.java and src/test/java/org/jsoup/parser/HtmlParserTest.java changed in the same commit 7 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1353,6 +1420,7 @@
     },
     {
       "id": "f68",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/main/java/org/jsoup/parser/Tokeniser.java changed in the same commit 6 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1371,6 +1439,7 @@
     },
     {
       "id": "f69",
+      "topic": "history",
       "statement": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java and src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in the same commit 6 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {
@@ -1389,6 +1458,7 @@
     },
     {
       "id": "f70",
+      "topic": "history",
       "statement": "src/test/java/org/jsoup/parser/HtmlParserTest.java and src/test/java/org/jsoup/parser/HtmlTreeBuilderTest.java changed in the same commit 6 times between 06 Aug 2026 and 04 Nov 2026",
       "evidence": [
         {

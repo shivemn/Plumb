@@ -30,6 +30,22 @@ class RepoKind(StrEnum):
     UNKNOWN = "unknown"
 
 
+class Topic(StrEnum):
+    """What a fact is about. The prompt planner picks facts for each section by topic."""
+
+    KIND = "kind"
+    LANGUAGES = "languages"
+    SKIPPED = "skipped"
+    BUILD = "build"
+    SYSTEM = "system"
+    SETTINGS = "settings"
+    MIGRATIONS = "migrations"
+    ENTRY_POINTS = "entry_points"
+    STRUCTURE = "structure"
+    HISTORY = "history"
+    GENERAL = "general"
+
+
 class FileEvidence(Strict):
     kind: Literal["file"] = "file"
     path: str = Field(min_length=1, description="Path from the repo root, with forward slashes.")
@@ -69,6 +85,7 @@ class Fact(Strict):
     """Something Plumb found without AI, with the evidence for it."""
 
     id: str = Field(pattern=r"^f[0-9]+$")
+    topic: Topic = Topic.GENERAL
     statement: str = Field(min_length=1)
     evidence: list[Evidence] = Field(min_length=1)
 
@@ -100,3 +117,33 @@ class FactSet(Strict):
         if len(ids) != len(set(ids)):
             raise ValueError("fact ids must be unique")
         return self
+
+
+class Section(Strict):
+    """One part of a report, such as the system design or how to contribute."""
+
+    id: str = Field(pattern=r"^[a-z_]+$")
+    title: str = Field(min_length=1)
+    claims: list[Claim]
+
+
+class RemovedClaim(Strict):
+    """A sentence the verifier dropped, and why. Shown so readers can check the checker."""
+
+    section: str
+    text: str
+    reason: str
+
+
+class Report(Strict):
+    """What the web app renders: verified claims, grouped into sections."""
+
+    schema_version: Literal[1] = 1
+    repo: RepoRef
+    kind: RepoKind
+    model: str = Field(description="The model that wrote the claims, as provider:model.")
+    sections: list[Section]
+    removed: list[RemovedClaim]
+    facts: list[Fact] = Field(
+        description="Every fact a kept claim cites, so the report stands alone."
+    )

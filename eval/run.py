@@ -24,15 +24,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import cast
 
-from plumb.deps import find_dependencies
-from plumb.entrypoints import EntryKind, find_entry_points
-from plumb.facts import build_facts
-from plumb.graph import all_edges, component_of
-from plumb.history import mine
-from plumb.inventory import Category, build_inventory
-from plumb.kind import decide_kind
-from plumb.source import SourceError, fetch
-from plumb.system import Role, find_migrations, find_settings, find_system
+from plumb.entrypoints import EntryKind
+from plumb.graph import component_of
+from plumb.pipeline import analyse_repo
+from plumb.source import SourceError
+from plumb.system import Role
 
 EVAL = Path(__file__).resolve().parent
 RESULTS = EVAL / "results"
@@ -63,22 +59,15 @@ def main() -> int:
         name = entry["url"].rstrip("/").split("/")[-1]
         started = time.monotonic()
         try:
-            checkout = fetch(entry["url"], WORKDIR, commit=entry["commit"])
+            analysis = analyse_repo(entry["url"], WORKDIR, commit=entry["commit"])
         except SourceError as error:
             rows.append(f"| {name} | failed: {error} | | | | | |")
             continue
-        files = build_inventory(checkout.path)
-        first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
-        history = mine(checkout.path, keep=first_party)
-        edges = all_edges(checkout.path, files)
-        entry_points = find_entry_points(checkout.path, files)
-        deps = find_dependencies(checkout.path, files)
-        system = find_system(checkout.path, files, checkout.name, deps)
-        settings = find_settings(checkout.path, files)
-        decision = decide_kind(files, entry_points, system, deps)
-        migrations = find_migrations(files)
-        facts = build_facts(
-            checkout, files, history, edges, entry_points, system, settings, decision, migrations
+        facts, edges, decision = analysis.facts, analysis.edges, analysis.decision
+        entry_points, system, migrations = (
+            analysis.entry_points,
+            analysis.system,
+            analysis.migrations,
         )
         (RESULTS / f"{name}.facts.json").write_text(
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"

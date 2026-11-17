@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a service repo: 17 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
@@ -33,6 +34,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "5 source files in css, 9,920 lines in all",
       "evidence": [
         {
@@ -57,6 +59,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "30 source files in java, 1,899 lines in all",
       "evidence": [
         {
@@ -81,6 +84,7 @@
     },
     {
       "id": "f4",
+      "topic": "languages",
       "statement": "12 source files in html, 546 lines in all",
       "evidence": [
         {
@@ -105,6 +109,7 @@
     },
     {
       "id": "f5",
+      "topic": "languages",
       "statement": "7 source files in sql, 344 lines in all",
       "evidence": [
         {
@@ -129,6 +134,7 @@
     },
     {
       "id": "f6",
+      "topic": "build",
       "statement": "Build or deploy file .devcontainer/Dockerfile",
       "evidence": [
         {
@@ -141,6 +147,7 @@
     },
     {
       "id": "f7",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/deploy-and-test-cluster.yml",
       "evidence": [
         {
@@ -153,6 +160,7 @@
     },
     {
       "id": "f8",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/gradle-build.yml",
       "evidence": [
         {
@@ -165,6 +173,7 @@
     },
     {
       "id": "f9",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/maven-build.yml",
       "evidence": [
         {
@@ -177,6 +186,7 @@
     },
     {
       "id": "f10",
+      "topic": "build",
       "statement": "Build or deploy file build.gradle",
       "evidence": [
         {
@@ -189,6 +199,7 @@
     },
     {
       "id": "f11",
+      "topic": "build",
       "statement": "Build or deploy file docker-compose.yml",
       "evidence": [
         {
@@ -201,6 +212,7 @@
     },
     {
       "id": "f12",
+      "topic": "build",
       "statement": "Build or deploy file pom.xml",
       "evidence": [
         {
@@ -213,6 +225,7 @@
     },
     {
       "id": "f13",
+      "topic": "system",
       "statement": "Database, cache or queue: H2 (dependency com.h2database:h2)",
       "evidence": [
         {
@@ -231,6 +244,7 @@
     },
     {
       "id": "f14",
+      "topic": "system",
       "statement": "Database, cache or queue: MySQL (dependency com.mysql:mysql-connector-j; setting mentions jdbc:mysql:; Compose service mysql, image mysql:9.7)",
       "evidence": [
         {
@@ -261,6 +275,7 @@
     },
     {
       "id": "f15",
+      "topic": "system",
       "statement": "Database, cache or queue: PostgreSQL (dependency org.postgresql:postgresql; setting mentions jdbc:postgresql:; Compose service postgres, image postgres:18.4)",
       "evidence": [
         {
@@ -291,6 +306,7 @@
     },
     {
       "id": "f16",
+      "topic": "settings",
       "statement": "Setting MYSQL_PASS is read from the environment in src/main/resources/application-mysql.properties",
       "evidence": [
         {
@@ -303,6 +319,7 @@
     },
     {
       "id": "f17",
+      "topic": "settings",
       "statement": "Setting MYSQL_URL is read from the environment in src/main/resources/application-mysql.properties",
       "evidence": [
         {
@@ -315,6 +332,7 @@
     },
     {
       "id": "f18",
+      "topic": "settings",
       "statement": "Setting MYSQL_USER is read from the environment in src/main/resources/application-mysql.properties",
       "evidence": [
         {
@@ -327,6 +345,7 @@
     },
     {
       "id": "f19",
+      "topic": "settings",
       "statement": "Setting POSTGRES_PASS is read from the environment in src/main/resources/application-postgres.properties",
       "evidence": [
         {
@@ -339,6 +358,7 @@
     },
     {
       "id": "f20",
+      "topic": "settings",
       "statement": "Setting POSTGRES_URL is read from the environment in src/main/resources/application-postgres.properties",
       "evidence": [
         {
@@ -351,6 +371,7 @@
     },
     {
       "id": "f21",
+      "topic": "settings",
       "statement": "Setting POSTGRES_USER is read from the environment in src/main/resources/application-postgres.properties",
       "evidence": [
         {
@@ -363,6 +384,7 @@
     },
     {
       "id": "f22",
+      "topic": "entry_points",
       "statement": "17 http routes found",
       "evidence": [
         {
@@ -387,6 +409,7 @@
     },
     {
       "id": "f23",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -399,6 +422,7 @@
     },
     {
       "id": "f24",
+      "topic": "entry_points",
       "statement": "HTTP route POST /owners/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -411,6 +435,7 @@
     },
     {
       "id": "f25",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/find (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -423,6 +448,7 @@
     },
     {
       "id": "f26",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -435,6 +461,7 @@
     },
     {
       "id": "f27",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/{ownerId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -447,6 +474,7 @@
     },
     {
       "id": "f28",
+      "topic": "entry_points",
       "statement": "HTTP route POST /owners/{ownerId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -459,6 +487,7 @@
     },
     {
       "id": "f29",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/{ownerId} (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
       "evidence": [
         {
@@ -471,6 +500,7 @@
     },
     {
       "id": "f30",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/{ownerId}/pets/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
       "evidence": [
         {
@@ -483,6 +513,7 @@
     },
     {
       "id": "f31",
+      "topic": "entry_points",
       "statement": "HTTP route POST /owners/{ownerId}/pets/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
       "evidence": [
         {
@@ -495,6 +526,7 @@
     },
     {
       "id": "f32",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/{ownerId}/pets/{petId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
       "evidence": [
         {
@@ -507,6 +539,7 @@
     },
     {
       "id": "f33",
+      "topic": "entry_points",
       "statement": "HTTP route POST /owners/{ownerId}/pets/{petId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
       "evidence": [
         {
@@ -519,6 +552,7 @@
     },
     {
       "id": "f34",
+      "topic": "entry_points",
       "statement": "HTTP route GET /owners/{ownerId}/pets/{petId}/visits/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
       "evidence": [
         {
@@ -531,6 +565,7 @@
     },
     {
       "id": "f35",
+      "topic": "entry_points",
       "statement": "HTTP route POST /owners/{ownerId}/pets/{petId}/visits/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
       "evidence": [
         {
@@ -543,6 +578,7 @@
     },
     {
       "id": "f36",
+      "topic": "entry_points",
       "statement": "HTTP route GET /oups (spring) in src/main/java/org/springframework/samples/petclinic/system/CrashController.java",
       "evidence": [
         {
@@ -555,6 +591,7 @@
     },
     {
       "id": "f37",
+      "topic": "entry_points",
       "statement": "HTTP route GET / (spring) in src/main/java/org/springframework/samples/petclinic/system/WelcomeController.java",
       "evidence": [
         {
@@ -567,6 +604,7 @@
     },
     {
       "id": "f38",
+      "topic": "entry_points",
       "statement": "HTTP route GET /vets.html (spring) in src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
       "evidence": [
         {
@@ -579,6 +617,7 @@
     },
     {
       "id": "f39",
+      "topic": "entry_points",
       "statement": "HTTP route GET /vets (spring) in src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
       "evidence": [
         {
@@ -591,6 +630,7 @@
     },
     {
       "id": "f40",
+      "topic": "entry_points",
       "statement": "1 program entry found",
       "evidence": [
         {
@@ -603,6 +643,7 @@
     },
     {
       "id": "f41",
+      "topic": "entry_points",
       "statement": "Program entry PetClinicApplication in src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
       "evidence": [
         {
@@ -615,6 +656,7 @@
     },
     {
       "id": "f42",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/owner (25 references)",
       "evidence": [
         {
@@ -639,6 +681,7 @@
     },
     {
       "id": "f43",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/owner (6 references)",
       "evidence": [
         {
@@ -663,6 +706,7 @@
     },
     {
       "id": "f44",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/vet uses code in src/main/java/org/springframework/samples/petclinic/vet (5 references)",
       "evidence": [
         {
@@ -687,6 +731,7 @@
     },
     {
       "id": "f45",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/model (4 references)",
       "evidence": [
         {
@@ -711,6 +756,7 @@
     },
     {
       "id": "f46",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/vet uses code in src/main/java/org/springframework/samples/petclinic/model (3 references)",
       "evidence": [
         {
@@ -735,6 +781,7 @@
     },
     {
       "id": "f47",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic (3 references)",
       "evidence": [
         {
@@ -759,6 +806,7 @@
     },
     {
       "id": "f48",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/vet (3 references)",
       "evidence": [
         {
@@ -783,6 +831,7 @@
     },
     {
       "id": "f49",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/model (2 references)",
       "evidence": [
         {
@@ -801,6 +850,7 @@
     },
     {
       "id": "f50",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/owner (2 references)",
       "evidence": [
         {
@@ -819,6 +869,7 @@
     },
     {
       "id": "f51",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/vet (2 references)",
       "evidence": [
         {
@@ -837,6 +888,7 @@
     },
     {
       "id": "f52",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/system uses code in src/main/java/org/springframework/samples/petclinic/system (2 references)",
       "evidence": [
         {
@@ -855,6 +907,7 @@
     },
     {
       "id": "f53",
+      "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/vet (1 reference)",
       "evidence": [
         {
@@ -867,6 +920,7 @@
     },
     {
       "id": "f54",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/model uses code in src/main/java/org/springframework/samples/petclinic/model (1 reference)",
       "evidence": [
         {
@@ -879,6 +933,7 @@
     },
     {
       "id": "f55",
+      "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/model (1 reference)",
       "evidence": [
         {
@@ -891,6 +946,7 @@
     },
     {
       "id": "f56",
+      "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java is used by 10 other files",
       "evidence": [
         {
@@ -915,6 +971,7 @@
     },
     {
       "id": "f57",
+      "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java is used by 10 other files",
       "evidence": [
         {
@@ -939,6 +996,7 @@
     },
     {
       "id": "f58",
+      "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java is used by 9 other files",
       "evidence": [
         {
@@ -963,6 +1021,7 @@
     },
     {
       "id": "f59",
+      "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/OwnerRepository.java is used by 8 other files",
       "evidence": [
         {
@@ -987,6 +1046,7 @@
     },
     {
       "id": "f60",
+      "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java is used by 7 other files",
       "evidence": [
         {
@@ -1011,6 +1071,7 @@
     },
     {
       "id": "f61",
+      "topic": "history",
       "statement": "13 commits between 01 Jul 2026 and 29 Sep 2026",
       "evidence": [
         {
@@ -1029,6 +1090,7 @@
     },
     {
       "id": "f62",
+      "topic": "history",
       "statement": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java changed in 3 commits by 3 authors between 01 Jul 2026 and 29 Sep 2026",
       "evidence": [
         {
@@ -1053,6 +1115,7 @@
     },
     {
       "id": "f63",
+      "topic": "history",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java changed in 3 commits by 2 authors between 01 Jul 2026 and 29 Sep 2026",
       "evidence": [
         {

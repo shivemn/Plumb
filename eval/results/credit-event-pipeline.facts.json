@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a service repo: 16 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
@@ -33,6 +34,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "27 source files in java, 1,827 lines in all",
       "evidence": [
         {
@@ -57,6 +59,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "30 source files in typescript, 1,696 lines in all",
       "evidence": [
         {
@@ -81,6 +84,7 @@
     },
     {
       "id": "f4",
+      "topic": "languages",
       "statement": "2 source files in html, 649 lines in all",
       "evidence": [
         {
@@ -99,6 +103,7 @@
     },
     {
       "id": "f5",
+      "topic": "languages",
       "statement": "1 source file in css, 279 lines in all",
       "evidence": [
         {
@@ -111,6 +116,7 @@
     },
     {
       "id": "f6",
+      "topic": "languages",
       "statement": "1 source file in sql, 18 lines in all",
       "evidence": [
         {
@@ -123,6 +129,7 @@
     },
     {
       "id": "f7",
+      "topic": "skipped",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -135,6 +142,7 @@
     },
     {
       "id": "f8",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/ci.yml",
       "evidence": [
         {
@@ -147,6 +155,7 @@
     },
     {
       "id": "f9",
+      "topic": "build",
       "statement": "Build or deploy file dashboard/package.json",
       "evidence": [
         {
@@ -159,6 +168,7 @@
     },
     {
       "id": "f10",
+      "topic": "build",
       "statement": "Build or deploy file docker-compose.yml",
       "evidence": [
         {
@@ -171,6 +181,7 @@
     },
     {
       "id": "f11",
+      "topic": "build",
       "statement": "Build or deploy file pom.xml",
       "evidence": [
         {
@@ -183,6 +194,7 @@
     },
     {
       "id": "f12",
+      "topic": "system",
       "statement": "Database, cache or queue: Apache Ignite (dependency org.apache.ignite:ignite-core)",
       "evidence": [
         {
@@ -195,6 +207,7 @@
     },
     {
       "id": "f13",
+      "topic": "system",
       "statement": "Database, cache or queue: Apache Kafka (dependency org.springframework.kafka:spring-kafka; setting mentions bootstrap-servers; Compose service kafka, image apache/kafka:3.8.0)",
       "evidence": [
         {
@@ -219,6 +232,7 @@
     },
     {
       "id": "f14",
+      "topic": "system",
       "statement": "Database, cache or queue: PostgreSQL (dependency org.postgresql:postgresql; setting mentions jdbc:postgresql:; Compose service postgres, image postgres:16-alpine)",
       "evidence": [
         {
@@ -243,6 +257,7 @@
     },
     {
       "id": "f15",
+      "topic": "system",
       "statement": "Monitoring: Grafana (Compose service grafana, image grafana/grafana:11.2.2)",
       "evidence": [
         {
@@ -255,6 +270,7 @@
     },
     {
       "id": "f16",
+      "topic": "system",
       "statement": "Monitoring: Prometheus (dependency io.micrometer:micrometer-registry-prometheus; Compose service prometheus, image prom/prometheus:v2.54.1)",
       "evidence": [
         {
@@ -273,6 +289,7 @@
     },
     {
       "id": "f17",
+      "topic": "migrations",
       "statement": "1 Flyway database migration in src/main/resources/db/migration",
       "evidence": [
         {
@@ -285,6 +302,7 @@
     },
     {
       "id": "f18",
+      "topic": "entry_points",
       "statement": "14 http routes found",
       "evidence": [
         {
@@ -309,6 +327,7 @@
     },
     {
       "id": "f19",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/archive (spring) in src/main/java/com/shivemn/ccp/web/ArchiveController.java",
       "evidence": [
         {
@@ -321,6 +340,7 @@
     },
     {
       "id": "f20",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/history/{borrowerId} (spring) in src/main/java/com/shivemn/ccp/web/ArchiveController.java",
       "evidence": [
         {
@@ -333,6 +353,7 @@
     },
     {
       "id": "f21",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/archive/rebuild (spring) in src/main/java/com/shivemn/ccp/web/ArchiveController.java",
       "evidence": [
         {
@@ -345,6 +366,7 @@
     },
     {
       "id": "f22",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/events (spring) in src/main/java/com/shivemn/ccp/web/EventController.java",
       "evidence": [
         {
@@ -357,6 +379,7 @@
     },
     {
       "id": "f23",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/events/generate (spring) in src/main/java/com/shivemn/ccp/web/EventController.java",
       "evidence": [
         {
@@ -369,6 +392,7 @@
     },
     {
       "id": "f24",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/live (spring) in src/main/java/com/shivemn/ccp/web/LiveController.java",
       "evidence": [
         {
@@ -381,6 +405,7 @@
     },
     {
       "id": "f25",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/profiles/{borrowerId} (spring) in src/main/java/com/shivemn/ccp/web/ProfileController.java",
       "evidence": [
         {
@@ -393,6 +418,7 @@
     },
     {
       "id": "f26",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/profiles (spring) in src/main/java/com/shivemn/ccp/web/ProfileController.java",
       "evidence": [
         {
@@ -405,6 +431,7 @@
     },
     {
       "id": "f27",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/analytics (spring) in src/main/java/com/shivemn/ccp/web/ProfileController.java",
       "evidence": [
         {
@@ -417,6 +444,7 @@
     },
     {
       "id": "f28",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/stats (spring) in src/main/java/com/shivemn/ccp/web/ProfileController.java",
       "evidence": [
         {
@@ -429,6 +457,7 @@
     },
     {
       "id": "f29",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/recent (spring) in src/main/java/com/shivemn/ccp/web/ProfileController.java",
       "evidence": [
         {
@@ -441,6 +470,7 @@
     },
     {
       "id": "f30",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/replay (spring) in src/main/java/com/shivemn/ccp/web/ReplayController.java",
       "evidence": [
         {
@@ -453,6 +483,7 @@
     },
     {
       "id": "f31",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/replay/start (spring) in src/main/java/com/shivemn/ccp/web/ReplayController.java",
       "evidence": [
         {
@@ -465,6 +496,7 @@
     },
     {
       "id": "f32",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/replay/stop (spring) in src/main/java/com/shivemn/ccp/web/ReplayController.java",
       "evidence": [
         {
@@ -477,6 +509,7 @@
     },
     {
       "id": "f33",
+      "topic": "entry_points",
       "statement": "2 queue consumers found",
       "evidence": [
         {
@@ -495,6 +528,7 @@
     },
     {
       "id": "f34",
+      "topic": "entry_points",
       "statement": "Queue consumer credit-events, group credit-event-archiver (kafka) in src/main/java/com/shivemn/ccp/archive/ArchiveConsumer.java",
       "evidence": [
         {
@@ -519,6 +553,7 @@
     },
     {
       "id": "f35",
+      "topic": "entry_points",
       "statement": "Queue consumer credit-events, group credit-profile-builder (kafka) in src/main/java/com/shivemn/ccp/pipeline/CreditEventConsumer.java",
       "evidence": [
         {
@@ -543,6 +578,7 @@
     },
     {
       "id": "f36",
+      "topic": "entry_points",
       "statement": "1 program entry found",
       "evidence": [
         {
@@ -555,6 +591,7 @@
     },
     {
       "id": "f37",
+      "topic": "entry_points",
       "statement": "Program entry CreditPipelineApplication in src/main/java/com/shivemn/ccp/CreditPipelineApplication.java",
       "evidence": [
         {
@@ -567,6 +604,7 @@
     },
     {
       "id": "f38",
+      "topic": "entry_points",
       "statement": "2 package scripts found",
       "evidence": [
         {
@@ -585,6 +623,7 @@
     },
     {
       "id": "f39",
+      "topic": "entry_points",
       "statement": "Package script npm run dev: vite (npm) in dashboard/package.json",
       "evidence": [
         {
@@ -597,6 +636,7 @@
     },
     {
       "id": "f40",
+      "topic": "entry_points",
       "statement": "Package script npm run build: tsc --noEmit && vite build (npm) in dashboard/package.json",
       "evidence": [
         {
@@ -609,6 +649,7 @@
     },
     {
       "id": "f41",
+      "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src (33 references)",
       "evidence": [
         {
@@ -633,6 +674,7 @@
     },
     {
       "id": "f42",
+      "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/components (18 references)",
       "evidence": [
         {
@@ -657,6 +699,7 @@
     },
     {
       "id": "f43",
+      "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/model (12 references)",
       "evidence": [
         {
@@ -681,6 +724,7 @@
     },
     {
       "id": "f44",
+      "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src/hooks (6 references)",
       "evidence": [
         {
@@ -705,6 +749,7 @@
     },
     {
       "id": "f45",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
         {
@@ -729,6 +774,7 @@
     },
     {
       "id": "f46",
+      "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
         {
@@ -753,6 +799,7 @@
     },
     {
       "id": "f47",
+      "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/hooks (4 references)",
       "evidence": [
         {
@@ -777,6 +824,7 @@
     },
     {
       "id": "f48",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/archive uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
         {
@@ -801,6 +849,7 @@
     },
     {
       "id": "f49",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
         {
@@ -825,6 +874,7 @@
     },
     {
       "id": "f50",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/service uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
         {
@@ -849,6 +899,7 @@
     },
     {
       "id": "f51",
+      "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/config (4 references)",
       "evidence": [
         {
@@ -873,6 +924,7 @@
     },
     {
       "id": "f52",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/config uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
         {
@@ -897,6 +949,7 @@
     },
     {
       "id": "f53",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
         {
@@ -921,6 +974,7 @@
     },
     {
       "id": "f54",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/replay uses code in src/main/java/com/shivemn/ccp/model (3 references)",
       "evidence": [
         {
@@ -945,6 +999,7 @@
     },
     {
       "id": "f55",
+      "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/archive (2 references)",
       "evidence": [
         {
@@ -963,6 +1018,7 @@
     },
     {
       "id": "f56",
+      "topic": "structure",
       "statement": "dashboard/src and dashboard/src/components each use the other",
       "evidence": [
         {
@@ -981,6 +1037,7 @@
     },
     {
       "id": "f57",
+      "topic": "structure",
       "statement": "dashboard/src and dashboard/src/hooks each use the other",
       "evidence": [
         {
@@ -999,6 +1056,7 @@
     },
     {
       "id": "f58",
+      "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/archive and src/main/java/com/shivemn/ccp/service each use the other",
       "evidence": [
         {
@@ -1017,6 +1075,7 @@
     },
     {
       "id": "f59",
+      "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/model/CreditEvent.java is used by 17 other files",
       "evidence": [
         {
@@ -1041,6 +1100,7 @@
     },
     {
       "id": "f60",
+      "topic": "structure",
       "statement": "dashboard/src/format.ts is used by 14 other files",
       "evidence": [
         {
@@ -1065,6 +1125,7 @@
     },
     {
       "id": "f61",
+      "topic": "structure",
       "statement": "dashboard/src/view.tsx is used by 13 other files",
       "evidence": [
         {
@@ -1089,6 +1150,7 @@
     },
     {
       "id": "f62",
+      "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/model/EventType.java is used by 11 other files",
       "evidence": [
         {
@@ -1113,6 +1175,7 @@
     },
     {
       "id": "f63",
+      "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/service/ProfileService.java is used by 9 other files",
       "evidence": [
         {
@@ -1137,6 +1200,7 @@
     },
     {
       "id": "f64",
+      "topic": "history",
       "statement": "5 commits between 01 Aug 2026 and 30 Oct 2026",
       "evidence": [
         {

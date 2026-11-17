@@ -30,6 +30,10 @@
           "title": "Id",
           "type": "string"
         },
+        "topic": {
+          "$ref": "#/$defs/Topic",
+          "default": "general"
+        },
         "statement": {
           "minLength": 1,
           "title": "Statement",
@@ -180,6 +184,24 @@
       ],
       "title": "RepoRef",
       "type": "object"
+    },
+    "Topic": {
+      "description": "What a fact is about. The prompt planner picks facts for each section by topic.",
+      "enum": [
+        "kind",
+        "languages",
+        "skipped",
+        "build",
+        "system",
+        "settings",
+        "migrations",
+        "entry_points",
+        "structure",
+        "history",
+        "general"
+      ],
+      "title": "Topic",
+      "type": "string"
     }
   },
   "additionalProperties": false,

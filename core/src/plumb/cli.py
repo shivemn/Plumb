@@ -9,16 +9,9 @@ from typing import Annotated
 import typer
 
 from plumb import __version__
-from plumb.deps import find_dependencies
-from plumb.entrypoints import find_entry_points
-from plumb.facts import build_facts
-from plumb.graph import all_edges
-from plumb.history import is_shallow, mine
-from plumb.inventory import Category, build_inventory
-from plumb.kind import decide_kind
-from plumb.model import FactSet
-from plumb.source import Limits, SourceError, fetch
-from plumb.system import find_migrations, find_settings, find_system
+from plumb.model import FactSet, Report
+from plumb.pipeline import Analysis, analyse_repo
+from plumb.source import Limits, SourceError
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -41,14 +34,16 @@ def main(
 
 @app.command()
 def schema(
-    out: Annotated[Path, typer.Option(help="Where to write the JSON Schema.")] = Path(
-        "../schema/factset.schema.json"
+    out: Annotated[Path, typer.Option(help="Folder to write the JSON Schemas into.")] = Path(
+        "../schema"
     ),
 ) -> None:
-    """Write the JSON Schema for the shared fact format."""
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(FactSet.model_json_schema(), indent=2) + "\n", encoding="utf-8")
-    typer.echo(f"Wrote {out}")
+    """Write the JSON Schemas for the fact and report formats."""
+    out.mkdir(parents=True, exist_ok=True)
+    for name, model in (("factset", FactSet), ("report", Report)):
+        target = out / f"{name}.schema.json"
+        target.write_text(json.dumps(model.model_json_schema(), indent=2) + "\n", encoding="utf-8")
+        typer.echo(f"Wrote {target}")
 
 
 DEFAULT_WORKDIR = Path.home() / ".plumb" / "repos"
@@ -68,40 +63,39 @@ def analyse(
     ] = None,
 ) -> None:
     """Analyse a repo without AI and write its facts as JSON."""
+    analysis = _analyse_or_exit(repo, workdir, commit, window_days, max_files)
+    checkout, facts, history = analysis.checkout, analysis.facts, analysis.history
+
+    target = out or Path(f"{checkout.name}.facts.json")
+    target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    typer.echo(
+        f"{checkout.owner}/{checkout.name} at {checkout.commit[:7]} "
+        f"({analysis.decision.kind.value}): {len(analysis.files)} files, "
+        f"{len(analysis.first_party)} first-party, {len(analysis.edges)} import links, "
+        f"{len(analysis.entry_points)} entry points, "
+        f"{len(history.commits) if history else 'no'} commits read, "
+        f"{len(facts.facts)} facts written to {target}"
+    )
+
+
+def _analyse_or_exit(
+    repo: str, workdir: Path, commit: str | None, window_days: int, max_files: int
+) -> Analysis:
     try:
-        checkout = fetch(repo, workdir=workdir, limits=Limits(max_files=max_files), commit=commit)
+        analysis = analyse_repo(
+            repo,
+            workdir,
+            commit=commit,
+            window_days=window_days,
+            limits=Limits(max_files=max_files),
+        )
     except SourceError as error:
         typer.echo(f"Could not analyse {repo}: {error}", err=True)
         raise typer.Exit(1) from error
-
-    files = build_inventory(checkout.path)
-    first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
-    if is_shallow(checkout.path):
-        history = None
+    if analysis.history is None:
         typer.echo(
             "This clone has only part of its history, so hot spots and files that change "
             "together are left out. Use a full clone or pass a GitHub URL instead.",
             err=True,
         )
-    else:
-        history = mine(checkout.path, window_days=window_days, keep=first_party)
-    edges = all_edges(checkout.path, files)
-    entry_points = find_entry_points(checkout.path, files)
-    deps = find_dependencies(checkout.path, files)
-    system = find_system(checkout.path, files, checkout.name, deps)
-    settings = find_settings(checkout.path, files)
-    decision = decide_kind(files, entry_points, system, deps)
-    migrations = find_migrations(files)
-    facts = build_facts(
-        checkout, files, history, edges, entry_points, system, settings, decision, migrations
-    )
-
-    target = out or Path(f"{checkout.name}.facts.json")
-    target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")
-    typer.echo(
-        f"{checkout.owner}/{checkout.name} at {checkout.commit[:7]} ({decision.kind.value}): "
-        f"{len(files)} files, {len(first_party)} first-party, {len(edges)} import links, "
-        f"{len(entry_points)} entry points, "
-        f"{len(history.commits) if history else 'no'} commits read, "
-        f"{len(facts.facts)} facts written to {target}"
-    )
+    return analysis

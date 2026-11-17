@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a website repo: a front-end build tool and no back-end service",
       "evidence": [
         {
@@ -21,6 +22,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "29 source files in typescript, 4,003 lines in all",
       "evidence": [
         {
@@ -45,6 +47,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "18 source files in astro, 3,546 lines in all",
       "evidence": [
         {
@@ -69,6 +72,7 @@
     },
     {
       "id": "f4",
+      "topic": "languages",
       "statement": "6 source files in css, 1,006 lines in all",
       "evidence": [
         {
@@ -93,6 +97,7 @@
     },
     {
       "id": "f5",
+      "topic": "languages",
       "statement": "1 source file in javascript, 11 lines in all",
       "evidence": [
         {
@@ -105,6 +110,7 @@
     },
     {
       "id": "f6",
+      "topic": "skipped",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -117,6 +123,7 @@
     },
     {
       "id": "f7",
+      "topic": "skipped",
       "statement": "1 example file left out of the analysis",
       "evidence": [
         {
@@ -129,6 +136,7 @@
     },
     {
       "id": "f8",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/ci.yml",
       "evidence": [
         {
@@ -141,6 +149,7 @@
     },
     {
       "id": "f9",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/link-check.yml",
       "evidence": [
         {
@@ -153,6 +162,7 @@
     },
     {
       "id": "f10",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/yearly-postings.yml",
       "evidence": [
         {
@@ -165,6 +175,7 @@
     },
     {
       "id": "f11",
+      "topic": "build",
       "statement": "Build or deploy file package.json",
       "evidence": [
         {
@@ -177,6 +188,7 @@
     },
     {
       "id": "f12",
+      "topic": "entry_points",
       "statement": "3 package scripts found",
       "evidence": [
         {
@@ -201,6 +213,7 @@
     },
     {
       "id": "f13",
+      "topic": "entry_points",
       "statement": "Package script npm run dev: astro dev (npm) in package.json",
       "evidence": [
         {
@@ -213,6 +226,7 @@
     },
     {
       "id": "f14",
+      "topic": "entry_points",
       "statement": "Package script npm run build: npm run validate && astro build (npm) in package.json",
       "evidence": [
         {
@@ -225,6 +239,7 @@
     },
     {
       "id": "f15",
+      "topic": "entry_points",
       "statement": "Package script npm run test: vitest run (npm) in package.json",
       "evidence": [
         {
@@ -237,6 +252,7 @@
     },
     {
       "id": "f16",
+      "topic": "structure",
       "statement": "Code in src/components uses code in src/lib (23 references)",
       "evidence": [
         {
@@ -261,6 +277,7 @@
     },
     {
       "id": "f17",
+      "topic": "structure",
       "statement": "Code in tests uses code in src/lib (21 references)",
       "evidence": [
         {
@@ -285,6 +302,7 @@
     },
     {
       "id": "f18",
+      "topic": "structure",
       "statement": "Code in src/pages uses code in src/lib (15 references)",
       "evidence": [
         {
@@ -309,6 +327,7 @@
     },
     {
       "id": "f19",
+      "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/lib (6 references)",
       "evidence": [
         {
@@ -333,6 +352,7 @@
     },
     {
       "id": "f20",
+      "topic": "structure",
       "statement": "Code in scripts uses code in src/lib (5 references)",
       "evidence": [
         {
@@ -357,6 +377,7 @@
     },
     {
       "id": "f21",
+      "topic": "structure",
       "statement": "Code in src/pages/roles uses code in src/lib (5 references)",
       "evidence": [
         {
@@ -381,6 +402,7 @@
     },
     {
       "id": "f22",
+      "topic": "structure",
       "statement": "Code in src/pages uses code in src/layouts (4 references)",
       "evidence": [
         {
@@ -405,6 +427,7 @@
     },
     {
       "id": "f23",
+      "topic": "structure",
       "statement": "Code in src/pages/designs uses code in src/lib (4 references)",
       "evidence": [
         {
@@ -429,6 +452,7 @@
     },
     {
       "id": "f24",
+      "topic": "structure",
       "statement": "Code in src/pages/concepts uses code in src/lib (3 references)",
       "evidence": [
         {
@@ -453,6 +477,7 @@
     },
     {
       "id": "f25",
+      "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/components (3 references)",
       "evidence": [
         {
@@ -477,6 +502,7 @@
     },
     {
       "id": "f26",
+      "topic": "structure",
       "statement": "Code in src/pages uses code in src/components (2 references)",
       "evidence": [
         {
@@ -495,6 +521,7 @@
     },
     {
       "id": "f27",
+      "topic": "structure",
       "statement": "Code in src/pages/designs uses code in src/layouts (2 references)",
       "evidence": [
         {
@@ -513,6 +540,7 @@
     },
     {
       "id": "f28",
+      "topic": "structure",
       "statement": "Code in src/pages/roles uses code in src/layouts (2 references)",
       "evidence": [
         {
@@ -531,6 +559,7 @@
     },
     {
       "id": "f29",
+      "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/layouts (2 references)",
       "evidence": [
         {
@@ -549,6 +578,7 @@
     },
     {
       "id": "f30",
+      "topic": "structure",
       "statement": "Code in src/layouts uses code in src/components (1 reference)",
       "evidence": [
         {
@@ -561,6 +591,7 @@
     },
     {
       "id": "f31",
+      "topic": "structure",
       "statement": "src/lib/schema.ts is used by 17 other files",
       "evidence": [
         {
@@ -585,6 +616,7 @@
     },
     {
       "id": "f32",
+      "topic": "structure",
       "statement": "src/lib/site.ts is used by 17 other files",
       "evidence": [
         {
@@ -609,6 +641,7 @@
     },
     {
       "id": "f33",
+      "topic": "structure",
       "statement": "src/lib/graph.ts is used by 13 other files",
       "evidence": [
         {
@@ -633,6 +666,7 @@
     },
     {
       "id": "f34",
+      "topic": "structure",
       "statement": "src/layouts/Base.astro is used by 11 other files",
       "evidence": [
         {
@@ -657,6 +691,7 @@
     },
     {
       "id": "f35",
+      "topic": "structure",
       "statement": "src/lib/content.ts is used by 11 other files",
       "evidence": [
         {
@@ -681,6 +716,7 @@
     },
     {
       "id": "f36",
+      "topic": "history",
       "statement": "68 commits between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -699,6 +735,7 @@
     },
     {
       "id": "f37",
+      "topic": "history",
       "statement": "src/lib/schema.ts changed in 23 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -723,6 +760,7 @@
     },
     {
       "id": "f38",
+      "topic": "history",
       "statement": "src/pages/index.astro changed in 18 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -747,6 +785,7 @@
     },
     {
       "id": "f39",
+      "topic": "history",
       "statement": "src/layouts/Base.astro changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -771,6 +810,7 @@
     },
     {
       "id": "f40",
+      "topic": "history",
       "statement": "src/styles/global.css changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -795,6 +835,7 @@
     },
     {
       "id": "f41",
+      "topic": "history",
       "statement": "src/lib/content.ts changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -819,6 +860,7 @@
     },
     {
       "id": "f42",
+      "topic": "history",
       "statement": "src/pages/roles/[id].astro changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -843,6 +885,7 @@
     },
     {
       "id": "f43",
+      "topic": "history",
       "statement": "src/styles/planner.css changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -867,6 +910,7 @@
     },
     {
       "id": "f44",
+      "topic": "history",
       "statement": "src/components/RolePlanner.tsx changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -891,6 +935,7 @@
     },
     {
       "id": "f45",
+      "topic": "history",
       "statement": "src/pages/concepts/[id].astro changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -915,6 +960,7 @@
     },
     {
       "id": "f46",
+      "topic": "history",
       "statement": "src/components/NetworkMap.astro changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -939,6 +985,7 @@
     },
     {
       "id": "f47",
+      "topic": "history",
       "statement": "src/lib/content.ts and src/lib/schema.ts changed in the same commit 13 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -957,6 +1004,7 @@
     },
     {
       "id": "f48",
+      "topic": "history",
       "statement": "src/lib/schema.ts and src/pages/roles/[id].astro changed in the same commit 11 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -975,6 +1023,7 @@
     },
     {
       "id": "f49",
+      "topic": "history",
       "statement": "src/components/RolePlanner.tsx and src/pages/index.astro changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -993,6 +1042,7 @@
     },
     {
       "id": "f50",
+      "topic": "history",
       "statement": "src/pages/index.astro and src/styles/planner.css changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -1011,6 +1061,7 @@
     },
     {
       "id": "f51",
+      "topic": "history",
       "statement": "src/layouts/Base.astro and src/pages/index.astro changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -1029,6 +1080,7 @@
     },
     {
       "id": "f52",
+      "topic": "history",
       "statement": "src/components/RolePlanner.tsx and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -1047,6 +1099,7 @@
     },
     {
       "id": "f53",
+      "topic": "history",
       "statement": "src/lib/schema.ts and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -1065,6 +1118,7 @@
     },
     {
       "id": "f54",
+      "topic": "history",
       "statement": "src/styles/global.css and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -1083,6 +1137,7 @@
     },
     {
       "id": "f55",
+      "topic": "history",
       "statement": "src/layouts/Base.astro and src/lib/schema.ts changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -1101,6 +1156,7 @@
     },
     {
       "id": "f56",
+      "topic": "history",
       "statement": "src/layouts/Base.astro and src/styles/global.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {

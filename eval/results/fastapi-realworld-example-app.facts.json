@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a service repo: 2 deployable service(s) and 19 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
@@ -33,6 +34,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "73 source files in python, 2,567 lines in all",
       "evidence": [
         {
@@ -57,6 +59,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "5 source files in sql, 252 lines in all",
       "evidence": [
         {
@@ -81,6 +84,7 @@
     },
     {
       "id": "f4",
+      "topic": "languages",
       "statement": "1 source file in shell, 16 lines in all",
       "evidence": [
         {
@@ -93,6 +97,7 @@
     },
     {
       "id": "f5",
+      "topic": "skipped",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -105,6 +110,7 @@
     },
     {
       "id": "f6",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/conduit.yml",
       "evidence": [
         {
@@ -117,6 +123,7 @@
     },
     {
       "id": "f7",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/deploy.yml",
       "evidence": [
         {
@@ -129,6 +136,7 @@
     },
     {
       "id": "f8",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/styles.yml",
       "evidence": [
         {
@@ -141,6 +149,7 @@
     },
     {
       "id": "f9",
+      "topic": "build",
       "statement": "GitHub Actions workflow .github/workflows/tests.yml",
       "evidence": [
         {
@@ -153,6 +162,7 @@
     },
     {
       "id": "f10",
+      "topic": "build",
       "statement": "Build or deploy file Dockerfile",
       "evidence": [
         {
@@ -165,6 +175,7 @@
     },
     {
       "id": "f11",
+      "topic": "build",
       "statement": "Build or deploy file docker-compose.yml",
       "evidence": [
         {
@@ -177,6 +188,7 @@
     },
     {
       "id": "f12",
+      "topic": "build",
       "statement": "Build or deploy file pyproject.toml",
       "evidence": [
         {
@@ -189,6 +201,7 @@
     },
     {
       "id": "f13",
+      "topic": "system",
       "statement": "Service run from this repo: app (Compose service built from .)",
       "evidence": [
         {
@@ -201,6 +214,7 @@
     },
     {
       "id": "f14",
+      "topic": "system",
       "statement": "Service run from this repo: fastapi-realworld-example-app (Dockerfile, runs poetry run alembic upgrade head && \\)",
       "evidence": [
         {
@@ -213,6 +227,7 @@
     },
     {
       "id": "f15",
+      "topic": "system",
       "statement": "Database, cache or queue: PostgreSQL (dependency asyncpg; dependency psycopg2-binary; setting mentions postgresql://; Compose service db, image postgres:11.5-alpine)",
       "evidence": [
         {
@@ -243,6 +258,7 @@
     },
     {
       "id": "f16",
+      "topic": "migrations",
       "statement": "1 Alembic database migration in app/db/migrations/versions",
       "evidence": [
         {
@@ -255,6 +271,7 @@
     },
     {
       "id": "f17",
+      "topic": "entry_points",
       "statement": "19 http routes found",
       "evidence": [
         {
@@ -279,6 +296,7 @@
     },
     {
       "id": "f18",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/articles/feed (fastapi) in app/api/routes/articles/articles_common.py",
       "evidence": [
         {
@@ -291,6 +309,7 @@
     },
     {
       "id": "f19",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/articles/{slug}/favorite (fastapi) in app/api/routes/articles/articles_common.py",
       "evidence": [
         {
@@ -303,6 +322,7 @@
     },
     {
       "id": "f20",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /api/articles/{slug}/favorite (fastapi) in app/api/routes/articles/articles_common.py",
       "evidence": [
         {
@@ -315,6 +335,7 @@
     },
     {
       "id": "f21",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/articles (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
@@ -327,6 +348,7 @@
     },
     {
       "id": "f22",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/articles (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
@@ -339,6 +361,7 @@
     },
     {
       "id": "f23",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
@@ -351,6 +374,7 @@
     },
     {
       "id": "f24",
+      "topic": "entry_points",
       "statement": "HTTP route PUT /api/articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
@@ -363,6 +387,7 @@
     },
     {
       "id": "f25",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /api/articles/{slug} (fastapi) in app/api/routes/articles/articles_resource.py",
       "evidence": [
         {
@@ -375,6 +400,7 @@
     },
     {
       "id": "f26",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/users/login (fastapi) in app/api/routes/authentication.py",
       "evidence": [
         {
@@ -387,6 +413,7 @@
     },
     {
       "id": "f27",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/users (fastapi) in app/api/routes/authentication.py",
       "evidence": [
         {
@@ -399,6 +426,7 @@
     },
     {
       "id": "f28",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/articles/{slug}/comments (fastapi) in app/api/routes/comments.py",
       "evidence": [
         {
@@ -411,6 +439,7 @@
     },
     {
       "id": "f29",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/articles/{slug}/comments (fastapi) in app/api/routes/comments.py",
       "evidence": [
         {
@@ -423,6 +452,7 @@
     },
     {
       "id": "f30",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /api/articles/{slug}/comments/{comment_id} (fastapi) in app/api/routes/comments.py",
       "evidence": [
         {
@@ -435,6 +465,7 @@
     },
     {
       "id": "f31",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/profiles/{username} (fastapi) in app/api/routes/profiles.py",
       "evidence": [
         {
@@ -447,6 +478,7 @@
     },
     {
       "id": "f32",
+      "topic": "entry_points",
       "statement": "HTTP route POST /api/profiles/{username}/follow (fastapi) in app/api/routes/profiles.py",
       "evidence": [
         {
@@ -459,6 +491,7 @@
     },
     {
       "id": "f33",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /api/profiles/{username}/follow (fastapi) in app/api/routes/profiles.py",
       "evidence": [
         {
@@ -471,6 +504,7 @@
     },
     {
       "id": "f34",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/tags (fastapi) in app/api/routes/tags.py",
       "evidence": [
         {
@@ -483,6 +517,7 @@
     },
     {
       "id": "f35",
+      "topic": "entry_points",
       "statement": "HTTP route GET /api/user (fastapi) in app/api/routes/users.py",
       "evidence": [
         {
@@ -495,6 +530,7 @@
     },
     {
       "id": "f36",
+      "topic": "entry_points",
       "statement": "HTTP route PUT /api/user (fastapi) in app/api/routes/users.py",
       "evidence": [
         {
@@ -507,6 +543,7 @@
     },
     {
       "id": "f37",
+      "topic": "structure",
       "statement": "Code in app/api/routes uses code in app/api/dependencies (11 references)",
       "evidence": [
         {
@@ -531,6 +568,7 @@
     },
     {
       "id": "f38",
+      "topic": "structure",
       "statement": "Code in tests/test_api/test_routes uses code in app/db/repositories (10 references)",
       "evidence": [
         {
@@ -555,6 +593,7 @@
     },
     {
       "id": "f39",
+      "topic": "structure",
       "statement": "Code in app/api/dependencies uses code in app/models/domain (8 references)",
       "evidence": [
         {
@@ -579,6 +618,7 @@
     },
     {
       "id": "f40",
+      "topic": "structure",
       "statement": "Code in app/db/repositories uses code in app/models/domain (8 references)",
       "evidence": [
         {
@@ -603,6 +643,7 @@
     },
     {
       "id": "f41",
+      "topic": "structure",
       "statement": "Code in tests/test_api/test_routes uses code in app/models/domain (8 references)",
       "evidence": [
         {
@@ -627,6 +668,7 @@
     },
     {
       "id": "f42",
+      "topic": "structure",
       "statement": "Code in app/api/routes uses code in app/models/domain (6 references)",
       "evidence": [
         {
@@ -651,6 +693,7 @@
     },
     {
       "id": "f43",
+      "topic": "structure",
       "statement": "Code in app/api/routes/articles uses code in app/api/dependencies (6 references)",
       "evidence": [
         {
@@ -675,6 +718,7 @@
     },
     {
       "id": "f44",
+      "topic": "structure",
       "statement": "Code in app/core uses code in app/core/settings (6 references)",
       "evidence": [
         {
@@ -699,6 +743,7 @@
     },
     {
       "id": "f45",
+      "topic": "structure",
       "statement": "Code in app/db/repositories uses code in app/db/queries (6 references)",
       "evidence": [
         {
@@ -723,6 +768,7 @@
     },
     {
       "id": "f46",
+      "topic": "structure",
       "statement": "Code in app/api/dependencies uses code in app/db/repositories (5 references)",
       "evidence": [
         {
@@ -747,6 +793,7 @@
     },
     {
       "id": "f47",
+      "topic": "structure",
       "statement": "Code in app/api/routes uses code in app/db/repositories (5 references)",
       "evidence": [
         {
@@ -771,6 +818,7 @@
     },
     {
       "id": "f48",
+      "topic": "structure",
       "statement": "Code in app/api/routes uses code in app/models/schemas (5 references)",
       "evidence": [
         {
@@ -795,6 +843,7 @@
     },
     {
       "id": "f49",
+      "topic": "structure",
       "statement": "Code in app/models/schemas uses code in app/models/domain (5 references)",
       "evidence": [
         {
@@ -819,6 +868,7 @@
     },
     {
       "id": "f50",
+      "topic": "structure",
       "statement": "Code in app/services uses code in app/models/domain (5 references)",
       "evidence": [
         {
@@ -843,6 +893,7 @@
     },
     {
       "id": "f51",
+      "topic": "structure",
       "statement": "Code in app/api/dependencies uses code in app/db (4 references)",
       "evidence": [
         {
@@ -867,6 +918,7 @@
     },
     {
       "id": "f52",
+      "topic": "structure",
       "statement": "app/core and app/core/settings each use the other",
       "evidence": [
         {
@@ -885,6 +937,7 @@
     },
     {
       "id": "f53",
+      "topic": "structure",
       "statement": "app/models/domain and app/services each use the other",
       "evidence": [
         {
@@ -903,6 +956,7 @@
     },
     {
       "id": "f54",
+      "topic": "structure",
       "statement": "app/models/domain/users.py is used by 25 other files",
       "evidence": [
         {
@@ -927,6 +981,7 @@
     },
     {
       "id": "f55",
+      "topic": "structure",
       "statement": "app/models/domain/articles.py is used by 12 other files",
       "evidence": [
         {
@@ -951,6 +1006,7 @@
     },
     {
       "id": "f56",
+      "topic": "structure",
       "statement": "app/api/dependencies/database.py is used by 11 other files",
       "evidence": [
         {
@@ -975,6 +1031,7 @@
     },
     {
       "id": "f57",
+      "topic": "structure",
       "statement": "app/db/errors.py is used by 11 other files",
       "evidence": [
         {
@@ -999,6 +1056,7 @@
     },
     {
       "id": "f58",
+      "topic": "structure",
       "statement": "app/db/repositories/users.py is used by 11 other files",
       "evidence": [
         {
@@ -1023,6 +1081,7 @@
     },
     {
       "id": "f59",
+      "topic": "history",
       "statement": "23 commits between 23 May 2022 and 21 Aug 2022",
       "evidence": [
         {

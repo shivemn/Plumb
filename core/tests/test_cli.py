@@ -16,7 +16,7 @@ def test_version() -> None:
 
 
 def test_schema_writes_json(tmp_path: Path) -> None:
-    out = tmp_path / "factset.schema.json"
-    result = runner.invoke(app, ["schema", "--out", str(out)])
+    result = runner.invoke(app, ["schema", "--out", str(tmp_path)])
     assert result.exit_code == 0
-    assert json.loads(out.read_text())["title"] == "FactSet"
+    assert json.loads((tmp_path / "factset.schema.json").read_text())["title"] == "FactSet"
+    assert json.loads((tmp_path / "report.schema.json").read_text())["title"] == "Report"

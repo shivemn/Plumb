@@ -9,6 +9,7 @@
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
       "statement": "Looks like a service repo: 1 deployable service(s) and 20 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
@@ -33,6 +34,7 @@
     },
     {
       "id": "f2",
+      "topic": "languages",
       "statement": "31 source files in typescript, 1,716 lines in all",
       "evidence": [
         {
@@ -57,6 +59,7 @@
     },
     {
       "id": "f3",
+      "topic": "languages",
       "statement": "4 source files in sql, 163 lines in all",
       "evidence": [
         {
@@ -81,6 +84,7 @@
     },
     {
       "id": "f4",
+      "topic": "languages",
       "statement": "1 source file in javascript, 3 lines in all",
       "evidence": [
         {
@@ -93,6 +97,7 @@
     },
     {
       "id": "f5",
+      "topic": "skipped",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -105,6 +110,7 @@
     },
     {
       "id": "f6",
+      "topic": "build",
       "statement": "Build or deploy file Dockerfile",
       "evidence": [
         {
@@ -117,6 +123,7 @@
     },
     {
       "id": "f7",
+      "topic": "build",
       "statement": "Build or deploy file package.json",
       "evidence": [
         {
@@ -129,6 +136,7 @@
     },
     {
       "id": "f8",
+      "topic": "system",
       "statement": "Service run from this repo: node-express-realworld-example-app (Dockerfile, runs [ \"node\", \"api\" ])",
       "evidence": [
         {
@@ -141,6 +149,7 @@
     },
     {
       "id": "f9",
+      "topic": "system",
       "statement": "Database, cache or queue: PostgreSQL (Prisma datasource, provider postgresql)",
       "evidence": [
         {
@@ -153,6 +162,7 @@
     },
     {
       "id": "f10",
+      "topic": "settings",
       "statement": "Setting HOST is read from the environment in e2e/src/support/test-setup.ts",
       "evidence": [
         {
@@ -165,6 +175,7 @@
     },
     {
       "id": "f11",
+      "topic": "settings",
       "statement": "Setting JWT_SECRET is read from the environment in src/app/routes/auth/auth.ts, src/app/routes/auth/token.utils.ts",
       "evidence": [
         {
@@ -183,6 +194,7 @@
     },
     {
       "id": "f12",
+      "topic": "settings",
       "statement": "Setting NODE_ENV is read from the environment in src/prisma/prisma-client.ts",
       "evidence": [
         {
@@ -195,6 +207,7 @@
     },
     {
       "id": "f13",
+      "topic": "settings",
       "statement": "Setting PORT is read from the environment in e2e/src/support/test-setup.ts, src/main.ts",
       "evidence": [
         {
@@ -213,6 +226,7 @@
     },
     {
       "id": "f14",
+      "topic": "migrations",
       "statement": "4 Prisma database migrations in src/prisma/migrations",
       "evidence": [
         {
@@ -231,6 +245,7 @@
     },
     {
       "id": "f15",
+      "topic": "entry_points",
       "statement": "20 http routes found",
       "evidence": [
         {
@@ -255,6 +270,7 @@
     },
     {
       "id": "f16",
+      "topic": "entry_points",
       "statement": "HTTP route GET /articles (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -267,6 +283,7 @@
     },
     {
       "id": "f17",
+      "topic": "entry_points",
       "statement": "HTTP route GET /articles/feed (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -279,6 +296,7 @@
     },
     {
       "id": "f18",
+      "topic": "entry_points",
       "statement": "HTTP route POST /articles (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -291,6 +309,7 @@
     },
     {
       "id": "f19",
+      "topic": "entry_points",
       "statement": "HTTP route GET /articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -303,6 +322,7 @@
     },
     {
       "id": "f20",
+      "topic": "entry_points",
       "statement": "HTTP route PUT /articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -315,6 +335,7 @@
     },
     {
       "id": "f21",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -327,6 +348,7 @@
     },
     {
       "id": "f22",
+      "topic": "entry_points",
       "statement": "HTTP route GET /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -339,6 +361,7 @@
     },
     {
       "id": "f23",
+      "topic": "entry_points",
       "statement": "HTTP route POST /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -351,6 +374,7 @@
     },
     {
       "id": "f24",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /articles/:slug/comments/:id (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -363,6 +387,7 @@
     },
     {
       "id": "f25",
+      "topic": "entry_points",
       "statement": "HTTP route POST /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -375,6 +400,7 @@
     },
     {
       "id": "f26",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
@@ -387,6 +413,7 @@
     },
     {
       "id": "f27",
+      "topic": "entry_points",
       "statement": "HTTP route POST /users (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -399,6 +426,7 @@
     },
     {
       "id": "f28",
+      "topic": "entry_points",
       "statement": "HTTP route POST /users/login (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -411,6 +439,7 @@
     },
     {
       "id": "f29",
+      "topic": "entry_points",
       "statement": "HTTP route GET /user (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -423,6 +452,7 @@
     },
     {
       "id": "f30",
+      "topic": "entry_points",
       "statement": "HTTP route PUT /user (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
@@ -435,6 +465,7 @@
     },
     {
       "id": "f31",
+      "topic": "entry_points",
       "statement": "HTTP route GET /profiles/:username (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
@@ -447,6 +478,7 @@
     },
     {
       "id": "f32",
+      "topic": "entry_points",
       "statement": "HTTP route POST /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
@@ -459,6 +491,7 @@
     },
     {
       "id": "f33",
+      "topic": "entry_points",
       "statement": "HTTP route DELETE /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
@@ -471,6 +504,7 @@
     },
     {
       "id": "f34",
+      "topic": "entry_points",
       "statement": "HTTP route GET /tags (express) in src/app/routes/tag/tag.controller.ts",
       "evidence": [
         {
@@ -483,6 +517,7 @@
     },
     {
       "id": "f35",
+      "topic": "entry_points",
       "statement": "HTTP route GET / (express) in src/main.ts",
       "evidence": [
         {
@@ -495,6 +530,7 @@
     },
     {
       "id": "f36",
+      "topic": "entry_points",
       "statement": "3 package scripts found",
       "evidence": [
         {
@@ -519,6 +555,7 @@
     },
     {
       "id": "f37",
+      "topic": "entry_points",
       "statement": "Package script npm run start: nx serve (npm) in package.json",
       "evidence": [
         {
@@ -531,6 +568,7 @@
     },
     {
       "id": "f38",
+      "topic": "entry_points",
       "statement": "Package script npm run build: nx build (npm) in package.json",
       "evidence": [
         {
@@ -543,6 +581,7 @@
     },
     {
       "id": "f39",
+      "topic": "entry_points",
       "statement": "Package script npm run test: nx test (npm) in package.json",
       "evidence": [
         {
@@ -555,6 +594,7 @@
     },
     {
       "id": "f40",
+      "topic": "structure",
       "statement": "Code in src/tests/services uses code in src/tests (3 references)",
       "evidence": [
         {
@@ -579,6 +619,7 @@
     },
     {
       "id": "f41",
+      "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -597,6 +638,7 @@
     },
     {
       "id": "f42",
+      "topic": "structure",
       "statement": "Code in src/app/routes/auth uses code in src/app/routes/article (2 references)",
       "evidence": [
         {
@@ -615,6 +657,7 @@
     },
     {
       "id": "f43",
+      "topic": "structure",
       "statement": "Code in src/app/routes/profile uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -633,6 +676,7 @@
     },
     {
       "id": "f44",
+      "topic": "structure",
       "statement": "Code in src/prisma uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -651,6 +695,7 @@
     },
     {
       "id": "f45",
+      "topic": "structure",
       "statement": "Code in src uses code in src/app/models (1 reference)",
       "evidence": [
         {
@@ -663,6 +708,7 @@
     },
     {
       "id": "f46",
+      "topic": "structure",
       "statement": "Code in src uses code in src/app/routes (1 reference)",
       "evidence": [
         {
@@ -675,6 +721,7 @@
     },
     {
       "id": "f47",
+      "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/article (1 reference)",
       "evidence": [
         {
@@ -687,6 +734,7 @@
     },
     {
       "id": "f48",
+      "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/auth (1 reference)",
       "evidence": [
         {
@@ -699,6 +747,7 @@
     },
     {
       "id": "f49",
+      "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/profile (1 reference)",
       "evidence": [
         {
@@ -711,6 +760,7 @@
     },
     {
       "id": "f50",
+      "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/tag (1 reference)",
       "evidence": [
         {
@@ -723,6 +773,7 @@
     },
     {
       "id": "f51",
+      "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/models (1 reference)",
       "evidence": [
         {
@@ -735,6 +786,7 @@
     },
     {
       "id": "f52",
+      "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/profile (1 reference)",
       "evidence": [
         {
@@ -747,6 +799,7 @@
     },
     {
       "id": "f53",
+      "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/tag (1 reference)",
       "evidence": [
         {
@@ -759,6 +812,7 @@
     },
     {
       "id": "f54",
+      "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/prisma (1 reference)",
       "evidence": [
         {
@@ -771,6 +825,7 @@
     },
     {
       "id": "f55",
+      "topic": "structure",
       "statement": "src/app/routes/article and src/app/routes/auth each use the other",
       "evidence": [
         {
@@ -789,6 +844,7 @@
     },
     {
       "id": "f56",
+      "topic": "structure",
       "statement": "src/app/routes/article and src/prisma each use the other",
       "evidence": [
         {
@@ -807,6 +863,7 @@
     },
     {
       "id": "f57",
+      "topic": "structure",
       "statement": "src/app/routes/auth and src/prisma each use the other",
       "evidence": [
         {
@@ -825,6 +882,7 @@
     },
     {
       "id": "f58",
+      "topic": "structure",
       "statement": "src/prisma/prisma-client.ts is used by 5 other files",
       "evidence": [
         {
@@ -849,6 +907,7 @@
     },
     {
       "id": "f59",
+      "topic": "structure",
       "statement": "src/app/models/http-exception.model.ts is used by 4 other files",
       "evidence": [
         {
@@ -873,6 +932,7 @@
     },
     {
       "id": "f60",
+      "topic": "structure",
       "statement": "src/app/routes/auth/auth.ts is used by 4 other files",
       "evidence": [
         {
@@ -897,6 +957,7 @@
     },
     {
       "id": "f61",
+      "topic": "structure",
       "statement": "src/app/routes/article/article.service.ts is used by 3 other files",
       "evidence": [
         {
@@ -921,6 +982,7 @@
     },
     {
       "id": "f62",
+      "topic": "structure",
       "statement": "src/app/routes/auth/auth.service.ts is used by 3 other files",
       "evidence": [
         {
@@ -945,6 +1007,7 @@
     },
     {
       "id": "f63",
+      "topic": "history",
       "statement": "4 commits between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
@@ -963,6 +1026,7 @@
     },
     {
       "id": "f64",
+      "topic": "history",
       "statement": "src/app/routes/auth/auth.service.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
@@ -987,6 +1051,7 @@
     },
     {
       "id": "f65",
+      "topic": "history",
       "statement": "src/main.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
@@ -1011,6 +1076,7 @@
     },
     {
       "id": "f66",
+      "topic": "history",
       "statement": "src/prisma/seed.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
       "evidence": [
         {
