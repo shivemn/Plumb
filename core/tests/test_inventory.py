@@ -36,6 +36,7 @@ from tests.conftest import RepoBuilder
         ("docs/conf.py", "python", Category.EXAMPLE),
         ("docs/guide.md", None, Category.DOCS),
         ("samples/demo/App.java", "java", Category.EXAMPLE),
+        ("src/main/java/org/acme/samples/App.java", "java", Category.SOURCE),
         ("examples/aliases/pyproject.toml", None, Category.EXAMPLE),
         ("examples/README.md", None, Category.DOCS),
     ],

@@ -94,7 +94,9 @@ def classify(path: str, head: bytes) -> tuple[str | None, Category]:
         return language, Category.GENERATED
     if _is_test(pure):
         return language, Category.TEST
-    if any(part in _EXAMPLE_DIRS for part in parts) and suffix not in (".md", ".rst", ".adoc"):
+    # Only a top-level examples folder counts: Java packages such as
+    # org/springframework/samples are real source.
+    if parts[:1] and parts[0] in _EXAMPLE_DIRS and suffix not in (".md", ".rst", ".adoc"):
         return language, Category.EXAMPLE
     if parts[:1] == ("docs",) and language is not None:
         return language, Category.EXAMPLE

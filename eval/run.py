@@ -23,6 +23,7 @@ from plumb.facts import build_facts
 from plumb.graph import all_edges, component_of
 from plumb.history import mine
 from plumb.inventory import Category, build_inventory
+from plumb.kind import decide_kind
 from plumb.source import SourceError, fetch
 from plumb.system import find_settings, find_system
 
@@ -51,7 +52,10 @@ def main() -> int:
         deps = find_dependencies(checkout.path, files)
         system = find_system(checkout.path, files, checkout.name, deps)
         settings = find_settings(checkout.path, files)
-        facts = build_facts(checkout, files, history, edges, entry_points, system, settings)
+        decision = decide_kind(files, entry_points, system, deps)
+        facts = build_facts(
+            checkout, files, history, edges, entry_points, system, settings, decision
+        )
         (RESULTS / f"{name}.facts.json").write_text(
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"
         )

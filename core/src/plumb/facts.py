@@ -11,6 +11,7 @@ from plumb.graph import component_edges, most_used, mutual_components
 from plumb.history import History
 from plumb.imports import Edge
 from plumb.inventory import Category, FileInfo
+from plumb.kind import KindDecision
 from plumb.model import (
     CommitEvidence,
     Evidence,
@@ -51,9 +52,15 @@ def build_facts(
     entry_points: list[EntryPoint] | None = None,
     system: System | None = None,
     settings: dict[str, list[Clue]] | None = None,
-    kind: RepoKind = RepoKind.UNKNOWN,
+    decision: KindDecision | None = None,
 ) -> FactSet:
     builder = FactBuilder()
+    kind = decision.kind if decision else RepoKind.UNKNOWN
+    if decision is not None and decision.clues:
+        builder.add(
+            f"Looks like a {decision.kind.value} repo: {decision.reason}",
+            [FileEvidence(path=c.path, start_line=c.line, end_line=c.line) for c in decision.clues],
+        )
     add_language_facts(builder, files)
     add_skipped_facts(builder, files)
     add_build_file_facts(builder, files)

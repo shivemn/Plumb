@@ -15,6 +15,7 @@ from plumb.facts import build_facts
 from plumb.graph import all_edges
 from plumb.history import is_shallow, mine
 from plumb.inventory import Category, build_inventory
+from plumb.kind import decide_kind
 from plumb.model import FactSet
 from plumb.source import Limits, SourceError, fetch
 from plumb.system import find_settings, find_system
@@ -89,12 +90,13 @@ def analyse(
     deps = find_dependencies(checkout.path, files)
     system = find_system(checkout.path, files, checkout.name, deps)
     settings = find_settings(checkout.path, files)
-    facts = build_facts(checkout, files, history, edges, entry_points, system, settings)
+    decision = decide_kind(files, entry_points, system, deps)
+    facts = build_facts(checkout, files, history, edges, entry_points, system, settings, decision)
 
     target = out or Path(f"{checkout.name}.facts.json")
     target.write_text(facts.model_dump_json(indent=2) + "\n", encoding="utf-8")
     typer.echo(
-        f"{checkout.owner}/{checkout.name} at {checkout.commit[:7]}: "
+        f"{checkout.owner}/{checkout.name} at {checkout.commit[:7]} ({decision.kind.value}): "
         f"{len(files)} files, {len(first_party)} first-party, {len(edges)} import links, "
         f"{len(entry_points)} entry points, "
         f"{len(history.commits) if history else 'no'} commits read, "

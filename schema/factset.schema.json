@@ -146,6 +146,7 @@
         "library",
         "cli",
         "data",
+        "website",
         "docs",
         "small",
         "unknown"

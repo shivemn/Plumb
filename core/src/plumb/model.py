@@ -24,6 +24,7 @@ class RepoKind(StrEnum):
     LIBRARY = "library"
     CLI = "cli"
     DATA = "data"
+    WEBSITE = "website"
     DOCS = "docs"
     SMALL = "small"
     UNKNOWN = "unknown"
