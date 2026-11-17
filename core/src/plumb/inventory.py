@@ -94,7 +94,7 @@ def classify(path: str, head: bytes) -> tuple[str | None, Category]:
         return language, Category.GENERATED
     if _is_test(pure):
         return language, Category.TEST
-    if any(part in _EXAMPLE_DIRS for part in parts) and suffix not in _DOC_SUFFIXES:
+    if any(part in _EXAMPLE_DIRS for part in parts) and suffix not in (".md", ".rst", ".adoc"):
         return language, Category.EXAMPLE
     if parts[:1] == ("docs",) and language is not None:
         return language, Category.EXAMPLE
