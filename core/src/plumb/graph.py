@@ -14,6 +14,7 @@ import networkx as nx
 
 from plumb.imports import Edge, java_edges, python_edges
 from plumb.inventory import FileInfo
+from plumb.jsimports import js_edges
 
 
 @dataclass(frozen=True)
@@ -25,7 +26,7 @@ class ComponentEdge:
 
 
 def all_edges(repo: Path, files: list[FileInfo]) -> list[Edge]:
-    return [*python_edges(repo, files), *java_edges(repo, files)]
+    return [*python_edges(repo, files), *java_edges(repo, files), *js_edges(repo, files)]
 
 
 def file_graph(edges: list[Edge]) -> nx.DiGraph[str]:
