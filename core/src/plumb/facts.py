@@ -83,7 +83,7 @@ def add_language_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
 
 
 def add_skipped_facts(builder: FactBuilder, files: list[FileInfo]) -> None:
-    for category in (Category.VENDORED, Category.GENERATED):
+    for category in (Category.VENDORED, Category.GENERATED, Category.EXAMPLE):
         skipped = [f for f in files if f.category is category]
         if not skipped:
             continue

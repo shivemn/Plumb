@@ -32,6 +32,12 @@ from tests.conftest import RepoBuilder
         ("LICENSE", None, Category.DOCS),
         ("data/loans.csv", None, Category.DATA),
         ("notebooks/explore.ipynb", "notebook", Category.SOURCE),
+        ("examples/aliases/aliases.py", "python", Category.EXAMPLE),
+        ("docs/conf.py", "python", Category.EXAMPLE),
+        ("docs/guide.md", None, Category.DOCS),
+        ("samples/demo/App.java", "java", Category.EXAMPLE),
+        ("examples/aliases/pyproject.toml", None, Category.EXAMPLE),
+        ("examples/README.md", None, Category.DOCS),
     ],
 )
 def test_classify(path: str, language: str | None, category: Category) -> None:

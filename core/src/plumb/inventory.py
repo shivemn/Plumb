@@ -18,6 +18,7 @@ from plumb.gitutil import git
 class Category(StrEnum):
     SOURCE = "source"
     TEST = "test"
+    EXAMPLE = "example"
     CONFIG = "config"
     DOCS = "docs"
     DATA = "data"
@@ -69,6 +70,7 @@ _BINARY_SUFFIXES = frozenset({
     ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".pdf", ".zip", ".gz", ".jar",
     ".woff", ".woff2", ".ttf", ".otf", ".mp4", ".mp3", ".class", ".so", ".dll", ".exe",
 })  # fmt: skip
+_EXAMPLE_DIRS = frozenset({"examples", "example", "samples", "sample", "demo", "demos", "docs_src"})
 _TEST_DIRS = frozenset({"test", "tests", "__tests__", "spec", "specs", "testing"})
 
 
@@ -92,6 +94,10 @@ def classify(path: str, head: bytes) -> tuple[str | None, Category]:
         return language, Category.GENERATED
     if _is_test(pure):
         return language, Category.TEST
+    if any(part in _EXAMPLE_DIRS for part in parts) and suffix not in _DOC_SUFFIXES:
+        return language, Category.EXAMPLE
+    if parts[:1] == ("docs",) and language is not None:
+        return language, Category.EXAMPLE
     if name.lower() in _CONFIG_NAMES or name.lower().startswith(("dockerfile", "docker-compose")):
         return language, Category.CONFIG
     if parts[:2] == (".github", "workflows") or suffix in _CONFIG_SUFFIXES:
