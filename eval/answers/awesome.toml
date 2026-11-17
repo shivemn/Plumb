@@ -1,0 +1,22 @@
+# Answer key: sindresorhus/awesome
+# Written by hand from the repo at the pinned commit, before Plumb ran on it.
+
+repo = "sindresorhus/awesome"
+commit = "bc98e517ddca672f55f9857d714fc3ea3c3540b2"
+kind = "docs"
+languages = []
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "there is source code",
+  "anything needs to be built or run",
+]
+
+[commands]
+contribute = "Read contributing.md and open a pull request that edits readme.md"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "docs"
+http_routes = 0
+stores = []

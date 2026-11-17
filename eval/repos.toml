@@ -18,9 +18,9 @@ commit = "129b31b76e87c0fe87bbdc8e8a649615e349e882"
 
 [[repo]]
 url = "https://github.com/shivemn/terminus"
-kind = "unknown"
+kind = "website"
 language = "typescript"
-why = "Own repo in an unsupported language: the report must say so, not guess."
+why = "Own repo: an Astro site with no back end. Astro files are not parsed yet."
 commit = "e44ea146ab44ac013a6603801b17180200675612"
 
 [[repo]]

@@ -6,6 +6,14 @@ commit = "e308a8df583a1776f53afb64feec03354011eaf1"
 kind = "service"
 languages = ["java", "typescript"]
 
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "Ignite runs as a separate service or container",
+  "the dashboard writes to the database directly",
+  "Grafana is required for the app to run",
+  "the load-test results are produced by CI",
+]
+
 [[runs]]
 name = "Spring Boot app"
 source = "src/main/java/com/shivemn/ccp/CreditPipelineApplication.java"
@@ -71,9 +79,8 @@ run = "mvn spring-boot:run"
 test = "mvn -B verify"
 dashboard = "cd dashboard && npm ci && npm run dev"
 
-must_not_claim = [
-  "Ignite runs as a separate service or container",
-  "the dashboard writes to the database directly",
-  "Grafana is required for the app to run",
-  "the load-test results are produced by CI",
-]
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "service"
+http_routes = 14
+stores = ["Apache Ignite", "Apache Kafka", "PostgreSQL"]

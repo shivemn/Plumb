@@ -1,0 +1,42 @@
+# Answer key: jhy/jsoup
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "jhy/jsoup"
+commit = "d90d57521d931db7bf7ee464a4c0a1a9293db088"
+kind = "library"
+languages = ["java"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "it runs a web server",
+  "it needs a database",
+]
+
+[[modules]]
+path = "src/main/java/org/jsoup/nodes"
+purpose = "The document tree: Document, Element, Node, Attributes."
+
+[[modules]]
+path = "src/main/java/org/jsoup/parser"
+purpose = "HTML and XML parsers and the tokeniser."
+
+[[modules]]
+path = "src/main/java/org/jsoup/select"
+purpose = "CSS selector engine."
+
+[[modules]]
+path = "src/main/java/org/jsoup/safety"
+purpose = "Cleaner and Safelist for untrusted HTML."
+
+[[modules]]
+path = "src/main/java/org/jsoup/helper"
+purpose = "HTTP connection and shared helpers."
+
+[commands]
+test = "mvn test"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "library"
+http_routes = 0
+stores = []

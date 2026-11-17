@@ -6,6 +6,13 @@ commit = "129b31b76e87c0fe87bbdc8e8a649615e349e882"
 kind = "service"
 languages = ["python", "typescript"]
 
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "the root node_modules folder is part of the application",
+  "the app needs PostgreSQL to run",
+  "the exchange core depends on FastAPI",
+]
+
 [[runs]]
 name = "marketlab serve (FastAPI)"
 source = "Dockerfile"
@@ -33,12 +40,12 @@ note = "Hosting for the demo, Docker runtime, health check /api/health."
 
 [[entry_points]]
 kind = "command"
-items = ["marketlab run", "marketlab show", "marketlab serve", "marketlab costs", "marketlab replay"]
+items = ["marketlab run", "marketlab show", "marketlab serve", "marketlab cluster", "marketlab costs", "marketlab replay"]
 source = "src/marketlab/cli.py"
 
 [[entry_points]]
 kind = "http"
-items = ["27 FastAPI routes"]
+items = ["28 FastAPI routes and websockets in src/marketlab/api/app.py", "2 in src/marketlab/cluster.py"]
 source = "src/marketlab/api/app.py"
 
 [[modules]]
@@ -63,11 +70,11 @@ run = "marketlab serve"
 test = "pytest"
 web = "cd web && npm ci && npm run build"
 
-must_not_claim = [
-  "the root node_modules folder is part of the application",
-  "the app needs PostgreSQL to run",
-  "the exchange core depends on FastAPI",
-]
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "service"
+http_routes = 30
+stores = ["PostgreSQL", "SQLite"]
 
 # Note for the owner: node_modules/ (999 files) and a root package.json for the
 # Neon CLI are committed at this commit. Plumb must skip vendored folders.

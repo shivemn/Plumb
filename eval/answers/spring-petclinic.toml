@@ -6,6 +6,13 @@ commit = "500158f732419217507c7656904b8e6aa1bcc0d6"
 kind = "service"
 languages = ["java"]
 
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "MySQL or PostgreSQL is required",
+  "the app exposes a JSON REST API as its main interface",
+  "it is a microservices system",
+]
+
 [[runs]]
 name = "Spring Boot web app"
 source = "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java"
@@ -52,8 +59,8 @@ run = "./mvnw spring-boot:run"
 run_gradle = "./gradlew bootRun"
 database = "docker compose up mysql (or postgres)"
 
-must_not_claim = [
-  "MySQL or PostgreSQL is required",
-  "the app exposes a JSON REST API as its main interface",
-  "it is a microservices system",
-]
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "service"
+http_routes = 17
+stores = ["H2", "MySQL", "PostgreSQL"]

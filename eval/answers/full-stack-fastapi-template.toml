@@ -1,0 +1,74 @@
+# Answer key: fastapi/full-stack-fastapi-template
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "fastapi/full-stack-fastapi-template"
+commit = "77e550a73bb49dd2967622c5ed11bf7a49603c93"
+kind = "service"
+languages = ["python", "typescript"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "the front end has its own production container at this commit",
+  "Redis or a message queue is used",
+]
+
+[[runs]]
+name = "backend (FastAPI)"
+source = "backend/Dockerfile"
+note = "Runs fastapi run with 4 workers; Compose service backend."
+
+[[runs]]
+name = "frontend (React, Vite)"
+source = "frontend/package.json"
+note = "Built with Vite. No Dockerfile for it at this commit, only one for Playwright tests."
+
+[[stores]]
+name = "PostgreSQL"
+source = "compose.yml"
+note = "Compose service db, image postgres; schema managed by Alembic migrations."
+
+[[outside]]
+name = "SMTP server for emails"
+source = "backend/app/core/config.py"
+note = "Mailpit stands in for it in local development (compose.override.yml)."
+
+[[outside]]
+name = "Sentry"
+source = "backend/pyproject.toml"
+note = "Error reporting, only when SENTRY_DSN is set."
+
+[[entry_points]]
+kind = "http"
+items = ["23 routes in backend/app/api/routes, mounted under the API prefix from settings"]
+source = "backend/app/api/main.py"
+
+[[modules]]
+path = "backend/app/api/routes"
+purpose = "Route handlers: login, users, items, utils, private."
+
+[[modules]]
+path = "backend/app/core"
+purpose = "Settings, database engine and security helpers."
+
+[[modules]]
+path = "backend/app/alembic/versions"
+purpose = "Database migrations."
+
+[[modules]]
+path = "frontend/src/routes"
+purpose = "Pages, using TanStack Router file-based routes."
+
+[[modules]]
+path = "frontend/src/client/core"
+purpose = "Generated API client used by the front end."
+
+[commands]
+run = "docker compose watch"
+backend_test = "bash backend/scripts/test.sh"
+frontend_dev = "cd frontend && npm run dev"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "service"
+http_routes = 23
+stores = ["PostgreSQL"]

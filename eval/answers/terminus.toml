@@ -1,0 +1,37 @@
+# Answer key: shivemn/terminus
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "shivemn/terminus"
+commit = "e44ea146ab44ac013a6603801b17180200675612"
+kind = "website"
+languages = ["typescript", "astro"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "it has a back end or database",
+  "the research/ folder is part of the site's code",
+]
+
+[[runs]]
+name = "Static site built with Astro"
+source = "package.json"
+note = "Deployed to Cloudflare Pages. No server code."
+
+[[modules]]
+path = "src/lib"
+purpose = "Content loading, the role and topic graph, and the content schema."
+
+[[modules]]
+path = "src/components"
+purpose = "Astro components for the pages."
+
+[commands]
+dev = "npm run dev"
+build = "npm run build (validates content first)"
+test = "npm test"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "website"
+http_routes = 0
+stores = []

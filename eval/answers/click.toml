@@ -1,0 +1,26 @@
+# Answer key: pallets/click
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "pallets/click"
+commit = "e38188e9e205005d5af5f9e59df51904c984586a"
+kind = "library"
+languages = ["python"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "the commands in examples/ are part of click itself",
+  "it is a command-line application",
+]
+
+[[modules]]
+path = "src/click"
+purpose = "The library: core.py (commands, groups, contexts), decorators.py, types.py, termui.py."
+
+[commands]
+test = "pytest"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "library"
+http_routes = 0
+stores = []

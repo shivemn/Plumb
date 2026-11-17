@@ -1,0 +1,27 @@
+# Answer key: psf/requests
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "psf/requests"
+commit = "3c7baaa05ab4aa49cc819ce3a819d260de19c157"
+kind = "library"
+languages = ["python"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "it runs a server",
+  "it has a command-line tool",
+]
+
+[[modules]]
+path = "src/requests"
+purpose = "The whole library: api.py (get, post and friends), sessions.py, models.py, adapters.py."
+
+[commands]
+install = "pip install -r requirements-dev.txt"
+test = "make test"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "library"
+http_routes = 0
+stores = []
