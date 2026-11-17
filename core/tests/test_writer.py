@@ -134,3 +134,27 @@ def test_unreadable_answers_are_not_cached(tmp_path: Path) -> None:
     assert write_section(task, second, cache).claims[0].text == "It is a service."
     assert len(second.prompts) == 1
     cache.close()
+
+
+def test_workspace_header(monkeypatch: pytest.MonkeyPatch) -> None:
+    sent: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        sent.append(request)
+        if "anthropic-workspace-id" not in request.headers:
+            message = "This API key is not scoped to a workspace, so this request must include "
+            message += "the anthropic-workspace-id header"
+            return httpx.Response(400, json={"error": {"message": message}})
+        return httpx.Response(200, json={"content": [{"type": "text", "text": "ok"}]})
+
+    def fake_post(url: str, **kwargs: object) -> httpx.Response:
+        with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+            return client.post(url, **kwargs)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(models.httpx, "post", fake_post)
+    plain = make_client("anthropic:claude-opus-5-5", env={"ANTHROPIC_API_KEY": "k"})
+    with pytest.raises(ModelError, match="Set ANTHROPIC_WORKSPACE_ID"):
+        plain.complete("sys", "prompt")
+    env = {"ANTHROPIC_API_KEY": "k", "ANTHROPIC_WORKSPACE_ID": "wrkspc_1"}
+    assert make_client("anthropic:claude-opus-5-5", env=env).complete("sys", "p") == "ok"
+    assert sent[-1].headers["anthropic-workspace-id"] == "wrkspc_1"

@@ -2,7 +2,9 @@
 
 Keys come from the environment (ANTHROPIC_API_KEY, OPENROUTER_API_KEY) and
 are only ever put in request headers: never logged, cached or written into
-an error message.
+an error message. An Anthropic key that is not scoped to one workspace also
+needs ANTHROPIC_WORKSPACE_ID, which is sent as the anthropic-workspace-id
+header.
 """
 
 from __future__ import annotations
@@ -54,9 +56,14 @@ class _HttpClient:
                 if response.status_code == 200:
                     return cast("object", response.json())
                 if response.status_code not in _RETRY_STATUS or attempt == self.retries:
+                    hint = ""
+                    if "anthropic-workspace-id" in response.text:
+                        hint = (
+                            " Set ANTHROPIC_WORKSPACE_ID, or create a key scoped to one workspace."
+                        )
                     raise ModelError(
                         f"{self.name}: provider answered {response.status_code}: "
-                        f"{response.text[:300]}"
+                        f"{response.text[:300]}{hint}"
                     )
             time.sleep(delay)
             delay *= 2
@@ -65,14 +72,19 @@ class _HttpClient:
 
 @dataclass
 class AnthropicClient(_HttpClient):
+    workspace: str = ""
+
     def complete(self, system: str, prompt: str, max_tokens: int = 2000) -> str:
+        headers = {
+            "x-api-key": self.key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+        }
+        if self.workspace:
+            headers["anthropic-workspace-id"] = self.workspace
         data = self._post(
             ANTHROPIC_URL,
-            {
-                "x-api-key": self.key,
-                "anthropic-version": "2023-06-01",
-                "content-type": "application/json",
-            },
+            headers,
             {
                 "model": self.model,
                 "max_tokens": max_tokens,
@@ -121,9 +133,13 @@ def make_client(spec: str, env: dict[str, str] | None = None) -> ModelClient:
         choices = ", ".join(f"{p}:<model>" for p in _PROVIDERS)
         raise ModelError(f"model must look like {choices}, not {spec!r}")
     kind, variable = _PROVIDERS[provider]
-    key = (env if env is not None else dict(os.environ)).get(variable, "")
+    environment = env if env is not None else dict(os.environ)
+    key = environment.get(variable, "")
     if not key:
         raise ModelError(f"set {variable} to use {provider} models")
+    if kind is AnthropicClient:
+        workspace = environment.get("ANTHROPIC_WORKSPACE_ID", "")
+        return AnthropicClient(name=spec, model=model, key=key, workspace=workspace)
     return kind(name=spec, model=model, key=key)
 
 
