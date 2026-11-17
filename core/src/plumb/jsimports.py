@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import posixpath
+import re
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path, PurePosixPath
@@ -23,8 +24,12 @@ from tree_sitter import Language, Node, Parser
 from plumb.imports import Edge
 from plumb.inventory import Category, FileInfo
 
-_JS_LANGUAGES = ("javascript", "typescript")
-_TRY_SUFFIXES = (".ts", ".tsx", ".d.ts", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".vue", ".svelte")
+_JS_LANGUAGES = ("javascript", "typescript", "astro", "vue", "svelte")
+_TRY_SUFFIXES = (
+    ".ts", ".tsx", ".d.ts", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".vue", ".svelte", ".astro",
+)  # fmt: skip
+_SCRIPT_TAG = re.compile(rb"<script\b([^>]*)>(.*?)</script>", re.S | re.I)
+_FRONTMATTER = re.compile(rb"\A\s*---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)", re.S)
 
 
 @dataclass(frozen=True)
@@ -87,6 +92,25 @@ def js_imports(path: str, source: bytes) -> list[JsImport]:
                 if value:
                     found.append(JsImport(value, node.start_point.row + 1))
         stack.extend(reversed(node.children))
+    return sorted(found, key=lambda i: i.line)
+
+
+def component_imports(path: str, source: bytes) -> list[JsImport]:
+    """Imports in Astro frontmatter and in <script> blocks of Astro, Vue and Svelte files."""
+    blocks: list[tuple[bytes, int, str]] = []
+    if path.endswith(".astro"):
+        front = _FRONTMATTER.match(source)
+        if front:
+            blocks.append((front.group(1), source.count(b"\n", 0, front.start(1)), "x.ts"))
+    for tag in _SCRIPT_TAG.finditer(source):
+        is_ts = re.search(rb"""lang\s*=\s*["']ts["']""", tag.group(1)) is not None
+        offset = source.count(b"\n", 0, tag.start(2))
+        blocks.append(
+            (tag.group(2), offset, "x.ts" if is_ts or path.endswith(".astro") else "x.js")
+        )
+    found: list[JsImport] = []
+    for code, offset, kind in blocks:
+        found.extend(JsImport(i.specifier, i.line + offset) for i in js_imports(kind, code))
     return sorted(found, key=lambda i: i.line)
 
 
@@ -234,7 +258,10 @@ def js_edges(repo: Path, files: list[FileInfo]) -> list[Edge]:
         if info.language not in _JS_LANGUAGES:
             continue
         seen: set[str] = set()
-        for item in js_imports(info.path, (repo / info.path).read_bytes()):
+        source = (repo / info.path).read_bytes()
+        is_component = info.path.endswith((".astro", ".vue", ".svelte"))
+        reader = component_imports if is_component else js_imports
+        for item in reader(info.path, source):
             target = resolver.resolve(info.path, item.specifier)
             if target and target != info.path and target not in seen:
                 seen.add(target)

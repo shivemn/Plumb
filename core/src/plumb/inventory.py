@@ -45,7 +45,7 @@ LANGUAGES: dict[str, str] = {
     ".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".hpp": "cpp",
     ".swift": "swift", ".r": "r", ".jl": "julia", ".lua": "lua", ".dart": "dart",
     ".sh": "shell", ".bash": "shell", ".ps1": "powershell",
-    ".sql": "sql", ".html": "html", ".css": "css", ".scss": "css", ".vue": "vue",
+    ".sql": "sql", ".html": "html", ".css": "css", ".scss": "css", ".vue": "vue", ".astro": "astro",
     ".svelte": "svelte", ".ipynb": "notebook",
 }  # fmt: skip
 

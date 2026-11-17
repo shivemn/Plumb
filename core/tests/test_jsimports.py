@@ -3,7 +3,15 @@ from collections.abc import Callable
 from pathlib import Path
 
 from plumb.inventory import build_inventory
-from plumb.jsimports import JsImport, JsResolver, PathAliases, js_edges, js_imports, strip_jsonc
+from plumb.jsimports import (
+    JsImport,
+    JsResolver,
+    PathAliases,
+    component_imports,
+    js_edges,
+    js_imports,
+    strip_jsonc,
+)
 from tests.conftest import RepoBuilder
 
 TSX = b"""\
@@ -85,4 +93,56 @@ def test_js_edges(make_repo: Callable[[str], RepoBuilder], tmp_path: Path) -> No
     assert edges == {
         ("web/src/main.tsx", "web/src/App.tsx", 1),
         ("web/src/App.tsx", "web/src/api.ts", 1),
+    }
+
+
+ASTRO = b"""---
+import Base from '../layouts/Base.astro';
+import { content } from '../lib/site';
+---
+<Base><h1>{content.title}</h1></Base>
+<script>
+  import { start } from '../lib/map';
+  start();
+</script>
+"""
+
+VUE = b"""<template><Button /></template>
+<script setup lang="ts">
+import Button from "./Button.vue";
+import { api } from "@/api";
+</script>
+"""
+
+
+def test_astro_frontmatter_and_scripts() -> None:
+    assert component_imports("src/pages/index.astro", ASTRO) == [
+        JsImport("../layouts/Base.astro", 2),
+        JsImport("../lib/site", 3),
+        JsImport("../lib/map", 7),
+    ]
+
+
+def test_vue_script_setup() -> None:
+    assert component_imports("src/App.vue", VUE) == [
+        JsImport("./Button.vue", 3),
+        JsImport("@/api", 4),
+    ]
+
+
+def test_astro_edges(make_repo: Callable[[str], RepoBuilder]) -> None:
+    repo = make_repo("site")
+    repo.commit(
+        {
+            "src/pages/index.astro": ASTRO.decode(),
+            "src/layouts/Base.astro": "<slot />\n",
+            "src/lib/site.ts": "export const content = {};\n",
+            "src/lib/map.ts": "export function start() {}\n",
+        }
+    )
+    edges = {(e.target, e.line) for e in js_edges(repo.path, build_inventory(repo.path))}
+    assert edges == {
+        ("src/layouts/Base.astro", 2),
+        ("src/lib/site.ts", 3),
+        ("src/lib/map.ts", 7),
     }
