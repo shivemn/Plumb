@@ -449,6 +449,37 @@ def package_json_entry_points(path: str, source: bytes) -> list[EntryPoint]:
     return found
 
 
+_CONSOLE_SCRIPT = re.compile(r"^\s*([\w.-]+)\s*=\s*([\w.]+:[\w.]+)\s*$")
+
+
+def setup_scripts(path: str, source: bytes) -> list[EntryPoint]:
+    """Commands from console_scripts in setup.cfg or setup.py."""
+    text = source.decode("utf-8", "replace")
+    found: list[EntryPoint] = []
+    lines = text.splitlines()
+    if path.endswith("setup.cfg"):
+        inside = False
+        for number, line in enumerate(lines, start=1):
+            if line.strip().startswith("console_scripts"):
+                inside = True
+                continue
+            if inside and (not line.startswith((" ", "\t")) or not line.strip()):
+                if line.strip():
+                    inside = False
+                continue
+            match = _CONSOLE_SCRIPT.match(line) if inside else None
+            if match:
+                name = f"{match.group(1)} ({match.group(2)})"
+                found.append(EntryPoint(EntryKind.COMMAND, name, path, number, "package"))
+    else:
+        for number, line in enumerate(lines, start=1):
+            for match in re.finditer(r"[\"']([\w.-]+)\s*=\s*([\w.]+:[\w.]+)[\"']", line):
+                if "console_scripts" in text:
+                    name = f"{match.group(1)} ({match.group(2)})"
+                    found.append(EntryPoint(EntryKind.COMMAND, name, path, number, "package"))
+    return found
+
+
 def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
     found: list[EntryPoint] = []
     for info in files:
@@ -459,6 +490,8 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
             found.extend(java_entry_points(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.SOURCE and info.language in ("javascript", "typescript"):
             found.extend(js_entry_points(info.path, (repo / info.path).read_bytes()))
+        elif info.category is Category.CONFIG and name in ("setup.cfg", "setup.py"):
+            found.extend(setup_scripts(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.CONFIG and name == "pyproject.toml":
             found.extend(pyproject_scripts(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.CONFIG and name == "package.json":

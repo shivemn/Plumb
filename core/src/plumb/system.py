@@ -140,7 +140,15 @@ def compose_parts(system: System, path: str, text: str) -> None:
             system.add(Role.CONTAINER, name, Clue(path, line, f"Compose service, image {image}"))
 
 
+# Folders whose Dockerfiles build packages or run tools rather than the app.
+_TOOLING_DIRS = frozenset({
+    "packaging", "extras", "scripts", "tools", "ci", "docs", "test", "tests", "e2e", "benchmarks",
+})  # fmt: skip
+
+
 def dockerfile_parts(system: System, path: str, text: str, repo_name: str) -> None:
+    if any(part in _TOOLING_DIRS for part in PurePosixPath(path).parts[:-1]):
+        return
     folder = str(PurePosixPath(path).parent)
     name = repo_name if folder == "." else PurePosixPath(folder).name
     start_line = 0
@@ -338,6 +346,16 @@ _CONFIG_FILE = re.compile(
     r"(^|/)(application[\w-]*\.(ya?ml|properties)|\.env\.(example|sample|template)"
     r"|settings\.py|config\.py|alembic\.ini|.*\.env)$"
 )
+_PRISMA_PROVIDER = re.compile(r"datasource\s+\w+\s*\{[^}]*?provider\s*=\s*\"(\w+)\"", re.S)
+_PRISMA_NAMES = {
+    "postgresql": "PostgreSQL",
+    "postgres": "PostgreSQL",
+    "mysql": "MySQL",
+    "sqlite": "SQLite",
+    "mongodb": "MongoDB",
+    "sqlserver": "SQL Server",
+    "cockroachdb": "CockroachDB",
+}
 _SQLITE_IMPORT = re.compile(rb"^\s*import sqlite3\b|^\s*from sqlite3 import", re.M)
 
 
@@ -355,6 +373,14 @@ def config_parts(system: System, repo: Path, files: list[FileInfo]) -> None:
                     if match:
                         clue = Clue(info.path, number, f"setting mentions {match.group(0)}")
                         system.add(role, name, clue)
+        if info.path.endswith(".prisma"):
+            text = (repo / info.path).read_text(encoding="utf-8", errors="replace")
+            for match in _PRISMA_PROVIDER.finditer(text):
+                name = _PRISMA_NAMES.get(match.group(1).lower())
+                if name:
+                    line = text.count("\n", 0, match.start(1)) + 1
+                    clue = Clue(info.path, line, f"Prisma datasource, provider {match.group(1)}")
+                    system.add(Role.STORE, name, clue)
         if info.language == "python" and info.category is Category.SOURCE:
             source = (repo / info.path).read_bytes()
             match = _SQLITE_IMPORT.search(source)

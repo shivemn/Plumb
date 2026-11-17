@@ -9,6 +9,7 @@ from plumb.entrypoints import (
     package_json_entry_points,
     pyproject_scripts,
     python_entry_points,
+    setup_scripts,
 )
 from plumb.inventory import build_inventory
 from tests.conftest import RepoBuilder
@@ -223,3 +224,14 @@ def test_prefixes_from_mounts_in_other_files(make_repo: Callable[[str], RepoBuil
         "GET /health",
         "POST /api/v1/auth/login",
     ]
+
+
+def test_setup_cfg_and_setup_py_scripts() -> None:
+    cfg = b"[options.entry_points]\nconsole_scripts =\n    http = httpie.__main__:main\n"
+    cfg += b"    httpie = httpie.manager.__main__:main\n\n[options.extras_require]\ndev = x\n"
+    assert [(e.name, e.line) for e in setup_scripts("setup.cfg", cfg)] == [
+        ("http (httpie.__main__:main)", 3),
+        ("httpie (httpie.manager.__main__:main)", 4),
+    ]
+    py = b'setup(entry_points={"console_scripts": ["shop = shop.cli:main"]})\n'
+    assert [e.name for e in setup_scripts("setup.py", py)] == ["shop (shop.cli:main)"]

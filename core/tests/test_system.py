@@ -183,3 +183,22 @@ def test_find_migrations() -> None:
         ("Django", "shop/migrations", 1),
         ("Flyway", "src/main/resources/db/migration", 2),
     ]
+
+
+def test_prisma_and_packaging_dockerfiles(make_repo: Callable[[str], RepoBuilder]) -> None:
+    repo = make_repo("shop")
+    repo.commit(
+        {
+            "src/prisma/schema.prisma": (
+                'generator client {\n  provider = "prisma-client-js"\n}\n'
+                'datasource db {\n  provider = "postgresql"\n  url = env("DATABASE_URL")\n}\n'
+            ),
+            "extras/packaging/linux/Dockerfile": 'FROM ubuntu\nCMD ["mv", "a", "b"]\n',
+        }
+    )
+    system = find_system(repo.path, build_inventory(repo.path), "shop")
+    (postgres,) = system.of(Role.STORE)
+    assert postgres.clues == [
+        Clue("src/prisma/schema.prisma", 5, "Prisma datasource, provider postgresql")
+    ]
+    assert system.of(Role.SERVICE) == []
