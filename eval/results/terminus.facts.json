@@ -45,6 +45,30 @@
     },
     {
       "id": "f3",
+      "statement": "18 source files in astro, 3,546 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/NetworkMap.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/components/HeroRide.astro",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
       "statement": "6 source files in css, 1,006 lines in all",
       "evidence": [
         {
@@ -68,7 +92,7 @@
       ]
     },
     {
-      "id": "f4",
+      "id": "f5",
       "statement": "1 source file in javascript, 11 lines in all",
       "evidence": [
         {
@@ -80,7 +104,7 @@
       ]
     },
     {
-      "id": "f5",
+      "id": "f6",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -92,7 +116,7 @@
       ]
     },
     {
-      "id": "f6",
+      "id": "f7",
       "statement": "1 example file left out of the analysis",
       "evidence": [
         {
@@ -104,7 +128,7 @@
       ]
     },
     {
-      "id": "f7",
+      "id": "f8",
       "statement": "GitHub Actions workflow .github/workflows/ci.yml",
       "evidence": [
         {
@@ -116,7 +140,7 @@
       ]
     },
     {
-      "id": "f8",
+      "id": "f9",
       "statement": "GitHub Actions workflow .github/workflows/link-check.yml",
       "evidence": [
         {
@@ -128,7 +152,7 @@
       ]
     },
     {
-      "id": "f9",
+      "id": "f10",
       "statement": "GitHub Actions workflow .github/workflows/yearly-postings.yml",
       "evidence": [
         {
@@ -140,7 +164,7 @@
       ]
     },
     {
-      "id": "f10",
+      "id": "f11",
       "statement": "Build or deploy file package.json",
       "evidence": [
         {
@@ -152,7 +176,7 @@
       ]
     },
     {
-      "id": "f11",
+      "id": "f12",
       "statement": "3 package scripts found",
       "evidence": [
         {
@@ -176,7 +200,7 @@
       ]
     },
     {
-      "id": "f12",
+      "id": "f13",
       "statement": "Package script npm run dev: astro dev (npm) in package.json",
       "evidence": [
         {
@@ -188,7 +212,7 @@
       ]
     },
     {
-      "id": "f13",
+      "id": "f14",
       "statement": "Package script npm run build: npm run validate && astro build (npm) in package.json",
       "evidence": [
         {
@@ -200,7 +224,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f15",
       "statement": "Package script npm run test: vitest run (npm) in package.json",
       "evidence": [
         {
@@ -212,7 +236,31 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f16",
+      "statement": "Code in src/components uses code in src/lib (23 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/DesignDiagram.astro",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/components/DesignDiagram.astro",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "src/components/HeroRide.astro",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f17",
       "statement": "Code in tests uses code in src/lib (21 references)",
       "evidence": [
         {
@@ -236,31 +284,55 @@
       ]
     },
     {
-      "id": "f16",
-      "statement": "Code in src/components uses code in src/lib (12 references)",
+      "id": "f18",
+      "statement": "Code in src/pages uses code in src/lib (15 references)",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/components/PlannerTools.tsx",
+          "path": "src/pages/certifications.astro",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/certifications.astro",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "Code in src/pages/tools uses code in src/lib (6 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/tools/[id].astro",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/tools/[id].astro",
           "start_line": 6,
           "end_line": 6
         },
         {
           "kind": "file",
-          "path": "src/components/PlannerTools.tsx",
+          "path": "src/pages/tools/[id].astro",
           "start_line": 7,
           "end_line": 7
-        },
-        {
-          "kind": "file",
-          "path": "src/components/PlannerTools.tsx",
-          "start_line": 8,
-          "end_line": 8
         }
       ]
     },
     {
-      "id": "f17",
+      "id": "f20",
       "statement": "Code in scripts uses code in src/lib (5 references)",
       "evidence": [
         {
@@ -284,31 +356,307 @@
       ]
     },
     {
-      "id": "f18",
-      "statement": "Code in src/pages uses code in src/lib (5 references)",
+      "id": "f21",
+      "statement": "Code in src/pages/roles uses code in src/lib (5 references)",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/pages/routes.json.ts",
+          "path": "src/pages/roles/[id].astro",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/roles/[id].astro",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/roles/[id].astro",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "Code in src/pages uses code in src/layouts (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/404.astro",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/certifications.astro",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "Code in src/pages/designs uses code in src/lib (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/designs/[id].astro",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/designs/[id].astro",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/designs/index.astro",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Code in src/pages/concepts uses code in src/lib (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/concepts/[id].astro",
           "start_line": 3,
           "end_line": 3
         },
         {
           "kind": "file",
-          "path": "src/pages/search.json.ts",
+          "path": "src/pages/concepts/[id].astro",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/concepts/[id].astro",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Code in src/pages/tools uses code in src/components (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/tools/[id].astro",
           "start_line": 3,
           "end_line": 3
         },
         {
           "kind": "file",
-          "path": "src/pages/search.json.ts",
+          "path": "src/pages/tools/[id].astro",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/tools/index.astro",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "Code in src/pages uses code in src/components (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
           "start_line": 4,
           "end_line": 4
         }
       ]
     },
     {
-      "id": "f19",
+      "id": "f27",
+      "statement": "Code in src/pages/designs uses code in src/layouts (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/designs/[id].astro",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/designs/index.astro",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "Code in src/pages/roles uses code in src/layouts (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/roles/[id].astro",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/roles/index.astro",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "Code in src/pages/tools uses code in src/layouts (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/tools/[id].astro",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/tools/index.astro",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "Code in src/layouts uses code in src/components (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/layouts/Base.astro",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "src/lib/schema.ts is used by 17 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "scripts/validate.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/components/DesignDiagram.astro",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "src/lib/site.ts is used by 17 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/site.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/components/HeroRide.astro",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/components/NetworkMap.astro",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "statement": "src/lib/graph.ts is used by 13 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/graph.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/components/HeroRide.astro",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/components/PlannerTools.tsx",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "statement": "src/layouts/Base.astro is used by 11 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/layouts/Base.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/404.astro",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/certifications.astro",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f35",
       "statement": "src/lib/content.ts is used by 11 other files",
       "evidence": [
         {
@@ -332,103 +680,7 @@
       ]
     },
     {
-      "id": "f20",
-      "statement": "src/lib/graph.ts is used by 11 other files",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/lib/graph.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/components/PlannerTools.tsx",
-          "start_line": 10,
-          "end_line": 10
-        },
-        {
-          "kind": "file",
-          "path": "src/components/RolePlanner.tsx",
-          "start_line": 9,
-          "end_line": 9
-        }
-      ]
-    },
-    {
-      "id": "f21",
-      "statement": "src/lib/schema.ts is used by 10 other files",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/lib/schema.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "scripts/validate.ts",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "src/lib/certifications.ts",
-          "start_line": 5,
-          "end_line": 5
-        }
-      ]
-    },
-    {
-      "id": "f22",
-      "statement": "src/lib/site.ts is used by 4 other files",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/lib/site.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/pages/routes.json.ts",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "src/pages/search.json.ts",
-          "start_line": 4,
-          "end_line": 4
-        }
-      ]
-    },
-    {
-      "id": "f23",
-      "statement": "src/lib/coaches.ts is used by 3 other files",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/lib/coaches.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/components/PlannerTools.tsx",
-          "start_line": 8,
-          "end_line": 8
-        },
-        {
-          "kind": "file",
-          "path": "src/components/RolePlanner.tsx",
-          "start_line": 10,
-          "end_line": 10
-        }
-      ]
-    },
-    {
-      "id": "f24",
+      "id": "f36",
       "statement": "68 commits between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -446,7 +698,7 @@
       ]
     },
     {
-      "id": "f25",
+      "id": "f37",
       "statement": "src/lib/schema.ts changed in 23 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -470,7 +722,55 @@
       ]
     },
     {
-      "id": "f26",
+      "id": "f38",
+      "statement": "src/pages/index.astro changed in 18 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "4b10d58c24979bc408ef105a5dbd236f79428a46"
+        },
+        {
+          "kind": "commit",
+          "sha": "1654be8f7df0689040cb76ebce18132288804357"
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "statement": "src/layouts/Base.astro changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/layouts/Base.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "78efb91b9b91c01fcfdd18316736d4aebd37e66f"
+        },
+        {
+          "kind": "commit",
+          "sha": "ad97d41f473c6f5e411c2ee42ae0ab0ad7cb6922"
+        }
+      ]
+    },
+    {
+      "id": "f40",
       "statement": "src/styles/global.css changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -494,7 +794,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f41",
       "statement": "src/lib/content.ts changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -518,7 +818,31 @@
       ]
     },
     {
-      "id": "f28",
+      "id": "f42",
+      "statement": "src/pages/roles/[id].astro changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/roles/[id].astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "e44ea146ab44ac013a6603801b17180200675612"
+        },
+        {
+          "kind": "commit",
+          "sha": "653e3bcf82c296284b7fdefed7e21b305232595c"
+        },
+        {
+          "kind": "commit",
+          "sha": "88341f6619420b332ca5beec3094937f942ab201"
+        }
+      ]
+    },
+    {
+      "id": "f43",
       "statement": "src/styles/planner.css changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -542,7 +866,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f44",
       "statement": "src/components/RolePlanner.tsx changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -566,108 +890,36 @@
       ]
     },
     {
-      "id": "f30",
-      "statement": "src/lib/graph.ts changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "id": "f45",
+      "statement": "src/pages/concepts/[id].astro changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/lib/graph.ts",
+          "path": "src/pages/concepts/[id].astro",
           "start_line": null,
           "end_line": null
         },
         {
           "kind": "commit",
-          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
+          "sha": "789359627f8536ae28138c7dd5c9a59a3814cdd5"
         },
         {
           "kind": "commit",
-          "sha": "3ab0911cb32a9af556c32150f01b3f6537f26e24"
-        },
-        {
-          "kind": "commit",
-          "sha": "671dff2694cd064adc50365a5e6b741c1093f476"
-        }
-      ]
-    },
-    {
-      "id": "f31",
-      "statement": "src/styles/route.css changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/styles/route.css",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "commit",
-          "sha": "e44ea146ab44ac013a6603801b17180200675612"
-        },
-        {
-          "kind": "commit",
-          "sha": "78efb91b9b91c01fcfdd18316736d4aebd37e66f"
-        },
-        {
-          "kind": "commit",
-          "sha": "e7847e613ded82671365eba467e36adbd285638f"
-        }
-      ]
-    },
-    {
-      "id": "f32",
-      "statement": "scripts/check-links.ts changed in 6 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "scripts/check-links.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "commit",
-          "sha": "88bbd7a2249fda53b2d91e4d10ef763a79edf804"
+          "sha": "fdcb8226893ea2cbbe0b2a833e487a6e31aa81b3"
         },
         {
           "kind": "commit",
           "sha": "ad97d41f473c6f5e411c2ee42ae0ab0ad7cb6922"
-        },
-        {
-          "kind": "commit",
-          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
         }
       ]
     },
     {
-      "id": "f33",
-      "statement": "scripts/validate.ts changed in 5 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
+      "id": "f46",
+      "statement": "src/components/NetworkMap.astro changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
           "kind": "file",
-          "path": "scripts/validate.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "commit",
-          "sha": "c6f59c0ad444eea14692d1bf4a138a79b2afcd20"
-        },
-        {
-          "kind": "commit",
-          "sha": "eabadd278d29fd982fcc5ecdbfcc02c26d7beb25"
-        },
-        {
-          "kind": "commit",
-          "sha": "32bd220903aedd63b34748fb68e244f250006ac3"
-        }
-      ]
-    },
-    {
-      "id": "f34",
-      "statement": "src/components/StopPanel.tsx changed in 5 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/components/StopPanel.tsx",
+          "path": "src/components/NetworkMap.astro",
           "start_line": null,
           "end_line": null
         },
@@ -677,16 +929,16 @@
         },
         {
           "kind": "commit",
-          "sha": "df69c096109e3f05445afc091f22c765081658aa"
+          "sha": "c7ab4455ce2c7c4731db664a72299c3d4cfc2503"
         },
         {
           "kind": "commit",
-          "sha": "a8121563e678944ff42a4496d67b3fca34699d82"
+          "sha": "033d35636e2892bed7f09ad4467afc7cfe716bf1"
         }
       ]
     },
     {
-      "id": "f35",
+      "id": "f47",
       "statement": "src/lib/content.ts and src/lib/schema.ts changed in the same commit 13 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -704,7 +956,79 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f48",
+      "statement": "src/lib/schema.ts and src/pages/roles/[id].astro changed in the same commit 11 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/roles/[id].astro",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "statement": "src/components/RolePlanner.tsx and src/pages/index.astro changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "statement": "src/pages/index.astro and src/styles/planner.css changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/styles/planner.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "statement": "src/layouts/Base.astro and src/pages/index.astro changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/layouts/Base.astro",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/index.astro",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f52",
       "statement": "src/components/RolePlanner.tsx and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -722,7 +1046,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f53",
       "statement": "src/lib/schema.ts and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -740,7 +1064,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f54",
       "statement": "src/styles/global.css and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -758,12 +1082,12 @@
       ]
     },
     {
-      "id": "f39",
-      "statement": "src/lib/graph.ts and src/lib/schema.ts changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
+      "id": "f55",
+      "statement": "src/layouts/Base.astro and src/lib/schema.ts changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/lib/graph.ts",
+          "path": "src/layouts/Base.astro",
           "start_line": null,
           "end_line": null
         },
@@ -776,90 +1100,18 @@
       ]
     },
     {
-      "id": "f40",
-      "statement": "src/styles/global.css and src/styles/route.css changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
+      "id": "f56",
+      "statement": "src/layouts/Base.astro and src/styles/global.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/styles/global.css",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/styles/route.css",
-          "start_line": null,
-          "end_line": null
-        }
-      ]
-    },
-    {
-      "id": "f41",
-      "statement": "src/components/RolePlanner.tsx and src/lib/schema.ts changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/components/RolePlanner.tsx",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/lib/schema.ts",
-          "start_line": null,
-          "end_line": null
-        }
-      ]
-    },
-    {
-      "id": "f42",
-      "statement": "src/lib/schema.ts and src/styles/global.css changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/lib/schema.ts",
+          "path": "src/layouts/Base.astro",
           "start_line": null,
           "end_line": null
         },
         {
           "kind": "file",
           "path": "src/styles/global.css",
-          "start_line": null,
-          "end_line": null
-        }
-      ]
-    },
-    {
-      "id": "f43",
-      "statement": "src/components/RolePlanner.tsx and src/styles/global.css changed in the same commit 6 times between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/components/RolePlanner.tsx",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/styles/global.css",
-          "start_line": null,
-          "end_line": null
-        }
-      ]
-    },
-    {
-      "id": "f44",
-      "statement": "scripts/validate.ts and src/lib/schema.ts changed in the same commit 5 times between 17 Aug 2026 and 15 Nov 2026",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "scripts/validate.ts",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/lib/schema.ts",
           "start_line": null,
           "end_line": null
         }

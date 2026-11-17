@@ -1,0 +1,1025 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "gothinkster",
+    "name": "node-express-realworld-example-app",
+    "commit": "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b"
+  },
+  "kind": "service",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "Looks like a service repo: 1 deployable service(s) and 20 route(s), consumer(s) or scheduled job(s)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 45,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "31 source files in typescript, 1,716 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "4 source files in sql, 163 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/migrations/20210924225358_initial/migration.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/migrations/20211001143221_implicit_tags/migration.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/migrations/20211221184529_deprecated_preview/migration.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "1 source file in javascript, 3 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "jest.preset.js",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "1 generated file left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package-lock.json",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "Build or deploy file Dockerfile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "Build or deploy file package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "Service run from this repo: node-express-realworld-example-app (Dockerfile, runs [ \"node\", \"api\" ])",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "Setting HOST is read from the environment in e2e/src/support/test-setup.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "e2e/src/support/test-setup.ts",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "Setting JWT_SECRET is read from the environment in src/app/routes/auth/auth.ts, src/app/routes/auth/token.utils.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.ts",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/token.utils.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "Setting NODE_ENV is read from the environment in src/prisma/prisma-client.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/prisma-client.ts",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "Setting PORT is read from the environment in e2e/src/support/test-setup.ts, src/main.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "e2e/src/support/test-setup.ts",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main.ts",
+          "start_line": 53,
+          "end_line": 53
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "4 Prisma database migrations in src/prisma/migrations",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/migrations/20210924225358_initial/migration.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/migrations/20211221184529_deprecated_preview/migration.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "20 http routes found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 45,
+          "end_line": 45
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 71,
+          "end_line": 71
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "HTTP route GET /articles (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "HTTP route GET /articles/feed (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 45,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "HTTP route POST /articles (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 71,
+          "end_line": 71
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "HTTP route GET /articles/:slug (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 87,
+          "end_line": 87
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "HTTP route PUT /articles/:slug (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 110,
+          "end_line": 110
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "HTTP route DELETE /articles/:slug (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 129,
+          "end_line": 129
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "HTTP route GET /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 149,
+          "end_line": 149
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "HTTP route POST /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 170,
+          "end_line": 170
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "HTTP route DELETE /articles/:slug/comments/:id (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 190,
+          "end_line": 190
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "HTTP route POST /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 210,
+          "end_line": 210
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "HTTP route DELETE /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 230,
+          "end_line": 230
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "HTTP route POST /users (express) in src/app/routes/auth/auth.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.controller.ts",
+          "start_line": 14,
+          "end_line": 14
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "HTTP route POST /users/login (express) in src/app/routes/auth/auth.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.controller.ts",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "HTTP route GET /user (express) in src/app/routes/auth/auth.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.controller.ts",
+          "start_line": 45,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "HTTP route PUT /user (express) in src/app/routes/auth/auth.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.controller.ts",
+          "start_line": 61,
+          "end_line": 61
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "HTTP route GET /profiles/:username (express) in src/app/routes/profile/profile.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/profile/profile.controller.ts",
+          "start_line": 14,
+          "end_line": 14
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "HTTP route POST /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/profile/profile.controller.ts",
+          "start_line": 34,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "HTTP route DELETE /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/profile/profile.controller.ts",
+          "start_line": 54,
+          "end_line": 54
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "statement": "HTTP route GET /tags (express) in src/app/routes/tag/tag.controller.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/tag/tag.controller.ts",
+          "start_line": 13,
+          "end_line": 13
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "statement": "HTTP route GET / (express) in src/main.ts",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main.ts",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "statement": "3 package scripts found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "statement": "Package script npm run start: nx serve (npm) in package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "statement": "Package script npm run build: nx build (npm) in package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "statement": "Package script npm run test: nx test (npm) in package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "statement": "Code in src/tests/services uses code in src/tests (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/tests/services/article.service.test.ts",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "src/tests/services/auth.service.test.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/tests/services/profile.service.test.ts",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "statement": "Code in src/app/routes/article uses code in src/app/routes/auth (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/author.mapper.ts",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "statement": "Code in src/app/routes/auth uses code in src/app/routes/article (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/user.model.ts",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/user.model.ts",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "statement": "Code in src/app/routes/profile uses code in src/app/routes/auth (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/profile/profile.controller.ts",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/profile/profile.utils.ts",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "statement": "Code in src/prisma uses code in src/app/routes/auth (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "statement": "Code in src uses code in src/app/models (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main.ts",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "statement": "Code in src uses code in src/app/routes (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "statement": "Code in src/app/routes uses code in src/app/routes/article (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/routes.ts",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "statement": "Code in src/app/routes uses code in src/app/routes/auth (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/routes.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "statement": "Code in src/app/routes uses code in src/app/routes/profile (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/routes.ts",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "statement": "Code in src/app/routes uses code in src/app/routes/tag (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/routes.ts",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "statement": "Code in src/app/routes/article uses code in src/app/models (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "statement": "Code in src/app/routes/article uses code in src/app/routes/profile (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "statement": "Code in src/app/routes/article uses code in src/app/routes/tag (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "statement": "Code in src/app/routes/article uses code in src/prisma (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "statement": "src/app/routes/article and src/app/routes/auth each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/user.model.ts",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "statement": "src/app/routes/article and src/prisma each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "statement": "src/app/routes/auth and src/prisma each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "statement": "src/prisma/prisma-client.ts is used by 5 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/prisma-client.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "statement": "src/app/models/http-exception.model.ts is used by 4 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/models/http-exception.model.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "statement": "src/app/routes/auth/auth.ts is used by 4 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.controller.ts",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "statement": "src/app/routes/article/article.service.ts is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.service.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/article/article.controller.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f61",
+      "statement": "src/app/routes/auth/auth.service.ts is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.controller.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f62",
+      "statement": "4 commits between 06 Oct 2023 and 04 Jan 2024",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b"
+        },
+        {
+          "kind": "commit",
+          "sha": "88b258ce54aaf54ff52511ba26edd52e36df201e"
+        },
+        {
+          "kind": "commit",
+          "sha": "5eeccf13f3a5778b8ba818240edf89919a689a80"
+        }
+      ]
+    },
+    {
+      "id": "f63",
+      "statement": "src/app/routes/auth/auth.service.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b"
+        },
+        {
+          "kind": "commit",
+          "sha": "5eeccf13f3a5778b8ba818240edf89919a689a80"
+        },
+        {
+          "kind": "commit",
+          "sha": "e40aeb924bbadca7f6444b502bdb7b1e6eddb8f9"
+        }
+      ]
+    },
+    {
+      "id": "f64",
+      "statement": "src/main.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "88b258ce54aaf54ff52511ba26edd52e36df201e"
+        },
+        {
+          "kind": "commit",
+          "sha": "5eeccf13f3a5778b8ba818240edf89919a689a80"
+        },
+        {
+          "kind": "commit",
+          "sha": "e40aeb924bbadca7f6444b502bdb7b1e6eddb8f9"
+        }
+      ]
+    },
+    {
+      "id": "f65",
+      "statement": "src/prisma/seed.ts changed in 3 commits by 1 author between 06 Oct 2023 and 04 Jan 2024",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/prisma/seed.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "88b258ce54aaf54ff52511ba26edd52e36df201e"
+        },
+        {
+          "kind": "commit",
+          "sha": "5eeccf13f3a5778b8ba818240edf89919a689a80"
+        },
+        {
+          "kind": "commit",
+          "sha": "e40aeb924bbadca7f6444b502bdb7b1e6eddb8f9"
+        }
+      ]
+    }
+  ]
+}

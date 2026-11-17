@@ -735,6 +735,24 @@
     },
     {
       "id": "f51",
+      "statement": "5 Alembic database migrations in backend/app/alembic/versions",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "backend/app/alembic/versions/1a31ce608336_add_cascade_delete_relationships.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "backend/app/alembic/versions/fe56fa70289e_add_created_at_to_user_and_item.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f52",
       "statement": "23 http routes found",
       "evidence": [
         {
@@ -758,8 +776,8 @@
       ]
     },
     {
-      "id": "f52",
-      "statement": "HTTP route GET /items/ (fastapi) in backend/app/api/routes/items.py",
+      "id": "f53",
+      "statement": "HTTP route GET /api/v1/items/ (fastapi) in backend/app/api/routes/items.py",
       "evidence": [
         {
           "kind": "file",
@@ -770,8 +788,8 @@
       ]
     },
     {
-      "id": "f53",
-      "statement": "HTTP route GET /items/{id} (fastapi) in backend/app/api/routes/items.py",
+      "id": "f54",
+      "statement": "HTTP route GET /api/v1/items/{id} (fastapi) in backend/app/api/routes/items.py",
       "evidence": [
         {
           "kind": "file",
@@ -782,8 +800,8 @@
       ]
     },
     {
-      "id": "f54",
-      "statement": "HTTP route POST /items/ (fastapi) in backend/app/api/routes/items.py",
+      "id": "f55",
+      "statement": "HTTP route POST /api/v1/items/ (fastapi) in backend/app/api/routes/items.py",
       "evidence": [
         {
           "kind": "file",
@@ -794,8 +812,8 @@
       ]
     },
     {
-      "id": "f55",
-      "statement": "HTTP route PUT /items/{id} (fastapi) in backend/app/api/routes/items.py",
+      "id": "f56",
+      "statement": "HTTP route PUT /api/v1/items/{id} (fastapi) in backend/app/api/routes/items.py",
       "evidence": [
         {
           "kind": "file",
@@ -806,8 +824,8 @@
       ]
     },
     {
-      "id": "f56",
-      "statement": "HTTP route DELETE /items/{id} (fastapi) in backend/app/api/routes/items.py",
+      "id": "f57",
+      "statement": "HTTP route DELETE /api/v1/items/{id} (fastapi) in backend/app/api/routes/items.py",
       "evidence": [
         {
           "kind": "file",
@@ -818,8 +836,8 @@
       ]
     },
     {
-      "id": "f57",
-      "statement": "HTTP route POST /login/access-token (fastapi) in backend/app/api/routes/login.py",
+      "id": "f58",
+      "statement": "HTTP route POST /api/v1/login/access-token (fastapi) in backend/app/api/routes/login.py",
       "evidence": [
         {
           "kind": "file",
@@ -830,8 +848,8 @@
       ]
     },
     {
-      "id": "f58",
-      "statement": "HTTP route POST /login/test-token (fastapi) in backend/app/api/routes/login.py",
+      "id": "f59",
+      "statement": "HTTP route POST /api/v1/login/test-token (fastapi) in backend/app/api/routes/login.py",
       "evidence": [
         {
           "kind": "file",
@@ -842,8 +860,8 @@
       ]
     },
     {
-      "id": "f59",
-      "statement": "HTTP route POST /password-recovery/{email} (fastapi) in backend/app/api/routes/login.py",
+      "id": "f60",
+      "statement": "HTTP route POST /api/v1/password-recovery/{email} (fastapi) in backend/app/api/routes/login.py",
       "evidence": [
         {
           "kind": "file",
@@ -854,8 +872,8 @@
       ]
     },
     {
-      "id": "f60",
-      "statement": "HTTP route POST /reset-password/ (fastapi) in backend/app/api/routes/login.py",
+      "id": "f61",
+      "statement": "HTTP route POST /api/v1/reset-password/ (fastapi) in backend/app/api/routes/login.py",
       "evidence": [
         {
           "kind": "file",
@@ -866,8 +884,8 @@
       ]
     },
     {
-      "id": "f61",
-      "statement": "HTTP route POST /password-recovery-html-content/{email} (fastapi) in backend/app/api/routes/login.py",
+      "id": "f62",
+      "statement": "HTTP route POST /api/v1/password-recovery-html-content/{email} (fastapi) in backend/app/api/routes/login.py",
       "evidence": [
         {
           "kind": "file",
@@ -878,8 +896,8 @@
       ]
     },
     {
-      "id": "f62",
-      "statement": "HTTP route POST /private/users/ (fastapi) in backend/app/api/routes/private.py",
+      "id": "f63",
+      "statement": "HTTP route POST /api/v1/private/users/ (fastapi) in backend/app/api/routes/private.py",
       "evidence": [
         {
           "kind": "file",
@@ -890,8 +908,8 @@
       ]
     },
     {
-      "id": "f63",
-      "statement": "HTTP route GET /users/ (fastapi) in backend/app/api/routes/users.py",
+      "id": "f64",
+      "statement": "HTTP route GET /api/v1/users/ (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -902,8 +920,8 @@
       ]
     },
     {
-      "id": "f64",
-      "statement": "HTTP route POST /users/ (fastapi) in backend/app/api/routes/users.py",
+      "id": "f65",
+      "statement": "HTTP route POST /api/v1/users/ (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -914,8 +932,8 @@
       ]
     },
     {
-      "id": "f65",
-      "statement": "HTTP route PATCH /users/me (fastapi) in backend/app/api/routes/users.py",
+      "id": "f66",
+      "statement": "HTTP route PATCH /api/v1/users/me (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -926,8 +944,8 @@
       ]
     },
     {
-      "id": "f66",
-      "statement": "HTTP route PATCH /users/me/password (fastapi) in backend/app/api/routes/users.py",
+      "id": "f67",
+      "statement": "HTTP route PATCH /api/v1/users/me/password (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -938,8 +956,8 @@
       ]
     },
     {
-      "id": "f67",
-      "statement": "HTTP route GET /users/me (fastapi) in backend/app/api/routes/users.py",
+      "id": "f68",
+      "statement": "HTTP route GET /api/v1/users/me (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -950,8 +968,8 @@
       ]
     },
     {
-      "id": "f68",
-      "statement": "HTTP route DELETE /users/me (fastapi) in backend/app/api/routes/users.py",
+      "id": "f69",
+      "statement": "HTTP route DELETE /api/v1/users/me (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -962,8 +980,8 @@
       ]
     },
     {
-      "id": "f69",
-      "statement": "HTTP route POST /users/signup (fastapi) in backend/app/api/routes/users.py",
+      "id": "f70",
+      "statement": "HTTP route POST /api/v1/users/signup (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -974,8 +992,8 @@
       ]
     },
     {
-      "id": "f70",
-      "statement": "HTTP route GET /users/{user_id} (fastapi) in backend/app/api/routes/users.py",
+      "id": "f71",
+      "statement": "HTTP route GET /api/v1/users/{user_id} (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -986,8 +1004,8 @@
       ]
     },
     {
-      "id": "f71",
-      "statement": "HTTP route PATCH /users/{user_id} (fastapi) in backend/app/api/routes/users.py",
+      "id": "f72",
+      "statement": "HTTP route PATCH /api/v1/users/{user_id} (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -998,8 +1016,8 @@
       ]
     },
     {
-      "id": "f72",
-      "statement": "HTTP route DELETE /users/{user_id} (fastapi) in backend/app/api/routes/users.py",
+      "id": "f73",
+      "statement": "HTTP route DELETE /api/v1/users/{user_id} (fastapi) in backend/app/api/routes/users.py",
       "evidence": [
         {
           "kind": "file",
@@ -1010,8 +1028,8 @@
       ]
     },
     {
-      "id": "f73",
-      "statement": "HTTP route POST /utils/test-email/ (fastapi) in backend/app/api/routes/utils.py",
+      "id": "f74",
+      "statement": "HTTP route POST /api/v1/utils/test-email/ (fastapi) in backend/app/api/routes/utils.py",
       "evidence": [
         {
           "kind": "file",
@@ -1022,8 +1040,8 @@
       ]
     },
     {
-      "id": "f74",
-      "statement": "HTTP route GET /utils/health-check/ (fastapi) in backend/app/api/routes/utils.py",
+      "id": "f75",
+      "statement": "HTTP route GET /api/v1/utils/health-check/ (fastapi) in backend/app/api/routes/utils.py",
       "evidence": [
         {
           "kind": "file",
@@ -1034,7 +1052,7 @@
       ]
     },
     {
-      "id": "f75",
+      "id": "f76",
       "statement": "3 commands found",
       "evidence": [
         {
@@ -1058,7 +1076,7 @@
       ]
     },
     {
-      "id": "f76",
+      "id": "f77",
       "statement": "Command prepare (typer) in scripts/prepare_release.py",
       "evidence": [
         {
@@ -1070,7 +1088,7 @@
       ]
     },
     {
-      "id": "f77",
+      "id": "f78",
       "statement": "Command current-version (typer) in scripts/prepare_release.py",
       "evidence": [
         {
@@ -1082,7 +1100,7 @@
       ]
     },
     {
-      "id": "f78",
+      "id": "f79",
       "statement": "Command release-notes (typer) in scripts/prepare_release.py",
       "evidence": [
         {
@@ -1094,7 +1112,7 @@
       ]
     },
     {
-      "id": "f79",
+      "id": "f80",
       "statement": "3 program entrys found",
       "evidence": [
         {
@@ -1118,7 +1136,7 @@
       ]
     },
     {
-      "id": "f80",
+      "id": "f81",
       "statement": "Program entry run as a script in backend/app/initial_data.py",
       "evidence": [
         {
@@ -1130,7 +1148,7 @@
       ]
     },
     {
-      "id": "f81",
+      "id": "f82",
       "statement": "Program entry run as a script in scripts/add_latest_release_date.py",
       "evidence": [
         {
@@ -1142,7 +1160,7 @@
       ]
     },
     {
-      "id": "f82",
+      "id": "f83",
       "statement": "Program entry run as a script in scripts/prepare_release.py",
       "evidence": [
         {
@@ -1154,7 +1172,7 @@
       ]
     },
     {
-      "id": "f83",
+      "id": "f84",
       "statement": "7 package scripts found",
       "evidence": [
         {
@@ -1178,7 +1196,7 @@
       ]
     },
     {
-      "id": "f84",
+      "id": "f85",
       "statement": "Package script npm run dev: vite (npm) in frontend/package.json",
       "evidence": [
         {
@@ -1190,7 +1208,7 @@
       ]
     },
     {
-      "id": "f85",
+      "id": "f86",
       "statement": "Package script npm run build: tsc -p tsconfig.build.json && vite build (npm) in frontend/package.json",
       "evidence": [
         {
@@ -1202,7 +1220,7 @@
       ]
     },
     {
-      "id": "f86",
+      "id": "f87",
       "statement": "Package script npm run test: bunx playwright test (npm) in frontend/package.json",
       "evidence": [
         {
@@ -1214,7 +1232,7 @@
       ]
     },
     {
-      "id": "f87",
+      "id": "f88",
       "statement": "Package script npm run dev: bun run --filter frontend dev (npm) in package.json",
       "evidence": [
         {
@@ -1226,7 +1244,7 @@
       ]
     },
     {
-      "id": "f88",
+      "id": "f89",
       "statement": "Package script npm run test: bun run --filter frontend test (npm) in package.json",
       "evidence": [
         {
@@ -1238,7 +1256,7 @@
       ]
     },
     {
-      "id": "f89",
+      "id": "f90",
       "statement": "Package script npm run build: email build (npm) in packages/react-email/package.json",
       "evidence": [
         {
@@ -1250,7 +1268,7 @@
       ]
     },
     {
-      "id": "f90",
+      "id": "f91",
       "statement": "Package script npm run dev: email dev --port 3333 (npm) in packages/react-email/package.json",
       "evidence": [
         {
@@ -1262,7 +1280,7 @@
       ]
     },
     {
-      "id": "f91",
+      "id": "f92",
       "statement": "Code in frontend/src/components/ui uses code in frontend/src/lib (23 references)",
       "evidence": [
         {
@@ -1286,7 +1304,7 @@
       ]
     },
     {
-      "id": "f92",
+      "id": "f93",
       "statement": "Code in frontend/src/components/Admin uses code in frontend/src/components/ui (20 references)",
       "evidence": [
         {
@@ -1310,7 +1328,7 @@
       ]
     },
     {
-      "id": "f93",
+      "id": "f94",
       "statement": "Code in frontend/src/components/Items uses code in frontend/src/components/ui (18 references)",
       "evidence": [
         {
@@ -1334,7 +1352,7 @@
       ]
     },
     {
-      "id": "f94",
+      "id": "f95",
       "statement": "Code in frontend/src/routes uses code in frontend/src/components/ui (15 references)",
       "evidence": [
         {
@@ -1358,7 +1376,7 @@
       ]
     },
     {
-      "id": "f95",
+      "id": "f96",
       "statement": "Code in frontend/src/client/client uses code in frontend/src/client/core (14 references)",
       "evidence": [
         {
@@ -1382,7 +1400,7 @@
       ]
     },
     {
-      "id": "f96",
+      "id": "f97",
       "statement": "Code in frontend/tests uses code in frontend/tests/utils (14 references)",
       "evidence": [
         {
@@ -1406,7 +1424,7 @@
       ]
     },
     {
-      "id": "f97",
+      "id": "f98",
       "statement": "Code in packages/react-email/emails uses code in packages/react-email/ui (12 references)",
       "evidence": [
         {
@@ -1430,7 +1448,7 @@
       ]
     },
     {
-      "id": "f98",
+      "id": "f99",
       "statement": "Code in backend/app/api/routes uses code in backend/app (10 references)",
       "evidence": [
         {
@@ -1454,7 +1472,7 @@
       ]
     },
     {
-      "id": "f99",
+      "id": "f100",
       "statement": "Code in frontend/src/components/UserSettings uses code in frontend/src/components/ui (10 references)",
       "evidence": [
         {
@@ -1478,7 +1496,7 @@
       ]
     },
     {
-      "id": "f100",
+      "id": "f101",
       "statement": "Code in frontend/src/components/Common uses code in frontend/src/components/ui (8 references)",
       "evidence": [
         {
@@ -1502,7 +1520,7 @@
       ]
     },
     {
-      "id": "f101",
+      "id": "f102",
       "statement": "Code in frontend/src/routes uses code in frontend/src/components/Common (7 references)",
       "evidence": [
         {
@@ -1526,7 +1544,7 @@
       ]
     },
     {
-      "id": "f102",
+      "id": "f103",
       "statement": "Code in frontend/src/routes uses code in frontend/src/hooks (7 references)",
       "evidence": [
         {
@@ -1550,7 +1568,7 @@
       ]
     },
     {
-      "id": "f103",
+      "id": "f104",
       "statement": "Code in backend/tests/api/routes uses code in backend/app (6 references)",
       "evidence": [
         {
@@ -1574,7 +1592,7 @@
       ]
     },
     {
-      "id": "f104",
+      "id": "f105",
       "statement": "Code in backend/tests/api/routes uses code in backend/app/core (6 references)",
       "evidence": [
         {
@@ -1598,7 +1616,7 @@
       ]
     },
     {
-      "id": "f105",
+      "id": "f106",
       "statement": "Code in frontend/src uses code in frontend/src/routes (6 references)",
       "evidence": [
         {
@@ -1622,7 +1640,7 @@
       ]
     },
     {
-      "id": "f106",
+      "id": "f107",
       "statement": "backend/app and backend/app/api each use the other",
       "evidence": [
         {
@@ -1640,7 +1658,7 @@
       ]
     },
     {
-      "id": "f107",
+      "id": "f108",
       "statement": "backend/app and backend/app/core each use the other",
       "evidence": [
         {
@@ -1658,7 +1676,7 @@
       ]
     },
     {
-      "id": "f108",
+      "id": "f109",
       "statement": "backend/app/api and backend/app/api/routes each use the other",
       "evidence": [
         {
@@ -1676,7 +1694,7 @@
       ]
     },
     {
-      "id": "f109",
+      "id": "f110",
       "statement": "frontend/src and frontend/src/routes each use the other",
       "evidence": [
         {
@@ -1694,7 +1712,7 @@
       ]
     },
     {
-      "id": "f110",
+      "id": "f111",
       "statement": "frontend/src/lib/utils.ts is used by 27 other files",
       "evidence": [
         {
@@ -1718,7 +1736,7 @@
       ]
     },
     {
-      "id": "f111",
+      "id": "f112",
       "statement": "frontend/src/client/index.ts is used by 20 other files",
       "evidence": [
         {
@@ -1742,7 +1760,7 @@
       ]
     },
     {
-      "id": "f112",
+      "id": "f113",
       "statement": "frontend/src/components/ui/button.tsx is used by 18 other files",
       "evidence": [
         {
@@ -1766,7 +1784,7 @@
       ]
     },
     {
-      "id": "f113",
+      "id": "f114",
       "statement": "backend/app/core/config.py is used by 16 other files",
       "evidence": [
         {
@@ -1790,7 +1808,7 @@
       ]
     },
     {
-      "id": "f114",
+      "id": "f115",
       "statement": "backend/app/models.py is used by 16 other files",
       "evidence": [
         {
@@ -1814,7 +1832,7 @@
       ]
     },
     {
-      "id": "f115",
+      "id": "f116",
       "statement": "68 commits between 18 Aug 2026 and 16 Nov 2026",
       "evidence": [
         {

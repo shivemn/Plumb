@@ -1,0 +1,1181 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "httpie",
+    "name": "cli",
+    "commit": "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345"
+  },
+  "kind": "service",
+  "facts": [
+    {
+      "id": "f1",
+      "statement": "Looks like a service repo: 1 deployable service(s)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/Dockerfile",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "85 source files in python, 10,627 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/cli/definition.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpie/client.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "statement": "2 source files in shell, 42 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/get_release_artifacts.sh",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "extras/httpie-completion.bash",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "statement": "9 example files left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributors/fetch.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "statement": "GitHub Actions workflow .github/workflows/benchmark.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "statement": "GitHub Actions workflow .github/workflows/code-style.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/code-style.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "statement": "GitHub Actions workflow .github/workflows/content.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/content.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "statement": "GitHub Actions workflow .github/workflows/coverage.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/coverage.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "statement": "GitHub Actions workflow .github/workflows/docs-check-markdown.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docs-check-markdown.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "statement": "GitHub Actions workflow .github/workflows/docs-deploy.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docs-deploy.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "statement": "GitHub Actions workflow .github/workflows/release-brew.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-brew.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "GitHub Actions workflow .github/workflows/release-choco.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "GitHub Actions workflow .github/workflows/release-linux-standalone.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-linux-standalone.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "GitHub Actions workflow .github/workflows/release-pypi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-pypi.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "GitHub Actions workflow .github/workflows/release-snap.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-snap.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "GitHub Actions workflow .github/workflows/stale.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/stale.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "GitHub Actions workflow .github/workflows/test-package-linux-snap.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/test-package-linux-snap.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "GitHub Actions workflow .github/workflows/test-package-mac-brew.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/test-package-mac-brew.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "GitHub Actions workflow .github/workflows/tests.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/tests.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "Build or deploy file Makefile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Makefile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "Build or deploy file extras/packaging/linux/Dockerfile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/Dockerfile",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "Build or deploy file setup.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "setup.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "Service run from this repo: linux (Dockerfile, runs [\"mv\", \"/app/extras/packaging/linux/dist/\", \"/artifacts\"])",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/Dockerfile",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Setting HTTPIE_BUILDING_MAN_PAGES is read from the environment in extras/scripts/generate_man_pages.py, httpie/cli/definition.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/scripts/generate_man_pages.py",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/definition.py",
+          "start_line": 29,
+          "end_line": 29
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Setting HTTPIE_COMMAND is read from the environment in extras/profiling/benchmarks.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/profiling/benchmarks.py",
+          "start_line": 101,
+          "end_line": 101
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "Setting HTTPIE_NO_MAN_PAGES is read from the environment in httpie/output/ui/man_pages.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/output/ui/man_pages.py",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "Setting HTTPIE_STDIN_READ_WARN_THRESHOLD is read from the environment in httpie/uploads.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/uploads.py",
+          "start_line": 96,
+          "end_line": 96
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "8 program entrys found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/build.py",
+          "start_line": 108,
+          "end_line": 108
+        },
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/scripts/http_cli.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/scripts/httpie_cli.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "Program entry run as a script in extras/packaging/linux/build.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/build.py",
+          "start_line": 108,
+          "end_line": 108
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "Program entry run as a script in extras/packaging/linux/scripts/http_cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/scripts/http_cli.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "Program entry run as a script in extras/packaging/linux/scripts/httpie_cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/packaging/linux/scripts/httpie_cli.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "Program entry run as a script in extras/profiling/benchmarks.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/profiling/benchmarks.py",
+          "start_line": 201,
+          "end_line": 201
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "statement": "Program entry run as a script in extras/profiling/run.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/profiling/run.py",
+          "start_line": 286,
+          "end_line": 286
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "statement": "Program entry run as a script in extras/scripts/generate_man_pages.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "extras/scripts/generate_man_pages.py",
+          "start_line": 187,
+          "end_line": 187
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "statement": "Program entry run as a script in httpie/__main__.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/__main__.py",
+          "start_line": 17,
+          "end_line": 17
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "statement": "Program entry run as a script in httpie/manager/__main__.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/manager/__main__.py",
+          "start_line": 60,
+          "end_line": 60
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "statement": "Code in tests uses code in httpie (43 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_auth.py",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_auth.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_cli.py",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "statement": "Code in tests uses code in tests/utils (35 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 14,
+          "end_line": 14
+        },
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "statement": "Code in tests uses code in httpie/cli (19 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_auth.py",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_auth.py",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_auth_plugins.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "statement": "Code in tests uses code in tests/fixtures (15 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_binary.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_cli.py",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_compress.py",
+          "start_line": 14,
+          "end_line": 14
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "statement": "Code in httpie/manager/tasks uses code in httpie (12 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/check_updates.py",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/check_updates.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/export_args.py",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "statement": "Code in httpie/output uses code in httpie (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/output/models.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/processing.py",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/streams.py",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "statement": "Code in tests uses code in httpie/plugins (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_auth.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_auth_plugins.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_auth_plugins.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "statement": "Code in httpie uses code in httpie/cli (9 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/adapters.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "httpie/client.py",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "kind": "file",
+          "path": "httpie/client.py",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "statement": "Code in tests/utils uses code in httpie (9 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/utils/__init__.py",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "kind": "file",
+          "path": "tests/utils/__init__.py",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "kind": "file",
+          "path": "tests/utils/__init__.py",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "statement": "Code in httpie/internal uses code in httpie (8 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/internal/daemon_runner.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "httpie/internal/daemon_runner.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "httpie/internal/daemons.py",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "statement": "Code in httpie/cli uses code in httpie (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 270,
+          "end_line": 270
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "statement": "Code in httpie/manager uses code in httpie (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/manager/__main__.py",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/__main__.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/__main__.py",
+          "start_line": 33,
+          "end_line": 33
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "statement": "Code in httpie/output/formatters uses code in httpie/plugins (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/output/formatters/colors.py",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/formatters/headers.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/formatters/json.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "statement": "Code in httpie/plugins uses code in httpie/output/formatters (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/plugins/registry.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "httpie/plugins/registry.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "httpie/plugins/registry.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "statement": "Code in tests uses code in httpie/output/formatters (4 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/test_json.py",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_meta.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_output.py",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "statement": "httpie and httpie/cli each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/adapters.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "statement": "httpie and httpie/internal each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/core.py",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "kind": "file",
+          "path": "httpie/internal/daemon_runner.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "statement": "httpie and httpie/legacy each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/sessions.py",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "kind": "file",
+          "path": "httpie/legacy/v3_1_0_session_cookie_format.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "statement": "httpie and httpie/output each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/core.py",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/models.py",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "statement": "httpie and httpie/output/ui each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/context.py",
+          "start_line": 21,
+          "end_line": 21
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/ui/man_pages.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "statement": "httpie and httpie/plugins each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/client.py",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "kind": "file",
+          "path": "httpie/plugins/manager.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "statement": "httpie/cli and httpie/output/ui each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 562,
+          "end_line": 562
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/ui/rich_help.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "statement": "httpie/manager and httpie/manager/tasks each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/manager/core.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/plugins.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "statement": "httpie/output and httpie/output/formatters each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/output/models.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "httpie/output/formatters/json.py",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f61",
+      "statement": "httpie/output/formatters and httpie/plugins each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/output/formatters/colors.py",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "kind": "file",
+          "path": "httpie/plugins/registry.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f62",
+      "statement": "tests/utils/__init__.py is used by 35 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/utils/__init__.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_auth.py",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f63",
+      "statement": "httpie/context.py is used by 26 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/context.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "kind": "file",
+          "path": "httpie/client.py",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f64",
+      "statement": "httpie/status.py is used by 24 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/status.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpie/__main__.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "httpie/core.py",
+          "start_line": 25,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "f65",
+      "statement": "httpie/utils.py is used by 19 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/utils.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/requestitems.py",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f66",
+      "statement": "httpie/compat.py is used by 17 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/compat.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpie/config.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "httpie/context.py",
+          "start_line": 16,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "f67",
+      "statement": "11 commits between 18 Sep 2024 and 17 Dec 2024",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345"
+        },
+        {
+          "kind": "commit",
+          "sha": "2843b874c60bda30e7393f0500353b6fe8451542"
+        },
+        {
+          "kind": "commit",
+          "sha": "2105caa49bae87c5809c274e407619a0de2639d1"
+        }
+      ]
+    },
+    {
+      "id": "f68",
+      "statement": "httpie/ssl_.py changed in 3 commits by 2 authors between 18 Sep 2024 and 17 Dec 2024",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/ssl_.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "2ef4a57d8c2a3defd189e0cc6e365fa8a9aaff2c"
+        },
+        {
+          "kind": "commit",
+          "sha": "ff742581f49dbc370b3288dd53d35f843c564c66"
+        },
+        {
+          "kind": "commit",
+          "sha": "fd30c4ef6230a927f9dcfad6301c40e8bf846156"
+        }
+      ]
+    }
+  ]
+}
