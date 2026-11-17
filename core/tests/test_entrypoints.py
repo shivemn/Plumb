@@ -1,4 +1,10 @@
-from plumb.entrypoints import EntryKind, EntryPoint, pyproject_scripts, python_entry_points
+from plumb.entrypoints import (
+    EntryKind,
+    EntryPoint,
+    java_entry_points,
+    pyproject_scripts,
+    python_entry_points,
+)
 
 FASTAPI = b"""\
 from fastapi import APIRouter, FastAPI
@@ -77,3 +83,55 @@ def test_pyproject_scripts() -> None:
 
 def test_bad_pyproject_is_ignored() -> None:
     assert pyproject_scripts("pyproject.toml", b"not [valid") == []
+
+
+SPRING = b"""\
+package com.shop.web;
+
+@RestController
+@RequestMapping("/api")
+public class OrderController {
+    @GetMapping
+    public List<Order> all() { return null; }
+
+    @PostMapping(value = {"/orders", "/orders/new"})
+    public Order create() { return null; }
+
+    @RequestMapping(path = "/legacy", method = RequestMethod.PUT)
+    public void legacy() {}
+
+    @DeleteMapping(Paths.ORDER)
+    public void remove() {}
+
+    @KafkaListener(topics = "${app.topic}", groupId = "billing")
+    public void onEvent(String message) {}
+
+    @RabbitListener(queues = {"emails", "sms"})
+    public void notify(String message) {}
+
+    @Scheduled(cron = "0 0 * * * *")
+    public void hourly() {}
+
+    @Scheduled(fixedRate = 5000)
+    public void tick() {}
+
+    public static void main(String[] args) {}
+}
+"""
+
+
+def test_spring_entry_points() -> None:
+    found = [(e.kind, e.name, e.framework, e.line) for e in java_entry_points("A.java", SPRING)]
+    assert found == [
+        (EntryKind.HTTP, "GET /api", "spring", 6),
+        (EntryKind.HTTP, "POST /api/orders", "spring", 9),
+        (EntryKind.HTTP, "POST /api/orders/new", "spring", 9),
+        (EntryKind.HTTP, "PUT /api/legacy", "spring", 12),
+        (EntryKind.HTTP, "DELETE /api/{Paths.ORDER}", "spring", 15),
+        (EntryKind.CONSUMER, "${app.topic}, group billing", "kafka", 18),
+        (EntryKind.CONSUMER, "emails", "rabbitmq", 21),
+        (EntryKind.CONSUMER, "sms", "rabbitmq", 21),
+        (EntryKind.SCHEDULED, "hourly (cron 0 0 * * * *)", "spring", 24),
+        (EntryKind.SCHEDULED, "tick (every 5000 ms)", "spring", 27),
+        (EntryKind.MAIN, "OrderController", None, 30),
+    ]

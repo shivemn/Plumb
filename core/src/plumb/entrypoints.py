@@ -15,6 +15,7 @@ from enum import StrEnum
 from functools import cache
 from pathlib import Path, PurePosixPath
 
+import tree_sitter_java
 import tree_sitter_python
 from tree_sitter import Language, Node, Parser
 
@@ -215,16 +216,153 @@ def pyproject_scripts(path: str, source: bytes) -> list[EntryPoint]:
     return found
 
 
+@cache
+def _java_parser() -> Parser:
+    return Parser(Language(tree_sitter_java.language()))
+
+
+_SPRING_MAPPINGS = {
+    "GetMapping": "GET",
+    "PostMapping": "POST",
+    "PutMapping": "PUT",
+    "DeleteMapping": "DELETE",
+    "PatchMapping": "PATCH",
+    "RequestMapping": "",
+}
+_JAVA_CONSUMERS = {
+    "KafkaListener": ("kafka", ("topics", "topicPattern", "value")),
+    "RabbitListener": ("rabbitmq", ("queues", "value")),
+    "JmsListener": ("jms", ("destination",)),
+    "SqsListener": ("sqs", ("value", "queueNames")),
+}
+
+
+def _java_annotations(node: Node) -> list[Node]:
+    modifiers = next((c for c in node.children if c.type == "modifiers"), None)
+    if modifiers is None:
+        return []
+    return [c for c in modifiers.children if c.type in ("annotation", "marker_annotation")]
+
+
+def _annotation_values(annotation: Node, keys: tuple[str, ...]) -> list[str]:
+    """String values given for any of `keys`; a bare argument counts as "value"."""
+    arguments = annotation.child_by_field_name("arguments")
+    if arguments is None:
+        return []
+    values: list[str] = []
+    for child in arguments.named_children:
+        if child.type == "element_value_pair":
+            key = _text(child.child_by_field_name("key"))
+            if key in keys:
+                values.extend(_java_strings(child.child_by_field_name("value")))
+        elif "value" in keys:
+            values.extend(_java_strings(child))
+    return values
+
+
+def _annotation_raw(annotation: Node, key: str) -> str | None:
+    arguments = annotation.child_by_field_name("arguments")
+    for child in arguments.named_children if arguments is not None else []:
+        if child.type == "element_value_pair" and _text(child.child_by_field_name("key")) == key:
+            return _text(child.child_by_field_name("value"))
+    return None
+
+
+def _java_strings(node: Node | None) -> list[str]:
+    if node is None:
+        return []
+    if node.type == "string_literal":
+        return ["".join(_text(c) for c in node.named_children if c.type == "string_fragment")]
+    if node.type == "element_value_array_initializer":
+        return [v for c in node.named_children for v in _java_strings(c)]
+    # A constant or expression: keep it as written so the report can name it.
+    return [f"{{{_text(node)}}}"]
+
+
+def java_entry_points(path: str, source: bytes) -> list[EntryPoint]:
+    tree = _java_parser().parse(source)
+    found: list[EntryPoint] = []
+    for node in _walk(tree.root_node):
+        if node.type != "class_declaration":
+            continue
+        class_name = _text(node.child_by_field_name("name"))
+        prefixes = [""]
+        for annotation in _java_annotations(node):
+            if _text(annotation.child_by_field_name("name")) == "RequestMapping":
+                prefixes = _annotation_values(annotation, ("value", "path")) or [""]
+        body = node.child_by_field_name("body")
+        for method in body.named_children if body is not None else []:
+            if method.type == "method_declaration":
+                found.extend(_java_method(method, path, class_name, prefixes))
+    return sorted(found, key=lambda e: e.line)
+
+
+def _java_method(method: Node, path: str, class_name: str, prefixes: list[str]) -> list[EntryPoint]:
+    name = _text(method.child_by_field_name("name"))
+    found: list[EntryPoint] = []
+    for annotation in _java_annotations(method):
+        kind = _text(annotation.child_by_field_name("name")).split(".")[-1]
+        line = annotation.start_point.row + 1
+        if kind in _SPRING_MAPPINGS:
+            verb = _SPRING_MAPPINGS[kind] or _request_method(annotation)
+            paths = _annotation_values(annotation, ("value", "path")) or [""]
+            for prefix in prefixes:
+                for sub in paths:
+                    route = (prefix.rstrip("/") + "/" + sub.lstrip("/")).rstrip("/") or "/"
+                    found.append(
+                        EntryPoint(EntryKind.HTTP, f"{verb} {route}", path, line, "spring")
+                    )
+        elif kind in _JAVA_CONSUMERS:
+            system, keys = _JAVA_CONSUMERS[kind]
+            targets = _annotation_values(annotation, keys) or [name]
+            group = _annotation_values(annotation, ("groupId", "group"))
+            suffix = f", group {group[0]}" if group else ""
+            for target in targets:
+                label = f"{target}{suffix}"
+                found.append(EntryPoint(EntryKind.CONSUMER, label, path, line, system))
+        elif kind == "Scheduled":
+            found.append(
+                EntryPoint(EntryKind.SCHEDULED, _schedule(annotation, name), path, line, "spring")
+            )
+    if name == "main" and _is_static_main(method):
+        line = method.start_point.row + 1
+        found.append(EntryPoint(EntryKind.MAIN, class_name, path, line))
+    return found
+
+
+def _request_method(annotation: Node) -> str:
+    raw = _annotation_raw(annotation, "method")
+    if not raw:
+        return "ANY"
+    verbs = [part.split(".")[-1] for part in raw.strip("{}").split(",")]
+    return ",".join(v.strip() for v in verbs if v.strip())
+
+
+def _schedule(annotation: Node, method_name: str) -> str:
+    for key, label in (("cron", "cron"), ("fixedRate", "every"), ("fixedDelay", "delay")):
+        raw = _annotation_raw(annotation, key)
+        if raw:
+            value = raw.strip('"')
+            unit = "" if key == "cron" else " ms"
+            return f"{method_name} ({label} {value}{unit})"
+    return method_name
+
+
+def _is_static_main(method: Node) -> bool:
+    modifiers = next((c for c in method.children if c.type == "modifiers"), None)
+    parameters = _text(method.child_by_field_name("parameters")).replace(" ", "")
+    is_static = modifiers is not None and "static" in _text(modifiers).split()
+    return is_static and parameters.startswith(("(String[]", "(String..."))
+
+
 def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
     found: list[EntryPoint] = []
     for info in files:
-        if (
-            info.category is not Category.SOURCE
-            and PurePosixPath(info.path).name != "pyproject.toml"
-        ):
-            continue
-        if info.language == "python" and info.path.endswith(".py"):
+        name = PurePosixPath(info.path).name
+        if info.category is Category.SOURCE and info.language == "python" and name.endswith(".py"):
             found.extend(python_entry_points(info.path, (repo / info.path).read_bytes()))
-        elif info.path.endswith("pyproject.toml") and info.category is Category.CONFIG:
+        elif info.category is Category.SOURCE and info.language == "java":
+            found.extend(java_entry_points(info.path, (repo / info.path).read_bytes()))
+        elif info.category is Category.CONFIG and name == "pyproject.toml":
             found.extend(pyproject_scripts(info.path, (repo / info.path).read_bytes()))
     return found
