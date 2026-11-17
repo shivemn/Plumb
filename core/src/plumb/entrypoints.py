@@ -12,7 +12,7 @@ import json
 import re
 import tomllib
 from collections.abc import Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from enum import StrEnum
 from functools import cache
 from pathlib import Path, PurePosixPath
@@ -24,6 +24,7 @@ from tree_sitter import Language, Node, Parser
 
 from plumb.inventory import Category, FileInfo
 from plumb.jsimports import js_parser_for
+from plumb.springconfig import SpringSettings, load_spring_settings
 
 
 class EntryKind(StrEnum):
@@ -43,6 +44,10 @@ class EntryPoint:
     path: str
     line: int
     framework: str | None = None
+    # Where a value in `name` was filled in from, such as a settings file.
+    resolved_from: tuple[tuple[str, int], ...] = ()
+    # The router or app object a route hangs off, used to join prefixes.
+    router: str | None = field(default=None, compare=False)
 
 
 _HTTP_METHODS = {"get", "post", "put", "delete", "patch", "head", "options", "websocket"}
@@ -456,4 +461,19 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
             found.extend(pyproject_scripts(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.CONFIG and name == "package.json":
             found.extend(package_json_entry_points(info.path, (repo / info.path).read_bytes()))
+    if any("${" in e.name for e in found):
+        found = resolve_placeholders(found, load_spring_settings(repo, files))
     return found
+
+
+def resolve_placeholders(found: list[EntryPoint], settings: SpringSettings) -> list[EntryPoint]:
+    """Fill in ${...} values in Spring entry points from the settings files."""
+    result: list[EntryPoint] = []
+    for entry in found:
+        if "${" not in entry.name or entry.framework in (None, "npm", "package"):
+            result.append(entry)
+            continue
+        name, used = settings.resolve(entry.name)
+        sources = tuple(dict.fromkeys((s.path, s.line) for s in used))
+        result.append(replace(entry, name=name, resolved_from=sources))
+    return result

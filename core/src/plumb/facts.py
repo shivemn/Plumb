@@ -179,9 +179,14 @@ def add_entry_point_facts(builder: FactBuilder, entry_points: list[EntryPoint]) 
         )
         for entry in found[:40]:
             via = f" ({entry.framework})" if entry.framework else ""
+            settings = [
+                FileEvidence(path=path, start_line=line, end_line=line)
+                for path, line in entry.resolved_from
+            ]
             builder.add(
                 f"{label} {entry.name}{via} in {entry.path}",
-                [FileEvidence(path=entry.path, start_line=entry.line, end_line=entry.line)],
+                [FileEvidence(path=entry.path, start_line=entry.line, end_line=entry.line)]
+                + settings,
             )
 
 
