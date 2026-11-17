@@ -42,7 +42,7 @@ def _parser(kind: str) -> Parser:
     return Parser(Language(tree_sitter_javascript.language()))
 
 
-def _parser_for(path: str) -> Parser:
+def js_parser_for(path: str) -> Parser:
     suffix = PurePosixPath(path).suffix
     if suffix == ".tsx":
         return _parser("tsx")
@@ -64,7 +64,7 @@ def _string_value(node: Node | None) -> str | None:
 
 
 def js_imports(path: str, source: bytes) -> list[JsImport]:
-    tree = _parser_for(path).parse(source)
+    tree = js_parser_for(path).parse(source)
     found: list[JsImport] = []
     stack = [tree.root_node]
     while stack:

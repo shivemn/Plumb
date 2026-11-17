@@ -8,18 +8,22 @@ report can say where they come from instead of inventing a value.
 
 from __future__ import annotations
 
+import json
+import re
 import tomllib
 from collections.abc import Iterator
 from dataclasses import dataclass
 from enum import StrEnum
 from functools import cache
 from pathlib import Path, PurePosixPath
+from typing import cast
 
 import tree_sitter_java
 import tree_sitter_python
 from tree_sitter import Language, Node, Parser
 
 from plumb.inventory import Category, FileInfo
+from plumb.jsimports import js_parser_for
 
 
 class EntryKind(StrEnum):
@@ -355,6 +359,89 @@ def _is_static_main(method: Node) -> bool:
     return is_static and parameters.startswith(("(String[]", "(String..."))
 
 
+_EXPRESS_OWNERS = {"app", "router", "server", "api", "routes", "fastify"}
+_NEXT_ROUTE = re.compile(r"(?:^|/)app/(?P<route>.*?)/?route\.(?:ts|js|tsx|jsx|mjs)$")
+_NEXT_API = re.compile(r"(?:^|/)pages/(?P<route>api/.+?)(?:/index)?\.(?:ts|js|tsx|jsx|mjs)$")
+
+
+def js_entry_points(path: str, source: bytes) -> list[EntryPoint]:
+    """Express-style routes (`app.get("/x", ...)`) and Next.js route files."""
+    found: list[EntryPoint] = []
+    for pattern in (_NEXT_ROUTE, _NEXT_API):
+        match = pattern.search(path)
+        if match:
+            route = "/" + re.sub(r"\(.*?\)/?", "", match["route"]).strip("/")
+            found.append(EntryPoint(EntryKind.HTTP, f"ANY {route}", path, 1, "next.js"))
+    tree = js_parser_for(path).parse(source)
+    for node in _walk(tree.root_node):
+        if node.type != "call_expression":
+            continue
+        function = node.child_by_field_name("function")
+        if function is None or function.type != "member_expression":
+            continue
+        owner = _text(function.child_by_field_name("object"))
+        method = _text(function.child_by_field_name("property"))
+        if owner not in _EXPRESS_OWNERS or method not in _HTTP_METHODS | {"all", "use"}:
+            continue
+        arguments = node.child_by_field_name("arguments")
+        first = arguments.named_children[0] if arguments and arguments.named_children else None
+        route = _js_string(first)
+        if route is None or not route.startswith("/") or method == "use":
+            continue
+        verb = "ANY" if method == "all" else method.upper()
+        found.append(
+            EntryPoint(EntryKind.HTTP, f"{verb} {route}", path, node.start_point.row + 1, "express")
+        )
+    return sorted(found, key=lambda e: e.line)
+
+
+def _js_string(node: Node | None) -> str | None:
+    if node is None or node.type != "string":
+        return None
+    return "".join(_text(c) for c in node.named_children if c.type == "string_fragment")
+
+
+_SCRIPT_NAMES = ("start", "dev", "serve", "build", "test", "worker")
+
+
+def package_json_entry_points(path: str, source: bytes) -> list[EntryPoint]:
+    """Installed commands ("bin") and the usual run scripts from package.json."""
+    try:
+        data: object = json.loads(source.decode("utf-8", "replace"))
+    except ValueError:
+        return []
+    if not isinstance(data, dict):
+        return []
+    lines = source.decode("utf-8", "replace").splitlines()
+
+    def line_of(key: str, start: int = 0) -> int:
+        for index in range(start, len(lines)):
+            if f'"{key}"' in lines[index]:
+                return index + 1
+        return start + 1
+
+    found: list[EntryPoint] = []
+    package = cast("dict[str, object]", data)
+    bins = package.get("bin")
+    bin_line = line_of("bin")
+    if isinstance(bins, str):
+        name = f"{package.get('name', 'bin')} ({bins})"
+        found.append(EntryPoint(EntryKind.COMMAND, name, path, bin_line, "npm"))
+    elif isinstance(bins, dict):
+        for name, target in cast("dict[str, object]", bins).items():
+            line = line_of(name, bin_line - 1)
+            found.append(EntryPoint(EntryKind.COMMAND, f"{name} ({target})", path, line, "npm"))
+    scripts = package.get("scripts")
+    if isinstance(scripts, dict):
+        start = line_of("scripts") - 1
+        for name, command in cast("dict[str, object]", scripts).items():
+            if name in _SCRIPT_NAMES:
+                line = line_of(name, start)
+                label = f"npm run {name}: {command}"
+                found.append(EntryPoint(EntryKind.SCRIPT, label, path, line, "npm"))
+    return found
+
+
 def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
     found: list[EntryPoint] = []
     for info in files:
@@ -363,6 +450,10 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
             found.extend(python_entry_points(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.SOURCE and info.language == "java":
             found.extend(java_entry_points(info.path, (repo / info.path).read_bytes()))
+        elif info.category is Category.SOURCE and info.language in ("javascript", "typescript"):
+            found.extend(js_entry_points(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.CONFIG and name == "pyproject.toml":
             found.extend(pyproject_scripts(info.path, (repo / info.path).read_bytes()))
+        elif info.category is Category.CONFIG and name == "package.json":
+            found.extend(package_json_entry_points(info.path, (repo / info.path).read_bytes()))
     return found

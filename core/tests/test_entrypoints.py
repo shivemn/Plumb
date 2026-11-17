@@ -2,6 +2,8 @@ from plumb.entrypoints import (
     EntryKind,
     EntryPoint,
     java_entry_points,
+    js_entry_points,
+    package_json_entry_points,
     pyproject_scripts,
     python_entry_points,
 )
@@ -134,4 +136,45 @@ def test_spring_entry_points() -> None:
         (EntryKind.SCHEDULED, "hourly (cron 0 0 * * * *)", "spring", 24),
         (EntryKind.SCHEDULED, "tick (every 5000 ms)", "spring", 27),
         (EntryKind.MAIN, "OrderController", None, 30),
+    ]
+
+
+EXPRESS = b"""\
+const express = require("express");
+const app = express();
+const router = express.Router();
+
+app.get("/health", (req, res) => res.send("ok"));
+router.post("/orders/:id", handler);
+app.use("/api", router);
+app.all("/legacy", legacy);
+cache.get("/not-a-route");
+"""
+
+
+def test_express_routes() -> None:
+    found = [(e.name, e.line) for e in js_entry_points("server/index.js", EXPRESS)]
+    assert found == [("GET /health", 5), ("POST /orders/:id", 6), ("ANY /legacy", 8)]
+
+
+def test_next_route_files() -> None:
+    found = js_entry_points(
+        "web/app/(shop)/orders/[id]/route.ts", b"export async function GET() {}"
+    )
+    assert [(e.name, e.framework) for e in found] == [("ANY /orders/[id]", "next.js")]
+    api = js_entry_points("pages/api/users/index.ts", b"export default function h() {}")
+    assert [e.name for e in api] == ["ANY /api/users"]
+
+
+def test_package_json() -> None:
+    source = b"""{
+  "name": "shop",
+  "bin": { "shop": "./bin/shop.js" },
+  "scripts": { "dev": "vite", "lint": "eslint .", "build": "vite build" }
+}"""
+    found = [(e.kind, e.name, e.line) for e in package_json_entry_points("package.json", source)]
+    assert found == [
+        (EntryKind.COMMAND, "shop (./bin/shop.js)", 3),
+        (EntryKind.SCRIPT, "npm run dev: vite", 4),
+        (EntryKind.SCRIPT, "npm run build: vite build", 4),
     ]
