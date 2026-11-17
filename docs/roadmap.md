@@ -49,10 +49,40 @@ About 16 weeks at 10 to 12 hours a week.
 - [x] Answer keys for all nine evaluation repos; kind, routes and stores
       scored automatically (27 of 27 checks pass)
 
-## Weeks 7 to 9 (next)
+## Weeks 7 to 9 (done)
 
-- [ ] Resolve settings placeholders (`${pipeline.topic}`) from config files
-- [ ] Router prefixes added in other files (`include_router(..., prefix=...)`)
-- [ ] Three held-out repos that Plumb was not developed against, to check
-      the scores are not just fitted to the nine
-- [ ] Prompt planner, writing layer and verifier
+- [x] Spring settings placeholders (`${pipeline.topic}`) resolved from
+      application.yml and application.properties
+- [x] Route prefixes joined from routers mounted in other files, including
+      aliased imports and prefixes taken from settings classes
+- [x] Imports read from Astro, Vue and Svelte files
+- [x] Database migration folders (Alembic, Flyway, Django, Prisma, Liquibase, Knex)
+- [x] Three held-out repos, keys written before Plumb ran on them. First run:
+      5 of 9 checks. After fixing what they exposed: 9 of 9 (see below)
+- [x] Report format, fact topics, prompt planner, Anthropic and OpenRouter
+      clients, answer cache
+- [x] Verifier: drops claims that cite missing facts or name files, routes,
+      code, numbers or technologies their facts do not contain
+- [x] `plumb report`, with `--dry-run` and Markdown export
+
+### What the held-out repos showed
+
+Their first run failed 4 of 9 checks, and every failure was a real gap:
+
+- FastAPI routes with an empty path (`@router.get("")`) were skipped.
+- A prefix from a lower-case settings field (`api_prefix`) and a router
+  imported under another name were not followed.
+- PostgreSQL behind Prisma was missed: Prisma's schema file was not read.
+- httpie's packaging Dockerfile was taken for a service, and its commands
+  in setup.cfg were not read.
+
+One answer key was wrong, not Plumb: the Express key missed `GET /` in
+`src/main.ts`. After the fixes these three repos have been tuned against
+too, so new held-out repos are needed for an honest score.
+
+## Weeks 10 to 12 (next)
+
+- [ ] First real reports with a model, and a published claim precision
+      (share of kept claims a person judges correct) on the evaluation repos
+- [ ] Three new held-out repos
+- [ ] Website: report page, system design and code map diagrams, gallery

@@ -5,10 +5,9 @@ where it changes most, and how to start contributing. Every claim in a
 report links to the file, commit or issue it came from. Anything the
 repo does not show is marked "not determined" instead of guessed.
 
-**Status:** early development. The analysis stage works for Python, Java,
-JavaScript and TypeScript repos (`plumb analyse`); there is no AI writing
-step or website yet.
-See [docs/roadmap.md](docs/roadmap.md).
+**Status:** early development. Analysis works for Python, Java, JavaScript
+and TypeScript repos, and `plumb report` writes a checked report with a
+model. There is no website yet. See [docs/roadmap.md](docs/roadmap.md).
 
 ## How it works
 
@@ -43,6 +42,17 @@ uv run pytest
 uv run plumb analyse pallets/click        # or a GitHub URL, or a local folder
 uv run python ../eval/run.py              # analyse and score the evaluation repos
 ```
+
+To write a report you need an API key for Anthropic or OpenRouter:
+
+```
+export ANTHROPIC_API_KEY=...                          # or OPENROUTER_API_KEY
+uv run plumb report pallets/click --dry-run           # see the prompts and their size first
+uv run plumb report pallets/click --model anthropic:claude-opus-5-5
+```
+
+This writes `click.report.json` and `click.report.md`. The key is read
+from the environment and only sent to the provider.
 
 `plumb analyse` writes `<repo>.facts.json`: what kind of repo it is, the
 services it runs, the databases, queues and outside services it uses, the

@@ -59,19 +59,42 @@ was not determined.
 
 ## Known limits of the analysis so far
 
-- Python, Java, JavaScript and TypeScript imports are read. Astro, Vue and
-  Svelte files are counted but not linked yet.
+- Python, Java, JavaScript and TypeScript imports are read, including the
+  script parts of Astro, Vue and Svelte files.
 - Python imports made through `importlib` or plugin lookups are not seen.
 - Java references come from imports and from type names used in the same
   package. Fully qualified names written inline are not read yet.
-- Values known only at run time are reported as written: a Kafka topic of
-  `${pipeline.topic}`, or a FastAPI prefix taken from settings.
-- Files loaded by name rather than imported (Alembic migrations, plugins)
-  do not show in the code map.
-- The nine evaluation repos are also the repos the detectors were built
-  against, so their scores are optimistic until held-out repos are added.
+- Spring placeholders are filled from the default settings files only;
+  profile files (application-prod.yml) are not used.
+- Express routers mounted with `app.use("/api", router)` do not add their
+  prefix yet; FastAPI and Flask mounts do.
+- Plugins loaded by name are not seen. Migrations are found as folders, not
+  through imports.
+- All twelve evaluation repos have now been used to fix detectors, so their
+  scores are optimistic until new held-out repos are added.
 - History needs a full clone. A shallow clone skips hot spots rather than
   reporting wrong counts.
+
+## The verifier
+
+`plumb.verify` keeps a claim only if it cites at least one fact given to
+its section, and every file path, route, `code name`, number and known
+technology name it mentions appears in a cited fact. Dropped claims are
+kept in the report with the reason, so readers can check the checker.
+
+It cannot catch a claim that misreads a fact using only the fact's own
+words (calling a monitoring tool a database, say). That needs the answer
+keys and a person's judgement, which is why claim precision is measured
+by hand.
+
+## Prompts
+
+- The model sees facts, never repo files.
+- Facts sit between markers that contain a random code, and each fact is
+  forced onto one line with marker-like text broken up, so text from a repo
+  cannot fake the end of the facts or add a fact of its own.
+- The cache key leaves out the random code, so the same facts are never
+  paid for twice. Only answers that could be read are cached.
 
 ## Security
 
