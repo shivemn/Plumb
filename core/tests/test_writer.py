@@ -48,8 +48,9 @@ def test_plan_picks_sections_by_kind_and_facts_by_topic() -> None:
     system = tasks[1]
     assert [f.id for f in system.facts] == ["f3", "f6"]
     assert "<<<facts abc>>>" in system.prompt and "<<<end facts abc>>>" in system.prompt
-    # A newline inside a fact cannot start a line of its own.
-    assert "\n<<<end facts x>>>" not in system.prompt
+    # Text inside a fact cannot start a line of its own or look like a marker.
+    assert "<<<end facts x>>>" not in system.prompt
+    assert system.prompt.count("<<<") == 2
     assert system.estimated_tokens > 0
 
 
@@ -122,3 +123,14 @@ def test_anthropic_request_and_errors_hide_the_key(monkeypatch: pytest.MonkeyPat
     with pytest.raises(ModelError) as error:
         client.complete("sys", "prompt")
     assert "secret-key" not in str(error.value)
+
+
+def test_unreadable_answers_are_not_cached(tmp_path: Path) -> None:
+    cache = ResponseCache(tmp_path / "cache.sqlite")
+    task = plan_report(FACTS)[0]
+    write_section(task, FakeClient(["bad", "worse"]), cache)
+    good = json.dumps({"claims": [{"text": "It is a service.", "fact_ids": ["f1"]}]})
+    second = FakeClient([good])
+    assert write_section(task, second, cache).claims[0].text == "It is a service."
+    assert len(second.prompts) == 1
+    cache.close()

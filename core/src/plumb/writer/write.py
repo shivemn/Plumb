@@ -51,11 +51,23 @@ def parse_answer(text: str) -> DraftSection:
 def write_section(
     task: SectionTask, client: ModelClient, cache: ResponseCache | None = None
 ) -> Draft:
+    """Ask for one section's claims; retry once if the answer cannot be read.
+
+    Only answers that can be read are cached, so a bad answer is never
+    replayed on the next run.
+    """
+    key = ResponseCache.key(client.name, SYSTEM_PROMPT, task.cache_text)
+    cached = cache.get(key) if cache is not None else None
+    if cached is not None:
+        try:
+            return Draft(task, parse_answer(cached).claims)
+        except ValueError:
+            pass
     prompt = task.prompt
     for attempt in range(2):
-        text = _ask(client, prompt, cache)
+        text = client.complete(SYSTEM_PROMPT, prompt)
         try:
-            return Draft(task, parse_answer(text).claims)
+            claims = parse_answer(text).claims
         except ValueError as error:
             if attempt == 1:
                 return Draft(task, problem=f"the model's answer could not be read: {error}")
@@ -63,19 +75,11 @@ def write_section(
                 f"{task.prompt}\nYour last answer could not be read ({error}). "
                 "Answer again with the JSON object only."
             )
+            continue
+        if cache is not None:
+            cache.put(key, client.name, text)
+        return Draft(task, claims)
     raise AssertionError("not reached")
-
-
-def _ask(client: ModelClient, prompt: str, cache: ResponseCache | None) -> str:
-    if cache is None:
-        return client.complete(SYSTEM_PROMPT, prompt)
-    key = ResponseCache.key(client.name, SYSTEM_PROMPT, prompt)
-    hit = cache.get(key)
-    if hit is not None:
-        return hit
-    text = client.complete(SYSTEM_PROMPT, prompt)
-    cache.put(key, client.name, text)
-    return text
 
 
 def write_report(

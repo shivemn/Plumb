@@ -101,6 +101,12 @@ class SectionTask:
     section: SectionSpec
     facts: tuple[Fact, ...]
     prompt: str
+    nonce: str  # the random part of the fact markers
+
+    @property
+    def cache_text(self) -> str:
+        """The prompt without its random marker, so a cached answer can be reused."""
+        return self.prompt.replace(self.nonce, "<marker>")
 
     @property
     def estimated_tokens(self) -> int:
@@ -116,7 +122,8 @@ def plan_report(facts: FactSet, nonce: str | None = None) -> list[SectionTask]:
         chosen = [f for f in facts.facts if f.topic in spec.topics][:MAX_FACTS_PER_SECTION]
         if not chosen:
             continue
-        tasks.append(SectionTask(spec, tuple(chosen), _prompt(facts, spec, chosen, marker)))
+        prompt = _prompt(facts, spec, chosen, marker)
+        tasks.append(SectionTask(spec, tuple(chosen), prompt, marker))
     return tasks
 
 
@@ -133,5 +140,5 @@ def _prompt(facts: FactSet, spec: SectionSpec, chosen: list[Fact], marker: str) 
 
 def _one_line(text: str) -> str:
     # Facts are one line each; a newline smuggled in through a file name must
-    # not be able to start a fake marker or a fake fact.
-    return " ".join(text.split())
+    # not be able to start a fake fact, and nothing may look like a marker.
+    return " ".join(text.split()).replace("<<<", "< < <").replace(">>>", "> > >")

@@ -9,9 +9,14 @@ from typing import Annotated
 import typer
 
 from plumb import __version__
+from plumb.markdown import render_markdown
 from plumb.model import FactSet, Report
 from plumb.pipeline import Analysis, analyse_repo
 from plumb.source import Limits, SourceError
+from plumb.verify import verify
+from plumb.writer.models import ModelError, ResponseCache, make_client
+from plumb.writer.plan import SYSTEM_PROMPT, plan_report
+from plumb.writer.write import write_report
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -99,3 +104,80 @@ def _analyse_or_exit(
             err=True,
         )
     return analysis
+
+
+DEFAULT_CACHE = Path.home() / ".plumb" / "answers.sqlite"
+
+
+@app.command()
+def report(
+    repo: Annotated[str, typer.Argument(help="A GitHub URL, owner/name, or a local folder.")],
+    model: Annotated[
+        str,
+        typer.Option(
+            help="provider:model, such as anthropic:claude-opus-5-5 or "
+            "openrouter:<model>. The key comes from ANTHROPIC_API_KEY or OPENROUTER_API_KEY."
+        ),
+    ] = "anthropic:claude-opus-5-5",
+    out: Annotated[
+        Path | None, typer.Option(help="Report JSON. Defaults to <name>.report.json.")
+    ] = None,
+    markdown: Annotated[
+        Path | None, typer.Option(help="Also write Markdown here. Defaults to <name>.report.md.")
+    ] = None,
+    dry_run: Annotated[
+        bool,
+        typer.Option(help="Write the prompts and show their size, without calling a model."),
+    ] = False,
+    window_days: Annotated[int, typer.Option(help="Days of history to mine.")] = 90,
+    workdir: Annotated[Path, typer.Option(help="Where cloned repos are kept.")] = DEFAULT_WORKDIR,
+    max_files: Annotated[int, typer.Option(help="Refuse repos with more tracked files.")] = 20_000,
+    commit: Annotated[
+        str | None, typer.Option(help="Analyse this commit instead of the newest.")
+    ] = None,
+    cache: Annotated[Path, typer.Option(help="Where model answers are cached.")] = DEFAULT_CACHE,
+) -> None:
+    """Analyse a repo, have a model write the report, and keep only claims that check out."""
+    analysis = _analyse_or_exit(repo, workdir, commit, window_days, max_files)
+    name = analysis.checkout.name
+    tasks = plan_report(analysis.facts)
+
+    if dry_run:
+        folder = Path(f"{name}.prompts")
+        folder.mkdir(exist_ok=True)
+        for number, task in enumerate(tasks, start=1):
+            target = folder / f"{number:02d}-{task.section.id}.txt"
+            target.write_text(f"{SYSTEM_PROMPT}\n---\n{task.prompt}", encoding="utf-8")
+            typer.echo(
+                f"{task.section.title}: {len(task.facts)} facts, "
+                f"about {task.estimated_tokens:,} input tokens"
+            )
+        total = sum(t.estimated_tokens for t in tasks)
+        typer.echo(f"{len(tasks)} prompts written to {folder}, about {total:,} input tokens in all")
+        return
+
+    try:
+        client = make_client(model)
+    except ModelError as error:
+        typer.echo(str(error), err=True)
+        raise typer.Exit(1) from error
+    answers = ResponseCache(cache)
+    try:
+        drafts = write_report(tasks, client, answers)
+    except ModelError as error:
+        typer.echo(str(error), err=True)
+        raise typer.Exit(1) from error
+    finally:
+        answers.close()
+    verified = verify(drafts, analysis.facts, client.name)
+
+    json_path = out or Path(f"{name}.report.json")
+    md_path = markdown or Path(f"{name}.report.md")
+    json_path.write_text(verified.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    md_path.write_text(render_markdown(verified), encoding="utf-8")
+    kept = sum(len(s.claims) for s in verified.sections)
+    dropped = sum(1 for r in verified.removed if r.text)
+    typer.echo(
+        f"{kept} of {kept + dropped} claims kept, {dropped} removed. "
+        f"Wrote {json_path} and {md_path}"
+    )
