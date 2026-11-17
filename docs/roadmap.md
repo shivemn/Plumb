@@ -6,7 +6,7 @@ About 16 weeks at 10 to 12 hours a week.
 |-------|------|-----------|
 | 1 | Skeleton, fact model, CI, eval repos, browser-call checks per AI provider | CI green; answer keys for 3 repos |
 | 2–5 | Miner, parser, dependency graph, git history, repo-kind detection | `plumb analyse` prints a fact set for every eval repo |
-| 6–7 | System design detectors | Services, stores and outside APIs match the answer keys |
+| 6–7 | System design detectors | Services, stores and outside APIs match the answer keys (stores done) |
 | 8–9 | Prompt planner, writing layer, verifier, scoring | Full report locally, with precision and recall published |
 | 10–12 | Website: report page, diagrams, gallery | Live site with pre-analysed repos |
 | 13 | Model picker, bring-your-own-key, cost estimate | Anyone can analyse a repo with their own key or a free model |
@@ -34,9 +34,25 @@ About 16 weeks at 10 to 12 hours a week.
 - [x] Dependency graph grouped into components
 - [x] `eval/run.py` runs all evaluation repos and scores module recall
 
-## Weeks 4 and 5 (next)
+## Weeks 4 to 6 (done)
 
-- [ ] Repo-kind detection (service, library, CLI, data, docs, small)
-- [ ] TypeScript and JavaScript imports, so front ends show up in the code map
-- [ ] Entry points: routes, commands, queue consumers, scheduled jobs
-- [ ] Answer keys for the remaining six evaluation repos
+- [x] TypeScript and JavaScript imports, with tsconfig path aliases
+- [x] Entry points: FastAPI and Flask routes, Typer, Click and argparse commands,
+      Celery tasks, Spring routes, Kafka, RabbitMQ and JMS consumers, scheduled
+      jobs, Java mains, Express and Next.js routes, package.json commands
+- [x] Example and docs code kept apart from source
+- [x] Dependencies from pyproject, requirements, pom.xml, Gradle and package.json
+- [x] Services from Dockerfiles, Compose, render.yaml and Procfiles
+- [x] Databases, caches, queues and outside services from dependencies,
+      config and code; settings read from the environment
+- [x] Repo kind: service, library, CLI, data, website, docs, small
+- [x] Answer keys for all nine evaluation repos; kind, routes and stores
+      scored automatically (27 of 27 checks pass)
+
+## Weeks 7 to 9 (next)
+
+- [ ] Resolve settings placeholders (`${pipeline.topic}`) from config files
+- [ ] Router prefixes added in other files (`include_router(..., prefix=...)`)
+- [ ] Three held-out repos that Plumb was not developed against, to check
+      the scores are not just fitted to the nine
+- [ ] Prompt planner, writing layer and verifier

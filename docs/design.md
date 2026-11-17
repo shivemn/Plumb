@@ -38,6 +38,7 @@ answer a question, the report says "not determined".
 | library | What it lets other code do, main modules, how a call flows |
 | cli     | Commands and the path from input to output |
 | data    | Data sources, the order scripts run in, outputs |
+| website | Pages, content and how the site is built |
 | docs    | How content is organised and how to add to it |
 | small   | A short summary, no diagram |
 
@@ -58,11 +59,17 @@ was not determined.
 
 ## Known limits of the analysis so far
 
-- Only Python and Java imports are read. Other languages are counted but
-  not linked, so a TypeScript front end does not show in the code map yet.
+- Python, Java, JavaScript and TypeScript imports are read. Astro, Vue and
+  Svelte files are counted but not linked yet.
 - Python imports made through `importlib` or plugin lookups are not seen.
 - Java references come from imports and from type names used in the same
   package. Fully qualified names written inline are not read yet.
+- Values known only at run time are reported as written: a Kafka topic of
+  `${pipeline.topic}`, or a FastAPI prefix taken from settings.
+- Files loaded by name rather than imported (Alembic migrations, plugins)
+  do not show in the code map.
+- The nine evaluation repos are also the repos the detectors were built
+  against, so their scores are optimistic until held-out repos are added.
 - History needs a full clone. A shallow clone skips hot spots rather than
   reporting wrong counts.
 
