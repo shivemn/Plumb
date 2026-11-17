@@ -20,7 +20,7 @@ from typing import cast
 
 import tree_sitter_java
 import tree_sitter_python
-from tree_sitter import Language, Node, Parser
+from tree_sitter import Language, Node, Parser, Tree
 
 from plumb.inventory import Category, FileInfo
 from plumb.jsimports import js_parser_for
@@ -165,7 +165,8 @@ def _from_decorators(
                 continue
             verb = method.upper() if method in _HTTP_METHODS else _route_methods(keywords)
             full = prefixes.get(owner, "") + first
-            found.append(EntryPoint(EntryKind.HTTP, f"{verb} {full}", path, line, _web(method)))
+            entry = EntryPoint(EntryKind.HTTP, f"{verb} {full}", path, line, _web(method))
+            found.append(replace(entry, router=owner or None))
         elif method in ("command", "group") or dotted in ("click.command", "click.group"):
             name = first or _py_string(keywords.get("name")) or function_name.replace("_", "-")
             found.append(EntryPoint(EntryKind.COMMAND, name, path, line, framework))
@@ -463,6 +464,10 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
             found.extend(package_json_entry_points(info.path, (repo / info.path).read_bytes()))
     if any("${" in e.name for e in found):
         found = resolve_placeholders(found, load_spring_settings(repo, files))
+    if any(e.router for e in found):
+        from plumb.mounts import join_mounts  # mounts builds on this module
+
+        found = join_mounts(repo, files, found)
     return found
 
 
@@ -477,3 +482,14 @@ def resolve_placeholders(found: list[EntryPoint], settings: SpringSettings) -> l
         sources = tuple(dict.fromkeys((s.path, s.line) for s in used))
         result.append(replace(entry, name=name, resolved_from=sources))
     return result
+
+
+# Helpers shared with plumb.mounts.
+py_text = _text
+py_string = _py_string
+py_call_args = _call_args
+walk = _walk
+
+
+def py_tree(source: bytes) -> Tree:
+    return _python_parser().parse(source)

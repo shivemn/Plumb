@@ -1,12 +1,17 @@
+from collections.abc import Callable
+
 from plumb.entrypoints import (
     EntryKind,
     EntryPoint,
+    find_entry_points,
     java_entry_points,
     js_entry_points,
     package_json_entry_points,
     pyproject_scripts,
     python_entry_points,
 )
+from plumb.inventory import build_inventory
+from tests.conftest import RepoBuilder
 
 FASTAPI = b"""\
 from fastapi import APIRouter, FastAPI
@@ -178,3 +183,37 @@ def test_package_json() -> None:
         (EntryKind.SCRIPT, "npm run dev: vite", 4),
         (EntryKind.SCRIPT, "npm run build: vite build", 4),
     ]
+
+
+def test_prefixes_from_mounts_in_other_files(make_repo: Callable[[str], RepoBuilder]) -> None:
+    repo = make_repo("shop")
+    repo.commit(
+        {
+            "app/__init__.py": "",
+            "app/core/__init__.py": "",
+            "app/core/config.py": 'class Settings:\n    API_V1_STR: str = "/api/v1"\n',
+            "app/api/__init__.py": "",
+            "app/api/routes/__init__.py": "",
+            "app/api/routes/items.py": (
+                'router = APIRouter(prefix="/items")\n\n@router.get("/{id}")\ndef read(): ...\n'
+            ),
+            "app/api/routes/login.py": (
+                'router = APIRouter()\n\n@router.post("/login")\ndef go(): ...\n'
+            ),
+            "app/api/main.py": (
+                "from app.api.routes import items, login\n"
+                "api_router = APIRouter()\n"
+                "api_router.include_router(items.router)\n"
+                'api_router.include_router(login.router, prefix="/auth")\n'
+            ),
+            "app/main.py": (
+                "from app.api.main import api_router\n"
+                "from app.core.config import settings\n"
+                "app = FastAPI()\n"
+                "app.include_router(api_router, prefix=settings.API_V1_STR)\n"
+                '@app.get("/health")\ndef health(): ...\n'
+            ),
+        }
+    )
+    names = sorted(e.name for e in find_entry_points(repo.path, build_inventory(repo.path)))
+    assert names == ["GET /api/v1/items/{id}", "GET /health", "POST /api/v1/auth/login"]
