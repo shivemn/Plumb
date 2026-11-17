@@ -5,11 +5,29 @@
     "name": "requests",
     "commit": "3c7baaa05ab4aa49cc819ce3a819d260de19c157"
   },
-  "kind": "unknown",
+  "kind": "library",
   "facts": [
     {
       "id": "f1",
-      "statement": "21 source files in python, 6,865 lines in all",
+      "statement": "Looks like a library repo: a package definition and no commands, routes or services",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "setup.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "19 source files in python, 6,394 lines in all",
       "evidence": [
         {
           "kind": "file",
@@ -32,20 +50,8 @@
       ]
     },
     {
-      "id": "f2",
-      "statement": "1 source file in html, 33 lines in all",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "docs/_templates/sidebar.html",
-          "start_line": null,
-          "end_line": null
-        }
-      ]
-    },
-    {
       "id": "f3",
-      "statement": "1 source file in css, 12 lines in all",
+      "statement": "4 example files left out of the analysis",
       "evidence": [
         {
           "kind": "file",
@@ -285,6 +291,84 @@
     },
     {
       "id": "f23",
+      "statement": "Setting CURL_CA_BUNDLE is read from the environment in src/requests/sessions.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/sessions.py",
+          "start_line": 858,
+          "end_line": 858
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Setting NETRC is read from the environment in src/requests/utils.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/utils.py",
+          "start_line": 239,
+          "end_line": 239
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Setting REQUESTS_CA_BUNDLE is read from the environment in src/requests/sessions.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/sessions.py",
+          "start_line": 857,
+          "end_line": 857
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "2 program entrys found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/certs.py",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/help.py",
+          "start_line": 131,
+          "end_line": 131
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "Program entry run as a script in src/requests/certs.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/certs.py",
+          "start_line": 17,
+          "end_line": 17
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "Program entry run as a script in src/requests/help.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/help.py",
+          "start_line": 131,
+          "end_line": 131
+        }
+      ]
+    },
+    {
+      "id": "f29",
       "statement": "Code in tests uses code in src/requests (26 references)",
       "evidence": [
         {
@@ -308,7 +392,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f30",
       "statement": "Code in tests uses code in tests/testserver (3 references)",
       "evidence": [
         {
@@ -332,19 +416,7 @@
       ]
     },
     {
-      "id": "f25",
-      "statement": "Code in docs uses code in src/requests (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "docs/conf.py",
-          "start_line": 27,
-          "end_line": 27
-        }
-      ]
-    },
-    {
-      "id": "f26",
+      "id": "f31",
       "statement": "src/requests/compat.py is used by 14 other files",
       "evidence": [
         {
@@ -368,7 +440,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f32",
       "statement": "src/requests/models.py is used by 11 other files",
       "evidence": [
         {
@@ -392,7 +464,7 @@
       ]
     },
     {
-      "id": "f28",
+      "id": "f33",
       "statement": "src/requests/structures.py is used by 9 other files",
       "evidence": [
         {
@@ -416,7 +488,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f34",
       "statement": "src/requests/cookies.py is used by 8 other files",
       "evidence": [
         {
@@ -440,7 +512,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f35",
       "statement": "src/requests/_types.py is used by 7 other files",
       "evidence": [
         {
@@ -464,7 +536,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f36",
       "statement": "8 commits between 28 Jul 2026 and 26 Oct 2026",
       "evidence": [
         {

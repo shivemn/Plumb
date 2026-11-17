@@ -5,10 +5,22 @@
     "name": "terminus",
     "commit": "e44ea146ab44ac013a6603801b17180200675612"
   },
-  "kind": "unknown",
+  "kind": "website",
   "facts": [
     {
       "id": "f1",
+      "statement": "Looks like a website repo: a front-end build tool and no back-end service",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f2",
       "statement": "29 source files in typescript, 4,003 lines in all",
       "evidence": [
         {
@@ -32,7 +44,7 @@
       ]
     },
     {
-      "id": "f2",
+      "id": "f3",
       "statement": "6 source files in css, 1,006 lines in all",
       "evidence": [
         {
@@ -50,18 +62,6 @@
         {
           "kind": "file",
           "path": "src/styles/route.css",
-          "start_line": null,
-          "end_line": null
-        }
-      ]
-    },
-    {
-      "id": "f3",
-      "statement": "1 source file in html, 514 lines in all",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "docs/prototypes/chat-design.html",
           "start_line": null,
           "end_line": null
         }
@@ -93,6 +93,18 @@
     },
     {
       "id": "f6",
+      "statement": "1 example file left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/prototypes/chat-design.html",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
       "statement": "GitHub Actions workflow .github/workflows/ci.yml",
       "evidence": [
         {
@@ -104,7 +116,7 @@
       ]
     },
     {
-      "id": "f7",
+      "id": "f8",
       "statement": "GitHub Actions workflow .github/workflows/link-check.yml",
       "evidence": [
         {
@@ -116,7 +128,7 @@
       ]
     },
     {
-      "id": "f8",
+      "id": "f9",
       "statement": "GitHub Actions workflow .github/workflows/yearly-postings.yml",
       "evidence": [
         {
@@ -128,7 +140,7 @@
       ]
     },
     {
-      "id": "f9",
+      "id": "f10",
       "statement": "Build or deploy file package.json",
       "evidence": [
         {
@@ -140,7 +152,283 @@
       ]
     },
     {
-      "id": "f10",
+      "id": "f11",
+      "statement": "3 package scripts found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "statement": "Package script npm run dev: astro dev (npm) in package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "statement": "Package script npm run build: npm run validate && astro build (npm) in package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "statement": "Package script npm run test: vitest run (npm) in package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "package.json",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "Code in tests uses code in src/lib (21 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/coaches.test.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "tests/graph.test.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "tests/graph.test.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "Code in src/components uses code in src/lib (12 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/components/PlannerTools.tsx",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "src/components/PlannerTools.tsx",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/components/PlannerTools.tsx",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "Code in scripts uses code in src/lib (5 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "scripts/check-links.ts",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "kind": "file",
+          "path": "scripts/check-sections.ts",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "kind": "file",
+          "path": "scripts/role-evidence.ts",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "Code in src/pages uses code in src/lib (5 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/routes.json.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/search.json.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/search.json.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "src/lib/content.ts is used by 11 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/content.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "scripts/check-links.ts",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "kind": "file",
+          "path": "scripts/check-sections.ts",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "src/lib/graph.ts is used by 11 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/graph.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/components/PlannerTools.tsx",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "src/lib/schema.ts is used by 10 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/schema.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "scripts/validate.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/lib/certifications.ts",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "src/lib/site.ts is used by 4 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/site.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/routes.json.ts",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/pages/search.json.ts",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "src/lib/coaches.ts is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/lib/coaches.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/components/PlannerTools.tsx",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/components/RolePlanner.tsx",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f24",
       "statement": "68 commits between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -158,7 +446,7 @@
       ]
     },
     {
-      "id": "f11",
+      "id": "f25",
       "statement": "src/lib/schema.ts changed in 23 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -182,7 +470,7 @@
       ]
     },
     {
-      "id": "f12",
+      "id": "f26",
       "statement": "src/styles/global.css changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -206,7 +494,7 @@
       ]
     },
     {
-      "id": "f13",
+      "id": "f27",
       "statement": "src/lib/content.ts changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -230,7 +518,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f28",
       "statement": "src/styles/planner.css changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -254,7 +542,7 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f29",
       "statement": "src/components/RolePlanner.tsx changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -278,7 +566,7 @@
       ]
     },
     {
-      "id": "f16",
+      "id": "f30",
       "statement": "src/lib/graph.ts changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -302,7 +590,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f31",
       "statement": "src/styles/route.css changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -326,7 +614,7 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f32",
       "statement": "scripts/check-links.ts changed in 6 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -350,7 +638,7 @@
       ]
     },
     {
-      "id": "f19",
+      "id": "f33",
       "statement": "scripts/validate.ts changed in 5 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -374,7 +662,7 @@
       ]
     },
     {
-      "id": "f20",
+      "id": "f34",
       "statement": "src/components/StopPanel.tsx changed in 5 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -398,7 +686,7 @@
       ]
     },
     {
-      "id": "f21",
+      "id": "f35",
       "statement": "src/lib/content.ts and src/lib/schema.ts changed in the same commit 13 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -416,7 +704,7 @@
       ]
     },
     {
-      "id": "f22",
+      "id": "f36",
       "statement": "src/components/RolePlanner.tsx and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -434,7 +722,7 @@
       ]
     },
     {
-      "id": "f23",
+      "id": "f37",
       "statement": "src/lib/schema.ts and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -452,7 +740,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f38",
       "statement": "src/styles/global.css and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -470,7 +758,7 @@
       ]
     },
     {
-      "id": "f25",
+      "id": "f39",
       "statement": "src/lib/graph.ts and src/lib/schema.ts changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -488,7 +776,7 @@
       ]
     },
     {
-      "id": "f26",
+      "id": "f40",
       "statement": "src/styles/global.css and src/styles/route.css changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -506,7 +794,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f41",
       "statement": "src/components/RolePlanner.tsx and src/lib/schema.ts changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -524,7 +812,7 @@
       ]
     },
     {
-      "id": "f28",
+      "id": "f42",
       "statement": "src/lib/schema.ts and src/styles/global.css changed in the same commit 7 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -542,7 +830,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f43",
       "statement": "src/components/RolePlanner.tsx and src/styles/global.css changed in the same commit 6 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {
@@ -560,7 +848,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f44",
       "statement": "scripts/validate.ts and src/lib/schema.ts changed in the same commit 5 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
         {

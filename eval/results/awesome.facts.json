@@ -5,10 +5,34 @@
     "name": "awesome",
     "commit": "bc98e517ddca672f55f9857d714fc3ea3c3540b2"
   },
-  "kind": "unknown",
+  "kind": "docs",
   "facts": [
     {
       "id": "f1",
+      "statement": "Looks like a docs repo: no source code, only documents",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "awesome.md",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "code-of-conduct.md",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "contributing.md",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f2",
       "statement": "GitHub Actions workflow .github/workflows/main.yml",
       "evidence": [
         {
@@ -20,7 +44,7 @@
       ]
     },
     {
-      "id": "f2",
+      "id": "f3",
       "statement": "7 commits between 04 Jun 2026 and 02 Sep 2026",
       "evidence": [
         {

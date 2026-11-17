@@ -5,11 +5,23 @@
     "name": "click",
     "commit": "e38188e9e205005d5af5f9e59df51904c984586a"
   },
-  "kind": "unknown",
+  "kind": "library",
   "facts": [
     {
       "id": "f1",
-      "statement": "32 source files in python, 13,983 lines in all",
+      "statement": "Looks like a library repo: a package definition and no commands, routes or services",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "statement": "17 source files in python, 12,829 lines in all",
       "evidence": [
         {
           "kind": "file",
@@ -32,7 +44,7 @@
       ]
     },
     {
-      "id": "f2",
+      "id": "f3",
       "statement": "1 source file in shell, 7 lines in all",
       "evidence": [
         {
@@ -44,7 +56,7 @@
       ]
     },
     {
-      "id": "f3",
+      "id": "f4",
       "statement": "1 generated file left out of the analysis",
       "evidence": [
         {
@@ -56,7 +68,25 @@
       ]
     },
     {
-      "id": "f4",
+      "id": "f5",
+      "statement": "38 example files left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "examples/README",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "docs/conf.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
       "statement": "GitHub Actions workflow .github/workflows/lock.yaml",
       "evidence": [
         {
@@ -68,7 +98,7 @@
       ]
     },
     {
-      "id": "f5",
+      "id": "f7",
       "statement": "GitHub Actions workflow .github/workflows/nightly.yaml",
       "evidence": [
         {
@@ -80,7 +110,7 @@
       ]
     },
     {
-      "id": "f6",
+      "id": "f8",
       "statement": "GitHub Actions workflow .github/workflows/pre-commit.yaml",
       "evidence": [
         {
@@ -92,7 +122,7 @@
       ]
     },
     {
-      "id": "f7",
+      "id": "f9",
       "statement": "GitHub Actions workflow .github/workflows/publish.yaml",
       "evidence": [
         {
@@ -104,7 +134,7 @@
       ]
     },
     {
-      "id": "f8",
+      "id": "f10",
       "statement": "GitHub Actions workflow .github/workflows/tests.yaml",
       "evidence": [
         {
@@ -116,7 +146,7 @@
       ]
     },
     {
-      "id": "f9",
+      "id": "f11",
       "statement": "GitHub Actions workflow .github/workflows/zizmor.yaml",
       "evidence": [
         {
@@ -128,7 +158,7 @@
       ]
     },
     {
-      "id": "f10",
+      "id": "f12",
       "statement": "Build or deploy file examples/aliases/pyproject.toml",
       "evidence": [
         {
@@ -140,7 +170,7 @@
       ]
     },
     {
-      "id": "f11",
+      "id": "f13",
       "statement": "Build or deploy file examples/colors/pyproject.toml",
       "evidence": [
         {
@@ -152,7 +182,7 @@
       ]
     },
     {
-      "id": "f12",
+      "id": "f14",
       "statement": "Build or deploy file examples/completion/pyproject.toml",
       "evidence": [
         {
@@ -164,7 +194,7 @@
       ]
     },
     {
-      "id": "f13",
+      "id": "f15",
       "statement": "Build or deploy file examples/complex/pyproject.toml",
       "evidence": [
         {
@@ -176,7 +206,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f16",
       "statement": "Build or deploy file examples/imagepipe/pyproject.toml",
       "evidence": [
         {
@@ -188,7 +218,7 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f17",
       "statement": "Build or deploy file examples/inout/pyproject.toml",
       "evidence": [
         {
@@ -200,7 +230,7 @@
       ]
     },
     {
-      "id": "f16",
+      "id": "f18",
       "statement": "Build or deploy file examples/naval/pyproject.toml",
       "evidence": [
         {
@@ -212,7 +242,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f19",
       "statement": "Build or deploy file examples/repo/pyproject.toml",
       "evidence": [
         {
@@ -224,7 +254,7 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f20",
       "statement": "Build or deploy file examples/termui/pyproject.toml",
       "evidence": [
         {
@@ -236,7 +266,7 @@
       ]
     },
     {
-      "id": "f19",
+      "id": "f21",
       "statement": "Build or deploy file examples/validation/pyproject.toml",
       "evidence": [
         {
@@ -248,7 +278,7 @@
       ]
     },
     {
-      "id": "f20",
+      "id": "f22",
       "statement": "Build or deploy file pyproject.toml",
       "evidence": [
         {
@@ -260,7 +290,79 @@
       ]
     },
     {
-      "id": "f21",
+      "id": "f23",
+      "statement": "Setting COMP_CWORD is read from the environment in src/click/shell_completion.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/shell_completion.py",
+          "start_line": 433,
+          "end_line": 433
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "Setting COMP_WORDS is read from the environment in src/click/shell_completion.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/shell_completion.py",
+          "start_line": 432,
+          "end_line": 432
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "Setting LESS is read from the environment in src/click/_termui_impl.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": 577,
+          "end_line": 577
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "Setting PAGER is read from the environment in src/click/_termui_impl.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": 467,
+          "end_line": 467
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "Setting TERM is read from the environment in src/click/_termui_impl.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/_termui_impl.py",
+          "start_line": 474,
+          "end_line": 474
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "Setting XDG_CONFIG_HOME is read from the environment in src/click/utils.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/utils.py",
+          "start_line": 512,
+          "end_line": 512
+        }
+      ]
+    },
+    {
+      "id": "f29",
       "statement": "Code in tests uses code in src/click (74 references)",
       "evidence": [
         {
@@ -284,7 +386,7 @@
       ]
     },
     {
-      "id": "f22",
+      "id": "f30",
       "statement": "Code in tests/test_utils uses code in src/click (20 references)",
       "evidence": [
         {
@@ -308,7 +410,7 @@
       ]
     },
     {
-      "id": "f23",
+      "id": "f31",
       "statement": "Code in tests/typing uses code in src/click (13 references)",
       "evidence": [
         {
@@ -332,7 +434,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f32",
       "statement": "Code in tests/test_types uses code in src/click (8 references)",
       "evidence": [
         {
@@ -356,126 +458,12 @@
       ]
     },
     {
-      "id": "f25",
-      "statement": "Code in examples/completion uses code in src/click (2 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/completion/completion.py",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "examples/completion/completion.py",
-          "start_line": 4,
-          "end_line": 4
-        }
-      ]
-    },
-    {
-      "id": "f26",
-      "statement": "Code in examples/complex/complex/commands uses code in examples/complex/complex (2 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/complex/complex/commands/cmd_init.py",
-          "start_line": 1,
-          "end_line": 1
-        },
-        {
-          "kind": "file",
-          "path": "examples/complex/complex/commands/cmd_status.py",
-          "start_line": 1,
-          "end_line": 1
-        }
-      ]
-    },
-    {
-      "id": "f27",
-      "statement": "Code in examples/complex/complex/commands uses code in src/click (2 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/complex/complex/commands/cmd_init.py",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "examples/complex/complex/commands/cmd_status.py",
-          "start_line": 3,
-          "end_line": 3
-        }
-      ]
-    },
-    {
-      "id": "f28",
-      "statement": "Code in examples/aliases uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/aliases/aliases.py",
-          "start_line": 4,
-          "end_line": 4
-        }
-      ]
-    },
-    {
-      "id": "f29",
-      "statement": "Code in examples/colors uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/colors/colors.py",
-          "start_line": 1,
-          "end_line": 1
-        }
-      ]
-    },
-    {
-      "id": "f30",
-      "statement": "Code in examples/complex/complex uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/complex/complex/cli.py",
-          "start_line": 4,
-          "end_line": 4
-        }
-      ]
-    },
-    {
-      "id": "f31",
-      "statement": "Code in examples/imagepipe uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/imagepipe/imagepipe.py",
-          "start_line": 7,
-          "end_line": 7
-        }
-      ]
-    },
-    {
-      "id": "f32",
-      "statement": "Code in examples/inout uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/inout/inout.py",
-          "start_line": 1,
-          "end_line": 1
-        }
-      ]
-    },
-    {
       "id": "f33",
-      "statement": "Code in examples/naval uses code in src/click (1 reference)",
+      "statement": "Code in tests/test_exceptions uses code in src/click (1 reference)",
       "evidence": [
         {
           "kind": "file",
-          "path": "examples/naval/naval.py",
+          "path": "tests/test_exceptions/test_FileError.py",
           "start_line": 1,
           "end_line": 1
         }
@@ -483,31 +471,7 @@
     },
     {
       "id": "f34",
-      "statement": "Code in examples/repo uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/repo/repo.py",
-          "start_line": 5,
-          "end_line": 5
-        }
-      ]
-    },
-    {
-      "id": "f35",
-      "statement": "Code in examples/termui uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "examples/termui/termui.py",
-          "start_line": 5,
-          "end_line": 5
-        }
-      ]
-    },
-    {
-      "id": "f36",
-      "statement": "src/click/__init__.py is used by 63 other files",
+      "statement": "src/click/__init__.py is used by 51 other files",
       "evidence": [
         {
           "kind": "file",
@@ -517,20 +481,20 @@
         },
         {
           "kind": "file",
-          "path": "examples/aliases/aliases.py",
-          "start_line": 4,
-          "end_line": 4
+          "path": "tests/test_abort_interrupt.py",
+          "start_line": 18,
+          "end_line": 18
         },
         {
           "kind": "file",
-          "path": "examples/colors/colors.py",
-          "start_line": 1,
-          "end_line": 1
+          "path": "tests/test_arguments.py",
+          "start_line": 10,
+          "end_line": 10
         }
       ]
     },
     {
-      "id": "f37",
+      "id": "f35",
       "statement": "src/click/_compat.py is used by 17 other files",
       "evidence": [
         {
@@ -554,7 +518,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f36",
       "statement": "src/click/core.py is used by 12 other files",
       "evidence": [
         {
@@ -578,7 +542,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f37",
       "statement": "src/click/utils.py is used by 12 other files",
       "evidence": [
         {
@@ -602,7 +566,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f38",
       "statement": "src/click/exceptions.py is used by 9 other files",
       "evidence": [
         {
@@ -626,7 +590,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f39",
       "statement": "48 commits between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -644,7 +608,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f40",
       "statement": "src/click/core.py changed in 13 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -668,7 +632,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f41",
       "statement": "tests/test_options.py changed in 9 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -692,7 +656,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f42",
       "statement": "src/click/_termui_impl.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -716,7 +680,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f43",
       "statement": "tests/test_arguments.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -740,7 +704,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f44",
       "statement": "tests/test_termui.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -764,7 +728,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f45",
       "statement": "tests/test_deprecations.py changed in 4 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -788,7 +752,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f46",
       "statement": "tests/test_basic.py changed in 3 commits by 2 authors between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -812,7 +776,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f47",
       "statement": "src/click/testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -836,7 +800,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f48",
       "statement": "tests/test_testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -860,7 +824,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f49",
       "statement": "src/click/core.py and tests/test_options.py changed in the same commit 8 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -878,7 +842,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f50",
       "statement": "src/click/core.py and tests/test_arguments.py changed in the same commit 7 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -896,7 +860,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f51",
       "statement": "src/click/_termui_impl.py and tests/test_termui.py changed in the same commit 6 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -914,7 +878,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f52",
       "statement": "tests/test_arguments.py and tests/test_options.py changed in the same commit 5 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -932,7 +896,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f53",
       "statement": "src/click/core.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -950,7 +914,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f54",
       "statement": "tests/test_arguments.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -968,7 +932,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f55",
       "statement": "tests/test_deprecations.py and tests/test_options.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {
@@ -986,7 +950,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f56",
       "statement": "src/click/testing.py and tests/test_testing.py changed in the same commit 3 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
         {

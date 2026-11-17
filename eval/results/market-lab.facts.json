@@ -5,10 +5,34 @@
     "name": "market-lab",
     "commit": "129b31b76e87c0fe87bbdc8e8a649615e349e882"
   },
-  "kind": "unknown",
+  "kind": "service",
   "facts": [
     {
       "id": "f1",
+      "statement": "Looks like a service repo: 1 deployable service(s) and 30 route(s), consumer(s) or scheduled job(s)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 535,
+          "end_line": 535
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 547,
+          "end_line": 547
+        }
+      ]
+    },
+    {
+      "id": "f2",
       "statement": "43 source files in python, 7,213 lines in all",
       "evidence": [
         {
@@ -32,7 +56,7 @@
       ]
     },
     {
-      "id": "f2",
+      "id": "f3",
       "statement": "52 source files in typescript, 5,447 lines in all",
       "evidence": [
         {
@@ -56,7 +80,7 @@
       ]
     },
     {
-      "id": "f3",
+      "id": "f4",
       "statement": "5 source files in css, 680 lines in all",
       "evidence": [
         {
@@ -80,7 +104,7 @@
       ]
     },
     {
-      "id": "f4",
+      "id": "f5",
       "statement": "1 source file in html, 17 lines in all",
       "evidence": [
         {
@@ -92,7 +116,7 @@
       ]
     },
     {
-      "id": "f5",
+      "id": "f6",
       "statement": "999 vendored files left out of the analysis",
       "evidence": [
         {
@@ -104,7 +128,7 @@
       ]
     },
     {
-      "id": "f6",
+      "id": "f7",
       "statement": "2 generated files left out of the analysis",
       "evidence": [
         {
@@ -122,7 +146,7 @@
       ]
     },
     {
-      "id": "f7",
+      "id": "f8",
       "statement": "GitHub Actions workflow .github/workflows/ci.yml",
       "evidence": [
         {
@@ -134,7 +158,7 @@
       ]
     },
     {
-      "id": "f8",
+      "id": "f9",
       "statement": "Build or deploy file Dockerfile",
       "evidence": [
         {
@@ -146,7 +170,7 @@
       ]
     },
     {
-      "id": "f9",
+      "id": "f10",
       "statement": "Build or deploy file package.json",
       "evidence": [
         {
@@ -158,7 +182,7 @@
       ]
     },
     {
-      "id": "f10",
+      "id": "f11",
       "statement": "Build or deploy file pyproject.toml",
       "evidence": [
         {
@@ -170,7 +194,7 @@
       ]
     },
     {
-      "id": "f11",
+      "id": "f12",
       "statement": "Build or deploy file render.yaml",
       "evidence": [
         {
@@ -182,7 +206,7 @@
       ]
     },
     {
-      "id": "f12",
+      "id": "f13",
       "statement": "Build or deploy file web/package.json",
       "evidence": [
         {
@@ -194,7 +218,715 @@
       ]
     },
     {
-      "id": "f13",
+      "id": "f14",
+      "statement": "Service run from this repo: market-lab (Dockerfile, runs [\"sh\", \"-c\", \"mkdir -p /data && marketlab serve --host 0.0.0.0 --port ${PORT} --db \\\"${DATABASE_URL:-/data/practice.db}\\\" --web web/dist --behind-proxy\"]; Render web service)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "render.yaml",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "statement": "Database, cache or queue: PostgreSQL (dependency psycopg)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "statement": "Database, cache or queue: SQLite (imports sqlite3)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/ledger/ledger.py",
+          "start_line": 16,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "statement": "Setting DATABASE_URL is read from the environment in Dockerfile, src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 64,
+          "end_line": 64
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "statement": "Setting PORT is read from the environment in Dockerfile",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "Dockerfile",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "statement": "30 http routes found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 535,
+          "end_line": 535
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 547,
+          "end_line": 547
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 586,
+          "end_line": 586
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "statement": "HTTP route GET /api/config (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 535,
+          "end_line": 535
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "statement": "HTTP route POST /api/auth/enter (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 547,
+          "end_line": 547
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "statement": "HTTP route POST /api/auth/guest (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 586,
+          "end_line": 586
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "statement": "HTTP route GET /api/auth/me (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 601,
+          "end_line": 601
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "statement": "HTTP route POST /api/auth/logout (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 608,
+          "end_line": 608
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "statement": "HTTP route GET /api/health (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 616,
+          "end_line": 616
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "statement": "HTTP route POST /api/runs (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 620,
+          "end_line": 620
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "statement": "HTTP route GET /api/runs/{run_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 643,
+          "end_line": 643
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "statement": "HTTP route GET /api/runs/{run_id}/events (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 647,
+          "end_line": 647
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "statement": "HTTP route GET /api/runs/{run_id}/ends (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 655,
+          "end_line": 655
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "statement": "HTTP route GET /api/runs/{run_id}/state (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 659,
+          "end_line": 659
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "statement": "HTTP route POST /api/sessions (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 663,
+          "end_line": 663
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "statement": "HTTP route GET /api/sessions/{session_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 692,
+          "end_line": 692
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "statement": "HTTP route GET /api/sessions/{session_id}/market (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 697,
+          "end_line": 697
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "statement": "HTTP route GET /api/sessions/{session_id}/statement (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 702,
+          "end_line": 702
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "statement": "HTTP route POST /api/sessions/{session_id}/advance (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 707,
+          "end_line": 707
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "statement": "HTTP route POST /api/sessions/{session_id}/orders (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 723,
+          "end_line": 723
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "statement": "HTTP route DELETE /api/sessions/{session_id}/orders/{order_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 742,
+          "end_line": 742
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "statement": "HTTP route DELETE /api/sessions/{session_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 758,
+          "end_line": 758
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "statement": "HTTP route POST /api/worlds (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 766,
+          "end_line": 766
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "statement": "HTTP route GET /api/accounts/{owner}/days (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 798,
+          "end_line": 798
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "statement": "HTTP route GET /api/worlds/{world_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 808,
+          "end_line": 808
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "statement": "HTTP route GET /api/worlds/{world_id}/statement (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 813,
+          "end_line": 813
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "statement": "HTTP route POST /api/worlds/{world_id}/advance (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 848,
+          "end_line": 848
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "statement": "HTTP route POST /api/worlds/{world_id}/orders (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 865,
+          "end_line": 865
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "statement": "HTTP route DELETE /api/worlds/{world_id}/orders/{symbol}/{order_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 880,
+          "end_line": 880
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "statement": "HTTP route DELETE /api/worlds/{world_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 893,
+          "end_line": 893
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "statement": "HTTP route WEBSOCKET /ws/runs/{run_id} (fastapi) in src/marketlab/api/app.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/api/app.py",
+          "start_line": 903,
+          "end_line": 903
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "statement": "HTTP route WEBSOCKET /ws/{rest:path} (fastapi) in src/marketlab/cluster.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cluster.py",
+          "start_line": 104,
+          "end_line": 104
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "statement": "HTTP route GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS /{path:path} (fastapi) in src/marketlab/cluster.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cluster.py",
+          "start_line": 139,
+          "end_line": 139
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "statement": "7 commands found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 44,
+          "end_line": 44
+        },
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 52,
+          "end_line": 52
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "statement": "Command marketlab (marketlab.cli:main) (package) in pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 15,
+          "end_line": 15
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "statement": "Command run (argparse) in src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 44,
+          "end_line": 44
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "statement": "Command show (argparse) in src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 52,
+          "end_line": 52
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "statement": "Command serve (argparse) in src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 59,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "statement": "Command cluster (argparse) in src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 77,
+          "end_line": 77
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "statement": "Command costs (argparse) in src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 89,
+          "end_line": 89
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "statement": "Command replay (argparse) in src/marketlab/cli.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/marketlab/cli.py",
+          "start_line": 97,
+          "end_line": 97
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "statement": "3 program entrys found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "benchmarks/bench_exchange.py",
+          "start_line": 329,
+          "end_line": 329
+        },
+        {
+          "kind": "file",
+          "path": "tools/loadtest.py",
+          "start_line": 167,
+          "end_line": 167
+        },
+        {
+          "kind": "file",
+          "path": "tools/serve_for_loadtest.py",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "statement": "Program entry run as a script in benchmarks/bench_exchange.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "benchmarks/bench_exchange.py",
+          "start_line": 329,
+          "end_line": 329
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "statement": "Program entry run as a script in tools/loadtest.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tools/loadtest.py",
+          "start_line": 167,
+          "end_line": 167
+        }
+      ]
+    },
+    {
+      "id": "f61",
+      "statement": "Program entry run as a script in tools/serve_for_loadtest.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tools/serve_for_loadtest.py",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f62",
+      "statement": "3 package scripts found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/package.json",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "web/package.json",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "web/package.json",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f63",
+      "statement": "Package script npm run dev: vite (npm) in web/package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/package.json",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f64",
+      "statement": "Package script npm run build: tsc --noEmit && vite build (npm) in web/package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/package.json",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f65",
+      "statement": "Package script npm run test: vitest run (npm) in web/package.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/package.json",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f66",
+      "statement": "Code in web/src/components uses code in web/src/lib (82 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/src/components/AccountStrip.tsx",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "web/src/components/AccountStrip.tsx",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "web/src/components/AccountStrip.tsx",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f67",
       "statement": "Code in tests/unit uses code in src/marketlab (30 references)",
       "evidence": [
         {
@@ -218,7 +950,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f68",
       "statement": "Code in tests/unit uses code in src/marketlab/core (22 references)",
       "evidence": [
         {
@@ -242,7 +974,7 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f69",
       "statement": "Code in tests/unit uses code in src/marketlab/ledger (19 references)",
       "evidence": [
         {
@@ -266,7 +998,7 @@
       ]
     },
     {
-      "id": "f16",
+      "id": "f70",
       "statement": "Code in tests/unit uses code in src/marketlab/sim (11 references)",
       "evidence": [
         {
@@ -290,7 +1022,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f71",
       "statement": "Code in tests/unit uses code in tests (10 references)",
       "evidence": [
         {
@@ -314,7 +1046,31 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f72",
+      "statement": "Code in web/src uses code in web/src/components (9 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f73",
       "statement": "Code in src/marketlab uses code in src/marketlab/core (8 references)",
       "evidence": [
         {
@@ -338,7 +1094,7 @@
       ]
     },
     {
-      "id": "f19",
+      "id": "f74",
       "statement": "Code in tests/property uses code in tests (7 references)",
       "evidence": [
         {
@@ -362,7 +1118,7 @@
       ]
     },
     {
-      "id": "f20",
+      "id": "f75",
       "statement": "Code in tests/unit uses code in src/marketlab/api (7 references)",
       "evidence": [
         {
@@ -386,7 +1142,31 @@
       ]
     },
     {
-      "id": "f21",
+      "id": "f76",
+      "statement": "Code in web/src uses code in web/src/lib (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f77",
       "statement": "Code in src/marketlab/api uses code in src/marketlab (6 references)",
       "evidence": [
         {
@@ -410,7 +1190,7 @@
       ]
     },
     {
-      "id": "f22",
+      "id": "f78",
       "statement": "Code in tests/property uses code in src/marketlab/core (6 references)",
       "evidence": [
         {
@@ -434,7 +1214,7 @@
       ]
     },
     {
-      "id": "f23",
+      "id": "f79",
       "statement": "Code in src/marketlab uses code in src/marketlab/sim (5 references)",
       "evidence": [
         {
@@ -458,7 +1238,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f80",
       "statement": "Code in tests/property uses code in src/marketlab (4 references)",
       "evidence": [
         {
@@ -482,79 +1262,7 @@
       ]
     },
     {
-      "id": "f25",
-      "statement": "Code in tests/property uses code in src/marketlab/ledger (4 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/property/test_gateway_model.py",
-          "start_line": 18,
-          "end_line": 18
-        },
-        {
-          "kind": "file",
-          "path": "tests/property/test_ledger_model.py",
-          "start_line": 15,
-          "end_line": 15
-        },
-        {
-          "kind": "file",
-          "path": "tests/property/test_ledger_reconciliation.py",
-          "start_line": 15,
-          "end_line": 15
-        }
-      ]
-    },
-    {
-      "id": "f26",
-      "statement": "Code in src/marketlab uses code in src/marketlab/ledger (3 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/marketlab/cli.py",
-          "start_line": 153,
-          "end_line": 153
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/session.py",
-          "start_line": 20,
-          "end_line": 20
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/world.py",
-          "start_line": 29,
-          "end_line": 29
-        }
-      ]
-    },
-    {
-      "id": "f27",
-      "statement": "Code in src/marketlab/ledger uses code in src/marketlab (3 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/marketlab/ledger/fills.py",
-          "start_line": 13,
-          "end_line": 13
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/ledger/gateway.py",
-          "start_line": 36,
-          "end_line": 36
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/ledger/gateway.py",
-          "start_line": 37,
-          "end_line": 37
-        }
-      ]
-    },
-    {
-      "id": "f28",
+      "id": "f81",
       "statement": "src/marketlab and src/marketlab/api each use the other",
       "evidence": [
         {
@@ -572,7 +1280,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f82",
       "statement": "src/marketlab and src/marketlab/ledger each use the other",
       "evidence": [
         {
@@ -590,7 +1298,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f83",
       "statement": "src/marketlab and src/marketlab/sim each use the other",
       "evidence": [
         {
@@ -608,7 +1316,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f84",
       "statement": "tests and tests/unit each use the other",
       "evidence": [
         {
@@ -626,7 +1334,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f85",
       "statement": "src/marketlab/core/__init__.py is used by 42 other files",
       "evidence": [
         {
@@ -650,7 +1358,55 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f86",
+      "statement": "web/src/lib/format.ts is used by 25 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/src/lib/format.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "web/src/components/AccountStrip.tsx",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "web/src/components/Activity.tsx",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f87",
+      "statement": "web/src/lib/market.ts is used by 24 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "web/src/lib/market.ts",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "web/src/App.tsx",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "web/src/components/Activity.tsx",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f88",
       "statement": "src/marketlab/ledger/__init__.py is used by 19 other files",
       "evidence": [
         {
@@ -674,7 +1430,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f89",
       "statement": "tests/helpers.py is used by 17 other files",
       "evidence": [
         {
@@ -698,55 +1454,7 @@
       ]
     },
     {
-      "id": "f35",
-      "statement": "src/marketlab/sim/__init__.py is used by 15 other files",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/marketlab/sim/__init__.py",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/api/app.py",
-          "start_line": 67,
-          "end_line": 67
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/cli.py",
-          "start_line": 24,
-          "end_line": 24
-        }
-      ]
-    },
-    {
-      "id": "f36",
-      "statement": "src/marketlab/codec.py is used by 13 other files",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/marketlab/codec.py",
-          "start_line": null,
-          "end_line": null
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/api/app.py",
-          "start_line": 61,
-          "end_line": 61
-        },
-        {
-          "kind": "file",
-          "path": "src/marketlab/log.py",
-          "start_line": 23,
-          "end_line": 23
-        }
-      ]
-    },
-    {
-      "id": "f37",
+      "id": "f90",
       "statement": "32 commits between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -764,7 +1472,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f91",
       "statement": "web/src/components/PracticeView.tsx changed in 14 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -788,7 +1496,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f92",
       "statement": "src/marketlab/api/app.py changed in 13 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -812,7 +1520,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f93",
       "statement": "web/src/desk.css changed in 10 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -836,7 +1544,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f94",
       "statement": "web/src/App.tsx changed in 9 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -860,7 +1568,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f95",
       "statement": "src/marketlab/ledger/ledger.py changed in 8 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -884,7 +1592,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f96",
       "statement": "tests/unit/test_api_worlds.py changed in 8 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -908,7 +1616,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f97",
       "statement": "web/src/components/PriceChart.tsx changed in 8 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -932,7 +1640,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f98",
       "statement": "src/marketlab/cli.py changed in 7 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -956,7 +1664,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f99",
       "statement": "src/marketlab/world.py changed in 7 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -980,7 +1688,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f100",
       "statement": "web/src/lib/world.ts changed in 7 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1004,7 +1712,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f101",
       "statement": "web/src/components/PracticeView.tsx and web/src/desk.css changed in the same commit 7 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1022,7 +1730,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f102",
       "statement": "src/marketlab/ledger/ledger.py and tests/unit/test_ledger.py changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1040,7 +1748,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f103",
       "statement": "src/marketlab/world.py and tests/unit/test_api_worlds.py changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1058,7 +1766,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f104",
       "statement": "web/src/components/PracticeView.tsx and web/src/lib/world.ts changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1076,7 +1784,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f105",
       "statement": "web/src/components/PracticeView.tsx and web/src/components/PriceChart.tsx changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1094,7 +1802,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f106",
       "statement": "web/src/App.tsx and web/src/components/PracticeView.tsx changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1112,7 +1820,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f107",
       "statement": "src/marketlab/api/app.py and web/src/components/PracticeView.tsx changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1130,7 +1838,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f108",
       "statement": "src/marketlab/cli.py and src/marketlab/ledger/ledger.py changed in the same commit 5 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1148,7 +1856,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f109",
       "statement": "src/marketlab/world.py and web/src/components/PracticeView.tsx changed in the same commit 5 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {
@@ -1166,7 +1874,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f110",
       "statement": "src/marketlab/api/app.py and src/marketlab/ledger/ledger.py changed in the same commit 5 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
         {

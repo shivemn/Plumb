@@ -1,13 +1,18 @@
-"""Run Plumb's analysis on every evaluation repo and score what it can score so far.
+"""Run Plumb's analysis on every evaluation repo and score it against the answer keys.
 
     cd core
     uv run python ../eval/run.py
 
 Each repo is cloned (without old file contents) at its pinned commit, and
-its facts are written to eval/results/. Repos with an answer key get a
-module recall score: the share of the key's modules that show up as a
-component in the dependency graph. Scores for services, stores and entry
-points come once the detectors exist (weeks 6 and 7).
+its facts are written to eval/results/. Each repo with an answer key is
+scored on:
+
+- kind: whether the detected repo kind matches the key
+- modules: the share of the key's modules that show up as a component in
+  the dependency graph
+- routes: HTTP routes found against the number in the key
+- stores: databases, caches and queues found against the key's list, with
+  extra and missing names spelled out
 """
 
 from __future__ import annotations
@@ -15,26 +20,43 @@ from __future__ import annotations
 import sys
 import time
 import tomllib
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import cast
 
 from plumb.deps import find_dependencies
-from plumb.entrypoints import find_entry_points
+from plumb.entrypoints import EntryKind, find_entry_points
 from plumb.facts import build_facts
 from plumb.graph import all_edges, component_of
 from plumb.history import mine
 from plumb.inventory import Category, build_inventory
 from plumb.kind import decide_kind
 from plumb.source import SourceError, fetch
-from plumb.system import find_settings, find_system
+from plumb.system import Role, find_settings, find_system
 
 EVAL = Path(__file__).resolve().parent
 RESULTS = EVAL / "results"
 WORKDIR = Path.home() / ".plumb" / "repos"
 
 
+@dataclass
+class Score:
+    """Totals across all repos, for the summary line."""
+
+    checks: int = 0
+    passed: int = 0
+    notes: list[str] = field(default_factory=list[str])
+
+    def check(self, ok: bool) -> str:
+        self.checks += 1
+        self.passed += ok
+        return "yes" if ok else "**no**"
+
+
 def main() -> int:
     repos = tomllib.loads((EVAL / "repos.toml").read_text(encoding="utf-8"))["repo"]
     RESULTS.mkdir(exist_ok=True)
+    score = Score()
     rows: list[str] = []
     for entry in repos:
         name = entry["url"].rstrip("/").split("/")[-1]
@@ -42,7 +64,7 @@ def main() -> int:
         try:
             checkout = fetch(entry["url"], WORKDIR, commit=entry["commit"])
         except SourceError as error:
-            rows.append(f"| {name} | failed: {error} | | | | |")
+            rows.append(f"| {name} | failed: {error} | | | | | |")
             continue
         files = build_inventory(checkout.path)
         first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
@@ -60,43 +82,79 @@ def main() -> int:
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"
         )
 
-        components = {component_of(e.source) for e in edges} | {
-            component_of(e.target) for e in edges
-        }
-        recall = _module_recall(name, components)
+        key = _answer_key(name)
+        expect = cast("dict[str, object]", key.get("expect", {}))
+        components = {component_of(e.source) for e in edges}
+        components |= {component_of(e.target) for e in edges}
+        routes = sum(1 for e in entry_points if e.kind is EntryKind.HTTP)
+        stores = sorted(p.name for p in system.of(Role.STORE))
         seconds = time.monotonic() - started
+
+        if not expect:
+            rows.append(
+                f"| {name} | {decision.kind.value} | | | {routes} | {', '.join(stores)} | |"
+            )
+            continue
+        kind_ok = score.check(decision.kind.value == expect["kind"])
+        want_routes = cast("int", expect["http_routes"])
+        routes_ok = score.check(routes == want_routes)
+        want_stores = sorted(cast("list[str]", expect["stores"]))
+        stores_ok = score.check(stores == want_stores)
         rows.append(
-            f"| {name} | {len(first_party)} | {len(edges)} | {len(facts.facts)} "
-            f"| {recall} | {seconds:.1f} s |"
+            f"| {name} | {decision.kind.value} ({kind_ok}) "
+            f"| {_module_recall(key, components)} "
+            f"| {routes} of {want_routes} ({routes_ok}) "
+            f"| {_compare(stores, want_stores)} ({stores_ok}) "
+            f"| {len(facts.facts)} | {seconds:.1f} s |"
         )
         print(rows[-1], file=sys.stderr)
 
     table = "\n".join(
         [
-            "| Repo | First-party files | Import links | Facts | Module recall | Time |",
-            "|------|------------------:|-------------:|------:|---------------|-----:|",
+            "| Repo | Kind | Modules | HTTP routes | Stores | Facts | Time |",
+            "|------|------|---------|-------------|--------|------:|-----:|",
             *rows,
         ]
     )
+    summary = f"{score.passed} of {score.checks} checks passed."
     (RESULTS / "summary.md").write_text(
         "# Evaluation results\n\nGenerated by `eval/run.py`. Times include cloning.\n\n"
-        + table
-        + "\n",
+        f"{summary}\n\n{table}\n",
         encoding="utf-8",
     )
     print(table)
+    print(summary)
     return 0
 
 
-def _module_recall(name: str, components: set[str]) -> str:
-    key = EVAL / "answers" / f"{name}.toml"
-    if not key.exists():
-        return "no key"
-    modules = [m["path"] for m in tomllib.loads(key.read_text(encoding="utf-8")).get("modules", [])]
+def _answer_key(name: str) -> dict[str, object]:
+    path = EVAL / "answers" / f"{name}.toml"
+    if not path.exists():
+        return {}
+    return tomllib.loads(path.read_text(encoding="utf-8"))
+
+
+def _module_recall(key: dict[str, object], components: set[str]) -> str:
+    modules = [str(m["path"]) for m in cast("list[dict[str, object]]", key.get("modules", []))]
+    if not modules:
+        return "none listed"
     found = [m for m in modules if m in components]
     missing = sorted(set(modules) - set(found))
     note = f" (missing {', '.join(missing)})" if missing else ""
     return f"{len(found)}/{len(modules)}{note}"
+
+
+def _compare(found: list[str], wanted: list[str]) -> str:
+    if found == wanted:
+        return ", ".join(found) or "none"
+    parts: list[str] = []
+    extra = sorted(set(found) - set(wanted))
+    missing = sorted(set(wanted) - set(found))
+    if extra:
+        parts.append(f"extra {', '.join(extra)}")
+    if missing:
+        parts.append(f"missing {', '.join(missing)}")
+    return "; ".join(parts)
 
 
 if __name__ == "__main__":
