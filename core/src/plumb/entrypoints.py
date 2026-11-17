@@ -396,9 +396,9 @@ def js_entry_points(path: str, source: bytes) -> list[EntryPoint]:
         if route is None or not route.startswith("/") or method == "use":
             continue
         verb = "ANY" if method == "all" else method.upper()
-        found.append(
-            EntryPoint(EntryKind.HTTP, f"{verb} {route}", path, node.start_point.row + 1, "express")
-        )
+        line = node.start_point.row + 1
+        entry = EntryPoint(EntryKind.HTTP, f"{verb} {route}", path, line, "express")
+        found.append(replace(entry, router=owner))
     return sorted(found, key=lambda e: e.line)
 
 
@@ -498,10 +498,15 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
             found.extend(package_json_entry_points(info.path, (repo / info.path).read_bytes()))
     if any("${" in e.name for e in found):
         found = resolve_placeholders(found, load_spring_settings(repo, files))
-    if any(e.router for e in found):
-        from plumb.mounts import join_mounts  # mounts builds on this module
+    # These modules build on this one, so they are imported here.
+    if any(e.router and e.framework in ("fastapi", "flask") for e in found):
+        from plumb.mounts import join_mounts
 
         found = join_mounts(repo, files, found)
+    if any(e.router and e.framework == "express" for e in found):
+        from plumb.expressmounts import join_express_mounts
+
+        found = join_express_mounts(repo, files, found)
     return found
 
 

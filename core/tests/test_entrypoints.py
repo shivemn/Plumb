@@ -235,3 +235,31 @@ def test_setup_cfg_and_setup_py_scripts() -> None:
     ]
     py = b'setup(entry_points={"console_scripts": ["shop = shop.cli:main"]})\n'
     assert [e.name for e in setup_scripts("setup.py", py)] == ["shop (shop.cli:main)"]
+
+
+def test_express_prefixes_across_files(make_repo: Callable[[str], RepoBuilder]) -> None:
+    repo = make_repo("api")
+    repo.commit(
+        {
+            "src/main.ts": (
+                "import routes from './app/routes';\n"
+                "const app = express();\n"
+                "app.use(routes);\n"
+                "app.get('/', status);\n"
+            ),
+            "src/app/routes.ts": (
+                "import tags from './tag.controller';\n"
+                "import users from './user.controller';\n"
+                "const api = Router().use(tags).use('/people', users);\n"
+                "export default Router().use('/api', api);\n"
+            ),
+            "src/app/tag.controller.ts": (
+                "const router = Router();\nrouter.get('/tags', list);\nexport default router;\n"
+            ),
+            "src/app/user.controller.ts": (
+                "const router = Router();\nrouter.post('/:id', save);\nexport default router;\n"
+            ),
+        }
+    )
+    names = sorted(e.name for e in find_entry_points(repo.path, build_inventory(repo.path)))
+    assert names == ["GET /", "GET /api/tags", "POST /api/people/:id"]
