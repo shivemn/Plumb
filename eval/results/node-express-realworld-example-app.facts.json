@@ -271,7 +271,7 @@
     {
       "id": "f16",
       "topic": "entry_points",
-      "statement": "HTTP route GET /articles (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route GET /api/articles (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -284,7 +284,7 @@
     {
       "id": "f17",
       "topic": "entry_points",
-      "statement": "HTTP route GET /articles/feed (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route GET /api/articles/feed (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -297,7 +297,7 @@
     {
       "id": "f18",
       "topic": "entry_points",
-      "statement": "HTTP route POST /articles (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route POST /api/articles (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -310,7 +310,7 @@
     {
       "id": "f19",
       "topic": "entry_points",
-      "statement": "HTTP route GET /articles/:slug (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route GET /api/articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -323,7 +323,7 @@
     {
       "id": "f20",
       "topic": "entry_points",
-      "statement": "HTTP route PUT /articles/:slug (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route PUT /api/articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -336,7 +336,7 @@
     {
       "id": "f21",
       "topic": "entry_points",
-      "statement": "HTTP route DELETE /articles/:slug (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route DELETE /api/articles/:slug (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -349,7 +349,7 @@
     {
       "id": "f22",
       "topic": "entry_points",
-      "statement": "HTTP route GET /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route GET /api/articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -362,7 +362,7 @@
     {
       "id": "f23",
       "topic": "entry_points",
-      "statement": "HTTP route POST /articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route POST /api/articles/:slug/comments (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -375,7 +375,7 @@
     {
       "id": "f24",
       "topic": "entry_points",
-      "statement": "HTTP route DELETE /articles/:slug/comments/:id (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route DELETE /api/articles/:slug/comments/:id (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -388,7 +388,7 @@
     {
       "id": "f25",
       "topic": "entry_points",
-      "statement": "HTTP route POST /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route POST /api/articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -401,7 +401,7 @@
     {
       "id": "f26",
       "topic": "entry_points",
-      "statement": "HTTP route DELETE /articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
+      "statement": "HTTP route DELETE /api/articles/:slug/favorite (express) in src/app/routes/article/article.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -414,7 +414,7 @@
     {
       "id": "f27",
       "topic": "entry_points",
-      "statement": "HTTP route POST /users (express) in src/app/routes/auth/auth.controller.ts",
+      "statement": "HTTP route POST /api/users (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -427,7 +427,7 @@
     {
       "id": "f28",
       "topic": "entry_points",
-      "statement": "HTTP route POST /users/login (express) in src/app/routes/auth/auth.controller.ts",
+      "statement": "HTTP route POST /api/users/login (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -440,7 +440,7 @@
     {
       "id": "f29",
       "topic": "entry_points",
-      "statement": "HTTP route GET /user (express) in src/app/routes/auth/auth.controller.ts",
+      "statement": "HTTP route GET /api/user (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -453,7 +453,7 @@
     {
       "id": "f30",
       "topic": "entry_points",
-      "statement": "HTTP route PUT /user (express) in src/app/routes/auth/auth.controller.ts",
+      "statement": "HTTP route PUT /api/user (express) in src/app/routes/auth/auth.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -466,7 +466,7 @@
     {
       "id": "f31",
       "topic": "entry_points",
-      "statement": "HTTP route GET /profiles/:username (express) in src/app/routes/profile/profile.controller.ts",
+      "statement": "HTTP route GET /api/profiles/:username (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -479,7 +479,7 @@
     {
       "id": "f32",
       "topic": "entry_points",
-      "statement": "HTTP route POST /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
+      "statement": "HTTP route POST /api/profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -492,7 +492,7 @@
     {
       "id": "f33",
       "topic": "entry_points",
-      "statement": "HTTP route DELETE /profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
+      "statement": "HTTP route DELETE /api/profiles/:username/follow (express) in src/app/routes/profile/profile.controller.ts",
       "evidence": [
         {
           "kind": "file",
@@ -505,7 +505,7 @@
     {
       "id": "f34",
       "topic": "entry_points",
-      "statement": "HTTP route GET /tags (express) in src/app/routes/tag/tag.controller.ts",
+      "statement": "HTTP route GET /api/tags (express) in src/app/routes/tag/tag.controller.ts",
       "evidence": [
         {
           "kind": "file",

@@ -13,6 +13,8 @@ scored on:
 - routes: HTTP routes found against the number in the key
 - stores: databases, caches and queues found against the key's list, with
   extra and missing names spelled out
+
+It exits with 1 if any check fails, so CI can run it.
 """
 
 from __future__ import annotations
@@ -121,7 +123,8 @@ def main() -> int:
     )
     print(table)
     print(summary)
-    return 0
+    failed = (score.checks - score.passed) + (held_out.checks - held_out.passed)
+    return 1 if failed else 0
 
 
 def _answer_key(name: str) -> dict[str, object]:

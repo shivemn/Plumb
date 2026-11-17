@@ -968,6 +968,110 @@
     },
     {
       "id": "f66",
+      "topic": "contribute",
+      "statement": "CI step \"Install\" in .github/workflows/ci.yml runs: python -m pip install --upgrade pip",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f67",
+      "topic": "contribute",
+      "statement": "CI step \"Install\" in .github/workflows/ci.yml runs: pip install -e \".[dev,api,postgres]\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f68",
+      "topic": "contribute",
+      "statement": "CI step \"Lint\" in .github/workflows/ci.yml runs: ruff check .",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f69",
+      "topic": "contribute",
+      "statement": "CI step \"Type check\" in .github/workflows/ci.yml runs: mypy",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f70",
+      "topic": "contribute",
+      "statement": "CI step \"Tests\" in .github/workflows/ci.yml runs: pytest",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f71",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm ci",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 74,
+          "end_line": 74
+        }
+      ]
+    },
+    {
+      "id": "f72",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm test",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 75,
+          "end_line": 75
+        }
+      ]
+    },
+    {
+      "id": "f73",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm run build",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 76,
+          "end_line": 76
+        }
+      ]
+    },
+    {
+      "id": "f74",
       "topic": "structure",
       "statement": "Code in web/src/components uses code in web/src/lib (82 references)",
       "evidence": [
@@ -992,7 +1096,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f75",
       "topic": "structure",
       "statement": "Code in tests/unit uses code in src/marketlab (30 references)",
       "evidence": [
@@ -1017,7 +1121,7 @@
       ]
     },
     {
-      "id": "f68",
+      "id": "f76",
       "topic": "structure",
       "statement": "Code in tests/unit uses code in src/marketlab/core (22 references)",
       "evidence": [
@@ -1042,7 +1146,7 @@
       ]
     },
     {
-      "id": "f69",
+      "id": "f77",
       "topic": "structure",
       "statement": "Code in tests/unit uses code in src/marketlab/ledger (19 references)",
       "evidence": [
@@ -1067,7 +1171,7 @@
       ]
     },
     {
-      "id": "f70",
+      "id": "f78",
       "topic": "structure",
       "statement": "Code in tests/unit uses code in src/marketlab/sim (11 references)",
       "evidence": [
@@ -1092,7 +1196,7 @@
       ]
     },
     {
-      "id": "f71",
+      "id": "f79",
       "topic": "structure",
       "statement": "Code in tests/unit uses code in tests (10 references)",
       "evidence": [
@@ -1117,7 +1221,7 @@
       ]
     },
     {
-      "id": "f72",
+      "id": "f80",
       "topic": "structure",
       "statement": "Code in web/src uses code in web/src/components (9 references)",
       "evidence": [
@@ -1142,7 +1246,7 @@
       ]
     },
     {
-      "id": "f73",
+      "id": "f81",
       "topic": "structure",
       "statement": "Code in src/marketlab uses code in src/marketlab/core (8 references)",
       "evidence": [
@@ -1167,7 +1271,7 @@
       ]
     },
     {
-      "id": "f74",
+      "id": "f82",
       "topic": "structure",
       "statement": "Code in tests/property uses code in tests (7 references)",
       "evidence": [
@@ -1192,7 +1296,7 @@
       ]
     },
     {
-      "id": "f75",
+      "id": "f83",
       "topic": "structure",
       "statement": "Code in tests/unit uses code in src/marketlab/api (7 references)",
       "evidence": [
@@ -1217,7 +1321,7 @@
       ]
     },
     {
-      "id": "f76",
+      "id": "f84",
       "topic": "structure",
       "statement": "Code in web/src uses code in web/src/lib (7 references)",
       "evidence": [
@@ -1242,7 +1346,7 @@
       ]
     },
     {
-      "id": "f77",
+      "id": "f85",
       "topic": "structure",
       "statement": "Code in src/marketlab/api uses code in src/marketlab (6 references)",
       "evidence": [
@@ -1267,7 +1371,7 @@
       ]
     },
     {
-      "id": "f78",
+      "id": "f86",
       "topic": "structure",
       "statement": "Code in tests/property uses code in src/marketlab/core (6 references)",
       "evidence": [
@@ -1292,7 +1396,7 @@
       ]
     },
     {
-      "id": "f79",
+      "id": "f87",
       "topic": "structure",
       "statement": "Code in src/marketlab uses code in src/marketlab/sim (5 references)",
       "evidence": [
@@ -1317,7 +1421,7 @@
       ]
     },
     {
-      "id": "f80",
+      "id": "f88",
       "topic": "structure",
       "statement": "Code in tests/property uses code in src/marketlab (4 references)",
       "evidence": [
@@ -1342,7 +1446,7 @@
       ]
     },
     {
-      "id": "f81",
+      "id": "f89",
       "topic": "structure",
       "statement": "src/marketlab and src/marketlab/api each use the other",
       "evidence": [
@@ -1361,7 +1465,7 @@
       ]
     },
     {
-      "id": "f82",
+      "id": "f90",
       "topic": "structure",
       "statement": "src/marketlab and src/marketlab/ledger each use the other",
       "evidence": [
@@ -1380,7 +1484,7 @@
       ]
     },
     {
-      "id": "f83",
+      "id": "f91",
       "topic": "structure",
       "statement": "src/marketlab and src/marketlab/sim each use the other",
       "evidence": [
@@ -1399,7 +1503,7 @@
       ]
     },
     {
-      "id": "f84",
+      "id": "f92",
       "topic": "structure",
       "statement": "tests and tests/unit each use the other",
       "evidence": [
@@ -1418,7 +1522,7 @@
       ]
     },
     {
-      "id": "f85",
+      "id": "f93",
       "topic": "structure",
       "statement": "src/marketlab/core/__init__.py is used by 42 other files",
       "evidence": [
@@ -1443,7 +1547,7 @@
       ]
     },
     {
-      "id": "f86",
+      "id": "f94",
       "topic": "structure",
       "statement": "web/src/lib/format.ts is used by 25 other files",
       "evidence": [
@@ -1468,7 +1572,7 @@
       ]
     },
     {
-      "id": "f87",
+      "id": "f95",
       "topic": "structure",
       "statement": "web/src/lib/market.ts is used by 24 other files",
       "evidence": [
@@ -1493,7 +1597,7 @@
       ]
     },
     {
-      "id": "f88",
+      "id": "f96",
       "topic": "structure",
       "statement": "src/marketlab/ledger/__init__.py is used by 19 other files",
       "evidence": [
@@ -1518,7 +1622,7 @@
       ]
     },
     {
-      "id": "f89",
+      "id": "f97",
       "topic": "structure",
       "statement": "tests/helpers.py is used by 17 other files",
       "evidence": [
@@ -1543,7 +1647,7 @@
       ]
     },
     {
-      "id": "f90",
+      "id": "f98",
       "topic": "history",
       "statement": "32 commits between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1562,7 +1666,7 @@
       ]
     },
     {
-      "id": "f91",
+      "id": "f99",
       "topic": "history",
       "statement": "web/src/components/PracticeView.tsx changed in 14 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1587,7 +1691,7 @@
       ]
     },
     {
-      "id": "f92",
+      "id": "f100",
       "topic": "history",
       "statement": "src/marketlab/api/app.py changed in 13 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1612,7 +1716,7 @@
       ]
     },
     {
-      "id": "f93",
+      "id": "f101",
       "topic": "history",
       "statement": "web/src/desk.css changed in 10 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1637,7 +1741,7 @@
       ]
     },
     {
-      "id": "f94",
+      "id": "f102",
       "topic": "history",
       "statement": "web/src/App.tsx changed in 9 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1662,7 +1766,7 @@
       ]
     },
     {
-      "id": "f95",
+      "id": "f103",
       "topic": "history",
       "statement": "src/marketlab/ledger/ledger.py changed in 8 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1687,7 +1791,7 @@
       ]
     },
     {
-      "id": "f96",
+      "id": "f104",
       "topic": "history",
       "statement": "tests/unit/test_api_worlds.py changed in 8 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1712,7 +1816,7 @@
       ]
     },
     {
-      "id": "f97",
+      "id": "f105",
       "topic": "history",
       "statement": "web/src/components/PriceChart.tsx changed in 8 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1737,7 +1841,7 @@
       ]
     },
     {
-      "id": "f98",
+      "id": "f106",
       "topic": "history",
       "statement": "src/marketlab/cli.py changed in 7 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1762,7 +1866,7 @@
       ]
     },
     {
-      "id": "f99",
+      "id": "f107",
       "topic": "history",
       "statement": "src/marketlab/world.py changed in 7 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1787,7 +1891,7 @@
       ]
     },
     {
-      "id": "f100",
+      "id": "f108",
       "topic": "history",
       "statement": "web/src/lib/world.ts changed in 7 commits by 1 author between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1812,7 +1916,7 @@
       ]
     },
     {
-      "id": "f101",
+      "id": "f109",
       "topic": "history",
       "statement": "web/src/components/PracticeView.tsx and web/src/desk.css changed in the same commit 7 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1831,7 +1935,7 @@
       ]
     },
     {
-      "id": "f102",
+      "id": "f110",
       "topic": "history",
       "statement": "src/marketlab/ledger/ledger.py and tests/unit/test_ledger.py changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1850,7 +1954,7 @@
       ]
     },
     {
-      "id": "f103",
+      "id": "f111",
       "topic": "history",
       "statement": "src/marketlab/world.py and tests/unit/test_api_worlds.py changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1869,7 +1973,7 @@
       ]
     },
     {
-      "id": "f104",
+      "id": "f112",
       "topic": "history",
       "statement": "web/src/components/PracticeView.tsx and web/src/lib/world.ts changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1888,7 +1992,7 @@
       ]
     },
     {
-      "id": "f105",
+      "id": "f113",
       "topic": "history",
       "statement": "web/src/components/PracticeView.tsx and web/src/components/PriceChart.tsx changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1907,7 +2011,7 @@
       ]
     },
     {
-      "id": "f106",
+      "id": "f114",
       "topic": "history",
       "statement": "web/src/App.tsx and web/src/components/PracticeView.tsx changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1926,7 +2030,7 @@
       ]
     },
     {
-      "id": "f107",
+      "id": "f115",
       "topic": "history",
       "statement": "src/marketlab/api/app.py and web/src/components/PracticeView.tsx changed in the same commit 6 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1945,7 +2049,7 @@
       ]
     },
     {
-      "id": "f108",
+      "id": "f116",
       "topic": "history",
       "statement": "src/marketlab/cli.py and src/marketlab/ledger/ledger.py changed in the same commit 5 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1964,7 +2068,7 @@
       ]
     },
     {
-      "id": "f109",
+      "id": "f117",
       "topic": "history",
       "statement": "src/marketlab/world.py and web/src/components/PracticeView.tsx changed in the same commit 5 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [
@@ -1983,7 +2087,7 @@
       ]
     },
     {
-      "id": "f110",
+      "id": "f118",
       "topic": "history",
       "statement": "src/marketlab/api/app.py and src/marketlab/ledger/ledger.py changed in the same commit 5 times between 09 Aug 2026 and 07 Nov 2026",
       "evidence": [

@@ -576,6 +576,318 @@
     },
     {
       "id": "f40",
+      "topic": "contribute",
+      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: python -m pip install pyperf>=2.3.0",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "topic": "contribute",
+      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: python extras/profiling/run.py --fresh --complex  --min-speed=6 --file output.txt",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": 25,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "contribute",
+      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=$(cat output.txt)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "contribute",
+      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=\"${body//'%'/'%25'}\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "contribute",
+      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=\"${body//$'\\n'/'%0A'}\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "contribute",
+      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=\"${body//$'\\r'/'%0D'}\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/benchmark.yml",
+          "start_line": 29,
+          "end_line": 29
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/code-style.yml runs: make venv",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/code-style.yml",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/code-style.yml runs: make codestyle",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/code-style.yml",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/content.yml runs: make content",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/content.yml",
+          "start_line": 14,
+          "end_line": 14
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make install",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/coverage.yml",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make test-cover",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/coverage.yml",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make codecov-upload",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/coverage.yml",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make test-dist",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/coverage.yml",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "topic": "contribute",
+      "statement": "CI step \"Install the linter\" in .github/workflows/docs-check-markdown.yml runs: sudo gem install mdl",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docs-check-markdown.yml",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "topic": "contribute",
+      "statement": "CI step \"Check files\" in .github/workflows/docs-check-markdown.yml runs: make doc-check",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docs-check-markdown.yml",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "topic": "contribute",
+      "statement": "CI step \"Install HTTPie\" in .github/workflows/docs-deploy.yml runs: sudo pip install httpie",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docs-deploy.yml",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "topic": "contribute",
+      "statement": "CI step \"Trigger new documentation build\" in .github/workflows/docs-deploy.yml runs: http --ignore-stdin POST ${{ secrets.DOCS_UPDATE_VERCEL_HOOK }}",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docs-deploy.yml",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "topic": "contribute",
+      "statement": "CI step \"Build the Choco package\" in .github/workflows/release-choco.yml runs: choco pack -v",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "topic": "contribute",
+      "statement": "CI step \"Check the Choco package\" in .github/workflows/release-choco.yml runs: choco info httpie -s .",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "topic": "contribute",
+      "statement": "CI step \"Local installation\" in .github/workflows/release-choco.yml runs: choco install httpie -y -dv -s \"'.;https://community.chocolatey.org/api/v2/'\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "topic": "contribute",
+      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: $env:ChocolateyInstall = Convert-Path \"$((Get-Command choco).Path)\\..\\..\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 44,
+          "end_line": 44
+        }
+      ]
+    },
+    {
+      "id": "f61",
+      "topic": "contribute",
+      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: Import-Module \"$env:ChocolateyInstall\\helpers\\chocolateyProfile.psm1\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 45,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "f62",
+      "topic": "contribute",
+      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: refreshenv",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 46,
+          "end_line": 46
+        }
+      ]
+    },
+    {
+      "id": "f63",
+      "topic": "contribute",
+      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: http --version",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/release-choco.yml",
+          "start_line": 48,
+          "end_line": 48
+        }
+      ]
+    },
+    {
+      "id": "f64",
       "topic": "structure",
       "statement": "Code in tests uses code in httpie (43 references)",
       "evidence": [
@@ -600,7 +912,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f65",
       "topic": "structure",
       "statement": "Code in tests uses code in tests/utils (35 references)",
       "evidence": [
@@ -625,7 +937,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f66",
       "topic": "structure",
       "statement": "Code in tests uses code in httpie/cli (19 references)",
       "evidence": [
@@ -650,7 +962,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f67",
       "topic": "structure",
       "statement": "Code in tests uses code in tests/fixtures (15 references)",
       "evidence": [
@@ -675,7 +987,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f68",
       "topic": "structure",
       "statement": "Code in httpie/manager/tasks uses code in httpie (12 references)",
       "evidence": [
@@ -700,7 +1012,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f69",
       "topic": "structure",
       "statement": "Code in httpie/output uses code in httpie (10 references)",
       "evidence": [
@@ -725,7 +1037,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f70",
       "topic": "structure",
       "statement": "Code in tests uses code in httpie/plugins (10 references)",
       "evidence": [
@@ -750,7 +1062,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f71",
       "topic": "structure",
       "statement": "Code in httpie uses code in httpie/cli (9 references)",
       "evidence": [
@@ -775,7 +1087,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f72",
       "topic": "structure",
       "statement": "Code in tests/utils uses code in httpie (9 references)",
       "evidence": [
@@ -800,7 +1112,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f73",
       "topic": "structure",
       "statement": "Code in httpie/internal uses code in httpie (8 references)",
       "evidence": [
@@ -825,7 +1137,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f74",
       "topic": "structure",
       "statement": "Code in httpie/cli uses code in httpie (7 references)",
       "evidence": [
@@ -850,7 +1162,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f75",
       "topic": "structure",
       "statement": "Code in httpie/manager uses code in httpie (7 references)",
       "evidence": [
@@ -875,7 +1187,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f76",
       "topic": "structure",
       "statement": "Code in httpie/output/formatters uses code in httpie/plugins (4 references)",
       "evidence": [
@@ -900,7 +1212,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f77",
       "topic": "structure",
       "statement": "Code in httpie/plugins uses code in httpie/output/formatters (4 references)",
       "evidence": [
@@ -925,7 +1237,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f78",
       "topic": "structure",
       "statement": "Code in tests uses code in httpie/output/formatters (4 references)",
       "evidence": [
@@ -950,7 +1262,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f79",
       "topic": "structure",
       "statement": "httpie and httpie/cli each use the other",
       "evidence": [
@@ -969,7 +1281,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f80",
       "topic": "structure",
       "statement": "httpie and httpie/internal each use the other",
       "evidence": [
@@ -988,7 +1300,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f81",
       "topic": "structure",
       "statement": "httpie and httpie/legacy each use the other",
       "evidence": [
@@ -1007,7 +1319,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f82",
       "topic": "structure",
       "statement": "httpie and httpie/output each use the other",
       "evidence": [
@@ -1026,7 +1338,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f83",
       "topic": "structure",
       "statement": "httpie and httpie/output/ui each use the other",
       "evidence": [
@@ -1045,7 +1357,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f84",
       "topic": "structure",
       "statement": "httpie and httpie/plugins each use the other",
       "evidence": [
@@ -1064,7 +1376,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f85",
       "topic": "structure",
       "statement": "httpie/cli and httpie/output/ui each use the other",
       "evidence": [
@@ -1083,7 +1395,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f86",
       "topic": "structure",
       "statement": "httpie/manager and httpie/manager/tasks each use the other",
       "evidence": [
@@ -1102,7 +1414,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f87",
       "topic": "structure",
       "statement": "httpie/output and httpie/output/formatters each use the other",
       "evidence": [
@@ -1121,7 +1433,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f88",
       "topic": "structure",
       "statement": "httpie/output/formatters and httpie/plugins each use the other",
       "evidence": [
@@ -1140,7 +1452,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f89",
       "topic": "structure",
       "statement": "tests/utils/__init__.py is used by 35 other files",
       "evidence": [
@@ -1165,7 +1477,7 @@
       ]
     },
     {
-      "id": "f66",
+      "id": "f90",
       "topic": "structure",
       "statement": "httpie/context.py is used by 26 other files",
       "evidence": [
@@ -1190,7 +1502,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f91",
       "topic": "structure",
       "statement": "httpie/status.py is used by 24 other files",
       "evidence": [
@@ -1215,7 +1527,7 @@
       ]
     },
     {
-      "id": "f68",
+      "id": "f92",
       "topic": "structure",
       "statement": "httpie/utils.py is used by 19 other files",
       "evidence": [
@@ -1240,7 +1552,7 @@
       ]
     },
     {
-      "id": "f69",
+      "id": "f93",
       "topic": "structure",
       "statement": "httpie/compat.py is used by 17 other files",
       "evidence": [
@@ -1265,7 +1577,7 @@
       ]
     },
     {
-      "id": "f70",
+      "id": "f94",
       "topic": "history",
       "statement": "11 commits between 18 Sep 2024 and 17 Dec 2024",
       "evidence": [
@@ -1284,7 +1596,7 @@
       ]
     },
     {
-      "id": "f71",
+      "id": "f95",
       "topic": "history",
       "statement": "httpie/ssl_.py changed in 3 commits by 2 authors between 18 Sep 2024 and 17 Dec 2024",
       "evidence": [

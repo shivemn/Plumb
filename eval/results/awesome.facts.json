@@ -47,6 +47,71 @@
     },
     {
       "id": "f3",
+      "topic": "contribute",
+      "statement": "CI step \"awesome-lint\" in .github/workflows/main.yml runs: ./.github/workflows/repo_linter.sh",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/main.yml",
+          "start_line": 14,
+          "end_line": 14
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "topic": "contribute",
+      "statement": "Contribution guide contributing.md has a section \"Adding an awesome list\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "contributing.md",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "topic": "contribute",
+      "statement": "Contribution guide contributing.md has a section \"Creating your own awesome list\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "contributing.md",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "topic": "contribute",
+      "statement": "Contribution guide contributing.md has a section \"Adding something to an awesome list\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "contributing.md",
+          "start_line": 13,
+          "end_line": 13
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "topic": "contribute",
+      "statement": "Contribution guide contributing.md has a section \"Updating your Pull Request\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "contributing.md",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f8",
       "topic": "history",
       "statement": "7 commits between 04 Jun 2026 and 02 Sep 2026",
       "evidence": [

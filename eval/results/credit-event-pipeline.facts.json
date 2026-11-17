@@ -649,6 +649,45 @@
     },
     {
       "id": "f41",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: mvn -B verify",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm ci",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm run build",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 36,
+          "end_line": 36
+        }
+      ]
+    },
+    {
+      "id": "f44",
       "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src (33 references)",
       "evidence": [
@@ -673,7 +712,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f45",
       "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/components (18 references)",
       "evidence": [
@@ -698,7 +737,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f46",
       "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/model (12 references)",
       "evidence": [
@@ -723,7 +762,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f47",
       "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src/hooks (6 references)",
       "evidence": [
@@ -748,7 +787,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f48",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
@@ -773,7 +812,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f49",
       "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
@@ -798,7 +837,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f50",
       "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/hooks (4 references)",
       "evidence": [
@@ -823,7 +862,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f51",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/archive uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -848,7 +887,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f52",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -873,7 +912,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f53",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/service uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -898,7 +937,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f54",
       "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/config (4 references)",
       "evidence": [
@@ -923,7 +962,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f55",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/config uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
@@ -948,7 +987,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f56",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
@@ -973,7 +1012,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f57",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/replay uses code in src/main/java/com/shivemn/ccp/model (3 references)",
       "evidence": [
@@ -998,7 +1037,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f58",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/archive (2 references)",
       "evidence": [
@@ -1017,7 +1056,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f59",
       "topic": "structure",
       "statement": "dashboard/src and dashboard/src/components each use the other",
       "evidence": [
@@ -1036,7 +1075,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f60",
       "topic": "structure",
       "statement": "dashboard/src and dashboard/src/hooks each use the other",
       "evidence": [
@@ -1055,7 +1094,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f61",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/archive and src/main/java/com/shivemn/ccp/service each use the other",
       "evidence": [
@@ -1074,7 +1113,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f62",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/model/CreditEvent.java is used by 17 other files",
       "evidence": [
@@ -1099,7 +1138,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f63",
       "topic": "structure",
       "statement": "dashboard/src/format.ts is used by 14 other files",
       "evidence": [
@@ -1124,7 +1163,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f64",
       "topic": "structure",
       "statement": "dashboard/src/view.tsx is used by 13 other files",
       "evidence": [
@@ -1149,7 +1188,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f65",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/model/EventType.java is used by 11 other files",
       "evidence": [
@@ -1174,7 +1213,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f66",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/service/ProfileService.java is used by 9 other files",
       "evidence": [
@@ -1199,7 +1238,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f67",
       "topic": "history",
       "statement": "5 commits between 01 Aug 2026 and 30 Oct 2026",
       "evidence": [

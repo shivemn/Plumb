@@ -391,6 +391,136 @@
     },
     {
       "id": "f29",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/nightly.yaml runs: uv run --locked --no-default-groups --group dev tox run",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/nightly.yaml",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/nightly.yaml runs: uv sync --all-extras",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/nightly.yaml",
+          "start_line": 64,
+          "end_line": 64
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/nightly.yaml runs: uv run --with \"git+https://github.com/pallets/click.git@${CLICK_REF}\" -- pytest",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/nightly.yaml",
+          "start_line": 67,
+          "end_line": 67
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/pre-commit.yaml runs: uv run --locked --no-default-groups --group pre-commit pre-commit run --show-diff-on-failure --color=always --all-files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/pre-commit.yaml",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/publish.yaml runs: uv build",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yaml",
+          "start_line": 25,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "contribute",
+      "statement": "CI step \"create release\" in .github/workflows/publish.yaml runs: gh release create --draft --repo ${GITHUB_REPOSITORY} ${GITHUB_REF_NAME} dist/*",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yaml",
+          "start_line": 43,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/tests.yaml runs: uv run --locked --no-default-groups --group dev tox run -e typing",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/tests.yaml",
+          "start_line": 59,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Extra Test Environments\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Code Style\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 33,
+          "end_line": 33
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Formatting\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 43,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "id": "f39",
       "topic": "structure",
       "statement": "Code in tests uses code in src/click (74 references)",
       "evidence": [
@@ -415,7 +545,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f40",
       "topic": "structure",
       "statement": "Code in tests/test_utils uses code in src/click (20 references)",
       "evidence": [
@@ -440,7 +570,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f41",
       "topic": "structure",
       "statement": "Code in tests/typing uses code in src/click (13 references)",
       "evidence": [
@@ -465,7 +595,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f42",
       "topic": "structure",
       "statement": "Code in tests/test_types uses code in src/click (8 references)",
       "evidence": [
@@ -490,7 +620,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f43",
       "topic": "structure",
       "statement": "Code in tests/test_exceptions uses code in src/click (1 reference)",
       "evidence": [
@@ -503,7 +633,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f44",
       "topic": "structure",
       "statement": "src/click/__init__.py is used by 51 other files",
       "evidence": [
@@ -528,7 +658,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f45",
       "topic": "structure",
       "statement": "src/click/_compat.py is used by 17 other files",
       "evidence": [
@@ -553,7 +683,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f46",
       "topic": "structure",
       "statement": "src/click/core.py is used by 12 other files",
       "evidence": [
@@ -578,7 +708,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f47",
       "topic": "structure",
       "statement": "src/click/utils.py is used by 12 other files",
       "evidence": [
@@ -603,7 +733,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f48",
       "topic": "structure",
       "statement": "src/click/exceptions.py is used by 9 other files",
       "evidence": [
@@ -628,7 +758,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f49",
       "topic": "history",
       "statement": "48 commits between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -647,7 +777,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f50",
       "topic": "history",
       "statement": "src/click/core.py changed in 13 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -672,7 +802,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f51",
       "topic": "history",
       "statement": "tests/test_options.py changed in 9 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -697,7 +827,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f52",
       "topic": "history",
       "statement": "src/click/_termui_impl.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -722,7 +852,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f53",
       "topic": "history",
       "statement": "tests/test_arguments.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -747,7 +877,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f54",
       "topic": "history",
       "statement": "tests/test_termui.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -772,7 +902,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f55",
       "topic": "history",
       "statement": "tests/test_deprecations.py changed in 4 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -797,7 +927,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f56",
       "topic": "history",
       "statement": "tests/test_basic.py changed in 3 commits by 2 authors between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -822,7 +952,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f57",
       "topic": "history",
       "statement": "src/click/testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -847,7 +977,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f58",
       "topic": "history",
       "statement": "tests/test_testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -872,7 +1002,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f59",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_options.py changed in the same commit 8 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -891,7 +1021,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f60",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_arguments.py changed in the same commit 7 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -910,7 +1040,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f61",
       "topic": "history",
       "statement": "src/click/_termui_impl.py and tests/test_termui.py changed in the same commit 6 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -929,7 +1059,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f62",
       "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_options.py changed in the same commit 5 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -948,7 +1078,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f63",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -967,7 +1097,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f64",
       "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -986,7 +1116,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f65",
       "topic": "history",
       "statement": "tests/test_deprecations.py and tests/test_options.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1005,7 +1135,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f66",
       "topic": "history",
       "statement": "src/click/testing.py and tests/test_testing.py changed in the same commit 3 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [

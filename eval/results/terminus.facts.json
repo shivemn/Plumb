@@ -252,6 +252,292 @@
     },
     {
       "id": "f16",
+      "topic": "contribute",
+      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm ci",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 17,
+          "end_line": 17
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "topic": "contribute",
+      "statement": "CI step \"Validate content\" in .github/workflows/ci.yml runs: npm run validate",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 19,
+          "end_line": 19
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "topic": "contribute",
+      "statement": "CI step \"Test path engine\" in .github/workflows/ci.yml runs: npm test",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "topic": "contribute",
+      "statement": "CI step \"Build site\" in .github/workflows/ci.yml runs: npx astro build",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/ci.yml",
+          "start_line": 23,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "topic": "contribute",
+      "statement": "CI step \"Check every link\" in .github/workflows/link-check.yml runs: npx tsx scripts/check-links.ts --markdown link-report.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "topic": "contribute",
+      "statement": "CI step \"Open or update the link-check issue\" in .github/workflows/link-check.yml runs: title=\"Broken links found by the monthly check\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 36,
+          "end_line": 36
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "topic": "contribute",
+      "statement": "CI step \"Open or update the link-check issue\" in .github/workflows/link-check.yml runs: gh label create links --color d93f0b --description \"Dead or moved links\" 2>/dev/null || true",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 37,
+          "end_line": 37
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "topic": "contribute",
+      "statement": "CI step \"Open or update the link-check issue\" in .github/workflows/link-check.yml runs: number=$(gh issue list --state open --label links --search \"in:title \\\"$title\\\"\" --json number --jq '.[0].number')",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 38,
+          "end_line": 38
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "topic": "contribute",
+      "statement": "CI step \"Open or update the link-check issue\" in .github/workflows/link-check.yml runs: gh issue comment \"$number\" --body-file link-report.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 40,
+          "end_line": 40
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "topic": "contribute",
+      "statement": "CI step \"Open or update the link-check issue\" in .github/workflows/link-check.yml runs: else",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "topic": "contribute",
+      "statement": "CI step \"Open or update the link-check issue\" in .github/workflows/link-check.yml runs: gh issue create --title \"$title\" --label links --body-file link-report.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/link-check.yml",
+          "start_line": 42,
+          "end_line": 42
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: year=$(date -u +%Y)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 23,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: title=\"Re-check routes against job listings ($year)\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: gh label create evidence --color 0e8a16 --description \"Routes and real job listings\" 2>/dev/null || true",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 25,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: Once a year, every checked route is re-checked against fresh listings (see docs/ROLES.md).",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: - [ ] For each route with an `evidence` block, collect the first 30 entry-level Naukri listings again.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: - [ ] Tag them with stop ids and save `research/postings/<route>.csv`, replacing last year's.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 31,
+          "end_line": 31
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: - [ ] Run `npm run evidence -- <route>` and move stops between tiers where the shares changed.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: - [ ] Update each `evidence` block: `postings`, `collected` and `note`.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 33,
+          "end_line": 33
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: - [ ] Add routes that are still drafts, starting with the most visited.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 34,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: BODY",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "contribute",
+      "statement": "CI step \"Open the reminder issue\" in .github/workflows/yearly-postings.yml runs: gh issue create --title \"$title\" --label evidence --body-file body.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/yearly-postings.yml",
+          "start_line": 36,
+          "end_line": 36
+        }
+      ]
+    },
+    {
+      "id": "f38",
       "topic": "structure",
       "statement": "Code in src/components uses code in src/lib (23 references)",
       "evidence": [
@@ -276,7 +562,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f39",
       "topic": "structure",
       "statement": "Code in tests uses code in src/lib (21 references)",
       "evidence": [
@@ -301,7 +587,7 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f40",
       "topic": "structure",
       "statement": "Code in src/pages uses code in src/lib (15 references)",
       "evidence": [
@@ -326,7 +612,7 @@
       ]
     },
     {
-      "id": "f19",
+      "id": "f41",
       "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/lib (6 references)",
       "evidence": [
@@ -351,7 +637,7 @@
       ]
     },
     {
-      "id": "f20",
+      "id": "f42",
       "topic": "structure",
       "statement": "Code in scripts uses code in src/lib (5 references)",
       "evidence": [
@@ -376,7 +662,7 @@
       ]
     },
     {
-      "id": "f21",
+      "id": "f43",
       "topic": "structure",
       "statement": "Code in src/pages/roles uses code in src/lib (5 references)",
       "evidence": [
@@ -401,7 +687,7 @@
       ]
     },
     {
-      "id": "f22",
+      "id": "f44",
       "topic": "structure",
       "statement": "Code in src/pages uses code in src/layouts (4 references)",
       "evidence": [
@@ -426,7 +712,7 @@
       ]
     },
     {
-      "id": "f23",
+      "id": "f45",
       "topic": "structure",
       "statement": "Code in src/pages/designs uses code in src/lib (4 references)",
       "evidence": [
@@ -451,7 +737,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f46",
       "topic": "structure",
       "statement": "Code in src/pages/concepts uses code in src/lib (3 references)",
       "evidence": [
@@ -476,7 +762,7 @@
       ]
     },
     {
-      "id": "f25",
+      "id": "f47",
       "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/components (3 references)",
       "evidence": [
@@ -501,7 +787,7 @@
       ]
     },
     {
-      "id": "f26",
+      "id": "f48",
       "topic": "structure",
       "statement": "Code in src/pages uses code in src/components (2 references)",
       "evidence": [
@@ -520,7 +806,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f49",
       "topic": "structure",
       "statement": "Code in src/pages/designs uses code in src/layouts (2 references)",
       "evidence": [
@@ -539,7 +825,7 @@
       ]
     },
     {
-      "id": "f28",
+      "id": "f50",
       "topic": "structure",
       "statement": "Code in src/pages/roles uses code in src/layouts (2 references)",
       "evidence": [
@@ -558,7 +844,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f51",
       "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/layouts (2 references)",
       "evidence": [
@@ -577,7 +863,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f52",
       "topic": "structure",
       "statement": "Code in src/layouts uses code in src/components (1 reference)",
       "evidence": [
@@ -590,7 +876,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f53",
       "topic": "structure",
       "statement": "src/lib/schema.ts is used by 17 other files",
       "evidence": [
@@ -615,7 +901,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f54",
       "topic": "structure",
       "statement": "src/lib/site.ts is used by 17 other files",
       "evidence": [
@@ -640,7 +926,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f55",
       "topic": "structure",
       "statement": "src/lib/graph.ts is used by 13 other files",
       "evidence": [
@@ -665,7 +951,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f56",
       "topic": "structure",
       "statement": "src/layouts/Base.astro is used by 11 other files",
       "evidence": [
@@ -690,7 +976,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f57",
       "topic": "structure",
       "statement": "src/lib/content.ts is used by 11 other files",
       "evidence": [
@@ -715,7 +1001,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f58",
       "topic": "history",
       "statement": "68 commits between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -734,7 +1020,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f59",
       "topic": "history",
       "statement": "src/lib/schema.ts changed in 23 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -759,7 +1045,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f60",
       "topic": "history",
       "statement": "src/pages/index.astro changed in 18 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -784,7 +1070,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f61",
       "topic": "history",
       "statement": "src/layouts/Base.astro changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -809,7 +1095,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f62",
       "topic": "history",
       "statement": "src/styles/global.css changed in 17 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -834,7 +1120,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f63",
       "topic": "history",
       "statement": "src/lib/content.ts changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -859,7 +1145,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f64",
       "topic": "history",
       "statement": "src/pages/roles/[id].astro changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -884,7 +1170,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f65",
       "topic": "history",
       "statement": "src/styles/planner.css changed in 15 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -909,7 +1195,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f66",
       "topic": "history",
       "statement": "src/components/RolePlanner.tsx changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -934,7 +1220,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f67",
       "topic": "history",
       "statement": "src/pages/concepts/[id].astro changed in 12 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -959,7 +1245,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f68",
       "topic": "history",
       "statement": "src/components/NetworkMap.astro changed in 7 commits by 1 author between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -984,7 +1270,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f69",
       "topic": "history",
       "statement": "src/lib/content.ts and src/lib/schema.ts changed in the same commit 13 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1003,7 +1289,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f70",
       "topic": "history",
       "statement": "src/lib/schema.ts and src/pages/roles/[id].astro changed in the same commit 11 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1022,7 +1308,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f71",
       "topic": "history",
       "statement": "src/components/RolePlanner.tsx and src/pages/index.astro changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1041,7 +1327,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f72",
       "topic": "history",
       "statement": "src/pages/index.astro and src/styles/planner.css changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1060,7 +1346,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f73",
       "topic": "history",
       "statement": "src/layouts/Base.astro and src/pages/index.astro changed in the same commit 10 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1079,7 +1365,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f74",
       "topic": "history",
       "statement": "src/components/RolePlanner.tsx and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1098,7 +1384,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f75",
       "topic": "history",
       "statement": "src/lib/schema.ts and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1117,7 +1403,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f76",
       "topic": "history",
       "statement": "src/styles/global.css and src/styles/planner.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1136,7 +1422,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f77",
       "topic": "history",
       "statement": "src/layouts/Base.astro and src/lib/schema.ts changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
@@ -1155,7 +1441,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f78",
       "topic": "history",
       "statement": "src/layouts/Base.astro and src/styles/global.css changed in the same commit 9 times between 17 Aug 2026 and 15 Nov 2026",
       "evidence": [
