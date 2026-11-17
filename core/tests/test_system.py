@@ -1,12 +1,17 @@
 from collections.abc import Callable
 
+from plumb.deps import Dependency
 from plumb.inventory import build_inventory
 from plumb.system import (
     Clue,
     Role,
     System,
     compose_parts,
+    config_parts,
+    dependency_part,
+    dependency_parts,
     dockerfile_parts,
+    find_settings,
     find_system,
     image_part,
     procfile_parts,
@@ -92,3 +97,66 @@ def test_find_system_skips_devcontainer(make_repo: Callable[[str], RepoBuilder])
     )
     system = find_system(repo.path, build_inventory(repo.path), "shop")
     assert [p.name for p in system.of(Role.SERVICE)] == ["api"]
+
+
+def test_dependency_part() -> None:
+    assert dependency_part("psycopg") == (Role.STORE, "PostgreSQL")
+    assert dependency_part("org.springframework.kafka:spring-kafka") == (Role.STORE, "Apache Kafka")
+    assert dependency_part("@aws-sdk/client-s3") == (Role.OUTSIDE, "AWS")
+    assert dependency_part("org.mongodb:mongodb-driver-sync") == (Role.STORE, "MongoDB")
+    assert dependency_part("google-cloud-storage") == (Role.OUTSIDE, "Google Cloud")
+    assert dependency_part("fastapi") is None
+
+
+def test_dependency_parts_merge_with_compose() -> None:
+    system = System()
+    compose_parts(system, "docker-compose.yml", COMPOSE)
+    dependency_parts(system, [Dependency("python", "asyncpg", "pyproject.toml", 7)])
+    clues = system.parts[(Role.STORE, "PostgreSQL")].clues
+    assert [c.detail for c in clues] == [
+        "Compose service db, image postgres:16-alpine",
+        "dependency asyncpg",
+    ]
+
+
+def test_config_and_code_signs(make_repo: Callable[[str], RepoBuilder]) -> None:
+    repo = make_repo("shop")
+    repo.commit(
+        {
+            "src/main/resources/application.yml": (
+                "spring:\n  datasource:\n    url: jdbc:postgresql://db/shop\n"
+                "  kafka:\n    bootstrap-servers: ${KAFKA_SERVERS:localhost:9092}\n"
+            ),
+            ".env.example": "REDIS_URL=redis://localhost:6379\n",
+            "app/store.py": "import json\nimport sqlite3\n",
+            "tests/test_store.py": "DB = 'mongodb://x'\n",
+        }
+    )
+    system = System()
+    config_parts(system, repo.path, build_inventory(repo.path))
+    found = {(p.name, c.path, c.line) for p in system.parts.values() for c in p.clues}
+    assert found == {
+        ("PostgreSQL", "src/main/resources/application.yml", 3),
+        ("Apache Kafka", "src/main/resources/application.yml", 5),
+        ("Redis", ".env.example", 1),
+        ("SQLite", "app/store.py", 2),
+    }
+
+
+def test_find_settings(make_repo: Callable[[str], RepoBuilder]) -> None:
+    repo = make_repo("shop")
+    repo.commit(
+        {
+            "app/config.py": (
+                'import os\nURL = os.environ["DATABASE_URL"]\nKEY = os.getenv("API_KEY")\n'
+            ),
+            "web/src/api.ts": "const base = import.meta.env.VITE_API_URL;\n",
+            "server.js": "const port = process.env.PORT || 3000;\nconst s = `${MID}`;\n",
+            ".github/workflows/ci.yml": "run: echo ${GITHUB_SHA}\n",
+            "Dockerfile": "FROM python\nCMD serve --port ${PORT}\n",
+            "README.md": 'os.environ["NOT_CODE"]\n',
+        }
+    )
+    settings = find_settings(repo.path, build_inventory(repo.path))
+    assert list(settings) == ["API_KEY", "DATABASE_URL", "PORT", "VITE_API_URL"]
+    assert [(c.path, c.line) for c in settings["PORT"]] == [("Dockerfile", 2), ("server.js", 1)]

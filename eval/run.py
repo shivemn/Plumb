@@ -17,13 +17,14 @@ import time
 import tomllib
 from pathlib import Path
 
+from plumb.deps import find_dependencies
 from plumb.entrypoints import find_entry_points
 from plumb.facts import build_facts
 from plumb.graph import all_edges, component_of
 from plumb.history import mine
 from plumb.inventory import Category, build_inventory
 from plumb.source import SourceError, fetch
-from plumb.system import find_system
+from plumb.system import find_settings, find_system
 
 EVAL = Path(__file__).resolve().parent
 RESULTS = EVAL / "results"
@@ -47,8 +48,10 @@ def main() -> int:
         history = mine(checkout.path, keep=first_party)
         edges = all_edges(checkout.path, files)
         entry_points = find_entry_points(checkout.path, files)
-        system = find_system(checkout.path, files, checkout.name)
-        facts = build_facts(checkout, files, history, edges, entry_points, system)
+        deps = find_dependencies(checkout.path, files)
+        system = find_system(checkout.path, files, checkout.name, deps)
+        settings = find_settings(checkout.path, files)
+        facts = build_facts(checkout, files, history, edges, entry_points, system, settings)
         (RESULTS / f"{name}.facts.json").write_text(
             facts.model_dump_json(indent=2) + "\n", encoding="utf-8"
         )

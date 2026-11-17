@@ -7,6 +7,7 @@ system design diagram can link to all the files that prove it exists.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from enum import StrEnum
 from pathlib import Path, PurePosixPath
@@ -15,6 +16,7 @@ from typing import cast
 import yaml
 from yaml.nodes import MappingNode, Node, ScalarNode, SequenceNode
 
+from plumb.deps import Dependency
 from plumb.inventory import Category, FileInfo
 
 
@@ -186,8 +188,12 @@ def _is_compose(name: str) -> bool:
     return lower.startswith(("docker-compose", "compose")) and lower.endswith((".yml", ".yaml"))
 
 
-def find_system(repo: Path, files: list[FileInfo], repo_name: str) -> System:
+def find_system(
+    repo: Path, files: list[FileInfo], repo_name: str, deps: list[Dependency] | None = None
+) -> System:
     system = System()
+    dependency_parts(system, deps or [])
+    config_parts(system, repo, files)
     for info in files:
         if info.category in (Category.VENDORED, Category.GENERATED, Category.EXAMPLE):
             continue
@@ -209,3 +215,182 @@ def find_system(repo: Path, files: list[FileInfo], repo_name: str) -> System:
         else:
             dockerfile_parts(system, info.path, reader_text, repo_name)
     return system
+
+
+# Dependencies that mean a repo talks to a store or an outside service.
+# Keys are dependency names as plumb.deps normalises them. A key ending in
+# "/" or ":" matches every name that starts with it.
+DEPENDENCIES: dict[str, tuple[Role, str]] = {
+    # PostgreSQL
+    "psycopg": (Role.STORE, "PostgreSQL"),
+    "psycopg2": (Role.STORE, "PostgreSQL"),
+    "psycopg2-binary": (Role.STORE, "PostgreSQL"),
+    "psycopg-binary": (Role.STORE, "PostgreSQL"),
+    "asyncpg": (Role.STORE, "PostgreSQL"),
+    "org.postgresql:postgresql": (Role.STORE, "PostgreSQL"),
+    "pg": (Role.STORE, "PostgreSQL"),
+    "postgres": (Role.STORE, "PostgreSQL"),
+    "@neondatabase/serverless": (Role.STORE, "PostgreSQL"),
+    # MySQL and MariaDB
+    "pymysql": (Role.STORE, "MySQL"),
+    "mysqlclient": (Role.STORE, "MySQL"),
+    "mysql-connector-python": (Role.STORE, "MySQL"),
+    "com.mysql:mysql-connector-j": (Role.STORE, "MySQL"),
+    "mysql:mysql-connector-java": (Role.STORE, "MySQL"),
+    "mysql2": (Role.STORE, "MySQL"),
+    "org.mariadb.jdbc:mariadb-java-client": (Role.STORE, "MariaDB"),
+    # Embedded and other databases
+    "com.h2database:h2": (Role.STORE, "H2"),
+    "org.xerial:sqlite-jdbc": (Role.STORE, "SQLite"),
+    "better-sqlite3": (Role.STORE, "SQLite"),
+    "aiosqlite": (Role.STORE, "SQLite"),
+    "pymongo": (Role.STORE, "MongoDB"),
+    "motor": (Role.STORE, "MongoDB"),
+    "mongodb": (Role.STORE, "MongoDB"),
+    "mongoose": (Role.STORE, "MongoDB"),
+    "org.mongodb:": (Role.STORE, "MongoDB"),
+    "org.springframework.boot:spring-boot-starter-data-mongodb": (Role.STORE, "MongoDB"),
+    "cassandra-driver": (Role.STORE, "Cassandra"),
+    "elasticsearch": (Role.STORE, "Elasticsearch"),
+    "@elastic/elasticsearch": (Role.STORE, "Elasticsearch"),
+    "org.apache.ignite:ignite-core": (Role.STORE, "Apache Ignite"),
+    "pyignite": (Role.STORE, "Apache Ignite"),
+    # Caches
+    "redis": (Role.STORE, "Redis"),
+    "ioredis": (Role.STORE, "Redis"),
+    "org.springframework.boot:spring-boot-starter-data-redis": (Role.STORE, "Redis"),
+    "redis.clients:jedis": (Role.STORE, "Redis"),
+    "io.lettuce:lettuce-core": (Role.STORE, "Redis"),
+    "pymemcache": (Role.STORE, "Memcached"),
+    # Queues and streams
+    "kafka-python": (Role.STORE, "Apache Kafka"),
+    "confluent-kafka": (Role.STORE, "Apache Kafka"),
+    "aiokafka": (Role.STORE, "Apache Kafka"),
+    "kafkajs": (Role.STORE, "Apache Kafka"),
+    "org.springframework.kafka:spring-kafka": (Role.STORE, "Apache Kafka"),
+    "org.apache.kafka:kafka-clients": (Role.STORE, "Apache Kafka"),
+    "pika": (Role.STORE, "RabbitMQ"),
+    "aio-pika": (Role.STORE, "RabbitMQ"),
+    "amqplib": (Role.STORE, "RabbitMQ"),
+    "org.springframework.boot:spring-boot-starter-amqp": (Role.STORE, "RabbitMQ"),
+    # Monitoring
+    "io.micrometer:micrometer-registry-prometheus": (Role.MONITORING, "Prometheus"),
+    "prometheus-client": (Role.MONITORING, "Prometheus"),
+    "prom-client": (Role.MONITORING, "Prometheus"),
+    "sentry-sdk": (Role.OUTSIDE, "Sentry"),
+    "@sentry/": (Role.OUTSIDE, "Sentry"),
+    "io.sentry:": (Role.OUTSIDE, "Sentry"),
+    # Outside services reached through their SDKs
+    "boto3": (Role.OUTSIDE, "AWS"),
+    "@aws-sdk/": (Role.OUTSIDE, "AWS"),
+    "software.amazon.awssdk:": (Role.OUTSIDE, "AWS"),
+    "stripe": (Role.OUTSIDE, "Stripe"),
+    "com.stripe:stripe-java": (Role.OUTSIDE, "Stripe"),
+    "twilio": (Role.OUTSIDE, "Twilio"),
+    "sendgrid": (Role.OUTSIDE, "SendGrid"),
+    "@sendgrid/mail": (Role.OUTSIDE, "SendGrid"),
+    "resend": (Role.OUTSIDE, "Resend"),
+    "openai": (Role.OUTSIDE, "OpenAI API"),
+    "anthropic": (Role.OUTSIDE, "Anthropic API"),
+    "@anthropic-ai/sdk": (Role.OUTSIDE, "Anthropic API"),
+    "firebase-admin": (Role.OUTSIDE, "Firebase"),
+    "firebase": (Role.OUTSIDE, "Firebase"),
+    "@supabase/supabase-js": (Role.OUTSIDE, "Supabase"),
+    "supabase": (Role.OUTSIDE, "Supabase"),
+    "slack-sdk": (Role.OUTSIDE, "Slack"),
+    "@slack/web-api": (Role.OUTSIDE, "Slack"),
+    "google-cloud-": (Role.OUTSIDE, "Google Cloud"),
+    "@google-cloud/": (Role.OUTSIDE, "Google Cloud"),
+}
+
+
+def dependency_part(name: str) -> tuple[Role, str] | None:
+    hit = DEPENDENCIES.get(name)
+    if hit is not None:
+        return hit
+    for key, value in DEPENDENCIES.items():
+        if key.endswith(("/", ":", "-")) and name.startswith(key):
+            return value
+    return None
+
+
+def dependency_parts(system: System, deps: list[Dependency]) -> None:
+    for dep in deps:
+        hit = dependency_part(dep.name)
+        if hit is not None:
+            role, name = hit
+            system.add(role, name, Clue(dep.path, dep.line, f"dependency {dep.name}"))
+
+
+# Connection strings and settings in config files.
+_CONFIG_SIGNS: tuple[tuple[re.Pattern[str], Role, str], ...] = (
+    (re.compile(r"jdbc:postgresql:|postgres(?:ql)?(?:\+\w+)?://"), Role.STORE, "PostgreSQL"),
+    (re.compile(r"jdbc:mysql:|mysql(?:\+\w+)?://"), Role.STORE, "MySQL"),
+    (re.compile(r"jdbc:mariadb:"), Role.STORE, "MariaDB"),
+    (re.compile(r"jdbc:h2:"), Role.STORE, "H2"),
+    (re.compile(r"sqlite(?:\+\w+)?:///|jdbc:sqlite:"), Role.STORE, "SQLite"),
+    (re.compile(r"mongodb(?:\+srv)?://"), Role.STORE, "MongoDB"),
+    (re.compile(r"rediss?://|spring\.data\.redis|spring\.redis\."), Role.STORE, "Redis"),
+    (re.compile(r"amqps?://|spring\.rabbitmq\."), Role.STORE, "RabbitMQ"),
+    (re.compile(r"bootstrap[-_.]servers"), Role.STORE, "Apache Kafka"),
+)
+_CONFIG_FILE = re.compile(
+    r"(^|/)(application[\w-]*\.(ya?ml|properties)|\.env\.(example|sample|template)"
+    r"|settings\.py|config\.py|alembic\.ini|.*\.env)$"
+)
+_SQLITE_IMPORT = re.compile(rb"^\s*import sqlite3\b|^\s*from sqlite3 import", re.M)
+
+
+def config_parts(system: System, repo: Path, files: list[FileInfo]) -> None:
+    for info in files:
+        if info.category in (Category.VENDORED, Category.GENERATED, Category.EXAMPLE):
+            continue
+        if info.category is Category.TEST:
+            continue
+        if _CONFIG_FILE.search(info.path):
+            text = (repo / info.path).read_text(encoding="utf-8", errors="replace")
+            for number, line in enumerate(text.splitlines(), start=1):
+                for pattern, role, name in _CONFIG_SIGNS:
+                    match = pattern.search(line)
+                    if match:
+                        clue = Clue(info.path, number, f"setting mentions {match.group(0)}")
+                        system.add(role, name, clue)
+        if info.language == "python" and info.category is Category.SOURCE:
+            source = (repo / info.path).read_bytes()
+            match = _SQLITE_IMPORT.search(source)
+            if match:
+                line = source.count(b"\n", 0, match.start()) + 1
+                system.add(Role.STORE, "SQLite", Clue(info.path, line, "imports sqlite3"))
+
+
+# Settings read from the environment.
+_ENV_READS: tuple[re.Pattern[bytes], ...] = (
+    re.compile(rb"os\.environ(?:\.get)?\s*[\[(]\s*[\"']([A-Z][A-Z0-9_]+)[\"']"),
+    re.compile(rb"os\.getenv\(\s*[\"']([A-Z][A-Z0-9_]+)[\"']"),
+    re.compile(rb"process\.env\.([A-Z][A-Z0-9_]+)"),
+    re.compile(rb"process\.env\[\s*[\"']([A-Z][A-Z0-9_]+)[\"']"),
+    re.compile(rb"import\.meta\.env\.([A-Z][A-Z0-9_]+)"),
+    re.compile(rb"System\.getenv\(\s*\"([A-Z][A-Z0-9_]+)\""),
+)
+# ${NAME} only counts in config files: in JavaScript it is template-string syntax.
+_ENV_IN_CONFIG = re.compile(rb"\$\{([A-Z][A-Z0-9_]+)(?::[^}]*)?\}")
+
+
+def find_settings(repo: Path, files: list[FileInfo]) -> dict[str, list[Clue]]:
+    """Environment variables the code or config reads, with where each is read."""
+    settings: dict[str, list[Clue]] = {}
+    for info in files:
+        if info.category not in (Category.SOURCE, Category.CONFIG):
+            continue
+        if info.size > 1_000_000 or info.path.startswith((".github/", ".devcontainer/")):
+            continue
+        source = (repo / info.path).read_bytes()
+        patterns = (_ENV_IN_CONFIG,) if info.category is Category.CONFIG else _ENV_READS
+        for pattern in patterns:
+            for match in pattern.finditer(source):
+                name = match.group(1).decode()
+                line = source.count(b"\n", 0, match.start()) + 1
+                clues = settings.setdefault(name, [])
+                if len(clues) < 3 and all(c.path != info.path for c in clues):
+                    clues.append(Clue(info.path, line, "reads it"))
+    return dict(sorted(settings.items()))

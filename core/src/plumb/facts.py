@@ -21,7 +21,7 @@ from plumb.model import (
     RepoRef,
 )
 from plumb.source import Checkout
-from plumb.system import Role, System
+from plumb.system import Clue, Role, System
 
 # Files that say how a repo is built, run or deployed. Later stages read
 # these to find services, databases and entry points.
@@ -50,6 +50,7 @@ def build_facts(
     edges: list[Edge] | None = None,
     entry_points: list[EntryPoint] | None = None,
     system: System | None = None,
+    settings: dict[str, list[Clue]] | None = None,
     kind: RepoKind = RepoKind.UNKNOWN,
 ) -> FactSet:
     builder = FactBuilder()
@@ -58,6 +59,8 @@ def build_facts(
     add_build_file_facts(builder, files)
     if system is not None:
         add_system_facts(builder, system)
+    if settings:
+        add_setting_facts(builder, settings)
     if entry_points:
         add_entry_point_facts(builder, entry_points)
     if edges:
@@ -133,6 +136,17 @@ def add_system_facts(builder: FactBuilder, system: System) -> None:
                     for c in part.clues[:5]
                 ],
             )
+
+
+def add_setting_facts(
+    builder: FactBuilder, settings: dict[str, list[Clue]], limit: int = 30
+) -> None:
+    for name, clues in list(settings.items())[:limit]:
+        places = ", ".join(c.path for c in clues)
+        builder.add(
+            f"Setting {name} is read from the environment in {places}",
+            [FileEvidence(path=c.path, start_line=c.line, end_line=c.line) for c in clues],
+        )
 
 
 _ENTRY_LABELS = {
