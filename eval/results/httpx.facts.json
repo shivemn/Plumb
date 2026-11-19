@@ -5,12 +5,12 @@
     "name": "httpx",
     "commit": "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016"
   },
-  "kind": "cli",
+  "kind": "library",
   "facts": [
     {
       "id": "f1",
       "topic": "kind",
-      "statement": "Looks like a cli repo: 2 command(s) and no routes or services",
+      "statement": "Looks like a library repo: a package definition whose only command needs an optional extra",
       "evidence": [
         {
           "kind": "file",
@@ -177,7 +177,7 @@
     {
       "id": "f12",
       "topic": "entry_points",
-      "statement": "Command httpx (httpx:main) (package) in pyproject.toml",
+      "statement": "Command httpx (httpx:main) (package, needs the cli extra) in pyproject.toml",
       "evidence": [
         {
           "kind": "file",

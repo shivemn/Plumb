@@ -10,13 +10,25 @@
     {
       "id": "f1",
       "topic": "kind",
-      "statement": "Looks like a service repo: 1 route(s), consumer(s) or scheduled job(s)",
+      "statement": "Looks like a service repo: 38 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
           "kind": "file",
           "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
           "start_line": 41,
           "end_line": 41
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 66,
+          "end_line": 66
         }
       ]
     },
@@ -196,6 +208,25 @@
     {
       "id": "f13",
       "topic": "system",
+      "statement": "Database, cache or queue: HSQLDB (dependency org.hsqldb:hsqldb; setting mentions jdbc:hsqldb:)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-hsqldb.properties",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "topic": "system",
       "statement": "Database, cache or queue: MySQL (dependency com.mysql:mysql-connector-j; setting mentions jdbc:mysql:; Compose service mysql, image mysql:8.4)",
       "evidence": [
         {
@@ -219,7 +250,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f15",
       "topic": "system",
       "statement": "Database, cache or queue: PostgreSQL (dependency org.postgresql:postgresql; setting mentions jdbc:postgresql:; Compose service postgres, image postgres:16.3)",
       "evidence": [
@@ -244,7 +275,7 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f16",
       "topic": "settings",
       "statement": "Setting MYSQL_PASS is read from the environment in src/main/resources/application-mysql.properties",
       "evidence": [
@@ -257,7 +288,7 @@
       ]
     },
     {
-      "id": "f16",
+      "id": "f17",
       "topic": "settings",
       "statement": "Setting MYSQL_URL is read from the environment in src/main/resources/application-mysql.properties",
       "evidence": [
@@ -270,7 +301,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f18",
       "topic": "settings",
       "statement": "Setting MYSQL_USER is read from the environment in src/main/resources/application-mysql.properties",
       "evidence": [
@@ -283,7 +314,7 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f19",
       "topic": "settings",
       "statement": "Setting POSTGRES_PASS is read from the environment in src/main/resources/application-postgres.properties",
       "evidence": [
@@ -296,7 +327,7 @@
       ]
     },
     {
-      "id": "f19",
+      "id": "f20",
       "topic": "settings",
       "statement": "Setting POSTGRES_URL is read from the environment in src/main/resources/application-postgres.properties",
       "evidence": [
@@ -309,7 +340,7 @@
       ]
     },
     {
-      "id": "f20",
+      "id": "f21",
       "topic": "settings",
       "statement": "Setting POSTGRES_USER is read from the environment in src/main/resources/application-postgres.properties",
       "evidence": [
@@ -322,20 +353,32 @@
       ]
     },
     {
-      "id": "f21",
+      "id": "f22",
       "topic": "entry_points",
-      "statement": "1 http route found",
+      "statement": "38 http routes found",
       "evidence": [
         {
           "kind": "file",
           "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
           "start_line": 41,
           "end_line": 41
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 66,
+          "end_line": 66
         }
       ]
     },
     {
-      "id": "f22",
+      "id": "f23",
       "topic": "entry_points",
       "statement": "HTTP route ANY / (spring) in src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
       "evidence": [
@@ -348,7 +391,488 @@
       ]
     },
     {
-      "id": "f23",
+      "id": "f24",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/oops (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 34,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/owners (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 66,
+          "end_line": 66
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/owners (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 98,
+          "end_line": 98
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/v2/owners (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 140,
+          "end_line": 140
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/owners/{ownerId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 207,
+          "end_line": 207
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/owners/{ownerId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 260,
+          "end_line": 260
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "entry_points",
+      "statement": "HTTP route DELETE /petclinic/api/owners/{ownerId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 309,
+          "end_line": 309
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/owners/{ownerId}/pets (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 363,
+          "end_line": 363
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/owners/{ownerId}/pets/{petId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 412,
+          "end_line": 412
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/owners/{ownerId}/pets/{petId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 474,
+          "end_line": 474
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/owners/{ownerId}/pets/{petId}/visits (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 529,
+          "end_line": 529
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/pettypes (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 587,
+          "end_line": 587
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/pettypes (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 620,
+          "end_line": 620
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/pettypes/{petTypeId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 671,
+          "end_line": 671
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/pettypes/{petTypeId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 724,
+          "end_line": 724
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "topic": "entry_points",
+      "statement": "HTTP route DELETE /petclinic/api/pettypes/{petTypeId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 784,
+          "end_line": 784
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/pets (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 839,
+          "end_line": 839
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/v2/pets (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 873,
+          "end_line": 873
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/pets/{petId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 927,
+          "end_line": 927
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/pets/{petId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 980,
+          "end_line": 980
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "entry_points",
+      "statement": "HTTP route DELETE /petclinic/api/pets/{petId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1040,
+          "end_line": 1040
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/visits (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1094,
+          "end_line": 1094
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/visits (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1127,
+          "end_line": 1127
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/visits/{visitId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1178,
+          "end_line": 1178
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/visits/{visitId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1231,
+          "end_line": 1231
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "topic": "entry_points",
+      "statement": "HTTP route DELETE /petclinic/api/visits/{visitId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1291,
+          "end_line": 1291
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/specialties (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1345,
+          "end_line": 1345
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/specialties (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1378,
+          "end_line": 1378
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/specialties/{specialtyId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1429,
+          "end_line": 1429
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/specialties/{specialtyId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1482,
+          "end_line": 1482
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "topic": "entry_points",
+      "statement": "HTTP route DELETE /petclinic/api/specialties/{specialtyId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1542,
+          "end_line": 1542
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/vets (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1596,
+          "end_line": 1596
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/vets (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1630,
+          "end_line": 1630
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "topic": "entry_points",
+      "statement": "HTTP route GET /petclinic/api/vets/{vetId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1681,
+          "end_line": 1681
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "topic": "entry_points",
+      "statement": "HTTP route PUT /petclinic/api/vets/{vetId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1734,
+          "end_line": 1734
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "topic": "entry_points",
+      "statement": "HTTP route DELETE /petclinic/api/vets/{vetId} (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1794,
+          "end_line": 1794
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "topic": "entry_points",
+      "statement": "HTTP route POST /petclinic/api/users (openapi) in src/main/resources/openapi.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/openapi.yml",
+          "start_line": 1848,
+          "end_line": 1848
+        }
+      ]
+    },
+    {
+      "id": "f61",
       "topic": "entry_points",
       "statement": "1 program entry found",
       "evidence": [
@@ -361,7 +885,7 @@
       ]
     },
     {
-      "id": "f24",
+      "id": "f62",
       "topic": "entry_points",
       "statement": "Program entry PetClinicApplication in src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
       "evidence": [
@@ -374,7 +898,7 @@
       ]
     },
     {
-      "id": "f25",
+      "id": "f63",
       "topic": "contribute",
       "statement": "CI step \"Enable auto-merge for minor and patch updates\" in .github/workflows/dependabot-auto-merge.yml runs: gh pr merge --auto --squash \"$PR_URL\"",
       "evidence": [
@@ -387,7 +911,7 @@
       ]
     },
     {
-      "id": "f26",
+      "id": "f64",
       "topic": "contribute",
       "statement": "CI step \"Build & publish the project\" in .github/workflows/docker-build.yml runs: mvn compile jib:build -X -DjibSerialize=true",
       "evidence": [
@@ -400,7 +924,7 @@
       ]
     },
     {
-      "id": "f27",
+      "id": "f65",
       "topic": "contribute",
       "statement": "CI step \"Build and analyze\" in .github/workflows/maven-build-master.yml runs: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-petclinic_spring-petclinic-rest -Dsonar.organization=spring-petclinic",
       "evidence": [
@@ -413,7 +937,7 @@
       ]
     },
     {
-      "id": "f28",
+      "id": "f66",
       "topic": "contribute",
       "statement": "CI step \"Build\" in .github/workflows/maven-build-pull-request.yml runs: ./mvnw -B verify",
       "evidence": [
@@ -426,7 +950,7 @@
       ]
     },
     {
-      "id": "f29",
+      "id": "f67",
       "topic": "contribute",
       "statement": "CI step \"Start PetClinic API\" in .github/workflows/newman-pipeline.yml runs: nohup mvn spring-boot:run &",
       "evidence": [
@@ -439,7 +963,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f68",
       "topic": "contribute",
       "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: timeout=60",
       "evidence": [
@@ -452,7 +976,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f69",
       "topic": "contribute",
       "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: while ! curl -s http://localhost:9966/petclinic > /dev/null; do",
       "evidence": [
@@ -465,7 +989,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f70",
       "topic": "contribute",
       "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: sleep 1",
       "evidence": [
@@ -478,7 +1002,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f71",
       "topic": "contribute",
       "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: ((timeout--))",
       "evidence": [
@@ -491,7 +1015,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f72",
       "topic": "contribute",
       "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: exit 1",
       "evidence": [
@@ -504,7 +1028,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f73",
       "topic": "contribute",
       "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: done",
       "evidence": [
@@ -517,7 +1041,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f74",
       "topic": "contribute",
       "statement": "CI step \"Run Newman Tests\" in .github/workflows/newman-pipeline.yml runs: bash postman-tests.sh",
       "evidence": [
@@ -530,7 +1054,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f75",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jdbc uses code in src/main/java/org/springframework/samples/petclinic/model (22 references)",
       "evidence": [
@@ -555,7 +1079,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f76",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/springdatajpa uses code in src/main/java/org/springframework/samples/petclinic/model (18 references)",
       "evidence": [
@@ -580,7 +1104,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f77",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/model (15 references)",
       "evidence": [
@@ -605,7 +1129,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f78",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository uses code in src/main/java/org/springframework/samples/petclinic/model (11 references)",
       "evidence": [
@@ -630,7 +1154,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f79",
       "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/mapper (11 references)",
       "evidence": [
@@ -655,7 +1179,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f80",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jpa uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
       "evidence": [
@@ -680,7 +1204,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f81",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/mapper (10 references)",
       "evidence": [
@@ -705,7 +1229,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f82",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
       "evidence": [
@@ -730,7 +1254,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f83",
       "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
       "evidence": [
@@ -755,7 +1279,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f84",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/mapper uses code in src/main/java/org/springframework/samples/petclinic/model (9 references)",
       "evidence": [
@@ -780,7 +1304,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f85",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jdbc uses code in src/main/java/org/springframework/samples/petclinic/repository (8 references)",
       "evidence": [
@@ -805,7 +1329,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f86",
       "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/rest/advice (8 references)",
       "evidence": [
@@ -830,7 +1354,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f87",
       "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/service (8 references)",
       "evidence": [
@@ -855,7 +1379,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f88",
       "topic": "structure",
       "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/test/java/org/springframework/samples/petclinic/service/clinicService (8 references)",
       "evidence": [
@@ -880,7 +1404,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f89",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jpa uses code in src/main/java/org/springframework/samples/petclinic/repository (7 references)",
       "evidence": [
@@ -905,7 +1429,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f90",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/model/Pet.java is used by 23 other files",
       "evidence": [
@@ -930,7 +1454,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f91",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/model/Visit.java is used by 22 other files",
       "evidence": [
@@ -955,7 +1479,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f92",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/model/PetType.java is used by 21 other files",
       "evidence": [
@@ -980,7 +1504,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f93",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/service/ClinicService.java is used by 17 other files",
       "evidence": [
@@ -1005,7 +1529,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f94",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/model/Owner.java is used by 15 other files",
       "evidence": [
@@ -1030,7 +1554,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f95",
       "topic": "history",
       "statement": "19 commits between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1049,7 +1573,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f96",
       "topic": "history",
       "statement": "src/main/resources/db/hsqldb/schema.sql changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1074,7 +1598,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f97",
       "topic": "history",
       "statement": "src/main/resources/db/mysql/schema.sql changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1099,7 +1623,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f98",
       "topic": "history",
       "statement": "src/main/resources/db/postgres/schema.sql changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1124,7 +1648,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f99",
       "topic": "history",
       "statement": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1149,7 +1673,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f100",
       "topic": "history",
       "statement": "src/main/resources/db/hsqldb/schema.sql and src/main/resources/db/mysql/schema.sql changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1168,7 +1692,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f101",
       "topic": "history",
       "statement": "src/main/resources/db/hsqldb/schema.sql and src/main/resources/db/postgres/schema.sql changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1187,7 +1711,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f102",
       "topic": "history",
       "statement": "src/main/resources/db/hsqldb/schema.sql and src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1206,7 +1730,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f103",
       "topic": "history",
       "statement": "src/main/resources/db/mysql/schema.sql and src/main/resources/db/postgres/schema.sql changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1225,7 +1749,7 @@
       ]
     },
     {
-      "id": "f66",
+      "id": "f104",
       "topic": "history",
       "statement": "src/main/resources/db/mysql/schema.sql and src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [
@@ -1244,7 +1768,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f105",
       "topic": "history",
       "statement": "src/main/resources/db/postgres/schema.sql and src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
       "evidence": [

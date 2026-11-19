@@ -5,10 +5,35 @@
     "name": "django-realworld-example-app",
     "commit": "29c9d42831fa0cfc5a4aa7561f674396eacf20a2"
   },
-  "kind": "unknown",
+  "kind": "service",
   "facts": [
     {
       "id": "f1",
+      "topic": "kind",
+      "statement": "Looks like a service repo: 12 route(s), consumer(s) or scheduled job(s)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f2",
       "topic": "languages",
       "statement": "44 source files in python, 1,778 lines in all",
       "evidence": [
@@ -33,7 +58,7 @@
       ]
     },
     {
-      "id": "f2",
+      "id": "f3",
       "topic": "build",
       "statement": "Build or deploy file requirements.txt",
       "evidence": [
@@ -46,7 +71,20 @@
       ]
     },
     {
-      "id": "f3",
+      "id": "f4",
+      "topic": "system",
+      "statement": "Database, cache or queue: SQLite (Django DATABASES ENGINE)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/settings.py",
+          "start_line": 88,
+          "end_line": 88
+        }
+      ]
+    },
+    {
+      "id": "f5",
       "topic": "migrations",
       "statement": "3 Django database migrations in conduit/apps/articles/migrations",
       "evidence": [
@@ -65,7 +103,7 @@
       ]
     },
     {
-      "id": "f4",
+      "id": "f6",
       "topic": "migrations",
       "statement": "1 Django database migration in conduit/apps/authentication/migrations",
       "evidence": [
@@ -78,7 +116,7 @@
       ]
     },
     {
-      "id": "f5",
+      "id": "f7",
       "topic": "migrations",
       "statement": "3 Django database migrations in conduit/apps/profiles/migrations",
       "evidence": [
@@ -97,7 +135,188 @@
       ]
     },
     {
-      "id": "f6",
+      "id": "f8",
+      "topic": "entry_points",
+      "statement": "12 http routes found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/articles (django) in conduit/apps/articles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/articles/feed (django) in conduit/apps/articles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 16,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/articles/{article_slug}/favorite (django) in conduit/apps/articles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/articles/{article_slug}/comments (django) in conduit/apps/articles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/articles/{article_slug}/comments/{comment_pk} (django) in conduit/apps/articles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/tags (django) in conduit/apps/articles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/urls.py",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/user (django) in conduit/apps/authentication/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/urls.py",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/users (django) in conduit/apps/authentication/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/urls.py",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/users/login (django) in conduit/apps/authentication/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/urls.py",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/profiles/{username} (django) in conduit/apps/profiles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/urls.py",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /api/profiles/{username}/follow (django) in conduit/apps/profiles/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/urls.py",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY /admin (django) in conduit/urls.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/urls.py",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f21",
       "topic": "entry_points",
       "statement": "1 program entry found",
       "evidence": [
@@ -110,7 +329,7 @@
       ]
     },
     {
-      "id": "f7",
+      "id": "f22",
       "topic": "entry_points",
       "statement": "Program entry run as a script in manage.py",
       "evidence": [
@@ -123,7 +342,7 @@
       ]
     },
     {
-      "id": "f8",
+      "id": "f23",
       "topic": "structure",
       "statement": "Code in conduit/apps/articles uses code in conduit/apps/core (3 references)",
       "evidence": [
@@ -148,7 +367,7 @@
       ]
     },
     {
-      "id": "f9",
+      "id": "f24",
       "topic": "structure",
       "statement": "Code in conduit/apps/authentication uses code in conduit/apps/core (2 references)",
       "evidence": [
@@ -167,7 +386,7 @@
       ]
     },
     {
-      "id": "f10",
+      "id": "f25",
       "topic": "structure",
       "statement": "Code in conduit/apps/authentication uses code in conduit/apps/profiles (2 references)",
       "evidence": [
@@ -186,7 +405,7 @@
       ]
     },
     {
-      "id": "f11",
+      "id": "f26",
       "topic": "structure",
       "statement": "Code in conduit/apps/profiles uses code in conduit/apps/core (2 references)",
       "evidence": [
@@ -205,7 +424,7 @@
       ]
     },
     {
-      "id": "f12",
+      "id": "f27",
       "topic": "structure",
       "statement": "Code in conduit/apps/articles uses code in conduit/apps/profiles (1 reference)",
       "evidence": [
@@ -218,7 +437,7 @@
       ]
     },
     {
-      "id": "f13",
+      "id": "f28",
       "topic": "structure",
       "statement": "conduit/apps/articles/models.py is used by 4 other files",
       "evidence": [
@@ -243,7 +462,7 @@
       ]
     },
     {
-      "id": "f14",
+      "id": "f29",
       "topic": "structure",
       "statement": "conduit/apps/authentication/models.py is used by 3 other files",
       "evidence": [
@@ -268,7 +487,7 @@
       ]
     },
     {
-      "id": "f15",
+      "id": "f30",
       "topic": "structure",
       "statement": "conduit/apps/core/models.py is used by 3 other files",
       "evidence": [
@@ -293,7 +512,7 @@
       ]
     },
     {
-      "id": "f16",
+      "id": "f31",
       "topic": "structure",
       "statement": "conduit/apps/core/renderers.py is used by 3 other files",
       "evidence": [
@@ -318,7 +537,7 @@
       ]
     },
     {
-      "id": "f17",
+      "id": "f32",
       "topic": "structure",
       "statement": "conduit/apps/profiles/models.py is used by 3 other files",
       "evidence": [
@@ -343,7 +562,7 @@
       ]
     },
     {
-      "id": "f18",
+      "id": "f33",
       "topic": "history",
       "statement": "3 commits between 27 Jan 2017 and 27 Apr 2017",
       "evidence": [
