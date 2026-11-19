@@ -5,7 +5,7 @@ from pathlib import Path
 
 from plumb.facts import FactBuilder, add_api_facts
 from plumb.inventory import build_inventory
-from plumb.publicapi import NameKind, find_public_api, python_definitions, summary_line
+from plumb.publicapi import NameKind, find_python_api, python_definitions, summary_line
 from tests.conftest import RepoBuilder
 
 Make = Callable[[str], RepoBuilder]
@@ -58,7 +58,7 @@ def test_explicit_imports_without_all(make_repo: Make) -> None:
             "tests/__init__.py": "",
         },
     )
-    api = find_public_api(tmp_path, build_inventory(tmp_path), "fetch")
+    api = find_python_api(tmp_path, build_inventory(tmp_path), "fetch")
     assert api is not None and api.package == "fetch"
     names = {n.name: n for n in api.names}
     assert set(names) == {"Client", "get", "Slow", "utils", "hidden", "VERSION"}
@@ -83,7 +83,7 @@ def test_all_and_star_imports_through_a_subpackage(make_repo: Make) -> None:
             "lib/_transports/base.py": 'class Transport:\n    """Sends requests."""\n',
         },
     )
-    api = find_public_api(tmp_path, build_inventory(tmp_path))
+    api = find_python_api(tmp_path, build_inventory(tmp_path))
     assert api is not None
     names = {n.name: n for n in api.names}
     assert names["Transport"].path == "lib/_transports/base.py"
@@ -116,7 +116,7 @@ def test_summary_line() -> None:
 def test_api_facts(make_repo: Make) -> None:
     files: dict[str, str | bytes] = {"lib/__init__.py": "from .client import *\n"}
     tmp_path = repo_with(make_repo, {**files, "lib/client.py": CLIENT})
-    api = find_public_api(tmp_path, build_inventory(tmp_path))
+    api = find_python_api(tmp_path, build_inventory(tmp_path))
     assert api is not None
     builder = FactBuilder()
     add_api_facts(builder, api)

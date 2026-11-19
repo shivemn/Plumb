@@ -265,6 +265,8 @@ def add_api_facts(builder: FactBuilder, api: PublicApi, limit: int = 30) -> None
     )
     for name in ranked[:limit]:
         call = f"({name.signature})" if name.kind is NameKind.FUNCTION else ""
+        if name.forms > 1:
+            call += f" (one of {name.forms} forms)"
         about = f": {name.summary}" if name.summary else ""
         builder.add(
             f"Public {_API_LABELS[name.kind]} {name.name}{call} in {name.path}{about}",

@@ -40,6 +40,7 @@ class PublicName:
     signature: str = ""  # parameter names for a function, such as "url, params, **kwargs"
     summary: str = ""  # first line of its docstring or doc comment
     exported_from: str = ""  # the file that makes it public, if not the defining file
+    forms: int = 1  # overloads of a Java method with this name
 
 
 @dataclass(frozen=True)
@@ -74,6 +75,8 @@ def summary_line(text: str, limit: int = 120) -> str:
     """The first sentence of a docstring or doc comment, shortened."""
     text = re.sub(r":\w+:`~?([^`<]+?)(?:\s*<[^>]+>)?`", r"\1", text)  # :class:`Request <Request>`
     text = text.replace("``", "`")
+    text = re.sub(r"\{@(?:link|linkplain)\s+(?:[\w.]*#)?([^}\s]+)[^}]*\}", r"\1", text)  # Javadoc
+    text = re.sub(r"\{@code\s+([^}]+)\}", r"`\1`", text)
     paragraph: list[str] = []
     for line in text.splitlines():
         line = re.sub(r"\s+", " ", line.strip(" */")).strip()
@@ -309,10 +312,10 @@ def _follow(
     )
 
 
-def find_public_api(
+def find_python_api(
     repo: Path, files: list[FileInfo], project: str | None = None
 ) -> PublicApi | None:
-    """The public API of the repo's main package, or None if no package is found."""
+    """The public API of the repo's main Python package, or None if there is none."""
     paths = {f.path for f in files}
     packages = find_python_packages(files, project)
     if packages:

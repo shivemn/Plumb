@@ -16,8 +16,9 @@ from plumb.history import History, is_shallow, mine
 from plumb.imports import Edge
 from plumb.inventory import Category, FileInfo, build_inventory
 from plumb.kind import KindDecision, decide_kind
+from plumb.libapi import find_public_api
 from plumb.model import FactSet, RepoKind
-from plumb.publicapi import PublicApi, find_public_api
+from plumb.publicapi import PublicApi
 from plumb.source import Checkout, Limits, fetch
 from plumb.system import Migrations, System, find_migrations, find_settings, find_system
 
@@ -74,7 +75,7 @@ def analyse_repo(
     steps = find_steps(checkout.path, files)
     api = None
     if decision.kind is RepoKind.LIBRARY:
-        api = find_public_api(checkout.path, files, checkout.name)
+        api = find_public_api(checkout.path, files, edges, checkout.name)
     activity = None
     if github is not None and checkout.owner != "local":
         paths = {f.path for f in files}

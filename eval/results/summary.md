@@ -7,17 +7,17 @@ Development repos: 36 of 36 checks passed. Held-out repos: 9 of 9 checks passed.
 | Repo | Kind | Modules | HTTP routes | Stores | Facts | Time |
 |------|------|---------|-------------|--------|------:|-----:|
 | credit-event-pipeline | service (yes) | 4/4 | 14 of 14 (yes) | Apache Ignite, Apache Kafka, PostgreSQL (yes) | 67 | 0.7 s |
-| market-lab | service (yes) | 4/4 | 30 of 30 (yes) | PostgreSQL, SQLite (yes) | 118 | 1.0 s |
+| market-lab | service (yes) | 4/4 | 30 of 30 (yes) | PostgreSQL, SQLite (yes) | 118 | 0.9 s |
 | terminus | website (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 78 | 0.6 s |
 | spring-petclinic | service (yes) | 4/4 | 17 of 17 (yes) | H2, MySQL, PostgreSQL (yes) | 68 | 0.4 s |
-| full-stack-fastapi-template | service (yes) | 5/5 | 23 of 23 (yes) | PostgreSQL (yes) | 140 | 0.6 s |
+| full-stack-fastapi-template | service (yes) | 5/5 | 23 of 23 (yes) | PostgreSQL (yes) | 140 | 0.7 s |
 | requests | library (yes) | 1/1 | 0 of 0 (yes) | none (yes) | 78 | 0.6 s |
-| click | library (yes) | 1/1 | 0 of 0 (yes) | none (yes) | 98 | 1.1 s |
-| jsoup | library (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 75 | 1.3 s |
-| awesome | docs (yes) | none listed | 0 of 0 (yes) | none (yes) | 8 | 0.3 s |
+| click | library (yes) | 1/1 | 0 of 0 (yes) | none (yes) | 98 | 1.2 s |
+| jsoup | library (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 107 | 1.4 s |
+| awesome | docs (yes) | none listed | 0 of 0 (yes) | none (yes) | 8 | 0.4 s |
 | fastapi-realworld-example-app | service (yes) | 5/5 | 19 of 19 (yes) | PostgreSQL (yes) | 69 | 0.5 s |
 | node-express-realworld-example-app | service (yes) | 4/4 | 20 of 20 (yes) | PostgreSQL (yes) | 66 | 0.4 s |
 | cli | cli (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 95 | 0.7 s |
 | django-realworld-example-app (held out) | service (yes) | 4/4 | 12 of 12 (yes) | SQLite (yes) | 33 | 0.4 s |
 | spring-petclinic-rest (held out) | service (yes) | 5/5 | 38 of 38 (yes) | H2, HSQLDB, MySQL, PostgreSQL (yes) | 105 | 0.6 s |
-| httpx (held out) | library (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 77 | 0.8 s |
+| httpx (held out) | library (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 77 | 0.7 s |
