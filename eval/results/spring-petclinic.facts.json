@@ -657,20 +657,20 @@
     {
       "id": "f42",
       "topic": "flow",
-      "statement": "9 of 17 traced routes reach the database",
+      "statement": "15 of 17 traced routes reach the database",
       "evidence": [
         {
           "kind": "file",
           "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
-          "start_line": 84,
-          "end_line": 84
+          "start_line": 67,
+          "end_line": 67
         }
       ]
     },
     {
       "id": "f43",
       "topic": "flow",
-      "statement": "POST /owners/{ownerId}/pets/{petId}/edit runs PetController.processUpdateForm in src/main/java/org/springframework/samples/petclinic/owner/PetController.java, then PetController.updatePetDetails in src/main/java/org/springframework/samples/petclinic/owner/PetController.java, then PetController.isDuplicatePetNameViolation in src/main/java/org/springframework/samples/petclinic/owner/PetController.java, then Owner.addPet in src/main/java/org/springframework/samples/petclinic/owner/Owner.java; it reaches the database (OwnerRepository.saveAndFlush in src/main/java/org/springframework/samples/petclinic/owner/PetController.java)",
+      "statement": "POST /owners/{ownerId}/pets/{petId}/edit is handled by PetController.processUpdateForm in src/main/java/org/springframework/samples/petclinic/owner/PetController.java; the framework first runs PetController.populatePetTypes, PetController.findOwner and PetController.findPet; PetController.processUpdateForm calls PetController.updatePetDetails and PetController.isDuplicatePetNameViolation; 1 more step not shown; PetController.populatePetTypes reaches the database (PetTypeRepository.findPetTypes in src/main/java/org/springframework/samples/petclinic/owner/PetController.java)",
       "evidence": [
         {
           "kind": "file",
@@ -681,14 +681,63 @@
         {
           "kind": "file",
           "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 62,
+          "end_line": 62
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 67,
+          "end_line": 67
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 75,
+          "end_line": 75
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
           "start_line": 186,
           "end_line": 186
         },
         {
           "kind": "file",
           "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
-          "start_line": 202,
-          "end_line": 202
+          "start_line": 64,
+          "end_line": 64
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "flow",
+      "statement": "POST /owners/{ownerId}/pets/new is handled by PetController.processCreationForm in src/main/java/org/springframework/samples/petclinic/owner/PetController.java; the framework first runs PetController.populatePetTypes, PetController.findOwner and PetController.findPet; PetController.processCreationForm calls Owner.addPet in src/main/java/org/springframework/samples/petclinic/owner/Owner.java and PetController.isDuplicatePetNameViolation; PetController.processCreationForm reaches the database (OwnerRepository.saveAndFlush in src/main/java/org/springframework/samples/petclinic/owner/PetController.java)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 62,
+          "end_line": 62
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 67,
+          "end_line": 67
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+          "start_line": 75,
+          "end_line": 75
         },
         {
           "kind": "file",
@@ -699,46 +748,15 @@
         {
           "kind": "file",
           "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
-          "start_line": 199,
-          "end_line": 199
-        }
-      ]
-    },
-    {
-      "id": "f44",
-      "topic": "flow",
-      "statement": "GET /owners runs OwnerController.processFindForm in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java, then OwnerController.findPaginatedForOwnersLastName in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java, then OwnerController.addPaginationModel in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java; it reaches the database (OwnerRepository.findByLastNameStartingWith in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
-          "start_line": 94,
-          "end_line": 94
-        },
-        {
-          "kind": "file",
-          "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
-          "start_line": 141,
-          "end_line": 141
-        },
-        {
-          "kind": "file",
-          "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
-          "start_line": 132,
-          "end_line": 132
-        },
-        {
-          "kind": "file",
-          "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
-          "start_line": 145,
-          "end_line": 145
+          "start_line": 126,
+          "end_line": 126
         }
       ]
     },
     {
       "id": "f45",
       "topic": "flow",
-      "statement": "GET /vets.html runs VetController.showVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java, then VetController.findPaginated in src/main/java/org/springframework/samples/petclinic/vet/VetController.java, then VetController.addPaginationModel in src/main/java/org/springframework/samples/petclinic/vet/VetController.java; it reaches the database (VetRepository.findAll in src/main/java/org/springframework/samples/petclinic/vet/VetController.java)",
+      "statement": "GET /vets.html is handled by VetController.showVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java; VetController.showVetList calls VetController.findPaginated and VetController.addPaginationModel; VetController.findPaginated reaches the database (VetRepository.findAll in src/main/java/org/springframework/samples/petclinic/vet/VetController.java)",
       "evidence": [
         {
           "kind": "file",
@@ -769,7 +787,7 @@
     {
       "id": "f46",
       "topic": "flow",
-      "statement": "GET /vets runs VetController.showResourcesVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java, then Vets.getVetList in src/main/java/org/springframework/samples/petclinic/vet/Vets.java; it reaches the database (VetRepository.findAll in src/main/java/org/springframework/samples/petclinic/vet/VetController.java)",
+      "statement": "GET /vets is handled by VetController.showResourcesVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java; VetController.showResourcesVetList calls Vets.getVetList in src/main/java/org/springframework/samples/petclinic/vet/Vets.java; VetController.showResourcesVetList reaches the database (VetRepository.findAll in src/main/java/org/springframework/samples/petclinic/vet/VetController.java)",
       "evidence": [
         {
           "kind": "file",

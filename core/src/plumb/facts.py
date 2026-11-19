@@ -10,6 +10,7 @@ from plumb.activity import Activity, describe_hours
 from plumb.contrib import Step
 from plumb.entrypoints import EntryKind, EntryPoint
 from plumb.flow import Flow, layers
+from plumb.flow import Step as FlowStep
 from plumb.graph import component_edges, most_used, mutual_components
 from plumb.history import History
 from plumb.imports import Edge
@@ -286,17 +287,44 @@ def add_api_facts(builder: FactBuilder, api: PublicApi, limit: int = 30) -> None
         )
 
 
-def _flow_statement(flow: Flow, steps: int = 5) -> str:
-    first, *rest = flow.steps[:steps]
-    parts = [f"{flow.route.name} runs {first.name} in {first.path}"]
-    parts += [f"then {s.name} in {s.path}" for s in rest]
-    text = ", ".join(parts)
-    if len(flow.steps) > steps:
-        text += f", and {_plural(len(flow.steps) - steps, 'more step')}"
-    if flow.touches:
-        reached = " and ".join(f"{t.what} ({t.call} in {t.path})" for t in flow.touches)
-        text += f"; it reaches {reached}"
-    return text
+def _and(items: list[str]) -> str:
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def _flow_statement(flow: Flow, limit: int = 6) -> str:
+    """Who calls whom, without claiming an order the code may not follow.
+
+    A file is named the first time a step from it appears; a name shared by two
+    steps keeps its file every time, so "create_user" is never ambiguous.
+    """
+    shown = flow.steps[:limit]
+    counts = Counter(s.name for s in shown)
+    named_files: set[str] = set()
+
+    def label(step: FlowStep) -> str:
+        if counts[step.name] > 1 or step.path not in named_files:
+            named_files.add(step.path)
+            return f"{step.name} in {step.path}"
+        return step.name
+
+    def short(step: FlowStep) -> str:  # a step already introduced
+        return f"{step.name} in {step.path}" if counts[step.name] > 1 else step.name
+
+    first = shown[0]
+    parts = [f"{flow.route.name} is handled by {label(first)}"]
+    before = [s for s in shown if s.before]
+    if before:
+        parts.append(f"the framework first runs {_and([label(s) for s in before])}")
+    for index, caller in enumerate(shown):
+        called = [s for s in shown if s.caller == index and not s.before]
+        if called:
+            parts.append(f"{short(caller)} calls {_and([label(s) for s in called])}")
+    if len(flow.steps) > limit:
+        parts.append(f"{_plural(len(flow.steps) - limit, 'more step')} not shown")
+    for touch in flow.touches:
+        who = short(flow.steps[touch.by]) if touch.by < len(shown) else short(first)
+        parts.append(f"{who} reaches {touch.what} ({touch.call} in {touch.path})")
+    return "; ".join(parts)
 
 
 def add_flow_facts(builder: FactBuilder, flows: list[Flow], limit: int = 10) -> None:

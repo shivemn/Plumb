@@ -701,7 +701,7 @@
     {
       "id": "f44",
       "topic": "flow",
-      "statement": "POST /api/replay/start runs ReplayController.start in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.start in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.tick in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, and 3 more steps; it reaches Kafka (KafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
+      "statement": "POST /api/replay/start is handled by ReplayController.start in src/main/java/com/shivemn/ccp/web/ReplayController.java; ReplayController.start calls DatasetReplayer.start in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java and DatasetReplayer.status; DatasetReplayer.start calls DatasetReplayer.stop and DatasetReplayer.tick; DatasetReplayer.stop calls DatasetReplayer.closeFile; 2 more steps not shown; ReplayController.start reaches Kafka (KafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
       "evidence": [
         {
           "kind": "file",
@@ -744,7 +744,7 @@
     {
       "id": "f45",
       "topic": "flow",
-      "statement": "POST /api/archive/rebuild runs ArchiveController.rebuild in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then RebuildService.start in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.rebuildNow in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then ProfileService.clearAll in src/main/java/com/shivemn/ccp/service/ProfileService.java, and 2 more steps; it reaches the database (JdbcTemplate.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
+      "statement": "POST /api/archive/rebuild is handled by ArchiveController.rebuild in src/main/java/com/shivemn/ccp/web/ArchiveController.java; ArchiveController.rebuild calls RebuildService.start in src/main/java/com/shivemn/ccp/archive/RebuildService.java and RebuildService.status; RebuildService.start calls RebuildService.rebuildNow; RebuildService.rebuildNow calls ProfileService.clearAll in src/main/java/com/shivemn/ccp/service/ProfileService.java and EventArchive.page in src/main/java/com/shivemn/ccp/archive/EventArchive.java; 1 more step not shown; EventArchive.page reaches the database (JdbcTemplate.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
       "evidence": [
         {
           "kind": "file",
@@ -787,7 +787,7 @@
     {
       "id": "f46",
       "topic": "flow",
-      "statement": "POST /api/events runs EventController.submit in src/main/java/com/shivemn/ccp/web/EventController.java, then EventPublisher.publish in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java, then PipelineMetrics.recordPublished in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java; it reaches Kafka (KafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
+      "statement": "POST /api/events is handled by EventController.submit in src/main/java/com/shivemn/ccp/web/EventController.java; EventController.submit calls EventPublisher.publish in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java; EventPublisher.publish calls PipelineMetrics.recordPublished in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java; EventPublisher.publish reaches Kafka (KafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
       "evidence": [
         {
           "kind": "file",
@@ -818,7 +818,7 @@
     {
       "id": "f47",
       "topic": "flow",
-      "statement": "GET /api/stats runs ProfileController.stats in src/main/java/com/shivemn/ccp/web/ProfileController.java, then StatsService.stats in src/main/java/com/shivemn/ccp/service/StatsService.java, then PipelineMetrics.published in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java, then ProfileService.processedEvents in src/main/java/com/shivemn/ccp/service/ProfileService.java, then ProfileService.profileCount in src/main/java/com/shivemn/ccp/service/ProfileService.java, and 4 more steps",
+      "statement": "GET /api/stats is handled by ProfileController.stats in src/main/java/com/shivemn/ccp/web/ProfileController.java; ProfileController.stats calls StatsService.stats in src/main/java/com/shivemn/ccp/service/StatsService.java; StatsService.stats calls PipelineMetrics.published in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java, ProfileService.processedEvents in src/main/java/com/shivemn/ccp/service/ProfileService.java, ProfileService.profileCount and PipelineMetrics.duplicates; 3 more steps not shown",
       "evidence": [
         {
           "kind": "file",
@@ -855,7 +855,7 @@
     {
       "id": "f48",
       "topic": "flow",
-      "statement": "GET /api/history/{borrowerId} runs ArchiveController.history in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then EventArchive.history in src/main/java/com/shivemn/ccp/archive/EventArchive.java; it reaches the database (JdbcTemplate.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
+      "statement": "GET /api/history/{borrowerId} is handled by ArchiveController.history in src/main/java/com/shivemn/ccp/web/ArchiveController.java; ArchiveController.history calls EventArchive.history in src/main/java/com/shivemn/ccp/archive/EventArchive.java; EventArchive.history reaches the database (JdbcTemplate.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
       "evidence": [
         {
           "kind": "file",
@@ -880,7 +880,7 @@
     {
       "id": "f49",
       "topic": "flow",
-      "statement": "GET /api/live runs LiveController.live in src/main/java/com/shivemn/ccp/web/LiveController.java, then LiveBroadcaster.subscribe in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java, then LiveBroadcaster.send in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java, then LiveBroadcaster.snapshot in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java, then StatsService.stats in src/main/java/com/shivemn/ccp/service/StatsService.java, and 1 more step",
+      "statement": "GET /api/live is handled by LiveController.live in src/main/java/com/shivemn/ccp/web/LiveController.java; LiveController.live calls LiveBroadcaster.subscribe in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java; LiveBroadcaster.subscribe calls LiveBroadcaster.send and LiveBroadcaster.snapshot; LiveBroadcaster.snapshot calls StatsService.stats in src/main/java/com/shivemn/ccp/service/StatsService.java and PipelineMetrics.recent in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java",
       "evidence": [
         {
           "kind": "file",
@@ -917,7 +917,7 @@
     {
       "id": "f50",
       "topic": "flow",
-      "statement": "POST /api/replay/stop runs ReplayController.stop in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.closeFile in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then CsvRecordReader.close in src/main/java/com/shivemn/ccp/replay/CsvRecordReader.java",
+      "statement": "POST /api/replay/stop is handled by ReplayController.stop in src/main/java/com/shivemn/ccp/web/ReplayController.java; ReplayController.stop calls DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java and DatasetReplayer.status; DatasetReplayer.stop calls DatasetReplayer.closeFile; DatasetReplayer.closeFile calls CsvRecordReader.close in src/main/java/com/shivemn/ccp/replay/CsvRecordReader.java",
       "evidence": [
         {
           "kind": "file",
@@ -954,7 +954,7 @@
     {
       "id": "f51",
       "topic": "flow",
-      "statement": "GET /api/analytics runs ProfileController.analytics in src/main/java/com/shivemn/ccp/web/ProfileController.java, then ProfileService.portfolio in src/main/java/com/shivemn/ccp/service/ProfileService.java, then ProfileService.atRisk in src/main/java/com/shivemn/ccp/service/ProfileService.java, then ProfileService.number in src/main/java/com/shivemn/ccp/service/ProfileService.java",
+      "statement": "GET /api/analytics is handled by ProfileController.analytics in src/main/java/com/shivemn/ccp/web/ProfileController.java; ProfileController.analytics calls ProfileService.portfolio in src/main/java/com/shivemn/ccp/service/ProfileService.java and ProfileService.atRisk; ProfileService.portfolio calls ProfileService.number",
       "evidence": [
         {
           "kind": "file",
@@ -985,7 +985,7 @@
     {
       "id": "f52",
       "topic": "flow",
-      "statement": "GET /api/archive runs ArchiveController.status in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then EventArchive.storedEvents in src/main/java/com/shivemn/ccp/archive/EventArchive.java, then RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+      "statement": "GET /api/archive is handled by ArchiveController.status in src/main/java/com/shivemn/ccp/web/ArchiveController.java; ArchiveController.status calls EventArchive.storedEvents in src/main/java/com/shivemn/ccp/archive/EventArchive.java and RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java",
       "evidence": [
         {
           "kind": "file",
@@ -1010,7 +1010,7 @@
     {
       "id": "f53",
       "topic": "flow",
-      "statement": "POST /api/events/generate runs EventController.generate in src/main/java/com/shivemn/ccp/web/EventController.java, then SyntheticEventGenerator.generate in src/main/java/com/shivemn/ccp/pipeline/SyntheticEventGenerator.java",
+      "statement": "POST /api/events/generate is handled by EventController.generate in src/main/java/com/shivemn/ccp/web/EventController.java; EventController.generate calls SyntheticEventGenerator.generate in src/main/java/com/shivemn/ccp/pipeline/SyntheticEventGenerator.java",
       "evidence": [
         {
           "kind": "file",
@@ -1029,7 +1029,7 @@
     {
       "id": "f54",
       "topic": "flow",
-      "statement": "GET /api/replay runs ReplayController.status in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+      "statement": "GET /api/replay is handled by ReplayController.status in src/main/java/com/shivemn/ccp/web/ReplayController.java; ReplayController.status calls DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
       "evidence": [
         {
           "kind": "file",

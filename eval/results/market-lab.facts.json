@@ -994,7 +994,7 @@
     {
       "id": "f67",
       "topic": "flow",
-      "statement": "POST /api/worlds runs start_world in src/marketlab/api/app.py, then world_json in src/marketlab/api/app.py, then PracticeWorld.statement in src/marketlab/world.py, then PracticeWorld.positions in src/marketlab/world.py, then PracticeWorld.today in src/marketlab/world.py, and 5 more steps",
+      "statement": "POST /api/worlds is handled by start_world in src/marketlab/api/app.py; start_world calls world_json; world_json calls PracticeWorld.statement in src/marketlab/world.py, PracticeWorld.positions, PracticeWorld.today and instrument_json; 4 more steps not shown",
       "evidence": [
         {
           "kind": "file",
@@ -1031,7 +1031,7 @@
     {
       "id": "f68",
       "topic": "flow",
-      "statement": "GET /api/worlds/{world_id} runs get_world in src/marketlab/api/app.py, then world_json in src/marketlab/api/app.py, then PracticeWorld.statement in src/marketlab/world.py, then PracticeWorld.positions in src/marketlab/world.py, then PracticeWorld.today in src/marketlab/world.py, and 5 more steps",
+      "statement": "GET /api/worlds/{world_id} is handled by get_world in src/marketlab/api/app.py; get_world calls world_json; world_json calls PracticeWorld.statement in src/marketlab/world.py, PracticeWorld.positions, PracticeWorld.today and instrument_json; 4 more steps not shown",
       "evidence": [
         {
           "kind": "file",
@@ -1068,7 +1068,7 @@
     {
       "id": "f69",
       "topic": "flow",
-      "statement": "POST /api/runs runs start_run in src/marketlab/api/app.py, then summary in src/marketlab/api/app.py, then instrument_json in src/marketlab/api/app.py",
+      "statement": "POST /api/runs is handled by start_run in src/marketlab/api/app.py; start_run calls summary; summary calls instrument_json",
       "evidence": [
         {
           "kind": "file",
@@ -1093,7 +1093,7 @@
     {
       "id": "f70",
       "topic": "flow",
-      "statement": "GET /api/runs/{run_id} runs get_run in src/marketlab/api/app.py, then summary in src/marketlab/api/app.py, then instrument_json in src/marketlab/api/app.py",
+      "statement": "GET /api/runs/{run_id} is handled by get_run in src/marketlab/api/app.py; get_run calls summary; summary calls instrument_json",
       "evidence": [
         {
           "kind": "file",

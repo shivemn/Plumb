@@ -582,7 +582,7 @@
     {
       "id": "f39",
       "topic": "flow",
-      "statement": "POST /api/users runs register in app/api/routes/authentication.py, then check_username_is_taken in app/services/authentication.py, then check_email_is_taken in app/services/authentication.py, then UsersRepository.create_user in app/db/repositories/users.py, then create_access_token_for_user in app/services/jwt.py, and 5 more steps",
+      "statement": "POST /api/users is handled by register in app/api/routes/authentication.py; register calls check_username_is_taken in app/services/authentication.py, check_email_is_taken, UsersRepository.create_user in app/db/repositories/users.py and create_access_token_for_user in app/services/jwt.py; check_username_is_taken calls UsersRepository.get_user_by_username; 4 more steps not shown",
       "evidence": [
         {
           "kind": "file",
@@ -619,7 +619,7 @@
     {
       "id": "f40",
       "topic": "flow",
-      "statement": "POST /api/articles runs create_new_article in app/api/routes/articles/articles_resource.py, then get_slug_for_article in app/services/articles.py, then check_article_exists in app/services/articles.py, then ArticlesRepository.create_article in app/db/repositories/articles.py, then ArticlesRepository.get_article_by_slug in app/db/repositories/articles.py, and 5 more steps",
+      "statement": "POST /api/articles is handled by create_new_article in app/api/routes/articles/articles_resource.py; create_new_article calls get_slug_for_article in app/services/articles.py, check_article_exists and ArticlesRepository.create_article in app/db/repositories/articles.py; check_article_exists calls ArticlesRepository.get_article_by_slug; ArticlesRepository.create_article calls ArticlesRepository._link_article_with_tags; 4 more steps not shown",
       "evidence": [
         {
           "kind": "file",
@@ -656,7 +656,7 @@
     {
       "id": "f41",
       "topic": "flow",
-      "statement": "PUT /api/user runs update_current_user in app/api/routes/users.py, then check_username_is_taken in app/services/authentication.py, then check_email_is_taken in app/services/authentication.py, then UsersRepository.update_user in app/db/repositories/users.py, then create_access_token_for_user in app/services/jwt.py, and 3 more steps",
+      "statement": "PUT /api/user is handled by update_current_user in app/api/routes/users.py; update_current_user calls check_username_is_taken in app/services/authentication.py, check_email_is_taken, UsersRepository.update_user in app/db/repositories/users.py and create_access_token_for_user in app/services/jwt.py; check_username_is_taken calls UsersRepository.get_user_by_username; 2 more steps not shown",
       "evidence": [
         {
           "kind": "file",
@@ -693,7 +693,7 @@
     {
       "id": "f42",
       "topic": "flow",
-      "statement": "POST /api/users/login runs login in app/api/routes/authentication.py, then UsersRepository.get_user_by_email in app/db/repositories/users.py, then create_access_token_for_user in app/services/jwt.py, then create_jwt_token in app/services/jwt.py",
+      "statement": "POST /api/users/login is handled by login in app/api/routes/authentication.py; login calls UsersRepository.get_user_by_email in app/db/repositories/users.py and create_access_token_for_user in app/services/jwt.py; create_access_token_for_user calls create_jwt_token",
       "evidence": [
         {
           "kind": "file",
@@ -724,7 +724,7 @@
     {
       "id": "f43",
       "topic": "flow",
-      "statement": "PUT /api/articles/{slug} runs update_article_by_slug in app/api/routes/articles/articles_resource.py, then get_slug_for_article in app/services/articles.py, then ArticlesRepository.update_article in app/db/repositories/articles.py",
+      "statement": "PUT /api/articles/{slug} is handled by update_article_by_slug in app/api/routes/articles/articles_resource.py; update_article_by_slug calls get_slug_for_article in app/services/articles.py and ArticlesRepository.update_article in app/db/repositories/articles.py",
       "evidence": [
         {
           "kind": "file",
@@ -749,7 +749,7 @@
     {
       "id": "f44",
       "topic": "flow",
-      "statement": "GET /api/articles runs list_articles in app/api/routes/articles/articles_resource.py, then ArticlesRepository.filter_articles in app/db/repositories/articles.py, then ArticlesRepository._get_article_from_db_record in app/db/repositories/articles.py, then ArticlesRepository.get_tags_for_article_by_slug in app/db/repositories/articles.py, then ArticlesRepository.get_favorites_count_for_article_by_slug in app/db/repositories/articles.py, and 1 more step; it reaches the database (self.connection.fetch in app/db/repositories/articles.py)",
+      "statement": "GET /api/articles is handled by list_articles in app/api/routes/articles/articles_resource.py; list_articles calls ArticlesRepository.filter_articles in app/db/repositories/articles.py; ArticlesRepository.filter_articles calls ArticlesRepository._get_article_from_db_record; ArticlesRepository._get_article_from_db_record calls ArticlesRepository.get_tags_for_article_by_slug, ArticlesRepository.get_favorites_count_for_article_by_slug and ArticlesRepository.is_article_favorited_by_user; ArticlesRepository.filter_articles reaches the database (self.connection.fetch in app/db/repositories/articles.py)",
       "evidence": [
         {
           "kind": "file",
@@ -792,7 +792,7 @@
     {
       "id": "f45",
       "topic": "flow",
-      "statement": "GET /api/articles/feed runs get_articles_for_user_feed in app/api/routes/articles/articles_common.py, then ArticlesRepository.get_articles_for_user_feed in app/db/repositories/articles.py, then ArticlesRepository._get_article_from_db_record in app/db/repositories/articles.py, then ArticlesRepository.get_tags_for_article_by_slug in app/db/repositories/articles.py, then ArticlesRepository.get_favorites_count_for_article_by_slug in app/db/repositories/articles.py, and 1 more step",
+      "statement": "GET /api/articles/feed is handled by get_articles_for_user_feed in app/api/routes/articles/articles_common.py; get_articles_for_user_feed calls ArticlesRepository.get_articles_for_user_feed in app/db/repositories/articles.py; ArticlesRepository.get_articles_for_user_feed calls ArticlesRepository._get_article_from_db_record; ArticlesRepository._get_article_from_db_record calls ArticlesRepository.get_tags_for_article_by_slug, ArticlesRepository.get_favorites_count_for_article_by_slug and ArticlesRepository.is_article_favorited_by_user",
       "evidence": [
         {
           "kind": "file",
@@ -829,7 +829,7 @@
     {
       "id": "f46",
       "topic": "flow",
-      "statement": "GET /api/articles/{slug}/comments runs list_comments_for_article in app/api/routes/comments.py, then CommentsRepository.get_comments_for_article in app/db/repositories/comments.py, then CommentsRepository._get_comment_from_db_record in app/db/repositories/comments.py",
+      "statement": "GET /api/articles/{slug}/comments is handled by list_comments_for_article in app/api/routes/comments.py; list_comments_for_article calls CommentsRepository.get_comments_for_article in app/db/repositories/comments.py; CommentsRepository.get_comments_for_article calls CommentsRepository._get_comment_from_db_record",
       "evidence": [
         {
           "kind": "file",
@@ -854,7 +854,7 @@
     {
       "id": "f47",
       "topic": "flow",
-      "statement": "POST /api/articles/{slug}/comments runs create_comment_for_article in app/api/routes/comments.py, then CommentsRepository.create_comment_for_article in app/db/repositories/comments.py, then CommentsRepository._get_comment_from_db_record in app/db/repositories/comments.py",
+      "statement": "POST /api/articles/{slug}/comments is handled by create_comment_for_article in app/api/routes/comments.py; create_comment_for_article calls CommentsRepository.create_comment_for_article in app/db/repositories/comments.py; CommentsRepository.create_comment_for_article calls CommentsRepository._get_comment_from_db_record",
       "evidence": [
         {
           "kind": "file",
@@ -879,7 +879,7 @@
     {
       "id": "f48",
       "topic": "flow",
-      "statement": "GET /api/user runs retrieve_current_user in app/api/routes/users.py, then create_access_token_for_user in app/services/jwt.py, then create_jwt_token in app/services/jwt.py",
+      "statement": "GET /api/user is handled by retrieve_current_user in app/api/routes/users.py; retrieve_current_user calls create_access_token_for_user in app/services/jwt.py; create_access_token_for_user calls create_jwt_token",
       "evidence": [
         {
           "kind": "file",

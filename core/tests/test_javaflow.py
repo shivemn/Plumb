@@ -19,6 +19,9 @@ public class OrderController {
 
     public OrderController(OrderService orders) { this.orders = orders; }
 
+    @ModelAttribute("customer")
+    public Customer loadCustomer() { return orders.currentCustomer(); }
+
     @GetMapping("/{id}")
     public Order get(@PathVariable long id) {
         return this.orders.find(id);
@@ -37,6 +40,7 @@ SERVICE = """package com.shop;
 public interface OrderService {
     Order find(long id);
     Order place(Order order);
+    Customer currentCustomer();
 }
 """
 
@@ -53,6 +57,8 @@ public class OrderServiceImpl implements OrderService {
         rest.postForObject("http://billing", order, Void.class);
         return repository.save(order);
     }
+
+    public Customer currentCustomer() { return null; }
 
     private void check(Order order) { if (order == null) throw new IllegalArgumentException(); }
 }
@@ -87,14 +93,23 @@ def test_spring_trace_through_interface_to_repository(make_repo: Make) -> None:
     by_route = {f.route.name: f for f in flows}
 
     get = by_route["GET /orders/{id}"]
-    assert [s.name for s in get.steps] == ["OrderController.get", "OrderServiceImpl.find"]
+    assert [s.name for s in get.steps] == [
+        "OrderController.get",
+        "OrderController.loadCustomer",  # @ModelAttribute: Spring runs it before the handler
+        "OrderServiceImpl.find",
+        "OrderServiceImpl.currentCustomer",
+    ]
+    assert [s.before for s in get.steps] == [False, True, False, False]
+    assert [s.caller for s in get.steps] == [None, 0, 0, 1]
     assert [(t.what, t.call) for t in get.touches] == [("the database", "OrderRepository.findById")]
 
     place = by_route["POST /orders"]
     assert [s.name for s in place.steps] == [
         "OrderController.place",
+        "OrderController.loadCustomer",
         "OrderServiceImpl.place",
+        "OrderServiceImpl.currentCustomer",
         "OrderServiceImpl.check",
     ]  # Order.getId is a getter, so it is not a step
     assert [t.what for t in place.touches] == ["an outside HTTP service", "the database"]
-    assert place.steps[1].path == BASE + "OrderServiceImpl.java"
+    assert place.steps[2].path == BASE + "OrderServiceImpl.java"

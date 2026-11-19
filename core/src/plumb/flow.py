@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import cache
 from pathlib import Path
 
@@ -58,6 +58,8 @@ class Step:
     path: str
     line: int
     name: str  # "get_user", "UserService.get"
+    caller: int | None = None  # index of the step that calls this one; None for the handler
+    before: bool = False  # run by the framework before the handler, such as @ModelAttribute
 
 
 @dataclass(frozen=True)
@@ -66,6 +68,7 @@ class Touch:
     call: str  # the call that does it, as written
     path: str
     line: int
+    by: int = 0  # index of the step that makes the call
 
 
 @dataclass(frozen=True)
@@ -279,13 +282,13 @@ def trace_python(files: _PythonFiles, route: EntryPoint) -> Flow | None:
     steps: list[Step] = [Step(route.path, handler.start_point.row + 1, name)]
     touches: list[Touch] = []
     seen = {(route.path, name)}
-    queue: list[tuple[str, Node, int]] = [(route.path, handler, 0)]
+    queue: list[tuple[str, Node, int, int]] = [(route.path, handler, 0, 0)]
     while queue and len(steps) < MAX_STEPS:
-        path, function, depth = queue.pop(0)
+        path, function, depth, index = queue.pop(0)
         for call in _calls(function):
             touch = _touch(files, path, call)
             if touch is not None and touch.what not in {t.what for t in touches}:
-                touches.append(touch)
+                touches.append(replace(touch, by=index))
             target = _target(files, path, function, call)
             if target is None or target in seen or depth + 1 >= MAX_DEPTH:
                 continue
@@ -295,8 +298,8 @@ def trace_python(files: _PythonFiles, route: EntryPoint) -> Flow | None:
             definition = files.function(*target)
             if definition is None:
                 continue
-            steps.append(Step(target[0], definition.start_point.row + 1, target[1]))
-            queue.append((target[0], definition, depth + 1))
+            steps.append(Step(target[0], definition.start_point.row + 1, target[1], index))
+            queue.append((target[0], definition, depth + 1, len(steps) - 1))
             if len(steps) >= MAX_STEPS:
                 break
     return Flow(route, tuple(steps), tuple(touches))

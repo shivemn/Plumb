@@ -130,9 +130,14 @@ def test_flow_facts(make_repo: Make) -> None:
     add_flow_facts(builder, flows)
     statements = [f.statement for f in builder.facts]
     assert statements[0] == "2 of 3 traced routes reach the database"  # no path is shared by 2
-    assert any(
-        s.startswith("POST /users runs create_user in app/routes/users.py, then register in")
-        and s.endswith("and the database (self.session.add in app/repositories/users.py)")
-        for s in statements
-    )
+    create = next(s for s in statements if s.startswith("POST /users"))
+    assert create == (
+        "POST /users is handled by create_user in app/routes/users.py; "
+        "create_user calls register in app/services/users.py and "
+        "open_account in app/clients/billing.py; "
+        "register calls _check and UserRepo.add in app/repositories/users.py; "
+        "UserRepo.add calls UserRepo._log; "
+        "open_account reaches an outside HTTP service (httpx.post in app/clients/billing.py); "
+        "UserRepo.add reaches the database (self.session.add in app/repositories/users.py)"
+    )  # each file is named once
     assert not any(s.startswith("GET /health") for s in statements)  # one step, nothing reached

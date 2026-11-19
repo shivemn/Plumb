@@ -172,6 +172,20 @@ def _parameters(method: Node, found: dict[str, str]) -> None:
             found[name] = _simple(py_text(type_node))
 
 
+def _modifiers(node: Node) -> str:
+    found = next((c for c in node.named_children if c.type == "modifiers"), None)
+    return py_text(found)
+
+
+def _model_attributes(owner: Node) -> list[Node]:
+    body = owner.child_by_field_name("body")
+    return [
+        member
+        for member in (body.named_children if body else [])
+        if member.type == "method_declaration" and "@ModelAttribute" in _modifiers(member)
+    ]
+
+
 def _is_accessor(method: Node) -> bool:
     """A getter or setter with a one-statement body: not a step worth showing."""
     name = py_text(method.child_by_field_name("name"))
@@ -207,9 +221,17 @@ def trace_java(files: JavaFiles, route: EntryPoint) -> Flow | None:
     steps = [Step(route.path, handler.start_point.row + 1, first)]
     touches: list[Touch] = []
     seen = {first}
-    queue: list[tuple[str, str, Node, Node, int]] = [(route.path, owner_name, owner, handler, 0)]
+    queue: list[tuple[str, str, Node, Node, int, int]] = [
+        (route.path, owner_name, owner, handler, 0, 0)
+    ]
+    # Spring runs a controller's @ModelAttribute methods before each of its handlers.
+    for member in _model_attributes(owner):
+        name = f"{owner_name}.{py_text(member.child_by_field_name('name'))}"
+        seen.add(name)
+        steps.append(Step(route.path, member.start_point.row + 1, name, 0, before=True))
+        queue.append((route.path, owner_name, owner, member, 0, len(steps) - 1))
     while queue and len(steps) < MAX_STEPS:
-        path, type_name, type_node, method, depth = queue.pop(0)
+        path, type_name, type_node, method, depth, index = queue.pop(0)
         variables = _variable_types(type_node, method)
         for call in walk(method):
             if call.type != "method_invocation":
@@ -234,7 +256,7 @@ def trace_java(files: JavaFiles, route: EntryPoint) -> Flow | None:
             if what is not None:
                 if what not in {t.what for t in touches}:
                     # Name the type, not the variable: OwnerRepository.save, not this.owners.save
-                    touches.append(Touch(what, f"{target_type}.{name}", path, line))
+                    touches.append(Touch(what, f"{target_type}.{name}", path, line, index))
                 continue
             concrete = files.concrete(target_type)
             key = f"{concrete}.{name}"
@@ -247,10 +269,11 @@ def trace_java(files: JavaFiles, route: EntryPoint) -> Flow | None:
             target_path, target_method = hit
             if _is_accessor(target_method):
                 continue
-            steps.append(Step(target_path, target_method.start_point.row + 1, key))
+            steps.append(Step(target_path, target_method.start_point.row + 1, key, index))
             target_owner = _owner(target_method)
             if target_owner is not None:
-                queue.append((target_path, concrete, target_owner, target_method, depth + 1))
+                at = len(steps) - 1
+                queue.append((target_path, concrete, target_owner, target_method, depth + 1, at))
             if len(steps) >= MAX_STEPS:
                 break
     return Flow(route, tuple(steps), tuple(touches))

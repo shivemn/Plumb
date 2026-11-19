@@ -1411,7 +1411,7 @@
     {
       "id": "f94",
       "topic": "flow",
-      "statement": "POST /api/v1/users/ runs create_user in backend/app/api/routes/users.py, then get_user_by_email in backend/app/crud.py, then create_user in backend/app/crud.py, then generate_new_account_email in backend/app/utils.py, then send_email in backend/app/utils.py, and 2 more steps; it reaches the database (session.exec in backend/app/crud.py)",
+      "statement": "POST /api/v1/users/ is handled by create_user in backend/app/api/routes/users.py; create_user in backend/app/api/routes/users.py calls get_user_by_email in backend/app/crud.py, create_user in backend/app/crud.py, generate_new_account_email in backend/app/utils.py and send_email; create_user in backend/app/crud.py calls get_password_hash in backend/app/core/security.py; 1 more step not shown; get_user_by_email reaches the database (session.exec in backend/app/crud.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1454,7 +1454,7 @@
     {
       "id": "f95",
       "topic": "flow",
-      "statement": "POST /api/v1/login/access-token runs login_access_token in backend/app/api/routes/login.py, then authenticate in backend/app/crud.py, then create_access_token in backend/app/core/security.py, then get_user_by_email in backend/app/crud.py, then verify_password in backend/app/core/security.py; it reaches the database (session.add in backend/app/crud.py)",
+      "statement": "POST /api/v1/login/access-token is handled by login_access_token in backend/app/api/routes/login.py; login_access_token calls authenticate in backend/app/crud.py and create_access_token in backend/app/core/security.py; authenticate calls get_user_by_email and verify_password; authenticate reaches the database (session.add in backend/app/crud.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1497,7 +1497,7 @@
     {
       "id": "f96",
       "topic": "flow",
-      "statement": "POST /api/v1/password-recovery/{email} runs recover_password in backend/app/api/routes/login.py, then get_user_by_email in backend/app/crud.py, then generate_password_reset_token in backend/app/utils.py, then generate_reset_password_email in backend/app/utils.py, then send_email in backend/app/utils.py, and 1 more step; it reaches the database (session.exec in backend/app/crud.py)",
+      "statement": "POST /api/v1/password-recovery/{email} is handled by recover_password in backend/app/api/routes/login.py; recover_password calls get_user_by_email in backend/app/crud.py, generate_password_reset_token in backend/app/utils.py, generate_reset_password_email and send_email; generate_reset_password_email calls render_email_template; get_user_by_email reaches the database (session.exec in backend/app/crud.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1540,7 +1540,7 @@
     {
       "id": "f97",
       "topic": "flow",
-      "statement": "POST /api/v1/password-recovery-html-content/{email} runs recover_password_html_content in backend/app/api/routes/login.py, then get_user_by_email in backend/app/crud.py, then generate_password_reset_token in backend/app/utils.py, then generate_reset_password_email in backend/app/utils.py, then render_email_template in backend/app/utils.py; it reaches the database (session.exec in backend/app/crud.py)",
+      "statement": "POST /api/v1/password-recovery-html-content/{email} is handled by recover_password_html_content in backend/app/api/routes/login.py; recover_password_html_content calls get_user_by_email in backend/app/crud.py, generate_password_reset_token in backend/app/utils.py and generate_reset_password_email; generate_reset_password_email calls render_email_template; get_user_by_email reaches the database (session.exec in backend/app/crud.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1583,7 +1583,7 @@
     {
       "id": "f98",
       "topic": "flow",
-      "statement": "PATCH /api/v1/users/me/password runs update_password_me in backend/app/api/routes/users.py, then verify_password in backend/app/core/security.py, then get_password_hash in backend/app/core/security.py; it reaches the database (session.add in backend/app/api/routes/users.py)",
+      "statement": "PATCH /api/v1/users/me/password is handled by update_password_me in backend/app/api/routes/users.py; update_password_me calls verify_password in backend/app/core/security.py and get_password_hash; update_password_me reaches the database (session.add in backend/app/api/routes/users.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1614,7 +1614,7 @@
     {
       "id": "f99",
       "topic": "flow",
-      "statement": "POST /api/v1/private/users/ runs create_user in backend/app/api/routes/private.py, then get_password_hash in backend/app/core/security.py; it reaches the database (session.add in backend/app/api/routes/private.py)",
+      "statement": "POST /api/v1/private/users/ is handled by create_user in backend/app/api/routes/private.py; create_user calls get_password_hash in backend/app/core/security.py; create_user reaches the database (session.add in backend/app/api/routes/private.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1639,7 +1639,7 @@
     {
       "id": "f100",
       "topic": "flow",
-      "statement": "GET /api/v1/items/ runs read_items in backend/app/api/routes/items.py; it reaches the database (session.exec in backend/app/api/routes/items.py)",
+      "statement": "GET /api/v1/items/ is handled by read_items in backend/app/api/routes/items.py; read_items reaches the database (session.exec in backend/app/api/routes/items.py)",
       "evidence": [
         {
           "kind": "file",
@@ -1658,7 +1658,7 @@
     {
       "id": "f101",
       "topic": "flow",
-      "statement": "GET /api/v1/items/{id} runs read_item in backend/app/api/routes/items.py; it reaches the database (session.get in backend/app/api/routes/items.py)",
+      "statement": "GET /api/v1/items/{id} is handled by read_item in backend/app/api/routes/items.py; read_item reaches the database (session.get in backend/app/api/routes/items.py)",
       "evidence": [
         {
           "kind": "file",
