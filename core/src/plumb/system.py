@@ -249,6 +249,7 @@ DEPENDENCIES: dict[str, tuple[Role, str]] = {
     "org.mariadb.jdbc:mariadb-java-client": (Role.STORE, "MariaDB"),
     # Embedded and other databases
     "com.h2database:h2": (Role.STORE, "H2"),
+    "org.hsqldb:hsqldb": (Role.STORE, "HSQLDB"),
     "org.xerial:sqlite-jdbc": (Role.STORE, "SQLite"),
     "better-sqlite3": (Role.STORE, "SQLite"),
     "aiosqlite": (Role.STORE, "SQLite"),
@@ -336,6 +337,7 @@ _CONFIG_SIGNS: tuple[tuple[re.Pattern[str], Role, str], ...] = (
     (re.compile(r"jdbc:mysql:|mysql(?:\+\w+)?://"), Role.STORE, "MySQL"),
     (re.compile(r"jdbc:mariadb:"), Role.STORE, "MariaDB"),
     (re.compile(r"jdbc:h2:"), Role.STORE, "H2"),
+    (re.compile(r"jdbc:hsqldb:"), Role.STORE, "HSQLDB"),
     (re.compile(r"sqlite(?:\+\w+)?:///|jdbc:sqlite:"), Role.STORE, "SQLite"),
     (re.compile(r"mongodb(?:\+srv)?://"), Role.STORE, "MongoDB"),
     (re.compile(r"rediss?://|spring\.data\.redis|spring\.redis\."), Role.STORE, "Redis"),
