@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Annotated
 
 import typer
 
 from plumb import __version__
+from plumb.github import GitHubClient
 from plumb.markdown import render_markdown
 from plumb.model import FactSet, Report
 from plumb.pipeline import Analysis, analyse_repo
@@ -52,6 +54,7 @@ def schema(
 
 
 DEFAULT_WORKDIR = Path.home() / ".plumb" / "repos"
+GITHUB_CACHE = Path.home() / ".plumb" / "github"
 
 
 @app.command()
@@ -66,9 +69,16 @@ def analyse(
     commit: Annotated[
         str | None, typer.Option(help="Analyse this commit instead of the newest.")
     ] = None,
+    github: Annotated[
+        bool,
+        typer.Option(
+            help="Read starter issues and review speed from GitHub. Set GITHUB_TOKEN "
+            "for more than 60 requests an hour."
+        ),
+    ] = True,
 ) -> None:
     """Analyse a repo without AI and write its facts as JSON."""
-    analysis = _analyse_or_exit(repo, workdir, commit, window_days, max_files)
+    analysis = _analyse_or_exit(repo, workdir, commit, window_days, max_files, github)
     checkout, facts, history = analysis.checkout, analysis.facts, analysis.history
 
     target = out or Path(f"{checkout.name}.facts.json")
@@ -84,8 +94,18 @@ def analyse(
 
 
 def _analyse_or_exit(
-    repo: str, workdir: Path, commit: str | None, window_days: int, max_files: int
+    repo: str,
+    workdir: Path,
+    commit: str | None,
+    window_days: int,
+    max_files: int,
+    github: bool = True,
 ) -> Analysis:
+    client = (
+        GitHubClient(token=os.environ.get("GITHUB_TOKEN"), cache_dir=GITHUB_CACHE)
+        if github
+        else None
+    )
     try:
         analysis = analyse_repo(
             repo,
@@ -93,10 +113,16 @@ def _analyse_or_exit(
             commit=commit,
             window_days=window_days,
             limits=Limits(max_files=max_files),
+            github=client,
         )
     except SourceError as error:
         typer.echo(f"Could not analyse {repo}: {error}", err=True)
         raise typer.Exit(1) from error
+    finally:
+        if client is not None:
+            client.close()
+    if analysis.activity is not None and analysis.activity.error:
+        typer.echo(f"Issues and pull requests were left out: {analysis.activity.error}", err=True)
     if analysis.history is None:
         typer.echo(
             "This clone has only part of its history, so hot spots and files that change "
@@ -135,10 +161,17 @@ def report(
     commit: Annotated[
         str | None, typer.Option(help="Analyse this commit instead of the newest.")
     ] = None,
+    github: Annotated[
+        bool,
+        typer.Option(
+            help="Read starter issues and review speed from GitHub. Set GITHUB_TOKEN "
+            "for more than 60 requests an hour."
+        ),
+    ] = True,
     cache: Annotated[Path, typer.Option(help="Where model answers are cached.")] = DEFAULT_CACHE,
 ) -> None:
     """Analyse a repo, have a model write the report, and keep only claims that check out."""
-    analysis = _analyse_or_exit(repo, workdir, commit, window_days, max_files)
+    analysis = _analyse_or_exit(repo, workdir, commit, window_days, max_files, github)
     name = analysis.checkout.name
     tasks = plan_report(analysis.facts)
 

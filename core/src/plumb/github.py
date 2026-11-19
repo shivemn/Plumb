@@ -42,6 +42,7 @@ class PullRequest:
     title: str
     created_at: datetime
     merged_at: datetime | None
+    author: str = ""
 
 
 @dataclass(frozen=True)
@@ -54,6 +55,12 @@ def _time(value: object) -> datetime | None:
     if not isinstance(value, str):
         return None
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def _login(user: object) -> str:
+    if not isinstance(user, dict):
+        return ""
+    return str(cast("dict[str, object]", user).get("login") or "")
 
 
 def _dicts(value: object) -> list[dict[str, object]]:
@@ -151,6 +158,7 @@ class GitHubClient:
                     title=str(item.get("title") or ""),
                     created_at=created,
                     merged_at=_time(item.get("merged_at")),
+                    author=_login(item.get("user")),
                 )
             )
         return found[:limit]
@@ -159,14 +167,8 @@ class GitHubClient:
         found: list[Review] = []
         for item in _dicts(self.get(f"/repos/{owner}/{name}/pulls/{number}/reviews")):
             submitted = _time(item.get("submitted_at"))
-            user = item.get("user")
-            author = (
-                str(cast("dict[str, object]", user).get("login", ""))
-                if isinstance(user, dict)
-                else ""
-            )
             if submitted is not None:
-                found.append(Review(submitted, author))
+                found.append(Review(submitted, _login(item.get("user"))))
         return found
 
     def close(self) -> None:

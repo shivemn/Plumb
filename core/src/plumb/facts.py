@@ -6,6 +6,7 @@ from collections import Counter, defaultdict
 from collections.abc import Sequence
 from pathlib import PurePosixPath
 
+from plumb.activity import Activity, describe_hours
 from plumb.contrib import Step
 from plumb.entrypoints import EntryKind, EntryPoint
 from plumb.graph import component_edges, most_used, mutual_components
@@ -19,6 +20,7 @@ from plumb.model import (
     Fact,
     FactSet,
     FileEvidence,
+    IssueEvidence,
     RepoKind,
     RepoRef,
     Topic,
@@ -59,6 +61,7 @@ def build_facts(
     decision: KindDecision | None = None,
     migrations: list[Migrations] | None = None,
     steps: list[Step] | None = None,
+    activity: Activity | None = None,
 ) -> FactSet:
     builder = FactBuilder()
     kind = decision.kind if decision else RepoKind.UNKNOWN
@@ -86,6 +89,8 @@ def build_facts(
         add_entry_point_facts(builder, entry_points)
     if steps:
         add_step_facts(builder, steps)
+    if activity is not None:
+        add_activity_facts(builder, activity)
     if edges:
         add_graph_facts(builder, edges)
     if history is not None:
@@ -226,6 +231,41 @@ def add_step_facts(builder: FactBuilder, steps: list[Step], limit: int = 24) -> 
             builder.add(f'CI step "{step.name}" in {step.path} runs: {step.command}', where)
         else:
             builder.add(f'Contribution guide {step.path} has a section "{step.name}"', where)
+
+
+def add_activity_facts(builder: FactBuilder, activity: Activity, limit: int = 8) -> None:
+    builder.topic = Topic.ACTIVITY
+    starters = activity.starters
+    if starters:
+        builder.add(
+            f"{_plural(len(starters), 'open issue')} labelled for newcomers, "
+            f"out of {activity.open_issues:,} open issues read",
+            [IssueEvidence(number=s.issue.number) for s in starters[:3]],
+        )
+    for starter in starters[:limit]:
+        issue = starter.issue
+        labels = ", ".join(issue.labels)
+        names = f"; it names {', '.join(starter.files)}" if starter.files else ""
+        builder.add(
+            f'Open issue #{issue.number} "{issue.title}" is labelled {labels}{names}',
+            [IssueEvidence(number=issue.number), *(FileEvidence(path=f) for f in starter.files)],
+        )
+    speed = activity.speed
+    if speed is None:
+        return
+    builder.add(
+        f"Recently closed pull requests were merged a median of "
+        f"{describe_hours(speed.hours_to_merge)} after being opened "
+        f"({_plural(len(speed.merged), 'merged pull request')} measured)",
+        [IssueEvidence(number=n) for n in speed.merged[:3]],
+    )
+    if speed.hours_to_review is not None:
+        builder.add(
+            f"Their first review by someone other than the author came a median of "
+            f"{describe_hours(speed.hours_to_review)} after opening "
+            f"({_plural(len(speed.reviewed), 'pull request')} measured)",
+            [IssueEvidence(number=n) for n in speed.reviewed[:3]],
+        )
 
 
 def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) -> None:

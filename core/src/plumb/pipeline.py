@@ -5,10 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+from plumb.activity import Activity, read_activity
 from plumb.contrib import find_steps
 from plumb.deps import Dependency, find_dependencies
 from plumb.entrypoints import EntryPoint, find_entry_points
 from plumb.facts import build_facts
+from plumb.github import GitHubClient
 from plumb.graph import all_edges
 from plumb.history import History, is_shallow, mine
 from plumb.imports import Edge
@@ -31,6 +33,7 @@ class Analysis:
     decision: KindDecision
     migrations: list[Migrations]
     facts: FactSet
+    activity: Activity | None = None  # None when GitHub was not asked
 
     @property
     def first_party(self) -> set[str]:
@@ -44,8 +47,13 @@ def analyse_repo(
     commit: str | None = None,
     window_days: int = 90,
     limits: Limits | None = None,
+    github: GitHubClient | None = None,
 ) -> Analysis:
-    """Fetch `ref` and run every analysis step. Raises SourceError if it cannot be fetched."""
+    """Fetch `ref` and run every analysis step. Raises SourceError if it cannot be fetched.
+
+    With a GitHub client, starter issues and review speed are read too; a
+    local folder that is not a GitHub clone has neither.
+    """
     checkout = fetch(ref, workdir=workdir, limits=limits, commit=commit)
     files = build_inventory(checkout.path)
     first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
@@ -62,9 +70,33 @@ def analyse_repo(
     decision = decide_kind(files, entry_points, system, deps)
     migrations = find_migrations(files)
     steps = find_steps(checkout.path, files)
+    activity = None
+    if github is not None and checkout.owner != "local":
+        paths = {f.path for f in files}
+        activity = read_activity(github, checkout.owner, checkout.name, paths)
     facts = build_facts(
-        checkout, files, history, edges, entry_points, system, settings, decision, migrations, steps
+        checkout,
+        files,
+        history,
+        edges,
+        entry_points,
+        system,
+        settings,
+        decision,
+        migrations,
+        steps,
+        activity,
     )
     return Analysis(
-        checkout, files, history, edges, entry_points, deps, system, decision, migrations, facts
+        checkout,
+        files,
+        history,
+        edges,
+        entry_points,
+        deps,
+        system,
+        decision,
+        migrations,
+        facts,
+        activity,
     )

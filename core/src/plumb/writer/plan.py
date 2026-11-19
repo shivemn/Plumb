@@ -53,9 +53,10 @@ SECTIONS: dict[str, SectionSpec] = {
     "contribute": SectionSpec(
         "contribute",
         "How to contribute",
-        (Topic.CONTRIBUTE, Topic.ENTRY_POINTS),
+        (Topic.CONTRIBUTE, Topic.ACTIVITY, Topic.ENTRY_POINTS),
         "Say how to set up, run and test the project, using the commands the facts show. "
-        "Prefer commands that CI runs. Mention the contribution guide if there is one.",
+        "Prefer commands that CI runs. Mention the contribution guide if there is one. "
+        "Point to open starter issues and say how long pull requests wait, if the facts say.",
     ),
     "hot_spots": SectionSpec(
         "hot_spots",

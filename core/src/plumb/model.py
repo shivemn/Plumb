@@ -44,6 +44,7 @@ class Topic(StrEnum):
     STRUCTURE = "structure"
     HISTORY = "history"
     CONTRIBUTE = "contribute"
+    ACTIVITY = "activity"
     GENERAL = "general"
 
 
