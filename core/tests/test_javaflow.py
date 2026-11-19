@@ -88,7 +88,7 @@ def test_spring_trace_through_interface_to_repository(make_repo: Make) -> None:
 
     get = by_route["GET /orders/{id}"]
     assert [s.name for s in get.steps] == ["OrderController.get", "OrderServiceImpl.find"]
-    assert [(t.what, t.call) for t in get.touches] == [("the database", "repository.findById")]
+    assert [(t.what, t.call) for t in get.touches] == [("the database", "OrderRepository.findById")]
 
     place = by_route["POST /orders"]
     assert [s.name for s in place.steps] == [

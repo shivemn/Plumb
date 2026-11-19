@@ -701,7 +701,7 @@
     {
       "id": "f44",
       "topic": "flow",
-      "statement": "POST /api/replay/start runs ReplayController.start in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.start in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.tick in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, and 3 more steps; it reaches Kafka (kafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
+      "statement": "POST /api/replay/start runs ReplayController.start in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.start in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.tick in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, and 3 more steps; it reaches Kafka (KafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
       "evidence": [
         {
           "kind": "file",
@@ -744,7 +744,7 @@
     {
       "id": "f45",
       "topic": "flow",
-      "statement": "POST /api/archive/rebuild runs ArchiveController.rebuild in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then RebuildService.start in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.rebuildNow in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then ProfileService.clearAll in src/main/java/com/shivemn/ccp/service/ProfileService.java, and 2 more steps; it reaches the database (jdbc.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
+      "statement": "POST /api/archive/rebuild runs ArchiveController.rebuild in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then RebuildService.start in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.rebuildNow in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then ProfileService.clearAll in src/main/java/com/shivemn/ccp/service/ProfileService.java, and 2 more steps; it reaches the database (JdbcTemplate.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
       "evidence": [
         {
           "kind": "file",
@@ -787,7 +787,7 @@
     {
       "id": "f46",
       "topic": "flow",
-      "statement": "POST /api/events runs EventController.submit in src/main/java/com/shivemn/ccp/web/EventController.java, then EventPublisher.publish in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java, then PipelineMetrics.recordPublished in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java; it reaches Kafka (kafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
+      "statement": "POST /api/events runs EventController.submit in src/main/java/com/shivemn/ccp/web/EventController.java, then EventPublisher.publish in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java, then PipelineMetrics.recordPublished in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java; it reaches Kafka (KafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
       "evidence": [
         {
           "kind": "file",
@@ -855,7 +855,7 @@
     {
       "id": "f48",
       "topic": "flow",
-      "statement": "GET /api/history/{borrowerId} runs ArchiveController.history in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then EventArchive.history in src/main/java/com/shivemn/ccp/archive/EventArchive.java; it reaches the database (jdbc.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
+      "statement": "GET /api/history/{borrowerId} runs ArchiveController.history in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then EventArchive.history in src/main/java/com/shivemn/ccp/archive/EventArchive.java; it reaches the database (JdbcTemplate.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
       "evidence": [
         {
           "kind": "file",

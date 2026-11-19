@@ -6,18 +6,18 @@ Development repos: 36 of 36 checks passed. Held-out repos: 9 of 9 checks passed.
 
 | Repo | Kind | Modules | HTTP routes | Stores | Facts | Time |
 |------|------|---------|-------------|--------|------:|-----:|
-| credit-event-pipeline | service (yes) | 4/4 | 14 of 14 (yes) | Apache Ignite, Apache Kafka, PostgreSQL (yes) | 81 | 1.1 s |
-| market-lab | service (yes) | 4/4 | 30 of 30 (yes) | PostgreSQL, SQLite (yes) | 122 | 1.3 s |
-| terminus | website (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 78 | 0.8 s |
-| spring-petclinic | service (yes) | 4/4 | 17 of 17 (yes) | H2, MySQL, PostgreSQL (yes) | 65 | 0.6 s |
-| full-stack-fastapi-template | service (yes) | 5/5 | 23 of 23 (yes) | PostgreSQL (yes) | 150 | 1.0 s |
+| credit-event-pipeline | service (yes) | 4/4 | 14 of 14 (yes) | Apache Ignite, Apache Kafka, PostgreSQL (yes) | 81 | 0.7 s |
+| market-lab | service (yes) | 4/4 | 30 of 30 (yes) | PostgreSQL, SQLite (yes) | 122 | 1.2 s |
+| terminus | website (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 78 | 0.6 s |
+| spring-petclinic | service (yes) | 4/4 | 17 of 17 (yes) | H2, MySQL, PostgreSQL (yes) | 65 | 0.5 s |
+| full-stack-fastapi-template | service (yes) | 5/5 | 23 of 23 (yes) | PostgreSQL (yes) | 150 | 0.7 s |
 | requests | library (yes) | 1/1 | 0 of 0 (yes) | none (yes) | 78 | 0.7 s |
 | click | library (yes) | 1/1 | 0 of 0 (yes) | none (yes) | 95 | 1.2 s |
-| jsoup | library (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 102 | 1.6 s |
+| jsoup | library (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 102 | 1.3 s |
 | awesome | docs (yes) | none listed | 0 of 0 (yes) | none (yes) | 8 | 0.5 s |
 | fastapi-realworld-example-app | service (yes) | 5/5 | 19 of 19 (yes) | PostgreSQL (yes) | 81 | 0.6 s |
-| node-express-realworld-example-app | service (yes) | 4/4 | 20 of 20 (yes) | PostgreSQL (yes) | 66 | 0.4 s |
-| cli | cli (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 95 | 0.7 s |
+| node-express-realworld-example-app | service (yes) | 4/4 | 20 of 20 (yes) | PostgreSQL (yes) | 66 | 0.5 s |
+| cli | cli (yes) | 5/5 | 0 of 0 (yes) | none (yes) | 95 | 0.6 s |
 | django-realworld-example-app (held out) | service (yes) | 4/4 | 12 of 12 (yes) | SQLite (yes) | 33 | 0.5 s |
 | spring-petclinic-rest (held out) | service (yes) | 5/5 | 38 of 38 (yes) | H2, HSQLDB, MySQL, PostgreSQL (yes) | 105 | 0.9 s |
-| httpx (held out) | library (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 75 | 1.0 s |
+| httpx (held out) | library (yes) | 2/2 | 0 of 0 (yes) | none (yes) | 75 | 0.8 s |

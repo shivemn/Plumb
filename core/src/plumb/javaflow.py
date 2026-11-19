@@ -233,7 +233,8 @@ def trace_java(files: JavaFiles, route: EntryPoint) -> Flow | None:
                 what = "the database"
             if what is not None:
                 if what not in {t.what for t in touches}:
-                    touches.append(Touch(what, f"{py_text(obj)}.{name}", path, line))
+                    # Name the type, not the variable: OwnerRepository.save, not this.owners.save
+                    touches.append(Touch(what, f"{target_type}.{name}", path, line))
                 continue
             concrete = files.concrete(target_type)
             key = f"{concrete}.{name}"

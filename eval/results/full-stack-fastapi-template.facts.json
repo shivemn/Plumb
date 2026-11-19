@@ -10,7 +10,7 @@
     {
       "id": "f1",
       "topic": "kind",
-      "statement": "Looks like a service repo: 2 deployable service(s) and 23 route(s), consumer(s) or scheduled job(s)",
+      "statement": "Looks like a service repo: 1 deployable service(s) and 23 route(s), consumer(s) or scheduled job(s)",
       "evidence": [
         {
           "kind": "file",
@@ -20,15 +20,15 @@
         },
         {
           "kind": "file",
-          "path": "compose.override.yml",
-          "start_line": 77,
-          "end_line": 77
+          "path": "backend/app/api/routes/items.py",
+          "start_line": 13,
+          "end_line": 13
         },
         {
           "kind": "file",
           "path": "backend/app/api/routes/items.py",
-          "start_line": 13,
-          "end_line": 13
+          "start_line": 48,
+          "end_line": 48
         }
       ]
     },
@@ -472,19 +472,6 @@
     {
       "id": "f31",
       "topic": "system",
-      "statement": "Service run from this repo: playwright (Compose service built from .)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "compose.override.yml",
-          "start_line": 77,
-          "end_line": 77
-        }
-      ]
-    },
-    {
-      "id": "f32",
-      "topic": "system",
       "statement": "Database, cache or queue: PostgreSQL (dependency psycopg; setting mentions postgresql://; setting mentions postgres://; setting mentions postgresql+psycopg://; Compose service db, image postgres:18)",
       "evidence": [
         {
@@ -520,7 +507,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f32",
       "topic": "system",
       "statement": "Outside service: Sentry (dependency sentry-sdk)",
       "evidence": [
@@ -533,7 +520,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f33",
       "topic": "system",
       "statement": "Other container: adminer (Compose service, image adminer)",
       "evidence": [
@@ -546,7 +533,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f34",
       "topic": "system",
       "statement": "Other container: mailpit (Compose service, image axllent/mailpit)",
       "evidence": [
@@ -555,6 +542,19 @@
           "path": "compose.override.yml",
           "start_line": 71,
           "end_line": 71
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "system",
+      "statement": "Other container: playwright (Compose service built from ., used for tests)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "compose.override.yml",
+          "start_line": 77,
+          "end_line": 77
         }
       ]
     },

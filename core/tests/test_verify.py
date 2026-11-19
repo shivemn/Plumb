@@ -98,3 +98,25 @@ def test_verify_builds_a_report() -> None:
         "the model's answer could not be read: x",
     ]
     assert [f.id for f in report.facts] == ["f1"]
+
+
+def test_generic_terms_and_implied_tools_are_not_rejected() -> None:
+    deploy = Fact(
+        id="f9",
+        topic=Topic.CONTRIBUTE,
+        statement='CI step "Deploy" in .github/workflows/deploy.yml runs: kubectl apply -f k8s/',
+        evidence=[FileEvidence(path=".github/workflows/deploy.yml", start_line=3, end_line=3)],
+    )
+    settings = Fact(
+        id="f8",
+        topic=Topic.SETTINGS,
+        statement="Setting POSTGRES_URL is read from the environment",
+        evidence=[FileEvidence(path="src/main/resources/application-postgres.properties")],
+    )
+    given = {"f9": deploy, "f8": settings}
+    assert check_claim(claim("CI/CD deploys to Kubernetes.", "f9"), given, set(given)).ok
+    assert check_claim(
+        claim("PostgreSQL settings come from POSTGRES_URL.", "f8"), given, set(given)
+    ).ok
+    unrelated = claim("It deploys to Kubernetes.", "f8")
+    assert not check_claim(unrelated, given, set(given)).ok

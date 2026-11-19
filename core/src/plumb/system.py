@@ -120,6 +120,9 @@ def _scalar(node: Node | None) -> str | None:
     return str(node.value) if isinstance(node, ScalarNode) else None
 
 
+_TEST_SERVICE = re.compile(r"(playwright|cypress|selenium|e2e|\btests?\b|-tests?$)", re.I)
+
+
 def compose_parts(system: System, path: str, text: str) -> None:
     root = _load_nodes(text)
     for name, service, line in _items(_get(root, "services")):
@@ -131,6 +134,10 @@ def compose_parts(system: System, path: str, text: str) -> None:
             system.add(role, part, Clue(path, line, f"Compose service {name}, image {image}"))
         elif build is not None:
             context = _scalar(build) or _scalar(_get(build, "context")) or "."
+            if _TEST_SERVICE.search(name):  # browser tests and the like, not the app
+                detail = f"Compose service built from {context}, used for tests"
+                system.add(Role.CONTAINER, name, Clue(path, line, detail))
+                continue
             system.add(
                 Role.SERVICE, name, Clue(path, line, f"Compose service built from {context}")
             )

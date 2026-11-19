@@ -202,3 +202,11 @@ def test_prisma_and_packaging_dockerfiles(make_repo: Callable[[str], RepoBuilder
         Clue("src/prisma/schema.prisma", 5, "Prisma datasource, provider postgresql")
     ]
     assert system.of(Role.SERVICE) == []
+
+
+def test_compose_test_containers_are_not_services() -> None:
+    system = System()
+    compose = "services:\n  backend:\n    build: ./backend\n  playwright:\n    build: .\n"
+    compose_parts(system, "docker-compose.yml", compose)
+    assert [p.name for p in system.of(Role.SERVICE)] == ["backend"]
+    assert [p.name for p in system.of(Role.CONTAINER)] == ["playwright"]

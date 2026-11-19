@@ -28,6 +28,8 @@ _PATH = re.compile(
     r"(?<![\w/])(?:[\w.-]+/)+[\w.{}:\[\]*-]+|\b[\w-]+\.(?:py|java|kt|ts|tsx|js|jsx|"
     r"astro|vue|svelte|ya?ml|toml|json|xml|md|sql|properties|gradle|prisma|cfg|ini)\b"
 )
+# Slashed words that are not paths: CI/CD, I/O, TCP/IP, and/or.
+_NOT_A_PATH = re.compile(r"[A-Z]+(?:/[A-Z]+)+|and/or|either/or|read/write|input/output")
 _ROUTE = re.compile(r"(?<![\w/.])/[\w{}:.\[\]-]+(?:/[\w{}:.\[\]-]*)*")
 _CODE = re.compile(r"`([^`]+)`")
 _NUMBER = re.compile(r"(?<![\w./-])\d[\d,]*(?:\.\d+)?(?![\w/])")
@@ -76,7 +78,11 @@ def check_claim(claim: DraftClaim, given: dict[str, Fact], all_ids: set[str]) ->
         [f.statement for f in cited]
         + [e.path for f in cited for e in f.evidence if isinstance(e, FileEvidence)]
     )
-    named = {m.group(0).rstrip(".,;:") for m in _PATH.finditer(text)}
+    named = {
+        m.group(0).rstrip(".,;:")
+        for m in _PATH.finditer(text)
+        if not _NOT_A_PATH.fullmatch(m.group(0).rstrip(".,;:"))
+    }
     named |= {m.group(0).rstrip(".,;:") for m in _ROUTE.finditer(text)}
     named |= {m.group(1) for m in _CODE.finditer(text)}
     missing = sorted(n for n in named if n and n not in source)
@@ -103,12 +109,20 @@ def check_claim(claim: DraftClaim, given: dict[str, Fact], all_ids: set[str]) ->
     return Check(True)
 
 
-_SAME_TECH = {"postgres": "postgresql", "kafka": "apache kafka", "ignite": "apache ignite"}
+# Other ways the facts can name a technology: a short name, or a tool that only
+# exists for it (kubectl runs against Kubernetes).
+_SAME_TECH: dict[str, tuple[str, ...]] = {
+    "postgres": ("postgresql",),
+    "postgresql": ("postgres",),
+    "kafka": ("apache kafka",),
+    "ignite": ("apache ignite",),
+    "kubernetes": ("kubectl", "k8s/", "helm"),
+}
 
 
 def _mentions(source: str, name: str) -> bool:
     lowered = name.lower()
-    return lowered in source or _SAME_TECH.get(lowered, lowered) in source
+    return lowered in source or any(other in source for other in _SAME_TECH.get(lowered, ()))
 
 
 def _normalise(number: str) -> str:
