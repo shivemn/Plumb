@@ -303,18 +303,27 @@ def trace_python(files: _PythonFiles, route: EntryPoint) -> Flow | None:
 
 
 def trace_flows(repo: Path, files: list[FileInfo], entry_points: list[EntryPoint]) -> list[Flow]:
-    """Traces for HTTP routes whose handler could be found."""
-    python = [
-        f.path
-        for f in files
-        if f.category is Category.SOURCE and f.language == "python" and f.path.endswith(".py")
-    ]
-    index = _PythonFiles(repo, python)
+    """Traces for HTTP routes whose handler could be found, in Python or Java."""
+    from plumb.javaflow import JavaFiles, trace_java  # imports this module's types
+
+    def source(language: str, suffix: str) -> list[str]:
+        return [
+            f.path
+            for f in files
+            if f.category is Category.SOURCE and f.language == language and f.path.endswith(suffix)
+        ]
+
+    routes = [e for e in entry_points if e.kind is EntryKind.HTTP]
+    python = _PythonFiles(repo, source("python", ".py"))
+    java_paths = source("java", ".java")
+    java = JavaFiles(repo, java_paths) if any(r.path.endswith(".java") for r in routes) else None
     flows: list[Flow] = []
-    for route in entry_points:
-        if route.kind is not EntryKind.HTTP or route.path not in index.paths:
-            continue
-        flow = trace_python(index, route)
+    for route in routes:
+        flow = None
+        if route.path in python.paths:
+            flow = trace_python(python, route)
+        elif java is not None and route.path in java.paths:
+            flow = trace_java(java, route)
         if flow is not None:
             flows.append(flow)
     return flows

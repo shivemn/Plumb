@@ -649,6 +649,404 @@
     },
     {
       "id": "f41",
+      "topic": "flow",
+      "statement": "5 of 14 traced routes pass through src/main/java/com/shivemn/ccp/web then src/main/java/com/shivemn/ccp/service",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveController.java",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "flow",
+      "statement": "2 of 14 traced routes reach the database",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 113,
+          "end_line": 113
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "flow",
+      "statement": "2 of 14 traced routes reach Kafka",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "flow",
+      "statement": "POST /api/replay/start runs ReplayController.start in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.start in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.tick in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, and 3 more steps; it reaches Kafka (kafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ReplayController.java",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 60,
+          "end_line": 60
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 81,
+          "end_line": 81
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 73,
+          "end_line": 73
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 101,
+          "end_line": 101
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "flow",
+      "statement": "POST /api/archive/rebuild runs ArchiveController.rebuild in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then RebuildService.start in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then RebuildService.rebuildNow in src/main/java/com/shivemn/ccp/archive/RebuildService.java, then ProfileService.clearAll in src/main/java/com/shivemn/ccp/service/ProfileService.java, and 2 more steps; it reaches the database (jdbc.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ArchiveController.java",
+          "start_line": 61,
+          "end_line": 61
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+          "start_line": 44,
+          "end_line": 44
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+          "start_line": 83,
+          "end_line": 83
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+          "start_line": 65,
+          "end_line": 65
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 118,
+          "end_line": 118
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 124,
+          "end_line": 124
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "topic": "flow",
+      "statement": "POST /api/events runs EventController.submit in src/main/java/com/shivemn/ccp/web/EventController.java, then EventPublisher.publish in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java, then PipelineMetrics.recordPublished in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java; it reaches Kafka (kafkaTemplate.send in src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 32,
+          "end_line": 32
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/PipelineMetrics.java",
+          "start_line": 72,
+          "end_line": 72
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/EventPublisher.java",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "topic": "flow",
+      "statement": "GET /api/stats runs ProfileController.stats in src/main/java/com/shivemn/ccp/web/ProfileController.java, then StatsService.stats in src/main/java/com/shivemn/ccp/service/StatsService.java, then PipelineMetrics.published in src/main/java/com/shivemn/ccp/service/PipelineMetrics.java, then ProfileService.processedEvents in src/main/java/com/shivemn/ccp/service/ProfileService.java, then ProfileService.profileCount in src/main/java/com/shivemn/ccp/service/ProfileService.java, and 4 more steps",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/StatsService.java",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/PipelineMetrics.java",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 122,
+          "end_line": 122
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 126,
+          "end_line": 126
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "topic": "flow",
+      "statement": "GET /api/history/{borrowerId} runs ArchiveController.history in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then EventArchive.history in src/main/java/com/shivemn/ccp/archive/EventArchive.java; it reaches the database (jdbc.query in src/main/java/com/shivemn/ccp/archive/EventArchive.java)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ArchiveController.java",
+          "start_line": 50,
+          "end_line": 50
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 113,
+          "end_line": 113
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "topic": "flow",
+      "statement": "GET /api/live runs LiveController.live in src/main/java/com/shivemn/ccp/web/LiveController.java, then LiveBroadcaster.subscribe in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java, then LiveBroadcaster.send in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java, then LiveBroadcaster.snapshot in src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java, then StatsService.stats in src/main/java/com/shivemn/ccp/service/StatsService.java, and 1 more step",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveController.java",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java",
+          "start_line": 48,
+          "end_line": 48
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java",
+          "start_line": 79,
+          "end_line": 79
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/LiveBroadcaster.java",
+          "start_line": 72,
+          "end_line": 72
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/StatsService.java",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "topic": "flow",
+      "statement": "POST /api/replay/stop runs ReplayController.stop in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.stop in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then DatasetReplayer.closeFile in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java, then CsvRecordReader.close in src/main/java/com/shivemn/ccp/replay/CsvRecordReader.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ReplayController.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 73,
+          "end_line": 73
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 81,
+          "end_line": 81
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 167,
+          "end_line": 167
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/CsvRecordReader.java",
+          "start_line": 68,
+          "end_line": 68
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "topic": "flow",
+      "statement": "GET /api/analytics runs ProfileController.analytics in src/main/java/com/shivemn/ccp/web/ProfileController.java, then ProfileService.portfolio in src/main/java/com/shivemn/ccp/service/ProfileService.java, then ProfileService.atRisk in src/main/java/com/shivemn/ccp/service/ProfileService.java, then ProfileService.number in src/main/java/com/shivemn/ccp/service/ProfileService.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 73,
+          "end_line": 73
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/service/ProfileService.java",
+          "start_line": 106,
+          "end_line": 106
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "topic": "flow",
+      "statement": "GET /api/archive runs ArchiveController.status in src/main/java/com/shivemn/ccp/web/ArchiveController.java, then EventArchive.storedEvents in src/main/java/com/shivemn/ccp/archive/EventArchive.java, then RebuildService.status in src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ArchiveController.java",
+          "start_line": 38,
+          "end_line": 38
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/EventArchive.java",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/archive/RebuildService.java",
+          "start_line": 83,
+          "end_line": 83
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "topic": "flow",
+      "statement": "POST /api/events/generate runs EventController.generate in src/main/java/com/shivemn/ccp/web/EventController.java, then SyntheticEventGenerator.generate in src/main/java/com/shivemn/ccp/pipeline/SyntheticEventGenerator.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 42,
+          "end_line": 42
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/pipeline/SyntheticEventGenerator.java",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "topic": "flow",
+      "statement": "GET /api/replay runs ReplayController.status in src/main/java/com/shivemn/ccp/web/ReplayController.java, then DatasetReplayer.status in src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ReplayController.java",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/replay/DatasetReplayer.java",
+          "start_line": 81,
+          "end_line": 81
+        }
+      ]
+    },
+    {
+      "id": "f55",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/ci.yml runs: mvn -B verify",
       "evidence": [
@@ -661,7 +1059,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f56",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm ci",
       "evidence": [
@@ -674,7 +1072,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f57",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm run build",
       "evidence": [
@@ -687,7 +1085,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f58",
       "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src (33 references)",
       "evidence": [
@@ -712,7 +1110,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f59",
       "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/components (18 references)",
       "evidence": [
@@ -737,7 +1135,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f60",
       "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/model (12 references)",
       "evidence": [
@@ -762,7 +1160,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f61",
       "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src/hooks (6 references)",
       "evidence": [
@@ -787,7 +1185,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f62",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
@@ -812,7 +1210,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f63",
       "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
@@ -837,7 +1235,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f64",
       "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/hooks (4 references)",
       "evidence": [
@@ -862,7 +1260,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f65",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/archive uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -887,7 +1285,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f66",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -912,7 +1310,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f67",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/service uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -937,7 +1335,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f68",
       "topic": "structure",
       "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/config (4 references)",
       "evidence": [
@@ -962,7 +1360,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f69",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/config uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
@@ -987,7 +1385,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f70",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
@@ -1012,7 +1410,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f71",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/replay uses code in src/main/java/com/shivemn/ccp/model (3 references)",
       "evidence": [
@@ -1037,7 +1435,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f72",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/archive (2 references)",
       "evidence": [
@@ -1056,7 +1454,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f73",
       "topic": "structure",
       "statement": "dashboard/src and dashboard/src/components each use the other",
       "evidence": [
@@ -1075,7 +1473,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f74",
       "topic": "structure",
       "statement": "dashboard/src and dashboard/src/hooks each use the other",
       "evidence": [
@@ -1094,7 +1492,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f75",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/archive and src/main/java/com/shivemn/ccp/service each use the other",
       "evidence": [
@@ -1113,7 +1511,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f76",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/model/CreditEvent.java is used by 17 other files",
       "evidence": [
@@ -1138,7 +1536,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f77",
       "topic": "structure",
       "statement": "dashboard/src/format.ts is used by 14 other files",
       "evidence": [
@@ -1163,7 +1561,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f78",
       "topic": "structure",
       "statement": "dashboard/src/view.tsx is used by 13 other files",
       "evidence": [
@@ -1188,7 +1586,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f79",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/model/EventType.java is used by 11 other files",
       "evidence": [
@@ -1213,7 +1611,7 @@
       ]
     },
     {
-      "id": "f66",
+      "id": "f80",
       "topic": "structure",
       "statement": "src/main/java/com/shivemn/ccp/service/ProfileService.java is used by 9 other files",
       "evidence": [
@@ -1238,7 +1636,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f81",
       "topic": "history",
       "statement": "5 commits between 01 Aug 2026 and 30 Oct 2026",
       "evidence": [
