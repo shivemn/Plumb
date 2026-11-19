@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "gothinkster",
+    "name": "django-realworld-example-app",
+    "commit": "29c9d42831fa0cfc5a4aa7561f674396eacf20a2"
+  },
+  "kind": "unknown",
+  "facts": [
+    {
+      "id": "f1",
+      "topic": "languages",
+      "statement": "44 source files in python, 1,778 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/views.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/serializers.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/settings.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "topic": "build",
+      "statement": "Build or deploy file requirements.txt",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "requirements.txt",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "topic": "migrations",
+      "statement": "3 Django database migrations in conduit/apps/articles/migrations",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/migrations/0001_initial.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/migrations/0003_auto_20160828_1656.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "topic": "migrations",
+      "statement": "1 Django database migration in conduit/apps/authentication/migrations",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/migrations/0001_initial.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "topic": "migrations",
+      "statement": "3 Django database migrations in conduit/apps/profiles/migrations",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/migrations/0001_initial.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/migrations/0003_profile_favorites.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "topic": "entry_points",
+      "statement": "1 program entry found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "manage.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "topic": "entry_points",
+      "statement": "Program entry run as a script in manage.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "manage.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "topic": "structure",
+      "statement": "Code in conduit/apps/articles uses code in conduit/apps/core (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/models.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/renderers.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/signals.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "topic": "structure",
+      "statement": "Code in conduit/apps/authentication uses code in conduit/apps/core (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/models.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/renderers.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "topic": "structure",
+      "statement": "Code in conduit/apps/authentication uses code in conduit/apps/profiles (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/serializers.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/signals.py",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "topic": "structure",
+      "statement": "Code in conduit/apps/profiles uses code in conduit/apps/core (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/models.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/renderers.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "topic": "structure",
+      "statement": "Code in conduit/apps/articles uses code in conduit/apps/profiles (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/serializers.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "topic": "structure",
+      "statement": "conduit/apps/articles/models.py is used by 4 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/relations.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/serializers.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "topic": "structure",
+      "statement": "conduit/apps/authentication/models.py is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/backends.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/serializers.py",
+          "start_line": 7,
+          "end_line": 7
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "topic": "structure",
+      "statement": "conduit/apps/core/models.py is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/core/models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/models.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/models.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "topic": "structure",
+      "statement": "conduit/apps/core/renderers.py is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/core/renderers.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/articles/renderers.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/renderers.py",
+          "start_line": 1,
+          "end_line": 1
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "topic": "structure",
+      "statement": "conduit/apps/profiles/models.py is used by 3 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/authentication/signals.py",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "conduit/apps/profiles/serializers.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "topic": "history",
+      "statement": "3 commits between 27 Jan 2017 and 27 Apr 2017",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "2363ab07fa1d241c842484ecc9ba62e0b43c19f4"
+        },
+        {
+          "kind": "commit",
+          "sha": "7ecae4970728b57022f2d18c6e9540aba7d4ff1d"
+        },
+        {
+          "kind": "commit",
+          "sha": "1bdf18d693c99cbd8afe684abb95d11a7d2fb8e3"
+        }
+      ]
+    }
+  ]
+}

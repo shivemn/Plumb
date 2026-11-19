@@ -1,0 +1,752 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "encode",
+    "name": "httpx",
+    "commit": "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016"
+  },
+  "kind": "cli",
+  "facts": [
+    {
+      "id": "f1",
+      "topic": "kind",
+      "statement": "Looks like a cli repo: 2 command(s) and no routes or services",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_main.py",
+          "start_line": 313,
+          "end_line": 313
+        },
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 59,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "topic": "languages",
+      "statement": "23 source files in python, 8,827 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_client.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_urls.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "topic": "skipped",
+      "statement": "2 example files left out of the analysis",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/css/custom.css",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/publish.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/test-suite.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/test-suite.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "topic": "build",
+      "statement": "Build or deploy file pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "topic": "build",
+      "statement": "Build or deploy file requirements.txt",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "requirements.txt",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "topic": "settings",
+      "statement": "Setting SSL_CERT_DIR is read from the environment in httpx/_config.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_config.py",
+          "start_line": 36,
+          "end_line": 36
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "topic": "settings",
+      "statement": "Setting SSL_CERT_FILE is read from the environment in httpx/_config.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_config.py",
+          "start_line": 34,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "topic": "entry_points",
+      "statement": "2 commands found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_main.py",
+          "start_line": 313,
+          "end_line": 313
+        },
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 59,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "topic": "entry_points",
+      "statement": "Command main (click) in httpx/_main.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_main.py",
+          "start_line": 313,
+          "end_line": 313
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "topic": "entry_points",
+      "statement": "Command httpx (httpx:main) (package) in pyproject.toml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pyproject.toml",
+          "start_line": 59,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Reporting Bugs\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Development\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 29,
+          "end_line": 29
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Testing and Linting\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 48,
+          "end_line": 48
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Documenting\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 81,
+          "end_line": 81
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Resolving Build / CI Failures\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 91,
+          "end_line": 91
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Releasing\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 140,
+          "end_line": 140
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "topic": "contribute",
+      "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Development proxy setup\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/CONTRIBUTING.md",
+          "start_line": 169,
+          "end_line": 169
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "topic": "contribute",
+      "statement": "CI step \"Install dependencies\" in .github/workflows/publish.yml runs: scripts/install",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yml",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "topic": "contribute",
+      "statement": "CI step \"Build package & docs\" in .github/workflows/publish.yml runs: scripts/build",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yml",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "topic": "contribute",
+      "statement": "CI step \"Publish to PyPI & deploy docs\" in .github/workflows/publish.yml runs: scripts/publish",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/publish.yml",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "topic": "contribute",
+      "statement": "CI step \"Run linting checks\" in .github/workflows/test-suite.yml runs: scripts/check",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/test-suite.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "topic": "contribute",
+      "statement": "CI step \"Run tests\" in .github/workflows/test-suite.yml runs: scripts/test",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/test-suite.yml",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "topic": "contribute",
+      "statement": "CI step \"Enforce coverage\" in .github/workflows/test-suite.yml runs: scripts/coverage",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/test-suite.yml",
+          "start_line": 34,
+          "end_line": 34
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Reporting Bugs or Other Issues\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 12,
+          "end_line": 12
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Development\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 40,
+          "end_line": 40
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Testing and Linting\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 59,
+          "end_line": 59
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Documenting\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 94,
+          "end_line": 94
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Resolving Build / CI Failures\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 104,
+          "end_line": 104
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Releasing\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 153,
+          "end_line": 153
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "contribute",
+      "statement": "Contribution guide docs/contributing.md has a section \"Development proxy setup\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docs/contributing.md",
+          "start_line": 182,
+          "end_line": 182
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "structure",
+      "statement": "Code in tests uses code in httpx (17 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/conftest.py",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_api.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_api.py",
+          "start_line": 98,
+          "end_line": 98
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "structure",
+      "statement": "Code in httpx/_transports uses code in httpx (12 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_transports/asgi.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_transports/asgi.py",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_transports/base.py",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "structure",
+      "statement": "Code in tests/client uses code in httpx (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/client/test_async_client.py",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "tests/client/test_auth.py",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "kind": "file",
+          "path": "tests/client/test_client.py",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "structure",
+      "statement": "Code in tests/models uses code in httpx (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/models/test_cookies.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "tests/models/test_headers.py",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "tests/models/test_queryparams.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "structure",
+      "statement": "Code in httpx uses code in httpx/_transports (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_client.py",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_client.py",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "topic": "structure",
+      "statement": "Code in tests/client uses code in tests (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/client/test_auth.py",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "topic": "structure",
+      "statement": "httpx and httpx/_transports each use the other",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_transports/asgi.py",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "topic": "structure",
+      "statement": "httpx/__init__.py is used by 32 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_transports/default.py",
+          "start_line": 36,
+          "end_line": 36
+        },
+        {
+          "kind": "file",
+          "path": "tests/client/test_async_client.py",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "topic": "structure",
+      "statement": "httpx/_models.py is used by 13 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_models.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_api.py",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "structure",
+      "statement": "httpx/_types.py is used by 12 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_types.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_api.py",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "structure",
+      "statement": "httpx/_exceptions.py is used by 9 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_exceptions.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_auth.py",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "structure",
+      "statement": "httpx/_urls.py is used by 8 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpx/_urls.py",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "httpx/__init__.py",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "kind": "file",
+          "path": "httpx/_api.py",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "history",
+      "statement": "4 commits between 18 Aug 2026 and 16 Nov 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016"
+        },
+        {
+          "kind": "commit",
+          "sha": "08cf535b34a242829883baab36ea7af08a35e2a8"
+        },
+        {
+          "kind": "commit",
+          "sha": "fdc0b4d62b8786be3528e89580ce7af4774ed3eb"
+        }
+      ]
+    }
+  ]
+}

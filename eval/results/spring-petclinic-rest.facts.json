@@ -1,0 +1,1266 @@
+{
+  "schema_version": 1,
+  "repo": {
+    "owner": "spring-petclinic",
+    "name": "spring-petclinic-rest",
+    "commit": "0515ec8b57e7708d99d7a1315638d81d3f2c9ead"
+  },
+  "kind": "service",
+  "facts": [
+    {
+      "id": "f1",
+      "topic": "kind",
+      "statement": "Looks like a service repo: 1 route(s), consumer(s) or scheduled job(s)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "topic": "languages",
+      "statement": "87 source files in java, 5,814 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicServiceImpl.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "topic": "languages",
+      "statement": "8 source files in sql, 552 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/hsqldb/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/h2/data.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/h2/schema.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "topic": "languages",
+      "statement": "1 source file in shell, 79 lines in all",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "postman-tests.sh",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/dependabot-auto-merge.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/dependabot-auto-merge.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/docker-build.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docker-build.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/maven-build-master.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/maven-build-master.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/maven-build-pull-request.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/maven-build-pull-request.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "topic": "build",
+      "statement": "GitHub Actions workflow .github/workflows/newman-pipeline.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "topic": "build",
+      "statement": "Build or deploy file docker-compose.yml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "docker-compose.yml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "topic": "build",
+      "statement": "Build or deploy file pom.xml",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "topic": "system",
+      "statement": "Database, cache or queue: H2 (dependency com.h2database:h2; setting mentions jdbc:h2:)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": 93,
+          "end_line": 93
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-h2.properties",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "topic": "system",
+      "statement": "Database, cache or queue: MySQL (dependency com.mysql:mysql-connector-j; setting mentions jdbc:mysql:; Compose service mysql, image mysql:8.4)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-mysql.properties",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "docker-compose.yml",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "topic": "system",
+      "statement": "Database, cache or queue: PostgreSQL (dependency org.postgresql:postgresql; setting mentions jdbc:postgresql:; Compose service postgres, image postgres:16.3)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "pom.xml",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-postgres.properties",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "docker-compose.yml",
+          "start_line": 17,
+          "end_line": 17
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "topic": "settings",
+      "statement": "Setting MYSQL_PASS is read from the environment in src/main/resources/application-mysql.properties",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-mysql.properties",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "topic": "settings",
+      "statement": "Setting MYSQL_URL is read from the environment in src/main/resources/application-mysql.properties",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-mysql.properties",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "topic": "settings",
+      "statement": "Setting MYSQL_USER is read from the environment in src/main/resources/application-mysql.properties",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-mysql.properties",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "topic": "settings",
+      "statement": "Setting POSTGRES_PASS is read from the environment in src/main/resources/application-postgres.properties",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-postgres.properties",
+          "start_line": 4,
+          "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "topic": "settings",
+      "statement": "Setting POSTGRES_URL is read from the environment in src/main/resources/application-postgres.properties",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-postgres.properties",
+          "start_line": 2,
+          "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "topic": "settings",
+      "statement": "Setting POSTGRES_USER is read from the environment in src/main/resources/application-postgres.properties",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/application-postgres.properties",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "topic": "entry_points",
+      "statement": "1 http route found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "topic": "entry_points",
+      "statement": "HTTP route ANY / (spring) in src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/RootRestControllerV1.java",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "topic": "entry_points",
+      "statement": "1 program entry found",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "topic": "entry_points",
+      "statement": "Program entry PetClinicApplication in src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+          "start_line": 10,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "topic": "contribute",
+      "statement": "CI step \"Enable auto-merge for minor and patch updates\" in .github/workflows/dependabot-auto-merge.yml runs: gh pr merge --auto --squash \"$PR_URL\"",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/dependabot-auto-merge.yml",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "topic": "contribute",
+      "statement": "CI step \"Build & publish the project\" in .github/workflows/docker-build.yml runs: mvn compile jib:build -X -DjibSerialize=true",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/docker-build.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "topic": "contribute",
+      "statement": "CI step \"Build and analyze\" in .github/workflows/maven-build-master.yml runs: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-petclinic_spring-petclinic-rest -Dsonar.organization=spring-petclinic",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/maven-build-master.yml",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "topic": "contribute",
+      "statement": "CI step \"Build\" in .github/workflows/maven-build-pull-request.yml runs: ./mvnw -B verify",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/maven-build-pull-request.yml",
+          "start_line": 23,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "topic": "contribute",
+      "statement": "CI step \"Start PetClinic API\" in .github/workflows/newman-pipeline.yml runs: nohup mvn spring-boot:run &",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "contribute",
+      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: timeout=60",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "contribute",
+      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: while ! curl -s http://localhost:9966/petclinic > /dev/null; do",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 29,
+          "end_line": 29
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "contribute",
+      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: sleep 1",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 31,
+          "end_line": 31
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "contribute",
+      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: ((timeout--))",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "contribute",
+      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: exit 1",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "contribute",
+      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: done",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 37,
+          "end_line": 37
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "contribute",
+      "statement": "CI step \"Run Newman Tests\" in .github/workflows/newman-pipeline.yml runs: bash postman-tests.sh",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/newman-pipeline.yml",
+          "start_line": 42,
+          "end_line": 42
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jdbc uses code in src/main/java/org/springframework/samples/petclinic/model (22 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java",
+          "start_line": 31,
+          "end_line": 31
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/springdatajpa uses code in src/main/java/org/springframework/samples/petclinic/model (18 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa/PetRepositoryOverride.java",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa/PetTypeRepositoryOverride.java",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa/SpecialtyRepositoryOverride.java",
+          "start_line": 20,
+          "end_line": 20
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/model (15 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicService.java",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicService.java",
+          "start_line": 26,
+          "end_line": 26
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicService.java",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository uses code in src/main/java/org/springframework/samples/petclinic/model (11 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/OwnerRepository.java",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/OwnerRepository.java",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/PetRepository.java",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "topic": "structure",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/mapper (11 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 31,
+          "end_line": 31
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jpa uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaOwnerRepositoryImpl.java",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetRepositoryImpl.java",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetRepositoryImpl.java",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/mapper (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 26,
+          "end_line": 26
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 28,
+          "end_line": 28
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "structure",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 32,
+          "end_line": 32
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/mapper uses code in src/main/java/org/springframework/samples/petclinic/model (9 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/OwnerMapper.java",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java",
+          "start_line": 8,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jdbc uses code in src/main/java/org/springframework/samples/petclinic/repository (8 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcPetRepositoryImpl.java",
+          "start_line": 43,
+          "end_line": 43
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcPetRepositoryImpl.java",
+          "start_line": 44,
+          "end_line": 44
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "topic": "structure",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/rest/advice (8 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
+          "start_line": 28,
+          "end_line": 28
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
+          "start_line": 31,
+          "end_line": 31
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "topic": "structure",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/service (8 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 38,
+          "end_line": 38
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
+          "start_line": 32,
+          "end_line": 32
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "topic": "structure",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/test/java/org/springframework/samples/petclinic/service/clinicService (8 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
+          "start_line": 33,
+          "end_line": 33
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jpa uses code in src/main/java/org/springframework/samples/petclinic/repository (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaOwnerRepositoryImpl.java",
+          "start_line": 32,
+          "end_line": 32
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetRepositoryImpl.java",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetTypeRepositoryImpl.java",
+          "start_line": 30,
+          "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "topic": "structure",
+      "statement": "src/main/java/org/springframework/samples/petclinic/model/Pet.java is used by 23 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/Pet.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/Owner.java",
+          "start_line": 51,
+          "end_line": 51
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "topic": "structure",
+      "statement": "src/main/java/org/springframework/samples/petclinic/model/Visit.java is used by 22 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/Visit.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/VisitMapper.java",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/Pet.java",
+          "start_line": 48,
+          "end_line": 48
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "topic": "structure",
+      "statement": "src/main/java/org/springframework/samples/petclinic/model/PetType.java is used by 21 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/PetType.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/PetMapper.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/PetTypeMapper.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "topic": "structure",
+      "statement": "src/main/java/org/springframework/samples/petclinic/service/ClinicService.java is used by 17 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicService.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 38,
+          "end_line": 38
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetRestControllerV1.java",
+          "start_line": 25,
+          "end_line": 25
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "topic": "structure",
+      "statement": "src/main/java/org/springframework/samples/petclinic/model/Owner.java is used by 15 other files",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/Owner.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/mapper/OwnerMapper.java",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/model/Pet.java",
+          "start_line": 45,
+          "end_line": 45
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "topic": "history",
+      "statement": "19 commits between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "commit",
+          "sha": "0515ec8b57e7708d99d7a1315638d81d3f2c9ead"
+        },
+        {
+          "kind": "commit",
+          "sha": "a4cb2c86272265c2916023074a771463f7114104"
+        },
+        {
+          "kind": "commit",
+          "sha": "5180cc9bd0163393c4e628bedc1bc4c27cfaab1b"
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "topic": "history",
+      "statement": "src/main/resources/db/hsqldb/schema.sql changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/hsqldb/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a4cb2c86272265c2916023074a771463f7114104"
+        },
+        {
+          "kind": "commit",
+          "sha": "5180cc9bd0163393c4e628bedc1bc4c27cfaab1b"
+        },
+        {
+          "kind": "commit",
+          "sha": "e1987d2b4715b30f8b97050b3a399fdcadf92cb3"
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "topic": "history",
+      "statement": "src/main/resources/db/mysql/schema.sql changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/mysql/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a4cb2c86272265c2916023074a771463f7114104"
+        },
+        {
+          "kind": "commit",
+          "sha": "5180cc9bd0163393c4e628bedc1bc4c27cfaab1b"
+        },
+        {
+          "kind": "commit",
+          "sha": "e1987d2b4715b30f8b97050b3a399fdcadf92cb3"
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "topic": "history",
+      "statement": "src/main/resources/db/postgres/schema.sql changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/postgres/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a4cb2c86272265c2916023074a771463f7114104"
+        },
+        {
+          "kind": "commit",
+          "sha": "5180cc9bd0163393c4e628bedc1bc4c27cfaab1b"
+        },
+        {
+          "kind": "commit",
+          "sha": "e1987d2b4715b30f8b97050b3a399fdcadf92cb3"
+        }
+      ]
+    },
+    {
+      "id": "f61",
+      "topic": "history",
+      "statement": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in 3 commits by 2 authors between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "commit",
+          "sha": "a4cb2c86272265c2916023074a771463f7114104"
+        },
+        {
+          "kind": "commit",
+          "sha": "5180cc9bd0163393c4e628bedc1bc4c27cfaab1b"
+        },
+        {
+          "kind": "commit",
+          "sha": "e1987d2b4715b30f8b97050b3a399fdcadf92cb3"
+        }
+      ]
+    },
+    {
+      "id": "f62",
+      "topic": "history",
+      "statement": "src/main/resources/db/hsqldb/schema.sql and src/main/resources/db/mysql/schema.sql changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/hsqldb/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/mysql/schema.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f63",
+      "topic": "history",
+      "statement": "src/main/resources/db/hsqldb/schema.sql and src/main/resources/db/postgres/schema.sql changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/hsqldb/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/postgres/schema.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f64",
+      "topic": "history",
+      "statement": "src/main/resources/db/hsqldb/schema.sql and src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/hsqldb/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f65",
+      "topic": "history",
+      "statement": "src/main/resources/db/mysql/schema.sql and src/main/resources/db/postgres/schema.sql changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/mysql/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/postgres/schema.sql",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f66",
+      "topic": "history",
+      "statement": "src/main/resources/db/mysql/schema.sql and src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/mysql/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f67",
+      "topic": "history",
+      "statement": "src/main/resources/db/postgres/schema.sql and src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java changed in the same commit 3 times between 16 Aug 2026 and 14 Nov 2026",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/resources/db/postgres/schema.sql",
+          "start_line": null,
+          "end_line": null
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    }
+  ]
+}

@@ -65,9 +65,8 @@ language = "none"
 why = "A list, not code: the report must not draw a diagram."
 commit = "bc98e517ddca672f55f9857d714fc3ea3c3540b2"
 
-# Held-out repos: answer keys written from the source before Plumb was run
-# on them, and Plumb not tuned against them. Their scores show how Plumb
-# does on code it has not seen.
+# First round of held-out repos (18 Nov). Plumb was fixed against them after
+# their first run, so they now count as development repos.
 
 [[repo]]
 url = "https://github.com/nsidnev/fastapi-realworld-example-app"
@@ -75,7 +74,7 @@ kind = "service"
 language = "python"
 why = "Held out. FastAPI with routers mounted under prefixes, Postgres, Alembic."
 commit = "029eb7781c60d5f563ee8990a0cbfb79b244538c"
-held_out = true
+held_out_round = 1  # tuned against since 18 Nov; scored as development
 
 [[repo]]
 url = "https://github.com/gothinkster/node-express-realworld-example-app"
@@ -83,7 +82,7 @@ kind = "service"
 language = "typescript"
 why = "Held out. Express in TypeScript with Prisma on PostgreSQL."
 commit = "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b"
-held_out = true
+held_out_round = 1  # tuned against since 18 Nov; scored as development
 
 [[repo]]
 url = "https://github.com/httpie/cli"
@@ -91,7 +90,7 @@ kind = "cli"
 language = "python"
 why = "Held out. A command-line tool installed through setup.cfg."
 commit = "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345"
-held_out = true
+held_out_round = 1  # tuned against since 18 Nov; scored as development
 
 # Second round of held-out repos, added 19 Nov 2026. Keys written before
 # Plumb ran on them.
@@ -103,6 +102,7 @@ language = "python"
 why = "Held out. Django REST framework, routes in urls.py, SQLite."
 commit = "29c9d42831fa0cfc5a4aa7561f674396eacf20a2"
 held_out = true
+held_out_round = 2
 
 [[repo]]
 url = "https://github.com/spring-petclinic/spring-petclinic-rest"
@@ -111,6 +111,7 @@ language = "java"
 why = "Held out. Spring REST whose routes come from an OpenAPI file at build time."
 commit = "0515ec8b57e7708d99d7a1315638d81d3f2c9ead"
 held_out = true
+held_out_round = 2
 
 [[repo]]
 url = "https://github.com/encode/httpx"
@@ -119,3 +120,4 @@ language = "python"
 why = "Held out. A library that also installs an optional command."
 commit = "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016"
 held_out = true
+held_out_round = 2
