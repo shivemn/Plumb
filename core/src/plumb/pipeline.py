@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from plumb.activity import Activity, read_activity
@@ -10,6 +10,7 @@ from plumb.contrib import find_steps
 from plumb.deps import Dependency, find_dependencies
 from plumb.entrypoints import EntryPoint, find_entry_points
 from plumb.facts import build_facts
+from plumb.flow import Flow, trace_flows
 from plumb.github import GitHubClient
 from plumb.graph import all_edges
 from plumb.history import History, is_shallow, mine
@@ -37,6 +38,7 @@ class Analysis:
     facts: FactSet
     activity: Activity | None = None  # None when GitHub was not asked
     api: PublicApi | None = None  # only looked for in a library
+    flows: list[Flow] = field(default_factory=list[Flow])
 
     @property
     def first_party(self) -> set[str]:
@@ -73,6 +75,7 @@ def analyse_repo(
     decision = decide_kind(files, entry_points, system, deps)
     migrations = find_migrations(files)
     steps = find_steps(checkout.path, files)
+    flows = trace_flows(checkout.path, files, entry_points)
     api = None
     if decision.kind is RepoKind.LIBRARY:
         api = find_public_api(checkout.path, files, edges, checkout.name)
@@ -93,6 +96,7 @@ def analyse_repo(
         steps,
         activity,
         api,
+        flows,
     )
     return Analysis(
         checkout,
@@ -107,4 +111,5 @@ def analyse_repo(
         facts,
         activity,
         api,
+        flows,
     )

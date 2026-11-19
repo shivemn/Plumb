@@ -113,18 +113,23 @@ class PythonIndex:
             # The first file found wins if two roots give the same name.
             self.file_of.setdefault(name, path)
 
+    def absolute(self, importer: str, item: Import) -> str | None:
+        """The dotted module an import names, with relative imports made absolute."""
+        if not item.level:
+            return item.module
+        package = self.module_of[importer].split(".")
+        if not importer.endswith("__init__.py"):
+            package = package[:-1]
+        if item.level - 1 > len(package):
+            return None
+        base = package[: len(package) - (item.level - 1)]
+        return ".".join([*base, *([item.module] if item.module else [])])
+
     def resolve(self, importer: str, item: Import) -> list[str]:
         """Repo files that one import statement refers to."""
-        if item.level:
-            package = self.module_of[importer].split(".")
-            if not importer.endswith("__init__.py"):
-                package = package[:-1]
-            if item.level - 1 > len(package):
-                return []
-            base = package[: len(package) - (item.level - 1)]
-            module = ".".join([*base, *([item.module] if item.module else [])])
-        else:
-            module = item.module
+        module = self.absolute(importer, item)
+        if module is None:
+            return []
 
         targets: list[str] = []
         if item.names:

@@ -9,6 +9,7 @@ from pathlib import PurePosixPath
 from plumb.activity import Activity, describe_hours
 from plumb.contrib import Step
 from plumb.entrypoints import EntryKind, EntryPoint
+from plumb.flow import Flow, layers
 from plumb.graph import component_edges, most_used, mutual_components
 from plumb.history import History
 from plumb.imports import Edge
@@ -64,6 +65,7 @@ def build_facts(
     steps: list[Step] | None = None,
     activity: Activity | None = None,
     api: PublicApi | None = None,
+    flows: list[Flow] | None = None,
 ) -> FactSet:
     builder = FactBuilder()
     kind = decision.kind if decision else RepoKind.UNKNOWN
@@ -91,6 +93,8 @@ def build_facts(
         add_entry_point_facts(builder, entry_points)
     if api is not None and api.names:
         add_api_facts(builder, api)
+    if flows:
+        add_flow_facts(builder, flows)
     if steps:
         add_step_facts(builder, steps)
     if activity is not None:
@@ -280,6 +284,65 @@ def add_api_facts(builder: FactBuilder, api: PublicApi, limit: int = 30) -> None
             f"Public exceptions: {shown}{more}",
             [e for n in exceptions[:5] for e in _api_evidence(n)[:1]],
         )
+
+
+def _flow_statement(flow: Flow, steps: int = 5) -> str:
+    first, *rest = flow.steps[:steps]
+    parts = [f"{flow.route.name} runs {first.name} in {first.path}"]
+    parts += [f"then {s.name} in {s.path}" for s in rest]
+    text = ", ".join(parts)
+    if len(flow.steps) > steps:
+        text += f", and {_plural(len(flow.steps) - steps, 'more step')}"
+    if flow.touches:
+        reached = " and ".join(f"{t.what} ({t.call} in {t.path})" for t in flow.touches)
+        text += f"; it reaches {reached}"
+    return text
+
+
+def add_flow_facts(builder: FactBuilder, flows: list[Flow], limit: int = 10) -> None:
+    """The usual path through the code, then example routes with different paths."""
+    builder.topic = Topic.FLOW
+    chains = Counter(layers(f) for f in flows if len(layers(f)) > 1)
+    chain, count = chains.most_common(1)[0] if chains else ((), 0)
+    if count >= 2:
+        examples = [f for f in flows if layers(f) == chain][:3]
+        builder.add(
+            f"{count:,} of {_plural(len(flows), 'traced route')} pass through "
+            f"{' then '.join(chain)}",
+            [
+                FileEvidence(
+                    path=f.steps[0].path, start_line=f.steps[0].line, end_line=f.steps[0].line
+                )
+                for f in examples
+            ],
+        )
+    touched = Counter(t.what for f in flows for t in f.touches)
+    for what, count in touched.most_common():
+        first = next(t for f in flows for t in f.touches if t.what == what)
+        builder.add(
+            f"{count:,} of {_plural(len(flows), 'traced route')} reach {what}",
+            [FileEvidence(path=first.path, start_line=first.line, end_line=first.line)],
+        )
+    # Example routes: the ones that go furthest, one or two per distinct path.
+    shown: Counter[tuple[str, ...]] = Counter()
+    ranked = sorted(flows, key=lambda f: (-len(set(layers(f))), -len(f.touches), -len(f.steps)))
+    for flow in ranked:
+        if len(shown) >= limit or shown[layers(flow)] >= 2:
+            continue
+        if len(flow.steps) < 2 and not flow.touches:
+            continue
+        shown[layers(flow)] += 1
+        route = flow.route
+        evidence: list[Evidence] = [
+            FileEvidence(path=route.path, start_line=route.line, end_line=route.line)
+        ]
+        evidence += [
+            FileEvidence(path=s.path, start_line=s.line, end_line=s.line) for s in flow.steps[1:5]
+        ]
+        evidence += [
+            FileEvidence(path=t.path, start_line=t.line, end_line=t.line) for t in flow.touches
+        ]
+        builder.add(_flow_statement(flow), evidence)
 
 
 def add_step_facts(builder: FactBuilder, steps: list[Step], limit: int = 24) -> None:

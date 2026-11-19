@@ -36,6 +36,14 @@ SECTIONS: dict[str, SectionSpec] = {
         "Describe the parts that run (services, databases, queues, outside services) "
         "and what each one is used for, as far as the facts show.",
     ),
+    "flow": SectionSpec(
+        "flow",
+        "How a request moves",
+        (Topic.FLOW,),
+        "Describe the path a typical request takes: the route handler, the layers it calls "
+        "and what it reaches, such as the database. Start with the usual path, then give one "
+        "or two example routes. Name only steps the facts show.",
+    ),
     "entry_points": SectionSpec(
         "entry_points",
         "Ways into the code",
@@ -78,6 +86,7 @@ SECTIONS_BY_KIND: dict[RepoKind, tuple[str, ...]] = {
     RepoKind.SERVICE: (
         "overview",
         "system",
+        "flow",
         "entry_points",
         "structure",
         "hot_spots",
