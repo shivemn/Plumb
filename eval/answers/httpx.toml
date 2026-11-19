@@ -1,0 +1,38 @@
+# Answer key: encode/httpx (held out, round 2)
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "encode/httpx"
+commit = "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016"
+kind = "library"
+languages = ["python"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "it runs a server",
+  "it is mainly a command-line tool",
+]
+
+[[entry_points]]
+kind = "command"
+items = ["httpx (httpx:main), only with the cli extra installed"]
+source = "pyproject.toml"
+
+[[modules]]
+path = "httpx"
+purpose = "The client: Client and AsyncClient, requests and responses, URLs, auth."
+
+[[modules]]
+path = "httpx/_transports"
+purpose = "Transports: the default HTTP transport, ASGI, WSGI and mock."
+
+[commands]
+install = "scripts/install"
+test = "scripts/test"
+
+# A library that also installs an optional command: the key says library,
+# because the command needs an extra and the package is imported far more
+# than it is run.
+[expect]
+kind = "library"
+http_routes = 0
+stores = []

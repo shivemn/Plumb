@@ -1,0 +1,59 @@
+# Answer key: gothinkster/django-realworld-example-app (held out, round 2)
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "gothinkster/django-realworld-example-app"
+commit = "29c9d42831fa0cfc5a4aa7561f674396eacf20a2"
+kind = "service"
+languages = ["python"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "it uses PostgreSQL",
+  "it has a front end",
+  "it runs in Docker",
+]
+
+[[runs]]
+name = "Django app"
+source = "manage.py"
+note = "Django 1.10 with Django REST framework. No deploy files."
+
+[[stores]]
+name = "SQLite"
+source = "conduit/settings.py"
+note = "DATABASES uses django.db.backends.sqlite3."
+
+[[entry_points]]
+kind = "http"
+items = [
+  "12 URL patterns: 2 in profiles, 5 in articles plus the articles view set, 3 in authentication, and admin",
+  "all app URLs are included under api/ in conduit/urls.py",
+]
+source = "conduit/urls.py"
+
+[[modules]]
+path = "conduit/apps/articles"
+purpose = "Articles, comments, tags and favourites."
+
+[[modules]]
+path = "conduit/apps/authentication"
+purpose = "Users, registration, login and JWT authentication."
+
+[[modules]]
+path = "conduit/apps/profiles"
+purpose = "Profiles and following."
+
+[[modules]]
+path = "conduit/apps/core"
+purpose = "Shared base model, renderers and the exception handler."
+
+[commands]
+install = "pip install -r requirements.txt"
+run = "python manage.py runserver"
+
+# Counting rule for routes: one per url() that points at a view, one per
+# router.register(), and one for admin.
+[expect]
+kind = "service"
+http_routes = 12
+stores = ["SQLite"]

@@ -1,0 +1,76 @@
+# Answer key: spring-petclinic/spring-petclinic-rest (held out, round 2)
+# Written by hand from the code at the pinned commit, before Plumb ran on it.
+
+repo = "spring-petclinic/spring-petclinic-rest"
+commit = "0515ec8b57e7708d99d7a1315638d81d3f2c9ead"
+kind = "service"
+languages = ["java"]
+
+# Claims a report about this repo must never make.
+must_not_claim = [
+  "MySQL or PostgreSQL is required",
+  "it has a front end in this repo",
+]
+
+[[runs]]
+name = "Spring Boot REST API"
+source = "pom.xml"
+note = "Port 9966, context path /petclinic. Controllers implement interfaces generated from openapi.yml at build time."
+
+[[stores]]
+name = "H2"
+source = "src/main/resources/application.properties"
+note = "Default: spring.profiles.active=h2,spring-data-jpa."
+
+[[stores]]
+name = "HSQLDB"
+source = "src/main/resources/application-hsqldb.properties"
+note = "Optional profile."
+
+[[stores]]
+name = "MySQL"
+source = "docker-compose.yml"
+note = "Optional profile; Compose service mysql."
+
+[[stores]]
+name = "PostgreSQL"
+source = "docker-compose.yml"
+note = "Optional profile; Compose service postgres."
+
+[[entry_points]]
+kind = "http"
+items = [
+  "37 operations defined in src/main/resources/openapi.yml",
+  "the root redirect in RootRestControllerV1",
+]
+source = "src/main/resources/openapi.yml"
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/rest/controller/v1"
+purpose = "Controllers for owners, pets, vets, visits, specialties, pet types and users."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/service"
+purpose = "ClinicService and UserService."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa"
+purpose = "Default repositories (Spring Data JPA)."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/repository/jdbc"
+purpose = "Alternative JDBC repositories, chosen by profile."
+
+[[modules]]
+path = "src/main/java/org/springframework/samples/petclinic/mapper"
+purpose = "MapStruct mappers between entities and API objects."
+
+[commands]
+run = "./mvnw spring-boot:run"
+test = "./mvnw test"
+
+# Numbers the evaluation scores automatically (eval/run.py).
+[expect]
+kind = "service"
+http_routes = 38
+stores = ["H2", "HSQLDB", "MySQL", "PostgreSQL"]
