@@ -89,9 +89,44 @@ too, so new held-out repos are needed for an honest score.
 - [x] Evaluation runs in CI on pull requests and weekly, and fails when a
       check drops
 
-## Weeks 10 to 12 (next)
+## Weeks 10 to 12 (done)
 
-- [ ] First real reports with a model, and a published claim precision
-      (share of kept claims a person judges correct) on the evaluation repos
-- [ ] Three new held-out repos
+The website moved to the next block. These weeks went into what the
+report says, so the site has more to show when it is built, and into the
+server it will call.
+
+- [x] Three new held-out repos (Django RealWorld, Spring PetClinic REST,
+      httpx). First run: 3 of 9 checks. After fixing what they exposed:
+      9 of 9 (see below)
+- [x] Django URL patterns and database settings; routes from OpenAPI files
+- [x] Starter issues, and median time to first review and to merge, from
+      GitHub (optional `GITHUB_TOKEN`, answers cached for a day)
+- [x] Public API of Python, Java and JavaScript/TypeScript libraries, and a
+      "What it lets your code do" section for libraries
+- [x] Request tracing from route handler to the database for Python and
+      Spring, and a "How a request moves" section for services
+- [x] `eval/judge.py`: judge kept claims by hand and score claim precision
+- [x] Web API with a job queue and a worker (`plumb serve`, `plumb worker`)
+- [ ] First real reports with a model and a published claim precision.
+      Needs an API key; the judging tool is ready
+
+### What the second held-out round showed
+
+- Django routes live in `urlpatterns`, not decorators, and the database is
+  named by `ENGINE` in settings: neither was read.
+- PetClinic REST declares its routes in an OpenAPI file and implements
+  generated interfaces, so only 1 of 38 routes was found. HSQLDB was not in
+  the catalogue.
+- httpx was called a CLI because of its `httpx` command, which only works
+  with the optional `[cli]` extra.
+
+These three are now tuned against too.
+
+## Weeks 13 to 16 (next)
+
 - [ ] Website: report page, system design and code map diagrams, gallery
+- [ ] Bring-your-own-key in the browser: model picker, cost estimate,
+      verifier run in the page
+- [ ] Go miner and speed comparison
+- [ ] Job table on PostgreSQL, rate limits, deploy
+- [ ] First published claim precision, and a third held-out round

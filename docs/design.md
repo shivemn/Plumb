@@ -20,7 +20,9 @@ answer a question, the report says "not determined".
    which section leads the report. No diagram is drawn when no running
    system is found.
 5. **Fact store.** Every finding becomes a `Fact` with evidence
-   (`core/src/plumb/model.py`). PostgreSQL on the server, SQLite locally.
+   (`core/src/plumb/model.py`). The web API (`core/src/plumb/server`)
+   keeps jobs and their facts in one table: SQLite for now, written in
+   SQL PostgreSQL also accepts.
 6. **Prompt planner.** Summarises bottom-up: file, module, system. The
    model sees facts, not the raw repo.
 7. **AI runner.** Runs in the user's browser (or the local tool) with the
@@ -71,8 +73,20 @@ the commands CI runs and the contribution guide's headings.
   exports; routers passed around in other ways are not.
 - Plugins loaded by name are not seen. Migrations are found as folders, not
   through imports.
-- All twelve evaluation repos have now been used to fix detectors, so their
-  scores are optimistic until new held-out repos are added.
+- All fifteen evaluation repos have now been used to fix detectors, so their
+  scores are optimistic until the next held-out round.
+- Request tracing follows calls the imports or declared types explain:
+  imported functions and classes, typed parameters, objects built in the
+  function, Spring fields and constructor parameters, and interfaces with
+  one implementation. Calls through dependency-injection containers,
+  dynamic dispatch or inherited Python methods are not followed. Spring
+  controllers that implement generated OpenAPI interfaces are not traced.
+- A library's public API is what its package entry point exports. Names
+  added at run time and Java classes in packages named internal, impl or
+  examples are left out.
+- Review speed counts only the 30 most recently closed pull requests, and
+  first review only for the ten newest merged ones, to stay within
+  GitHub's limit for requests without a token.
 - History needs a full clone. A shallow clone skips hot spots rather than
   reporting wrong counts.
 
@@ -104,3 +118,7 @@ by hand.
 - The web app's content security policy lists the only hosts the page may
   contact, and the analyse page loads no third-party scripts.
 - API keys are kept in memory for the session, never stored or logged.
+- The web API accepts only GitHub repos. The worker always clones from a
+  `https://github.com/` URL, so a request cannot name a folder on the
+  server. Commits must be hex SHAs.
+- `GITHUB_TOKEN`, when set, is only sent to api.github.com.

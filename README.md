@@ -7,7 +7,8 @@ repo does not show is marked "not determined" instead of guessed.
 
 **Status:** early development. Analysis works for Python, Java, JavaScript
 and TypeScript repos, and `plumb report` writes a checked report with a
-model. There is no website yet. See [docs/roadmap.md](docs/roadmap.md).
+model. A web API queues repos and serves their facts; there is no website
+yet. See [docs/roadmap.md](docs/roadmap.md).
 
 ## How it works
 
@@ -57,9 +58,26 @@ is not scoped to one workspace, also set `ANTHROPIC_WORKSPACE_ID`.
 
 `plumb analyse` writes `<repo>.facts.json`: what kind of repo it is, the
 services it runs, the databases, queues and outside services it uses, the
-settings it reads, its routes, commands and consumers, which parts of the
-code use which, hot spots and files that change together. Every fact cites
-the files, lines or commits it came from.
+settings it reads, its routes, commands and consumers, how a request moves
+from route handler to the database, a library's public API, which parts of
+the code use which, hot spots, files that change together, starter issues
+and how long pull requests wait for review. Every fact cites the files,
+lines, commits or issues it came from. Set `GITHUB_TOKEN` to read issues
+and pull requests past GitHub's limit of 60 requests an hour, or pass
+`--no-github` to skip them.
+
+To run the web API and a worker on your machine:
+
+```
+uv sync --extra server
+uv run plumb serve                     # http://127.0.0.1:8000/api/docs
+uv run plumb worker                    # in a second terminal
+curl -X POST localhost:8000/api/jobs -H 'content-type: application/json' \
+     -d '{"repo": "pallets/click"}'
+```
+
+The server only produces facts. Reports are written in the browser with
+the reader's own key, so no model key ever reaches it.
 
 ## Licence
 
