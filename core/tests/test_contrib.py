@@ -1,6 +1,7 @@
 from collections.abc import Callable
 
 from plumb.contrib import find_steps, guide_steps, makefile_steps, workflow_steps
+from plumb.facts import FactBuilder, add_step_facts
 from plumb.inventory import build_inventory
 from tests.conftest import RepoBuilder
 
@@ -68,3 +69,32 @@ def test_find_steps(make_repo: Callable[[str], RepoBuilder]) -> None:
     assert all(
         not s.path.startswith("examples") for s in find_steps(repo.path, build_inventory(repo.path))
     )
+
+
+DOWNSTREAM = """
+jobs:
+  race-tests:
+    name: ${{ matrix.config.name }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: tox run
+  flask-tests:
+    name: Flask
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: pallets/flask
+      - run: pytest
+"""
+
+
+def test_workflow_steps_know_their_job_and_other_repositories() -> None:
+    own, flask = workflow_steps("nightly.yaml", DOWNSTREAM)
+    assert (own.job, own.other_repo) == ("race-tests", "")  # a templated name falls back to the key
+    assert (flask.job, flask.other_repo) == ("Flask", "pallets/flask")
+    builder = FactBuilder()
+    add_step_facts(builder, [flask, own])
+    statements = [f.statement for f in builder.facts]
+    assert statements[0] == "A CI step in job race-tests of nightly.yaml runs: tox run"
+    assert statements[1].startswith("A CI step in job Flask of nightly.yaml runs: pytest (this job")
+    assert "checks out pallets/flask" in statements[1]

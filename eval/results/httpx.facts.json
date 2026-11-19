@@ -901,7 +901,7 @@
     {
       "id": "f52",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/publish.yml runs: scripts/install",
+      "statement": "CI step \"Install dependencies\" in job Publish release of .github/workflows/publish.yml runs: scripts/install",
       "evidence": [
         {
           "kind": "file",
@@ -914,7 +914,7 @@
     {
       "id": "f53",
       "topic": "contribute",
-      "statement": "CI step \"Build package & docs\" in .github/workflows/publish.yml runs: scripts/build",
+      "statement": "CI step \"Build package & docs\" in job Publish release of .github/workflows/publish.yml runs: scripts/build",
       "evidence": [
         {
           "kind": "file",
@@ -927,7 +927,7 @@
     {
       "id": "f54",
       "topic": "contribute",
-      "statement": "CI step \"Publish to PyPI & deploy docs\" in .github/workflows/publish.yml runs: scripts/publish",
+      "statement": "CI step \"Publish to PyPI & deploy docs\" in job Publish release of .github/workflows/publish.yml runs: scripts/publish",
       "evidence": [
         {
           "kind": "file",
@@ -940,7 +940,7 @@
     {
       "id": "f55",
       "topic": "contribute",
-      "statement": "CI step \"Run linting checks\" in .github/workflows/test-suite.yml runs: scripts/check",
+      "statement": "CI step \"Run linting checks\" in job tests of .github/workflows/test-suite.yml runs: scripts/check",
       "evidence": [
         {
           "kind": "file",
@@ -953,7 +953,7 @@
     {
       "id": "f56",
       "topic": "contribute",
-      "statement": "CI step \"Run tests\" in .github/workflows/test-suite.yml runs: scripts/test",
+      "statement": "CI step \"Run tests\" in job tests of .github/workflows/test-suite.yml runs: scripts/test",
       "evidence": [
         {
           "kind": "file",
@@ -966,7 +966,7 @@
     {
       "id": "f57",
       "topic": "contribute",
-      "statement": "CI step \"Enforce coverage\" in .github/workflows/test-suite.yml runs: scripts/coverage",
+      "statement": "CI step \"Enforce coverage\" in job tests of .github/workflows/test-suite.yml runs: scripts/coverage",
       "evidence": [
         {
           "kind": "file",

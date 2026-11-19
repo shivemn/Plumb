@@ -1118,7 +1118,7 @@
     {
       "id": "f71",
       "topic": "contribute",
-      "statement": "CI step \"Install\" in .github/workflows/ci.yml runs: python -m pip install --upgrade pip",
+      "statement": "CI step \"Install\" in job test of .github/workflows/ci.yml runs: python -m pip install --upgrade pip",
       "evidence": [
         {
           "kind": "file",
@@ -1131,7 +1131,7 @@
     {
       "id": "f72",
       "topic": "contribute",
-      "statement": "CI step \"Install\" in .github/workflows/ci.yml runs: pip install -e \".[dev,api,postgres]\"",
+      "statement": "CI step \"Install\" in job test of .github/workflows/ci.yml runs: pip install -e \".[dev,api,postgres]\"",
       "evidence": [
         {
           "kind": "file",
@@ -1144,7 +1144,7 @@
     {
       "id": "f73",
       "topic": "contribute",
-      "statement": "CI step \"Lint\" in .github/workflows/ci.yml runs: ruff check .",
+      "statement": "CI step \"Lint\" in job test of .github/workflows/ci.yml runs: ruff check .",
       "evidence": [
         {
           "kind": "file",
@@ -1157,7 +1157,7 @@
     {
       "id": "f74",
       "topic": "contribute",
-      "statement": "CI step \"Type check\" in .github/workflows/ci.yml runs: mypy",
+      "statement": "CI step \"Type check\" in job test of .github/workflows/ci.yml runs: mypy",
       "evidence": [
         {
           "kind": "file",
@@ -1170,7 +1170,7 @@
     {
       "id": "f75",
       "topic": "contribute",
-      "statement": "CI step \"Tests\" in .github/workflows/ci.yml runs: pytest",
+      "statement": "CI step \"Tests\" in job test of .github/workflows/ci.yml runs: pytest",
       "evidence": [
         {
           "kind": "file",
@@ -1183,7 +1183,7 @@
     {
       "id": "f76",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm ci",
+      "statement": "A CI step in job web of .github/workflows/ci.yml runs: npm ci",
       "evidence": [
         {
           "kind": "file",
@@ -1196,7 +1196,7 @@
     {
       "id": "f77",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm test",
+      "statement": "A CI step in job web of .github/workflows/ci.yml runs: npm test",
       "evidence": [
         {
           "kind": "file",
@@ -1209,7 +1209,7 @@
     {
       "id": "f78",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm run build",
+      "statement": "A CI step in job web of .github/workflows/ci.yml runs: npm run build",
       "evidence": [
         {
           "kind": "file",

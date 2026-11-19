@@ -25,6 +25,8 @@ class Step:
     command: str
     path: str
     line: int
+    job: str = ""  # the CI job a step belongs to
+    other_repo: str = ""  # a repository the job checks out instead of this one
 
 
 _MAKE_TARGET = re.compile(r"^([A-Za-z][\w.-]*)\s*:(?!=)")
@@ -62,10 +64,15 @@ def workflow_steps(path: str, text: str) -> list[Step]:
     except yaml.YAMLError:
         return []
     found: list[Step] = []
-    for _, job in _pairs(_get(root, "jobs")):
+    for job_key, job in _pairs(_get(root, "jobs")):
         steps = _get(job, "steps")
         if not isinstance(steps, SequenceNode):
             continue
+        job_name = _get(job, "name")
+        job_label = job_key
+        if isinstance(job_name, ScalarNode) and "${{" not in str(job_name.value):
+            job_label = str(job_name.value)
+        other = _other_repository(cast("list[Node]", steps.value))
         for step in cast("list[Node]", steps.value):
             run = _get(step, "run")
             if not isinstance(run, ScalarNode):
@@ -78,8 +85,19 @@ def workflow_steps(path: str, text: str) -> list[Step]:
                     line = run.start_mark.line + 1 + (offset if run.style in ("|", ">") else 0)
                     if run.style in ("|", ">"):
                         line += 1
-                    found.append(Step("ci", label, command, path, line))
+                    found.append(Step("ci", label, command, path, line, job_label, other))
     return found
+
+
+def _other_repository(steps: list[Node]) -> str:
+    """The repository an actions/checkout step fetches, if it is not this one."""
+    for step in steps:
+        uses = _get(step, "uses")
+        if isinstance(uses, ScalarNode) and str(uses.value).startswith("actions/checkout"):
+            repository = _get(_get(step, "with"), "repository")
+            if isinstance(repository, ScalarNode) and "${{" not in str(repository.value):
+                return str(repository.value)
+    return ""
 
 
 def guide_steps(path: str, text: str) -> list[Step]:

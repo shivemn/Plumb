@@ -1048,7 +1048,7 @@
     {
       "id": "f55",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/ci.yml runs: mvn -B verify",
+      "statement": "A CI step in job Java build and tests of .github/workflows/ci.yml runs: mvn -B verify",
       "evidence": [
         {
           "kind": "file",
@@ -1061,7 +1061,7 @@
     {
       "id": "f56",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm ci",
+      "statement": "A CI step in job React dashboard build of .github/workflows/ci.yml runs: npm ci",
       "evidence": [
         {
           "kind": "file",
@@ -1074,7 +1074,7 @@
     {
       "id": "f57",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/ci.yml runs: npm run build",
+      "statement": "A CI step in job React dashboard build of .github/workflows/ci.yml runs: npm run build",
       "evidence": [
         {
           "kind": "file",

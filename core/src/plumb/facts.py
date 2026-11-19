@@ -376,6 +376,8 @@ def add_flow_facts(builder: FactBuilder, flows: list[Flow], limit: int = 10) -> 
 def add_step_facts(builder: FactBuilder, steps: list[Step], limit: int = 24) -> None:
     builder.topic = Topic.CONTRIBUTE
     seen: set[str] = set()
+    # Steps that test another repository come last: they say least about this one.
+    steps = sorted(steps, key=lambda step: bool(step.other_repo))
     for step in steps:
         if len(seen) >= limit or (step.command and step.command in seen):
             continue
@@ -384,7 +386,15 @@ def add_step_facts(builder: FactBuilder, steps: list[Step], limit: int = 24) -> 
         if step.kind == "make":
             builder.add(f"Makefile target {step.name} runs: {step.command}", where)
         elif step.kind == "ci":
-            builder.add(f'CI step "{step.name}" in {step.path} runs: {step.command}', where)
+            named = f'CI step "{step.name}"' if step.name else "A CI step"
+            job = f" in job {step.job}" if step.job else ""
+            text = f"{named}{job} of {step.path} runs: {step.command}"
+            if step.other_repo:
+                text += (
+                    f" (this job checks out {step.other_repo}, so it tests that repository "
+                    "against this one rather than this repository's own code)"
+                )
+            builder.add(text, where)
         else:
             builder.add(f'Contribution guide {step.path} has a section "{step.name}"', where)
 

@@ -656,7 +656,7 @@
     {
       "id": "f47",
       "topic": "contribute",
-      "statement": "CI step \"Maven Compile\" in .github/workflows/build.yml runs: mvn -X compile -B --file pom.xml",
+      "statement": "CI step \"Maven Compile\" in job test of .github/workflows/build.yml runs: mvn -X compile -B --file pom.xml",
       "evidence": [
         {
           "kind": "file",
@@ -669,7 +669,7 @@
     {
       "id": "f48",
       "topic": "contribute",
-      "statement": "CI step \"Maven Verify\" in .github/workflows/build.yml runs: mvn -X verify -B --file pom.xml",
+      "statement": "CI step \"Maven Verify\" in job test of .github/workflows/build.yml runs: mvn -X verify -B --file pom.xml",
       "evidence": [
         {
           "kind": "file",

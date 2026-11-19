@@ -791,7 +791,7 @@
     {
       "id": "f50",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: gh issue close $ISSUE_URL \\",
+      "statement": "A CI step in job close_qa of .github/workflows/close-issues.yml runs: gh issue close $ISSUE_URL \\",
       "evidence": [
         {
           "kind": "file",
@@ -804,7 +804,7 @@
     {
       "id": "f51",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --comment \"As described in the template, we won't be able to answer questions on this issue tracker. Please use [Stack Overflow](https://stackoverflow.com/)\" \\",
+      "statement": "A CI step in job close_qa of .github/workflows/close-issues.yml runs: --comment \"As described in the template, we won't be able to answer questions on this issue tracker. Please use [Stack Overflow](https://stackoverflow.com/)\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -817,7 +817,7 @@
     {
       "id": "f52",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --reason completed",
+      "statement": "A CI step in job close_qa of .github/workflows/close-issues.yml runs: --reason completed",
       "evidence": [
         {
           "kind": "file",
@@ -830,7 +830,7 @@
     {
       "id": "f53",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: gh issue lock $ISSUE_URL --reason off_topic",
+      "statement": "A CI step in job close_qa of .github/workflows/close-issues.yml runs: gh issue lock $ISSUE_URL --reason off_topic",
       "evidence": [
         {
           "kind": "file",
@@ -843,7 +843,7 @@
     {
       "id": "f54",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --comment \"As described in the template, Requests is not accepting feature requests\" \\",
+      "statement": "A CI step in job close_feature_request of .github/workflows/close-issues.yml runs: --comment \"As described in the template, Requests is not accepting feature requests\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -856,7 +856,7 @@
     {
       "id": "f55",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --reason \"not planned\"",
+      "statement": "A CI step in job close_feature_request of .github/workflows/close-issues.yml runs: --reason \"not planned\"",
       "evidence": [
         {
           "kind": "file",
@@ -869,7 +869,7 @@
     {
       "id": "f56",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/codeql-analysis.yml runs: git checkout HEAD^2",
+      "statement": "A CI step in job Analyze of .github/workflows/codeql-analysis.yml runs: git checkout HEAD^2",
       "evidence": [
         {
           "kind": "file",
@@ -882,7 +882,7 @@
     {
       "id": "f57",
       "topic": "contribute",
-      "statement": "CI step \"Run pre-commit\" in .github/workflows/lint.yml runs: python -m pip install pre-commit==4.6.0",
+      "statement": "CI step \"Run pre-commit\" in job lint of .github/workflows/lint.yml runs: python -m pip install pre-commit==4.6.0",
       "evidence": [
         {
           "kind": "file",
@@ -895,7 +895,7 @@
     {
       "id": "f58",
       "topic": "contribute",
-      "statement": "CI step \"Run pre-commit\" in .github/workflows/lint.yml runs: pre-commit run --show-diff-on-failure --color=always --all-files",
+      "statement": "CI step \"Run pre-commit\" in job lint of .github/workflows/lint.yml runs: pre-commit run --show-diff-on-failure --color=always --all-files",
       "evidence": [
         {
           "kind": "file",
@@ -908,7 +908,7 @@
     {
       "id": "f59",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/publish.yml runs: python -m pip install build==1.4.0",
+      "statement": "CI step \"Install dependencies\" in job Build dists of .github/workflows/publish.yml runs: python -m pip install build==1.4.0",
       "evidence": [
         {
           "kind": "file",
@@ -921,7 +921,7 @@
     {
       "id": "f60",
       "topic": "contribute",
-      "statement": "CI step \"Build dists\" in .github/workflows/publish.yml runs: SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct) \\",
+      "statement": "CI step \"Build dists\" in job Build dists of .github/workflows/publish.yml runs: SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct) \\",
       "evidence": [
         {
           "kind": "file",
@@ -934,7 +934,7 @@
     {
       "id": "f61",
       "topic": "contribute",
-      "statement": "CI step \"Build dists\" in .github/workflows/publish.yml runs: python -m build",
+      "statement": "CI step \"Build dists\" in job Build dists of .github/workflows/publish.yml runs: python -m build",
       "evidence": [
         {
           "kind": "file",
@@ -947,7 +947,7 @@
     {
       "id": "f62",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/run-tests.yml runs: make",
+      "statement": "CI step \"Install dependencies\" in job build of .github/workflows/run-tests.yml runs: make",
       "evidence": [
         {
           "kind": "file",
@@ -960,7 +960,7 @@
     {
       "id": "f63",
       "topic": "contribute",
-      "statement": "CI step \"Run tests\" in .github/workflows/run-tests.yml runs: make ci",
+      "statement": "CI step \"Run tests\" in job build of .github/workflows/run-tests.yml runs: make ci",
       "evidence": [
         {
           "kind": "file",
@@ -973,7 +973,7 @@
     {
       "id": "f64",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/run-tests.yml runs: python -m pip uninstall -y \"charset_normalizer\" \"chardet\"",
+      "statement": "CI step \"Install dependencies\" in job No Character Detection of .github/workflows/run-tests.yml runs: python -m pip uninstall -y \"charset_normalizer\" \"chardet\"",
       "evidence": [
         {
           "kind": "file",
@@ -986,7 +986,7 @@
     {
       "id": "f65",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/run-tests.yml runs: python  -m pip install \"urllib3<2\"",
+      "statement": "CI step \"Install dependencies\" in job urllib3 1.x of .github/workflows/run-tests.yml runs: python  -m pip install \"urllib3<2\"",
       "evidence": [
         {
           "kind": "file",
@@ -999,7 +999,7 @@
     {
       "id": "f66",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/typecheck.yml runs: python -m pip install pip==26.0.1",
+      "statement": "CI step \"Install dependencies\" in job typecheck of .github/workflows/typecheck.yml runs: python -m pip install pip==26.0.1",
       "evidence": [
         {
           "kind": "file",
@@ -1012,7 +1012,7 @@
     {
       "id": "f67",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/typecheck.yml runs: python -m pip install -e . --group typecheck",
+      "statement": "CI step \"Install dependencies\" in job typecheck of .github/workflows/typecheck.yml runs: python -m pip install -e . --group typecheck",
       "evidence": [
         {
           "kind": "file",
@@ -1025,7 +1025,7 @@
     {
       "id": "f68",
       "topic": "contribute",
-      "statement": "CI step \"Run pyright\" in .github/workflows/typecheck.yml runs: python -m pyright src/requests/",
+      "statement": "CI step \"Run pyright\" in job typecheck of .github/workflows/typecheck.yml runs: python -m pyright src/requests/",
       "evidence": [
         {
           "kind": "file",

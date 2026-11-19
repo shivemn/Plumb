@@ -577,7 +577,7 @@
     {
       "id": "f40",
       "topic": "contribute",
-      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: python -m pip install pyperf>=2.3.0",
+      "statement": "CI step \"Run Benchmarks\" in job test of .github/workflows/benchmark.yml runs: python -m pip install pyperf>=2.3.0",
       "evidence": [
         {
           "kind": "file",
@@ -590,7 +590,7 @@
     {
       "id": "f41",
       "topic": "contribute",
-      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: python extras/profiling/run.py --fresh --complex  --min-speed=6 --file output.txt",
+      "statement": "CI step \"Run Benchmarks\" in job test of .github/workflows/benchmark.yml runs: python extras/profiling/run.py --fresh --complex  --min-speed=6 --file output.txt",
       "evidence": [
         {
           "kind": "file",
@@ -603,7 +603,7 @@
     {
       "id": "f42",
       "topic": "contribute",
-      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=$(cat output.txt)",
+      "statement": "CI step \"Run Benchmarks\" in job test of .github/workflows/benchmark.yml runs: body=$(cat output.txt)",
       "evidence": [
         {
           "kind": "file",
@@ -616,7 +616,7 @@
     {
       "id": "f43",
       "topic": "contribute",
-      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=\"${body//'%'/'%25'}\"",
+      "statement": "CI step \"Run Benchmarks\" in job test of .github/workflows/benchmark.yml runs: body=\"${body//'%'/'%25'}\"",
       "evidence": [
         {
           "kind": "file",
@@ -629,7 +629,7 @@
     {
       "id": "f44",
       "topic": "contribute",
-      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=\"${body//$'\\n'/'%0A'}\"",
+      "statement": "CI step \"Run Benchmarks\" in job test of .github/workflows/benchmark.yml runs: body=\"${body//$'\\n'/'%0A'}\"",
       "evidence": [
         {
           "kind": "file",
@@ -642,7 +642,7 @@
     {
       "id": "f45",
       "topic": "contribute",
-      "statement": "CI step \"Run Benchmarks\" in .github/workflows/benchmark.yml runs: body=\"${body//$'\\r'/'%0D'}\"",
+      "statement": "CI step \"Run Benchmarks\" in job test of .github/workflows/benchmark.yml runs: body=\"${body//$'\\r'/'%0D'}\"",
       "evidence": [
         {
           "kind": "file",
@@ -655,7 +655,7 @@
     {
       "id": "f46",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/code-style.yml runs: make venv",
+      "statement": "A CI step in job code-style of .github/workflows/code-style.yml runs: make venv",
       "evidence": [
         {
           "kind": "file",
@@ -668,7 +668,7 @@
     {
       "id": "f47",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/code-style.yml runs: make codestyle",
+      "statement": "A CI step in job code-style of .github/workflows/code-style.yml runs: make codestyle",
       "evidence": [
         {
           "kind": "file",
@@ -681,7 +681,7 @@
     {
       "id": "f48",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/content.yml runs: make content",
+      "statement": "A CI step in job update-content of .github/workflows/content.yml runs: make content",
       "evidence": [
         {
           "kind": "file",
@@ -694,7 +694,7 @@
     {
       "id": "f49",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make install",
+      "statement": "A CI step in job coverage of .github/workflows/coverage.yml runs: make install",
       "evidence": [
         {
           "kind": "file",
@@ -707,7 +707,7 @@
     {
       "id": "f50",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make test-cover",
+      "statement": "A CI step in job coverage of .github/workflows/coverage.yml runs: make test-cover",
       "evidence": [
         {
           "kind": "file",
@@ -720,7 +720,7 @@
     {
       "id": "f51",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make codecov-upload",
+      "statement": "A CI step in job coverage of .github/workflows/coverage.yml runs: make codecov-upload",
       "evidence": [
         {
           "kind": "file",
@@ -733,7 +733,7 @@
     {
       "id": "f52",
       "topic": "contribute",
-      "statement": "CI step \"\" in .github/workflows/coverage.yml runs: make test-dist",
+      "statement": "A CI step in job coverage of .github/workflows/coverage.yml runs: make test-dist",
       "evidence": [
         {
           "kind": "file",
@@ -746,7 +746,7 @@
     {
       "id": "f53",
       "topic": "contribute",
-      "statement": "CI step \"Install the linter\" in .github/workflows/docs-check-markdown.yml runs: sudo gem install mdl",
+      "statement": "CI step \"Install the linter\" in job doc of .github/workflows/docs-check-markdown.yml runs: sudo gem install mdl",
       "evidence": [
         {
           "kind": "file",
@@ -759,7 +759,7 @@
     {
       "id": "f54",
       "topic": "contribute",
-      "statement": "CI step \"Check files\" in .github/workflows/docs-check-markdown.yml runs: make doc-check",
+      "statement": "CI step \"Check files\" in job doc of .github/workflows/docs-check-markdown.yml runs: make doc-check",
       "evidence": [
         {
           "kind": "file",
@@ -772,7 +772,7 @@
     {
       "id": "f55",
       "topic": "contribute",
-      "statement": "CI step \"Install HTTPie\" in .github/workflows/docs-deploy.yml runs: sudo pip install httpie",
+      "statement": "CI step \"Install HTTPie\" in job trigger-doc-build of .github/workflows/docs-deploy.yml runs: sudo pip install httpie",
       "evidence": [
         {
           "kind": "file",
@@ -785,7 +785,7 @@
     {
       "id": "f56",
       "topic": "contribute",
-      "statement": "CI step \"Trigger new documentation build\" in .github/workflows/docs-deploy.yml runs: http --ignore-stdin POST ${{ secrets.DOCS_UPDATE_VERCEL_HOOK }}",
+      "statement": "CI step \"Trigger new documentation build\" in job trigger-doc-build of .github/workflows/docs-deploy.yml runs: http --ignore-stdin POST ${{ secrets.DOCS_UPDATE_VERCEL_HOOK }}",
       "evidence": [
         {
           "kind": "file",
@@ -798,7 +798,7 @@
     {
       "id": "f57",
       "topic": "contribute",
-      "statement": "CI step \"Build the Choco package\" in .github/workflows/release-choco.yml runs: choco pack -v",
+      "statement": "CI step \"Build the Choco package\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: choco pack -v",
       "evidence": [
         {
           "kind": "file",
@@ -811,7 +811,7 @@
     {
       "id": "f58",
       "topic": "contribute",
-      "statement": "CI step \"Check the Choco package\" in .github/workflows/release-choco.yml runs: choco info httpie -s .",
+      "statement": "CI step \"Check the Choco package\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: choco info httpie -s .",
       "evidence": [
         {
           "kind": "file",
@@ -824,7 +824,7 @@
     {
       "id": "f59",
       "topic": "contribute",
-      "statement": "CI step \"Local installation\" in .github/workflows/release-choco.yml runs: choco install httpie -y -dv -s \"'.;https://community.chocolatey.org/api/v2/'\"",
+      "statement": "CI step \"Local installation\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: choco install httpie -y -dv -s \"'.;https://community.chocolatey.org/api/v2/'\"",
       "evidence": [
         {
           "kind": "file",
@@ -837,7 +837,7 @@
     {
       "id": "f60",
       "topic": "contribute",
-      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: $env:ChocolateyInstall = Convert-Path \"$((Get-Command choco).Path)\\..\\..\"",
+      "statement": "CI step \"Test the locally installed binaries\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: $env:ChocolateyInstall = Convert-Path \"$((Get-Command choco).Path)\\..\\..\"",
       "evidence": [
         {
           "kind": "file",
@@ -850,7 +850,7 @@
     {
       "id": "f61",
       "topic": "contribute",
-      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: Import-Module \"$env:ChocolateyInstall\\helpers\\chocolateyProfile.psm1\"",
+      "statement": "CI step \"Test the locally installed binaries\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: Import-Module \"$env:ChocolateyInstall\\helpers\\chocolateyProfile.psm1\"",
       "evidence": [
         {
           "kind": "file",
@@ -863,7 +863,7 @@
     {
       "id": "f62",
       "topic": "contribute",
-      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: refreshenv",
+      "statement": "CI step \"Test the locally installed binaries\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: refreshenv",
       "evidence": [
         {
           "kind": "file",
@@ -876,7 +876,7 @@
     {
       "id": "f63",
       "topic": "contribute",
-      "statement": "CI step \"Test the locally installed binaries\" in .github/workflows/release-choco.yml runs: http --version",
+      "statement": "CI step \"Test the locally installed binaries\" in job Release the Chocolatey of .github/workflows/release-choco.yml runs: http --version",
       "evidence": [
         {
           "kind": "file",

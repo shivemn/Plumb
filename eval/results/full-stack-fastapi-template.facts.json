@@ -1677,7 +1677,7 @@
     {
       "id": "f102",
       "topic": "contribute",
-      "statement": "CI step \"Bump pre-commit hooks\" in .github/workflows/bump-pre-commit-hooks.yml runs: uv run prek update --freeze --cooldown-days 7",
+      "statement": "CI step \"Bump pre-commit hooks\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: uv run prek update --freeze --cooldown-days 7",
       "evidence": [
         {
           "kind": "file",
@@ -1690,7 +1690,7 @@
     {
       "id": "f103",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: exit 0",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: exit 0",
       "evidence": [
         {
           "kind": "file",
@@ -1703,7 +1703,7 @@
     {
       "id": "f104",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: git config user.name \"pr-submit[bot]\"",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: git config user.name \"pr-submit[bot]\"",
       "evidence": [
         {
           "kind": "file",
@@ -1716,7 +1716,7 @@
     {
       "id": "f105",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: git config user.email \"pr-submit[bot]@users.noreply.github.com\"",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: git config user.email \"pr-submit[bot]@users.noreply.github.com\"",
       "evidence": [
         {
           "kind": "file",
@@ -1729,7 +1729,7 @@
     {
       "id": "f106",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: branch=\"bump-pre-commit-hooks\"",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: branch=\"bump-pre-commit-hooks\"",
       "evidence": [
         {
           "kind": "file",
@@ -1742,7 +1742,7 @@
     {
       "id": "f107",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: git switch -C \"$branch\"",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: git switch -C \"$branch\"",
       "evidence": [
         {
           "kind": "file",
@@ -1755,7 +1755,7 @@
     {
       "id": "f108",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: git add .pre-commit-config.yaml",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: git add .pre-commit-config.yaml",
       "evidence": [
         {
           "kind": "file",
@@ -1768,7 +1768,7 @@
     {
       "id": "f109",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: git commit -m \"⬆ Bump pre-commit hooks\"",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: git commit -m \"⬆ Bump pre-commit hooks\"",
       "evidence": [
         {
           "kind": "file",
@@ -1781,7 +1781,7 @@
     {
       "id": "f110",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: gh auth setup-git",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: gh auth setup-git",
       "evidence": [
         {
           "kind": "file",
@@ -1794,7 +1794,7 @@
     {
       "id": "f111",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: git push --force origin \"$branch\"",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: git push --force origin \"$branch\"",
       "evidence": [
         {
           "kind": "file",
@@ -1807,7 +1807,7 @@
     {
       "id": "f112",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: gh pr create \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: gh pr create \\",
       "evidence": [
         {
           "kind": "file",
@@ -1820,7 +1820,7 @@
     {
       "id": "f113",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --base \"$BASE_BRANCH\" \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --base \"$BASE_BRANCH\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -1833,7 +1833,7 @@
     {
       "id": "f114",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --head \"$branch\" \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --head \"$branch\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -1846,7 +1846,7 @@
     {
       "id": "f115",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --title \"⬆ Bump pre-commit hooks\" \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --title \"⬆ Bump pre-commit hooks\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -1859,7 +1859,7 @@
     {
       "id": "f116",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --body \"Bump pre-commit hook versions via \\`prek update --freeze --cooldown-days 7\\`.\" \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --body \"Bump pre-commit hook versions via \\`prek update --freeze --cooldown-days 7\\`.\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -1872,7 +1872,7 @@
     {
       "id": "f117",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --label internal \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --label internal \\",
       "evidence": [
         {
           "kind": "file",
@@ -1885,7 +1885,7 @@
     {
       "id": "f118",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --label dependencies \\",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --label dependencies \\",
       "evidence": [
         {
           "kind": "file",
@@ -1898,7 +1898,7 @@
     {
       "id": "f119",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: --label pre-commit",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: --label pre-commit",
       "evidence": [
         {
           "kind": "file",
@@ -1911,7 +1911,7 @@
     {
       "id": "f120",
       "topic": "contribute",
-      "statement": "CI step \"Create pull request\" in .github/workflows/bump-pre-commit-hooks.yml runs: else",
+      "statement": "CI step \"Create pull request\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: else",
       "evidence": [
         {
           "kind": "file",
@@ -1924,7 +1924,7 @@
     {
       "id": "f121",
       "topic": "contribute",
-      "statement": "CI step \"Extract release details\" in .github/workflows/create-draft-release.yml runs: version=\"$(uv run python scripts/prepare_release.py current-version)\"",
+      "statement": "CI step \"Extract release details\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: version=\"$(uv run python scripts/prepare_release.py current-version)\"",
       "evidence": [
         {
           "kind": "file",
@@ -1937,7 +1937,7 @@
     {
       "id": "f122",
       "topic": "contribute",
-      "statement": "CI step \"Extract release details\" in .github/workflows/create-draft-release.yml runs: uv run python scripts/prepare_release.py release-notes > draft-release-notes.md",
+      "statement": "CI step \"Extract release details\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: uv run python scripts/prepare_release.py release-notes > draft-release-notes.md",
       "evidence": [
         {
           "kind": "file",
@@ -1950,7 +1950,7 @@
     {
       "id": "f123",
       "topic": "contribute",
-      "statement": "CI step \"Create draft release\" in .github/workflows/create-draft-release.yml runs: gh release create \"$VERSION\" \\",
+      "statement": "CI step \"Create draft release\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: gh release create \"$VERSION\" \\",
       "evidence": [
         {
           "kind": "file",
@@ -1963,7 +1963,7 @@
     {
       "id": "f124",
       "topic": "contribute",
-      "statement": "CI step \"Create draft release\" in .github/workflows/create-draft-release.yml runs: --draft \\",
+      "statement": "CI step \"Create draft release\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: --draft \\",
       "evidence": [
         {
           "kind": "file",
@@ -1976,7 +1976,7 @@
     {
       "id": "f125",
       "topic": "contribute",
-      "statement": "CI step \"Create draft release\" in .github/workflows/create-draft-release.yml runs: --title \"$VERSION\" \\",
+      "statement": "CI step \"Create draft release\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: --title \"$VERSION\" \\",
       "evidence": [
         {
           "kind": "file",

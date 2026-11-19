@@ -900,7 +900,7 @@
     {
       "id": "f63",
       "topic": "contribute",
-      "statement": "CI step \"Enable auto-merge for minor and patch updates\" in .github/workflows/dependabot-auto-merge.yml runs: gh pr merge --auto --squash \"$PR_URL\"",
+      "statement": "CI step \"Enable auto-merge for minor and patch updates\" in job dependabot of .github/workflows/dependabot-auto-merge.yml runs: gh pr merge --auto --squash \"$PR_URL\"",
       "evidence": [
         {
           "kind": "file",
@@ -913,7 +913,7 @@
     {
       "id": "f64",
       "topic": "contribute",
-      "statement": "CI step \"Build & publish the project\" in .github/workflows/docker-build.yml runs: mvn compile jib:build -X -DjibSerialize=true",
+      "statement": "CI step \"Build & publish the project\" in job build of .github/workflows/docker-build.yml runs: mvn compile jib:build -X -DjibSerialize=true",
       "evidence": [
         {
           "kind": "file",
@@ -926,7 +926,7 @@
     {
       "id": "f65",
       "topic": "contribute",
-      "statement": "CI step \"Build and analyze\" in .github/workflows/maven-build-master.yml runs: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-petclinic_spring-petclinic-rest -Dsonar.organization=spring-petclinic",
+      "statement": "CI step \"Build and analyze\" in job build of .github/workflows/maven-build-master.yml runs: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-petclinic_spring-petclinic-rest -Dsonar.organization=spring-petclinic",
       "evidence": [
         {
           "kind": "file",
@@ -939,7 +939,7 @@
     {
       "id": "f66",
       "topic": "contribute",
-      "statement": "CI step \"Build\" in .github/workflows/maven-build-pull-request.yml runs: ./mvnw -B verify",
+      "statement": "CI step \"Build\" in job build of .github/workflows/maven-build-pull-request.yml runs: ./mvnw -B verify",
       "evidence": [
         {
           "kind": "file",
@@ -952,7 +952,7 @@
     {
       "id": "f67",
       "topic": "contribute",
-      "statement": "CI step \"Start PetClinic API\" in .github/workflows/newman-pipeline.yml runs: nohup mvn spring-boot:run &",
+      "statement": "CI step \"Start PetClinic API\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: nohup mvn spring-boot:run &",
       "evidence": [
         {
           "kind": "file",
@@ -965,7 +965,7 @@
     {
       "id": "f68",
       "topic": "contribute",
-      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: timeout=60",
+      "statement": "CI step \"Wait for API Availability\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: timeout=60",
       "evidence": [
         {
           "kind": "file",
@@ -978,7 +978,7 @@
     {
       "id": "f69",
       "topic": "contribute",
-      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: while ! curl -s http://localhost:9966/petclinic > /dev/null; do",
+      "statement": "CI step \"Wait for API Availability\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: while ! curl -s http://localhost:9966/petclinic > /dev/null; do",
       "evidence": [
         {
           "kind": "file",
@@ -991,7 +991,7 @@
     {
       "id": "f70",
       "topic": "contribute",
-      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: sleep 1",
+      "statement": "CI step \"Wait for API Availability\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: sleep 1",
       "evidence": [
         {
           "kind": "file",
@@ -1004,7 +1004,7 @@
     {
       "id": "f71",
       "topic": "contribute",
-      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: ((timeout--))",
+      "statement": "CI step \"Wait for API Availability\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: ((timeout--))",
       "evidence": [
         {
           "kind": "file",
@@ -1017,7 +1017,7 @@
     {
       "id": "f72",
       "topic": "contribute",
-      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: exit 1",
+      "statement": "CI step \"Wait for API Availability\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: exit 1",
       "evidence": [
         {
           "kind": "file",
@@ -1030,7 +1030,7 @@
     {
       "id": "f73",
       "topic": "contribute",
-      "statement": "CI step \"Wait for API Availability\" in .github/workflows/newman-pipeline.yml runs: done",
+      "statement": "CI step \"Wait for API Availability\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: done",
       "evidence": [
         {
           "kind": "file",
@@ -1043,7 +1043,7 @@
     {
       "id": "f74",
       "topic": "contribute",
-      "statement": "CI step \"Run Newman Tests\" in .github/workflows/newman-pipeline.yml runs: bash postman-tests.sh",
+      "statement": "CI step \"Run Newman Tests\" in job newman-tests of .github/workflows/newman-pipeline.yml runs: bash postman-tests.sh",
       "evidence": [
         {
           "kind": "file",

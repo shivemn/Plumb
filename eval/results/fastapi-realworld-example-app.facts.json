@@ -904,7 +904,7 @@
     {
       "id": "f49",
       "topic": "contribute",
-      "statement": "CI step \"Ensure cache is healthy\" in .github/workflows/conduit.yml runs: poetry run pip --version >/dev/null 2>&1 || rm -rf .venv",
+      "statement": "CI step \"Ensure cache is healthy\" in job API spec tests of .github/workflows/conduit.yml runs: poetry run pip --version >/dev/null 2>&1 || rm -rf .venv",
       "evidence": [
         {
           "kind": "file",
@@ -917,7 +917,7 @@
     {
       "id": "f50",
       "topic": "contribute",
-      "statement": "CI step \"Install dependencies\" in .github/workflows/conduit.yml runs: poetry install --no-interaction",
+      "statement": "CI step \"Install dependencies\" in job API spec tests of .github/workflows/conduit.yml runs: poetry install --no-interaction",
       "evidence": [
         {
           "kind": "file",
@@ -930,7 +930,7 @@
     {
       "id": "f51",
       "topic": "contribute",
-      "statement": "CI step \"Run newman and test service\" in .github/workflows/conduit.yml runs: poetry run alembic upgrade head",
+      "statement": "CI step \"Run newman and test service\" in job API spec tests of .github/workflows/conduit.yml runs: poetry run alembic upgrade head",
       "evidence": [
         {
           "kind": "file",
@@ -943,7 +943,7 @@
     {
       "id": "f52",
       "topic": "contribute",
-      "statement": "CI step \"Run newman and test service\" in .github/workflows/conduit.yml runs: poetry run uvicorn app.main:app &",
+      "statement": "CI step \"Run newman and test service\" in job API spec tests of .github/workflows/conduit.yml runs: poetry run uvicorn app.main:app &",
       "evidence": [
         {
           "kind": "file",
@@ -956,7 +956,7 @@
     {
       "id": "f53",
       "topic": "contribute",
-      "statement": "CI step \"Run newman and test service\" in .github/workflows/conduit.yml runs: APIURL=http://localhost:8000/api ./postman/run-api-tests.sh",
+      "statement": "CI step \"Run newman and test service\" in job API spec tests of .github/workflows/conduit.yml runs: APIURL=http://localhost:8000/api ./postman/run-api-tests.sh",
       "evidence": [
         {
           "kind": "file",
@@ -969,7 +969,7 @@
     {
       "id": "f54",
       "topic": "contribute",
-      "statement": "CI step \"Run newman and test service\" in .github/workflows/conduit.yml runs: poetry run alembic downgrade base",
+      "statement": "CI step \"Run newman and test service\" in job API spec tests of .github/workflows/conduit.yml runs: poetry run alembic downgrade base",
       "evidence": [
         {
           "kind": "file",
@@ -982,7 +982,7 @@
     {
       "id": "f55",
       "topic": "contribute",
-      "statement": "CI step \"Build image and publish to registry\" in .github/workflows/deploy.yml runs: docker build -t $IMAGE_NAME:latest .",
+      "statement": "CI step \"Build image and publish to registry\" in job Build Container of .github/workflows/deploy.yml runs: docker build -t $IMAGE_NAME:latest .",
       "evidence": [
         {
           "kind": "file",
@@ -995,7 +995,7 @@
     {
       "id": "f56",
       "topic": "contribute",
-      "statement": "CI step \"Build image and publish to registry\" in .github/workflows/deploy.yml runs: docker push $IMAGE_NAME:latest",
+      "statement": "CI step \"Build image and publish to registry\" in job Build Container of .github/workflows/deploy.yml runs: docker push $IMAGE_NAME:latest",
       "evidence": [
         {
           "kind": "file",
@@ -1008,7 +1008,7 @@
     {
       "id": "f57",
       "topic": "contribute",
-      "statement": "CI step \"Run linters\" in .github/workflows/styles.yml runs: poetry run ./scripts/lint",
+      "statement": "CI step \"Run linters\" in job Lint code of .github/workflows/styles.yml runs: poetry run ./scripts/lint",
       "evidence": [
         {
           "kind": "file",
@@ -1021,7 +1021,7 @@
     {
       "id": "f58",
       "topic": "contribute",
-      "statement": "CI step \"Run tests\" in .github/workflows/tests.yml runs: poetry run ./scripts/test",
+      "statement": "CI step \"Run tests\" in job Run tests of .github/workflows/tests.yml runs: poetry run ./scripts/test",
       "evidence": [
         {
           "kind": "file",

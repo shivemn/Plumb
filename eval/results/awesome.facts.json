@@ -48,7 +48,7 @@
     {
       "id": "f3",
       "topic": "contribute",
-      "statement": "CI step \"awesome-lint\" in .github/workflows/main.yml runs: ./.github/workflows/repo_linter.sh",
+      "statement": "CI step \"awesome-lint\" in job lint of .github/workflows/main.yml runs: ./.github/workflows/repo_linter.sh",
       "evidence": [
         {
           "kind": "file",
