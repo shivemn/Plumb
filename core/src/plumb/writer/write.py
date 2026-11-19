@@ -65,7 +65,8 @@ def write_section(
             pass
     prompt = task.prompt
     for attempt in range(2):
-        text = client.complete(SYSTEM_PROMPT, prompt)
+        # Room for models that think before answering; only tokens used are billed.
+        text = client.complete(SYSTEM_PROMPT, prompt, max_tokens=4000)
         try:
             claims = parse_answer(text).claims
         except ValueError as error:

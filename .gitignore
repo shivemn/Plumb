@@ -30,3 +30,9 @@ Thumbs.db
 # Secrets
 .env
 .env.*
+
+# Output of plumb analyse and plumb report run from core/
+core/*.prompts/
+core/*.facts.json
+core/*.report.json
+core/*.report.md

@@ -1,10 +1,19 @@
 """Talk to AI providers, with a cache so the same prompt is never paid for twice.
 
-Keys come from the environment (ANTHROPIC_API_KEY, OPENROUTER_API_KEY) and
-are only ever put in request headers: never logged, cached or written into
-an error message. An Anthropic key that is not scoped to one workspace also
-needs ANTHROPIC_WORKSPACE_ID, which is sent as the anthropic-workspace-id
-header.
+Anthropic has its own client. Every other provider speaks the OpenAI chat
+format, so one client covers them, each with its own address and key:
+
+    openrouter  OPENROUTER_API_KEY  free models end in ":free"
+    groq        GROQ_API_KEY        free tier with a daily token limit
+    gemini      GEMINI_API_KEY      free tier for Flash models
+    openai      OPENAI_API_KEY
+    ollama      (no key)            models on your own machine; OLLAMA_HOST
+                                    changes the address from localhost:11434
+
+Keys come from the environment and are only ever put in request headers:
+never logged, cached or written into an error message. An Anthropic key
+that is not scoped to one workspace also needs ANTHROPIC_WORKSPACE_ID,
+sent as the anthropic-workspace-id header.
 """
 
 from __future__ import annotations
@@ -20,7 +29,6 @@ from typing import Protocol, cast
 import httpx
 
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 _RETRY_STATUS = {429, 500, 502, 503, 504, 529}
 
 
@@ -97,14 +105,23 @@ class AnthropicClient(_HttpClient):
 
 
 @dataclass
-class OpenRouterClient(_HttpClient):
+class ChatClient(_HttpClient):
+    """Any provider with an OpenAI-style /chat/completions endpoint."""
+
+    url: str = ""
+    # OpenAI's newer models only accept max_completion_tokens; others take max_tokens.
+    token_field: str = "max_tokens"
+
     def complete(self, system: str, prompt: str, max_tokens: int = 2000) -> str:
+        headers = {"content-type": "application/json"}
+        if self.key:
+            headers["authorization"] = f"Bearer {self.key}"
         data = self._post(
-            OPENROUTER_URL,
-            {"authorization": f"Bearer {self.key}", "content-type": "application/json"},
+            self.url,
+            headers,
             {
                 "model": self.model,
-                "max_tokens": max_tokens,
+                self.token_field: max_tokens,
                 "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": prompt},
@@ -120,27 +137,60 @@ class OpenRouterClient(_HttpClient):
         return str(message.get("content") or "")
 
 
-_PROVIDERS = {
-    "anthropic": (AnthropicClient, "ANTHROPIC_API_KEY"),
-    "openrouter": (OpenRouterClient, "OPENROUTER_API_KEY"),
+@dataclass(frozen=True)
+class Provider:
+    url: str
+    key_variable: str | None  # None: no key needed
+    token_field: str = "max_tokens"
+
+
+PROVIDERS: dict[str, Provider] = {
+    "openrouter": Provider("https://openrouter.ai/api/v1/chat/completions", "OPENROUTER_API_KEY"),
+    "groq": Provider("https://api.groq.com/openai/v1/chat/completions", "GROQ_API_KEY"),
+    "gemini": Provider(
+        "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        "GEMINI_API_KEY",
+    ),
+    "openai": Provider(
+        "https://api.openai.com/v1/chat/completions", "OPENAI_API_KEY", "max_completion_tokens"
+    ),
+    "ollama": Provider("http://localhost:11434/v1/chat/completions", None),
 }
 
 
 def make_client(spec: str, env: dict[str, str] | None = None) -> ModelClient:
     """Build a client from "provider:model", reading the key from the environment."""
     provider, sep, model = spec.partition(":")
-    if not sep or not model or provider not in _PROVIDERS:
-        choices = ", ".join(f"{p}:<model>" for p in _PROVIDERS)
+    names = ["anthropic", *PROVIDERS]
+    if not sep or not model or provider not in names:
+        choices = ", ".join(f"{p}:<model>" for p in names)
         raise ModelError(f"model must look like {choices}, not {spec!r}")
-    kind, variable = _PROVIDERS[provider]
     environment = env if env is not None else dict(os.environ)
-    key = environment.get(variable, "")
-    if not key:
-        raise ModelError(f"set {variable} to use {provider} models")
-    if kind is AnthropicClient:
+    if provider == "anthropic":
+        key = environment.get("ANTHROPIC_API_KEY", "")
+        if not key:
+            raise ModelError("set ANTHROPIC_API_KEY to use anthropic models")
         workspace = environment.get("ANTHROPIC_WORKSPACE_ID", "")
         return AnthropicClient(name=spec, model=model, key=key, workspace=workspace)
-    return kind(name=spec, model=model, key=key)
+    settings = PROVIDERS[provider]
+    key = environment.get(settings.key_variable, "") if settings.key_variable else ""
+    if settings.key_variable and not key:
+        raise ModelError(f"set {settings.key_variable} to use {provider} models")
+    url = settings.url
+    if provider == "ollama" and environment.get("OLLAMA_HOST"):
+        host = environment["OLLAMA_HOST"].rstrip("/")
+        host = host if host.startswith("http") else f"http://{host}"
+        url = f"{host}/v1/chat/completions"
+    # Local models are slow on a laptop, so they get longer to answer.
+    timeout = 600 if provider == "ollama" else 120
+    return ChatClient(
+        name=spec,
+        model=model,
+        key=key,
+        timeout=timeout,
+        url=url,
+        token_field=settings.token_field,
+    )
 
 
 class ResponseCache:

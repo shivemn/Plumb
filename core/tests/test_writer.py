@@ -164,3 +164,72 @@ def test_workspace_header(monkeypatch: pytest.MonkeyPatch) -> None:
     env = {"ANTHROPIC_API_KEY": "k", "ANTHROPIC_WORKSPACE_ID": "wrkspc_1"}
     assert make_client("anthropic:claude-opus-5-5", env=env).complete("sys", "p") == "ok"
     assert sent[-1].headers["anthropic-workspace-id"] == "wrkspc_1"
+
+
+@pytest.mark.parametrize(
+    ("spec", "env", "url", "auth", "token_field"),
+    [
+        (
+            "openrouter:openai/gpt-oss-120b:free",
+            {"OPENROUTER_API_KEY": "k1"},
+            "https://openrouter.ai/api/v1/chat/completions",
+            "Bearer k1",
+            "max_tokens",
+        ),
+        (
+            "groq:openai/gpt-oss-120b",
+            {"GROQ_API_KEY": "k2"},
+            "https://api.groq.com/openai/v1/chat/completions",
+            "Bearer k2",
+            "max_tokens",
+        ),
+        (
+            "openai:gpt-5",
+            {"OPENAI_API_KEY": "k3"},
+            "https://api.openai.com/v1/chat/completions",
+            "Bearer k3",
+            "max_completion_tokens",
+        ),
+        (
+            "ollama:qwen3:8b",
+            {"OLLAMA_HOST": "127.0.0.1:9999"},
+            "http://127.0.0.1:9999/v1/chat/completions",
+            None,
+            "max_tokens",
+        ),
+    ],
+)
+def test_chat_providers(
+    monkeypatch: pytest.MonkeyPatch,
+    spec: str,
+    env: dict[str, str],
+    url: str,
+    auth: str | None,
+    token_field: str,
+) -> None:
+    sent: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        sent.append(request)
+        return httpx.Response(200, json={"choices": [{"message": {"content": "hi"}}]})
+
+    transport = httpx.MockTransport(handler)
+
+    def fake_post(url: str, **kwargs: object) -> httpx.Response:
+        with httpx.Client(transport=transport) as client:
+            return client.post(url, **kwargs)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(models.httpx, "post", fake_post)
+    client = make_client(spec, env=env)
+    assert client.complete("sys", "prompt", max_tokens=50) == "hi"
+    assert str(sent[0].url) == url
+    assert sent[0].headers.get("authorization") == auth
+    body = json.loads(sent[0].content)
+    assert body["model"] == spec.partition(":")[2] and body[token_field] == 50
+    assert body["messages"][0] == {"role": "system", "content": "sys"}
+
+
+def test_chat_provider_needs_its_key() -> None:
+    with pytest.raises(ModelError, match="set GROQ_API_KEY"):
+        make_client("groq:some-model", env={})
+    assert make_client("ollama:llama3", env={}).name == "ollama:llama3"

@@ -142,7 +142,8 @@ def report(
         str,
         typer.Option(
             help="provider:model, such as anthropic:claude-opus-5-5 or "
-            "openrouter:<model>. The key comes from ANTHROPIC_API_KEY or OPENROUTER_API_KEY."
+            "openrouter:openai/gpt-oss-120b:free. Also groq:, gemini:, openai: and "
+            "ollama:<model>. The key comes from <PROVIDER>_API_KEY, such as OPENROUTER_API_KEY."
         ),
     ] = "anthropic:claude-opus-5-5",
     out: Annotated[

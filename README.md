@@ -44,13 +44,22 @@ uv run plumb analyse pallets/click        # or a GitHub URL, or a local folder
 uv run python ../eval/run.py              # analyse and score the evaluation repos
 ```
 
-To write a report you need an API key for Anthropic or OpenRouter:
+To write a report you need a model. Free ones work:
 
 ```
-export ANTHROPIC_API_KEY=...                          # or OPENROUTER_API_KEY
+export OPENROUTER_API_KEY=...                         # free account at openrouter.ai
 uv run plumb report pallets/click --dry-run           # see the prompts and their size first
-uv run plumb report pallets/click --model anthropic:claude-opus-5-5
+uv run plumb report pallets/click --model openrouter:openai/gpt-oss-120b:free
 ```
+
+| Provider | Model option | Key |
+|----------|--------------|-----|
+| Anthropic | `anthropic:claude-opus-5-5` (default) | `ANTHROPIC_API_KEY` |
+| OpenRouter | `openrouter:<model>`; free ones end in `:free` | `OPENROUTER_API_KEY` |
+| Groq | `groq:<model>` (free tier) | `GROQ_API_KEY` |
+| Google Gemini | `gemini:<model>` (free tier for Flash) | `GEMINI_API_KEY` |
+| OpenAI | `openai:<model>` | `OPENAI_API_KEY` |
+| Ollama, on your machine | `ollama:<model>` | none |
 
 This writes `click.report.json` and `click.report.md`. The key is read
 from the environment and only sent to the provider. If your Anthropic key
