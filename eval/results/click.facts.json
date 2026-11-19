@@ -1192,69 +1192,6 @@
     {
       "id": "f73",
       "topic": "structure",
-      "statement": "Code in tests/typing uses code in src/click (13 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/typing/typing_aliased_group.py",
-          "start_line": 7,
-          "end_line": 7
-        },
-        {
-          "kind": "file",
-          "path": "tests/typing/typing_confirmation_option.py",
-          "start_line": 5,
-          "end_line": 5
-        },
-        {
-          "kind": "file",
-          "path": "tests/typing/typing_edit.py",
-          "start_line": 4,
-          "end_line": 4
-        }
-      ]
-    },
-    {
-      "id": "f74",
-      "topic": "structure",
-      "statement": "Code in tests/test_types uses code in src/click (8 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/test_types/test_Choice.py",
-          "start_line": 1,
-          "end_line": 1
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_types/test_File.py",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_types/test_FloatRange.py",
-          "start_line": 3,
-          "end_line": 3
-        }
-      ]
-    },
-    {
-      "id": "f75",
-      "topic": "structure",
-      "statement": "Code in tests/test_exceptions uses code in src/click (1 reference)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/test_exceptions/test_FileError.py",
-          "start_line": 1,
-          "end_line": 1
-        }
-      ]
-    },
-    {
-      "id": "f76",
-      "topic": "structure",
       "statement": "src/click/__init__.py is used by 51 other files",
       "evidence": [
         {
@@ -1278,7 +1215,7 @@
       ]
     },
     {
-      "id": "f77",
+      "id": "f74",
       "topic": "structure",
       "statement": "src/click/_compat.py is used by 17 other files",
       "evidence": [
@@ -1303,7 +1240,7 @@
       ]
     },
     {
-      "id": "f78",
+      "id": "f75",
       "topic": "structure",
       "statement": "src/click/core.py is used by 12 other files",
       "evidence": [
@@ -1328,7 +1265,7 @@
       ]
     },
     {
-      "id": "f79",
+      "id": "f76",
       "topic": "structure",
       "statement": "src/click/utils.py is used by 12 other files",
       "evidence": [
@@ -1353,7 +1290,7 @@
       ]
     },
     {
-      "id": "f80",
+      "id": "f77",
       "topic": "structure",
       "statement": "src/click/exceptions.py is used by 9 other files",
       "evidence": [
@@ -1378,7 +1315,7 @@
       ]
     },
     {
-      "id": "f81",
+      "id": "f78",
       "topic": "history",
       "statement": "48 commits between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1397,7 +1334,7 @@
       ]
     },
     {
-      "id": "f82",
+      "id": "f79",
       "topic": "history",
       "statement": "src/click/core.py changed in 13 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1422,7 +1359,7 @@
       ]
     },
     {
-      "id": "f83",
+      "id": "f80",
       "topic": "history",
       "statement": "tests/test_options.py changed in 9 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1447,7 +1384,7 @@
       ]
     },
     {
-      "id": "f84",
+      "id": "f81",
       "topic": "history",
       "statement": "src/click/_termui_impl.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1472,7 +1409,7 @@
       ]
     },
     {
-      "id": "f85",
+      "id": "f82",
       "topic": "history",
       "statement": "tests/test_arguments.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1497,7 +1434,7 @@
       ]
     },
     {
-      "id": "f86",
+      "id": "f83",
       "topic": "history",
       "statement": "tests/test_termui.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1522,7 +1459,7 @@
       ]
     },
     {
-      "id": "f87",
+      "id": "f84",
       "topic": "history",
       "statement": "tests/test_deprecations.py changed in 4 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1547,7 +1484,7 @@
       ]
     },
     {
-      "id": "f88",
+      "id": "f85",
       "topic": "history",
       "statement": "tests/test_basic.py changed in 3 commits by 2 authors between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1572,7 +1509,7 @@
       ]
     },
     {
-      "id": "f89",
+      "id": "f86",
       "topic": "history",
       "statement": "src/click/testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1597,7 +1534,7 @@
       ]
     },
     {
-      "id": "f90",
+      "id": "f87",
       "topic": "history",
       "statement": "tests/test_testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1622,7 +1559,7 @@
       ]
     },
     {
-      "id": "f91",
+      "id": "f88",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_options.py changed in the same commit 8 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1641,7 +1578,7 @@
       ]
     },
     {
-      "id": "f92",
+      "id": "f89",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_arguments.py changed in the same commit 7 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1660,7 +1597,7 @@
       ]
     },
     {
-      "id": "f93",
+      "id": "f90",
       "topic": "history",
       "statement": "src/click/_termui_impl.py and tests/test_termui.py changed in the same commit 6 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1679,7 +1616,7 @@
       ]
     },
     {
-      "id": "f94",
+      "id": "f91",
       "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_options.py changed in the same commit 5 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1698,7 +1635,7 @@
       ]
     },
     {
-      "id": "f95",
+      "id": "f92",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1717,7 +1654,7 @@
       ]
     },
     {
-      "id": "f96",
+      "id": "f93",
       "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1736,7 +1673,7 @@
       ]
     },
     {
-      "id": "f97",
+      "id": "f94",
       "topic": "history",
       "statement": "tests/test_deprecations.py and tests/test_options.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1755,7 +1692,7 @@
       ]
     },
     {
-      "id": "f98",
+      "id": "f95",
       "topic": "history",
       "statement": "src/click/testing.py and tests/test_testing.py changed in the same commit 3 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [

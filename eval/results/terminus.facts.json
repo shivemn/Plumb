@@ -564,31 +564,6 @@
     {
       "id": "f39",
       "topic": "structure",
-      "statement": "Code in tests uses code in src/lib (21 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/coaches.test.ts",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "tests/graph.test.ts",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "tests/graph.test.ts",
-          "start_line": 4,
-          "end_line": 4
-        }
-      ]
-    },
-    {
-      "id": "f40",
-      "topic": "structure",
       "statement": "Code in src/pages uses code in src/lib (15 references)",
       "evidence": [
         {
@@ -612,7 +587,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f40",
       "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/lib (6 references)",
       "evidence": [
@@ -637,7 +612,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f41",
       "topic": "structure",
       "statement": "Code in scripts uses code in src/lib (5 references)",
       "evidence": [
@@ -662,7 +637,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f42",
       "topic": "structure",
       "statement": "Code in src/pages/roles uses code in src/lib (5 references)",
       "evidence": [
@@ -687,7 +662,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f43",
       "topic": "structure",
       "statement": "Code in src/pages uses code in src/layouts (4 references)",
       "evidence": [
@@ -712,7 +687,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f44",
       "topic": "structure",
       "statement": "Code in src/pages/designs uses code in src/lib (4 references)",
       "evidence": [
@@ -737,7 +712,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f45",
       "topic": "structure",
       "statement": "Code in src/pages/concepts uses code in src/lib (3 references)",
       "evidence": [
@@ -762,7 +737,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f46",
       "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/components (3 references)",
       "evidence": [
@@ -787,7 +762,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f47",
       "topic": "structure",
       "statement": "Code in src/pages uses code in src/components (2 references)",
       "evidence": [
@@ -806,7 +781,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f48",
       "topic": "structure",
       "statement": "Code in src/pages/designs uses code in src/layouts (2 references)",
       "evidence": [
@@ -825,7 +800,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f49",
       "topic": "structure",
       "statement": "Code in src/pages/roles uses code in src/layouts (2 references)",
       "evidence": [
@@ -844,7 +819,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f50",
       "topic": "structure",
       "statement": "Code in src/pages/tools uses code in src/layouts (2 references)",
       "evidence": [
@@ -863,13 +838,26 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f51",
       "topic": "structure",
       "statement": "Code in src/layouts uses code in src/components (1 reference)",
       "evidence": [
         {
           "kind": "file",
           "path": "src/layouts/Base.astro",
+          "start_line": 6,
+          "end_line": 6
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "topic": "structure",
+      "statement": "Code in src/pages/concepts uses code in src/components (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/pages/concepts/[id].astro",
           "start_line": 6,
           "end_line": 6
         }

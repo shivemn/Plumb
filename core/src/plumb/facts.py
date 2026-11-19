@@ -398,7 +398,11 @@ def add_activity_facts(builder: FactBuilder, activity: Activity, limit: int = 8)
 
 def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) -> None:
     builder.topic = Topic.STRUCTURE
+    # Tests using the code they test says little about how the code is laid
+    # out, so links from test folders come after the rest and only two show.
     components = component_edges(edges)
+    tests = [c for c in components if _is_test_folder(c.source)]
+    components = [c for c in components if c not in tests] + tests[:2]
     for item in components[:limit]:
         builder.add(
             f"Code in {item.source} uses code in {item.target} "
@@ -418,6 +422,12 @@ def add_graph_facts(builder: FactBuilder, edges: list[Edge], limit: int = 15) ->
             f"{target} is used by {_plural(sources, 'other file')}",
             [FileEvidence(path=target), *(_line(e) for e in users[:2])],
         )
+
+
+def _is_test_folder(folder: str) -> bool:
+    return any(
+        part in ("test", "tests", "testing", "spec", "__tests__") for part in folder.split("/")
+    )
 
 
 def _line(edge: Edge) -> FileEvidence:

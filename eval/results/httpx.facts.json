@@ -640,7 +640,7 @@
     {
       "id": "f37",
       "topic": "public_api",
-      "statement": "Public class URL in httpx/_urls.py: url = httpx.URL(\"HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink\")",
+      "statement": "Public class URL in httpx/_urls.py: The components of a URL are broken down like this:",
       "evidence": [
         {
           "kind": "file",
@@ -1070,31 +1070,6 @@
     {
       "id": "f65",
       "topic": "structure",
-      "statement": "Code in tests uses code in httpx (17 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/conftest.py",
-          "start_line": 20,
-          "end_line": 20
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_api.py",
-          "start_line": 5,
-          "end_line": 5
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_api.py",
-          "start_line": 98,
-          "end_line": 98
-        }
-      ]
-    },
-    {
-      "id": "f66",
-      "topic": "structure",
       "statement": "Code in httpx/_transports uses code in httpx (12 references)",
       "evidence": [
         {
@@ -1118,57 +1093,7 @@
       ]
     },
     {
-      "id": "f67",
-      "topic": "structure",
-      "statement": "Code in tests/client uses code in httpx (10 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/client/test_async_client.py",
-          "start_line": 8,
-          "end_line": 8
-        },
-        {
-          "kind": "file",
-          "path": "tests/client/test_auth.py",
-          "start_line": 18,
-          "end_line": 18
-        },
-        {
-          "kind": "file",
-          "path": "tests/client/test_client.py",
-          "start_line": 9,
-          "end_line": 9
-        }
-      ]
-    },
-    {
-      "id": "f68",
-      "topic": "structure",
-      "statement": "Code in tests/models uses code in httpx (7 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/models/test_cookies.py",
-          "start_line": 5,
-          "end_line": 5
-        },
-        {
-          "kind": "file",
-          "path": "tests/models/test_headers.py",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "tests/models/test_queryparams.py",
-          "start_line": 3,
-          "end_line": 3
-        }
-      ]
-    },
-    {
-      "id": "f69",
+      "id": "f66",
       "topic": "structure",
       "statement": "Code in httpx uses code in httpx/_transports (3 references)",
       "evidence": [
@@ -1193,20 +1118,57 @@
       ]
     },
     {
-      "id": "f70",
+      "id": "f67",
       "topic": "structure",
-      "statement": "Code in tests/client uses code in tests (1 reference)",
+      "statement": "Code in tests uses code in httpx (17 references)",
       "evidence": [
         {
           "kind": "file",
-          "path": "tests/client/test_auth.py",
+          "path": "tests/conftest.py",
           "start_line": 20,
           "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_api.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "tests/test_api.py",
+          "start_line": 98,
+          "end_line": 98
         }
       ]
     },
     {
-      "id": "f71",
+      "id": "f68",
+      "topic": "structure",
+      "statement": "Code in tests/client uses code in httpx (10 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "tests/client/test_async_client.py",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "tests/client/test_auth.py",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "kind": "file",
+          "path": "tests/client/test_client.py",
+          "start_line": 9,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "f69",
       "topic": "structure",
       "statement": "httpx and httpx/_transports each use the other",
       "evidence": [
@@ -1225,7 +1187,7 @@
       ]
     },
     {
-      "id": "f72",
+      "id": "f70",
       "topic": "structure",
       "statement": "httpx/__init__.py is used by 32 other files",
       "evidence": [
@@ -1250,7 +1212,7 @@
       ]
     },
     {
-      "id": "f73",
+      "id": "f71",
       "topic": "structure",
       "statement": "httpx/_models.py is used by 13 other files",
       "evidence": [
@@ -1275,7 +1237,7 @@
       ]
     },
     {
-      "id": "f74",
+      "id": "f72",
       "topic": "structure",
       "statement": "httpx/_types.py is used by 12 other files",
       "evidence": [
@@ -1300,7 +1262,7 @@
       ]
     },
     {
-      "id": "f75",
+      "id": "f73",
       "topic": "structure",
       "statement": "httpx/_exceptions.py is used by 9 other files",
       "evidence": [
@@ -1325,7 +1287,7 @@
       ]
     },
     {
-      "id": "f76",
+      "id": "f74",
       "topic": "structure",
       "statement": "httpx/_urls.py is used by 8 other files",
       "evidence": [
@@ -1350,7 +1312,7 @@
       ]
     },
     {
-      "id": "f77",
+      "id": "f75",
       "topic": "history",
       "statement": "4 commits between 18 Aug 2026 and 16 Nov 2026",
       "evidence": [

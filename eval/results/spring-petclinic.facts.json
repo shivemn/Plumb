@@ -859,81 +859,6 @@
     {
       "id": "f52",
       "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/owner (25 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
-          "start_line": 60,
-          "end_line": 60
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
-          "start_line": 71,
-          "end_line": 71
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
-          "start_line": 73,
-          "end_line": 73
-        }
-      ]
-    },
-    {
-      "id": "f53",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/owner (6 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
-          "start_line": 34,
-          "end_line": 34
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
-          "start_line": 35,
-          "end_line": 35
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
-          "start_line": 36,
-          "end_line": 36
-        }
-      ]
-    },
-    {
-      "id": "f54",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/vet uses code in src/main/java/org/springframework/samples/petclinic/vet (5 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java",
-          "start_line": 45,
-          "end_line": 45
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java",
-          "start_line": 54,
-          "end_line": 54
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java",
-          "start_line": 56,
-          "end_line": 56
-        }
-      ]
-    },
-    {
-      "id": "f55",
-      "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/model (4 references)",
       "evidence": [
         {
@@ -957,7 +882,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f53",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/vet uses code in src/main/java/org/springframework/samples/petclinic/model (3 references)",
       "evidence": [
@@ -982,57 +907,7 @@
       ]
     },
     {
-      "id": "f57",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic (3 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/MysqlTestApplication.java",
-          "start_line": 43,
-          "end_line": 43
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/PetClinicIntegrationTests.java",
-          "start_line": 67,
-          "end_line": 67
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/PostgresIntegrationTests.java",
-          "start_line": 72,
-          "end_line": 72
-        }
-      ]
-    },
-    {
-      "id": "f58",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/vet (3 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/MySqlIntegrationTests.java",
-          "start_line": 32,
-          "end_line": 32
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/PetClinicIntegrationTests.java",
-          "start_line": 31,
-          "end_line": 31
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/PostgresIntegrationTests.java",
-          "start_line": 46,
-          "end_line": 46
-        }
-      ]
-    },
-    {
-      "id": "f59",
+      "id": "f54",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/model (2 references)",
       "evidence": [
@@ -1051,64 +926,7 @@
       ]
     },
     {
-      "id": "f60",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/owner (2 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/PetClinicConcurrencyTests.java",
-          "start_line": 22,
-          "end_line": 22
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/PetClinicConcurrencyTests.java",
-          "start_line": 23,
-          "end_line": 23
-        }
-      ]
-    },
-    {
-      "id": "f61",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/vet (2 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
-          "start_line": 40,
-          "end_line": 40
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
-          "start_line": 41,
-          "end_line": 41
-        }
-      ]
-    },
-    {
-      "id": "f62",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/system uses code in src/main/java/org/springframework/samples/petclinic/system (2 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java",
-          "start_line": 33,
-          "end_line": 33
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/system/WelcomeControllerTests.java",
-          "start_line": 30,
-          "end_line": 30
-        }
-      ]
-    },
-    {
-      "id": "f63",
+      "id": "f55",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/vet (1 reference)",
       "evidence": [
@@ -1121,33 +939,57 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f56",
       "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/model uses code in src/main/java/org/springframework/samples/petclinic/model (1 reference)",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/owner (25 references)",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java",
-          "start_line": 52,
-          "end_line": 52
+          "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+          "start_line": 60,
+          "end_line": 60
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+          "start_line": 71,
+          "end_line": 71
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+          "start_line": 73,
+          "end_line": 73
         }
       ]
     },
     {
-      "id": "f65",
+      "id": "f57",
       "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/model (1 reference)",
+      "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/owner (6 references)",
       "evidence": [
         {
           "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/service/EntityUtils.java",
-          "start_line": 20,
-          "end_line": 20
+          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "kind": "file",
+          "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
+          "start_line": 36,
+          "end_line": 36
         }
       ]
     },
     {
-      "id": "f66",
+      "id": "f58",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java is used by 10 other files",
       "evidence": [
@@ -1172,7 +1014,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f59",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java is used by 10 other files",
       "evidence": [
@@ -1197,7 +1039,7 @@
       ]
     },
     {
-      "id": "f68",
+      "id": "f60",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java is used by 9 other files",
       "evidence": [
@@ -1222,7 +1064,7 @@
       ]
     },
     {
-      "id": "f69",
+      "id": "f61",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/OwnerRepository.java is used by 8 other files",
       "evidence": [
@@ -1247,7 +1089,7 @@
       ]
     },
     {
-      "id": "f70",
+      "id": "f62",
       "topic": "structure",
       "statement": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java is used by 7 other files",
       "evidence": [
@@ -1272,7 +1114,7 @@
       ]
     },
     {
-      "id": "f71",
+      "id": "f63",
       "topic": "history",
       "statement": "13 commits between 01 Jul 2026 and 29 Sep 2026",
       "evidence": [
@@ -1291,7 +1133,7 @@
       ]
     },
     {
-      "id": "f72",
+      "id": "f64",
       "topic": "history",
       "statement": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java changed in 3 commits by 3 authors between 01 Jul 2026 and 29 Sep 2026",
       "evidence": [
@@ -1316,7 +1158,7 @@
       ]
     },
     {
-      "id": "f73",
+      "id": "f65",
       "topic": "history",
       "statement": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java changed in 3 commits by 2 authors between 01 Jul 2026 and 29 Sep 2026",
       "evidence": [

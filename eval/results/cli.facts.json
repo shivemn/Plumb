@@ -889,106 +889,6 @@
     {
       "id": "f64",
       "topic": "structure",
-      "statement": "Code in tests uses code in httpie (43 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/test_auth.py",
-          "start_line": 6,
-          "end_line": 6
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_auth.py",
-          "start_line": 7,
-          "end_line": 7
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_cli.py",
-          "start_line": 12,
-          "end_line": 12
-        }
-      ]
-    },
-    {
-      "id": "f65",
-      "topic": "structure",
-      "statement": "Code in tests uses code in tests/utils (35 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/conftest.py",
-          "start_line": 7,
-          "end_line": 7
-        },
-        {
-          "kind": "file",
-          "path": "tests/conftest.py",
-          "start_line": 14,
-          "end_line": 14
-        },
-        {
-          "kind": "file",
-          "path": "tests/conftest.py",
-          "start_line": 22,
-          "end_line": 22
-        }
-      ]
-    },
-    {
-      "id": "f66",
-      "topic": "structure",
-      "statement": "Code in tests uses code in httpie/cli (19 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/test_auth.py",
-          "start_line": 9,
-          "end_line": 9
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_auth.py",
-          "start_line": 10,
-          "end_line": 10
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_auth_plugins.py",
-          "start_line": 3,
-          "end_line": 3
-        }
-      ]
-    },
-    {
-      "id": "f67",
-      "topic": "structure",
-      "statement": "Code in tests uses code in tests/fixtures (15 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/test_binary.py",
-          "start_line": 4,
-          "end_line": 4
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_cli.py",
-          "start_line": 15,
-          "end_line": 15
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_compress.py",
-          "start_line": 14,
-          "end_line": 14
-        }
-      ]
-    },
-    {
-      "id": "f68",
-      "topic": "structure",
       "statement": "Code in httpie/manager/tasks uses code in httpie (12 references)",
       "evidence": [
         {
@@ -1012,7 +912,7 @@
       ]
     },
     {
-      "id": "f69",
+      "id": "f65",
       "topic": "structure",
       "statement": "Code in httpie/output uses code in httpie (10 references)",
       "evidence": [
@@ -1037,32 +937,7 @@
       ]
     },
     {
-      "id": "f70",
-      "topic": "structure",
-      "statement": "Code in tests uses code in httpie/plugins (10 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/test_auth.py",
-          "start_line": 5,
-          "end_line": 5
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_auth_plugins.py",
-          "start_line": 4,
-          "end_line": 4
-        },
-        {
-          "kind": "file",
-          "path": "tests/test_auth_plugins.py",
-          "start_line": 5,
-          "end_line": 5
-        }
-      ]
-    },
-    {
-      "id": "f71",
+      "id": "f66",
       "topic": "structure",
       "statement": "Code in httpie uses code in httpie/cli (9 references)",
       "evidence": [
@@ -1087,32 +962,7 @@
       ]
     },
     {
-      "id": "f72",
-      "topic": "structure",
-      "statement": "Code in tests/utils uses code in httpie (9 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "tests/utils/__init__.py",
-          "start_line": 16,
-          "end_line": 16
-        },
-        {
-          "kind": "file",
-          "path": "tests/utils/__init__.py",
-          "start_line": 19,
-          "end_line": 19
-        },
-        {
-          "kind": "file",
-          "path": "tests/utils/__init__.py",
-          "start_line": 20,
-          "end_line": 20
-        }
-      ]
-    },
-    {
-      "id": "f73",
+      "id": "f67",
       "topic": "structure",
       "statement": "Code in httpie/internal uses code in httpie (8 references)",
       "evidence": [
@@ -1137,7 +987,7 @@
       ]
     },
     {
-      "id": "f74",
+      "id": "f68",
       "topic": "structure",
       "statement": "Code in httpie/cli uses code in httpie (7 references)",
       "evidence": [
@@ -1162,7 +1012,7 @@
       ]
     },
     {
-      "id": "f75",
+      "id": "f69",
       "topic": "structure",
       "statement": "Code in httpie/manager uses code in httpie (7 references)",
       "evidence": [
@@ -1187,7 +1037,7 @@
       ]
     },
     {
-      "id": "f76",
+      "id": "f70",
       "topic": "structure",
       "statement": "Code in httpie/output/formatters uses code in httpie/plugins (4 references)",
       "evidence": [
@@ -1212,7 +1062,7 @@
       ]
     },
     {
-      "id": "f77",
+      "id": "f71",
       "topic": "structure",
       "statement": "Code in httpie/plugins uses code in httpie/output/formatters (4 references)",
       "evidence": [
@@ -1237,27 +1087,177 @@
       ]
     },
     {
-      "id": "f78",
+      "id": "f72",
       "topic": "structure",
-      "statement": "Code in tests uses code in httpie/output/formatters (4 references)",
+      "statement": "Code in httpie uses code in httpie/output (3 references)",
       "evidence": [
         {
           "kind": "file",
-          "path": "tests/test_json.py",
-          "start_line": 9,
-          "end_line": 9
+          "path": "httpie/core.py",
+          "start_line": 22,
+          "end_line": 22
         },
         {
           "kind": "file",
-          "path": "tests/test_meta.py",
+          "path": "httpie/core.py",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "kind": "file",
+          "path": "httpie/downloads.py",
+          "start_line": 16,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "f73",
+      "topic": "structure",
+      "statement": "Code in httpie uses code in httpie/output/ui (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/context.py",
+          "start_line": 21,
+          "end_line": 21
+        },
+        {
+          "kind": "file",
+          "path": "httpie/context.py",
+          "start_line": 194,
+          "end_line": 194
+        },
+        {
+          "kind": "file",
+          "path": "httpie/downloads.py",
+          "start_line": 326,
+          "end_line": 326
+        }
+      ]
+    },
+    {
+      "id": "f74",
+      "topic": "structure",
+      "statement": "Code in httpie uses code in httpie/plugins (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/client.py",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "kind": "file",
+          "path": "httpie/core.py",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "httpie/sessions.py",
+          "start_line": 21,
+          "end_line": 21
+        }
+      ]
+    },
+    {
+      "id": "f75",
+      "topic": "structure",
+      "statement": "Code in httpie/cli uses code in httpie/plugins (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/cli/argparser.py",
+          "start_line": 28,
+          "end_line": 28
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/definition.py",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "kind": "file",
+          "path": "httpie/cli/definition.py",
+          "start_line": 23,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "f76",
+      "topic": "structure",
+      "statement": "Code in httpie/legacy uses code in httpie (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/legacy/v3_1_0_session_cookie_format.py",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "kind": "file",
+          "path": "httpie/legacy/v3_2_0_session_header_format.py",
           "start_line": 4,
           "end_line": 4
         },
         {
           "kind": "file",
-          "path": "tests/test_output.py",
-          "start_line": 21,
-          "end_line": 21
+          "path": "httpie/legacy/v3_2_0_session_header_format.py",
+          "start_line": 68,
+          "end_line": 68
+        }
+      ]
+    },
+    {
+      "id": "f77",
+      "topic": "structure",
+      "statement": "Code in httpie/manager uses code in httpie/cli (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/manager/__main__.py",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/cli.py",
+          "start_line": 2,
+          "end_line": 2
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/cli.py",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f78",
+      "topic": "structure",
+      "statement": "Code in httpie/manager/tasks uses code in httpie/manager (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/plugins.py",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/plugins.py",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "kind": "file",
+          "path": "httpie/manager/tasks/sessions.py",
+          "start_line": 7,
+          "end_line": 7
         }
       ]
     },

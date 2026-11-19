@@ -1137,31 +1137,6 @@
     {
       "id": "f60",
       "topic": "structure",
-      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/model (12 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
-          "start_line": 10,
-          "end_line": 10
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
-          "start_line": 11,
-          "end_line": 11
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
-          "start_line": 12,
-          "end_line": 12
-        }
-      ]
-    },
-    {
-      "id": "f61",
-      "topic": "structure",
       "statement": "Code in dashboard/src/components uses code in dashboard/src/hooks (6 references)",
       "evidence": [
         {
@@ -1185,7 +1160,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f61",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/service (5 references)",
       "evidence": [
@@ -1210,32 +1185,7 @@
       ]
     },
     {
-      "id": "f63",
-      "topic": "structure",
-      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/service (5 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
-          "start_line": 13,
-          "end_line": 13
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/IgnitePersistenceTest.java",
-          "start_line": 10,
-          "end_line": 10
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/PipelineIntegrationTest.java",
-          "start_line": 12,
-          "end_line": 12
-        }
-      ]
-    },
-    {
-      "id": "f64",
+      "id": "f62",
       "topic": "structure",
       "statement": "Code in dashboard/src uses code in dashboard/src/hooks (4 references)",
       "evidence": [
@@ -1260,7 +1210,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f63",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/archive uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -1285,7 +1235,7 @@
       ]
     },
     {
-      "id": "f66",
+      "id": "f64",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -1310,7 +1260,7 @@
       ]
     },
     {
-      "id": "f67",
+      "id": "f65",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/service uses code in src/main/java/com/shivemn/ccp/model (4 references)",
       "evidence": [
@@ -1335,32 +1285,7 @@
       ]
     },
     {
-      "id": "f68",
-      "topic": "structure",
-      "statement": "Code in src/test/java/com/shivemn/ccp uses code in src/main/java/com/shivemn/ccp/config (4 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
-          "start_line": 8,
-          "end_line": 8
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/ArchiveIntegrationTest.java",
-          "start_line": 9,
-          "end_line": 9
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/com/shivemn/ccp/IgnitePersistenceTest.java",
-          "start_line": 6,
-          "end_line": 6
-        }
-      ]
-    },
-    {
-      "id": "f69",
+      "id": "f66",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/config uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
@@ -1385,7 +1310,7 @@
       ]
     },
     {
-      "id": "f70",
+      "id": "f67",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/pipeline uses code in src/main/java/com/shivemn/ccp/service (3 references)",
       "evidence": [
@@ -1410,7 +1335,7 @@
       ]
     },
     {
-      "id": "f71",
+      "id": "f68",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/replay uses code in src/main/java/com/shivemn/ccp/model (3 references)",
       "evidence": [
@@ -1435,7 +1360,7 @@
       ]
     },
     {
-      "id": "f72",
+      "id": "f69",
       "topic": "structure",
       "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/archive (2 references)",
       "evidence": [
@@ -1450,6 +1375,57 @@
           "path": "src/main/java/com/shivemn/ccp/web/ArchiveController.java",
           "start_line": 4,
           "end_line": 4
+        }
+      ]
+    },
+    {
+      "id": "f70",
+      "topic": "structure",
+      "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/model (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/ProfileController.java",
+          "start_line": 3,
+          "end_line": 3
+        }
+      ]
+    },
+    {
+      "id": "f71",
+      "topic": "structure",
+      "statement": "Code in src/main/java/com/shivemn/ccp/web uses code in src/main/java/com/shivemn/ccp/pipeline (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/com/shivemn/ccp/web/EventController.java",
+          "start_line": 5,
+          "end_line": 5
+        }
+      ]
+    },
+    {
+      "id": "f72",
+      "topic": "structure",
+      "statement": "Code in dashboard/src/hooks uses code in dashboard/src (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "dashboard/src/hooks/useLive.ts",
+          "start_line": 2,
+          "end_line": 2
         }
       ]
     },

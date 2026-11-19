@@ -71,6 +71,9 @@ def _docstring(body: Node | None) -> str:
     return summary_line(text)
 
 
+_CODE_LINE = re.compile(r"^[\w.\[\]]+\s*=\s*\S|^[\w.]+\(.*\)$|^(assert|import|from|return) ")
+
+
 def summary_line(text: str, limit: int = 120) -> str:
     """The first sentence of a docstring or doc comment, shortened."""
     text = re.sub(r":\w+:`~?([^`<]+?)(?:\s*<[^>]+>)?`", r"\1", text)  # :class:`Request <Request>`
@@ -82,6 +85,10 @@ def summary_line(text: str, limit: int = 120) -> str:
         line = re.sub(r"\s+", " ", line.strip(" */")).strip()
         if line.startswith(("@", ":", "#", ">>>")):
             break
+        if _CODE_LINE.match(line):  # an example, such as `url = httpx.URL(...)`
+            if paragraph:
+                break
+            continue
         if not line:
             if paragraph:
                 break

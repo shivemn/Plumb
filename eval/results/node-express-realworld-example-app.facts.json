@@ -595,31 +595,6 @@
     {
       "id": "f40",
       "topic": "structure",
-      "statement": "Code in src/tests/services uses code in src/tests (3 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/tests/services/article.service.test.ts",
-          "start_line": 1,
-          "end_line": 1
-        },
-        {
-          "kind": "file",
-          "path": "src/tests/services/auth.service.test.ts",
-          "start_line": 3,
-          "end_line": 3
-        },
-        {
-          "kind": "file",
-          "path": "src/tests/services/profile.service.test.ts",
-          "start_line": 1,
-          "end_line": 1
-        }
-      ]
-    },
-    {
-      "id": "f41",
-      "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/auth (2 references)",
       "evidence": [
         {
@@ -637,7 +612,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f41",
       "topic": "structure",
       "statement": "Code in src/app/routes/auth uses code in src/app/routes/article (2 references)",
       "evidence": [
@@ -656,7 +631,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f42",
       "topic": "structure",
       "statement": "Code in src/app/routes/profile uses code in src/app/routes/auth (2 references)",
       "evidence": [
@@ -675,7 +650,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f43",
       "topic": "structure",
       "statement": "Code in src/prisma uses code in src/app/routes/auth (2 references)",
       "evidence": [
@@ -694,7 +669,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f44",
       "topic": "structure",
       "statement": "Code in src uses code in src/app/models (1 reference)",
       "evidence": [
@@ -707,7 +682,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f45",
       "topic": "structure",
       "statement": "Code in src uses code in src/app/routes (1 reference)",
       "evidence": [
@@ -720,7 +695,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f46",
       "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/article (1 reference)",
       "evidence": [
@@ -733,7 +708,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f47",
       "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/auth (1 reference)",
       "evidence": [
@@ -746,7 +721,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f48",
       "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/profile (1 reference)",
       "evidence": [
@@ -759,7 +734,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f49",
       "topic": "structure",
       "statement": "Code in src/app/routes uses code in src/app/routes/tag (1 reference)",
       "evidence": [
@@ -772,7 +747,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f50",
       "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/models (1 reference)",
       "evidence": [
@@ -785,7 +760,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f51",
       "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/profile (1 reference)",
       "evidence": [
@@ -798,7 +773,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f52",
       "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/app/routes/tag (1 reference)",
       "evidence": [
@@ -811,7 +786,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f53",
       "topic": "structure",
       "statement": "Code in src/app/routes/article uses code in src/prisma (1 reference)",
       "evidence": [
@@ -820,6 +795,19 @@
           "path": "src/app/routes/article/article.service.ts",
           "start_line": 2,
           "end_line": 2
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "topic": "structure",
+      "statement": "Code in src/app/routes/auth uses code in src/app/models (1 reference)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/app/routes/auth/auth.service.ts",
+          "start_line": 4,
+          "end_line": 4
         }
       ]
     },

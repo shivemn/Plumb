@@ -42,7 +42,8 @@ def render_markdown(report: Report) -> str:
         lines += ["## Sources", ""]
         for fact in report.facts:
             where = "; ".join(_evidence(e) for e in fact.evidence)
-            lines.append(f'- <a id="{fact.id}"></a>**{fact.id}**: {fact.statement}. {where}')
+            end = "" if fact.statement.endswith((".", "!", "?")) else "."
+            lines.append(f'- <a id="{fact.id}"></a>**{fact.id}**: {fact.statement}{end} {where}')
         lines.append("")
 
     if report.removed:

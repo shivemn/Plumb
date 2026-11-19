@@ -129,3 +129,9 @@ def test_api_facts(make_repo: Make) -> None:
         "Public class Client in lib/client.py: An HTTP client.",
         "Public exceptions: HTTPError, Timeout",
     ]
+
+
+def test_summary_skips_code_examples() -> None:
+    text = 'url = httpx.URL("https://example.org")\nassert url.host == "example.org"\n\nMore.'
+    assert summary_line(text) == "More."
+    assert summary_line("Builds a URL.\nurl = URL('x')") == "Builds a URL."

@@ -1156,31 +1156,6 @@
     {
       "id": "f79",
       "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/mapper (11 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 29,
-          "end_line": 29
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 30,
-          "end_line": 30
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 31,
-          "end_line": 31
-        }
-      ]
-    },
-    {
-      "id": "f80",
-      "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jpa uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
       "evidence": [
         {
@@ -1204,7 +1179,7 @@
       ]
     },
     {
-      "id": "f81",
+      "id": "f80",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/mapper (10 references)",
       "evidence": [
@@ -1229,7 +1204,7 @@
       ]
     },
     {
-      "id": "f82",
+      "id": "f81",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
       "evidence": [
@@ -1254,32 +1229,7 @@
       ]
     },
     {
-      "id": "f83",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/model (10 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 32,
-          "end_line": 32
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
-          "start_line": 27,
-          "end_line": 27
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
-          "start_line": 30,
-          "end_line": 30
-        }
-      ]
-    },
-    {
-      "id": "f84",
+      "id": "f82",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/mapper uses code in src/main/java/org/springframework/samples/petclinic/model (9 references)",
       "evidence": [
@@ -1304,7 +1254,7 @@
       ]
     },
     {
-      "id": "f85",
+      "id": "f83",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jdbc uses code in src/main/java/org/springframework/samples/petclinic/repository (8 references)",
       "evidence": [
@@ -1329,82 +1279,7 @@
       ]
     },
     {
-      "id": "f86",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/rest/advice (8 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 33,
-          "end_line": 33
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
-          "start_line": 28,
-          "end_line": 28
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
-          "start_line": 31,
-          "end_line": 31
-        }
-      ]
-    },
-    {
-      "id": "f87",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/main/java/org/springframework/samples/petclinic/service (8 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 38,
-          "end_line": 38
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
-          "start_line": 32,
-          "end_line": 32
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
-          "start_line": 32,
-          "end_line": 32
-        }
-      ]
-    },
-    {
-      "id": "f88",
-      "topic": "structure",
-      "statement": "Code in src/test/java/org/springframework/samples/petclinic/rest/controller uses code in src/test/java/org/springframework/samples/petclinic/service/clinicService (8 references)",
-      "evidence": [
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/OwnerRestControllerV1Tests.java",
-          "start_line": 39,
-          "end_line": 39
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetRestControllerV1Tests.java",
-          "start_line": 33,
-          "end_line": 33
-        },
-        {
-          "kind": "file",
-          "path": "src/test/java/org/springframework/samples/petclinic/rest/controller/PetTypeRestControllerV1Tests.java",
-          "start_line": 33,
-          "end_line": 33
-        }
-      ]
-    },
-    {
-      "id": "f89",
+      "id": "f84",
       "topic": "structure",
       "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jpa uses code in src/main/java/org/springframework/samples/petclinic/repository (7 references)",
       "evidence": [
@@ -1425,6 +1300,125 @@
           "path": "src/main/java/org/springframework/samples/petclinic/repository/jpa/JpaPetTypeRepositoryImpl.java",
           "start_line": 30,
           "end_line": 30
+        }
+      ]
+    },
+    {
+      "id": "f85",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/springdatajpa uses code in src/main/java/org/springframework/samples/petclinic/repository (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa/SpringDataOwnerRepository.java",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa/SpringDataPetRepository.java",
+          "start_line": 28,
+          "end_line": 28
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/springdatajpa/SpringDataPetTypeRepository.java",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ]
+    },
+    {
+      "id": "f86",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v1 uses code in src/main/java/org/springframework/samples/petclinic/service (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/OwnerRestControllerV1.java",
+          "start_line": 38,
+          "end_line": 38
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetRestControllerV1.java",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v1/PetTypeRestControllerV1.java",
+          "start_line": 27,
+          "end_line": 27
+        }
+      ]
+    },
+    {
+      "id": "f87",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/repository (7 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicServiceImpl.java",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicServiceImpl.java",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/service/ClinicServiceImpl.java",
+          "start_line": 24,
+          "end_line": 24
+        }
+      ]
+    },
+    {
+      "id": "f88",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/repository/jdbc uses code in src/main/java/org/springframework/samples/petclinic/util (3 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcPetRepositoryImpl.java",
+          "start_line": 45,
+          "end_line": 45
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcVetRepositoryImpl.java",
+          "start_line": 41,
+          "end_line": 41
+        }
+      ]
+    },
+    {
+      "id": "f89",
+      "topic": "structure",
+      "statement": "Code in src/main/java/org/springframework/samples/petclinic/rest/controller/v2 uses code in src/main/java/org/springframework/samples/petclinic/mapper (2 references)",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v2/OwnerRestControllerV2.java",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "kind": "file",
+          "path": "src/main/java/org/springframework/samples/petclinic/rest/controller/v2/PetRestControllerV2.java",
+          "start_line": 8,
+          "end_line": 8
         }
       ]
     },
