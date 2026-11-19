@@ -499,6 +499,10 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
     if any("${" in e.name for e in found):
         found = resolve_placeholders(found, load_spring_settings(repo, files))
     # These modules build on this one, so they are imported here.
+    if any(PurePosixPath(f.path).name == "urls.py" for f in files):
+        from plumb.django import django_routes
+
+        found.extend(django_routes(repo, files))
     if any(e.router and e.framework in ("fastapi", "flask") for e in found):
         from plumb.mounts import join_mounts
 

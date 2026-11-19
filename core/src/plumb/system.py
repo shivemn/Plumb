@@ -373,6 +373,12 @@ def config_parts(system: System, repo: Path, files: list[FileInfo]) -> None:
                     if match:
                         clue = Clue(info.path, number, f"setting mentions {match.group(0)}")
                         system.add(role, name, clue)
+        if PurePosixPath(info.path).name == "settings.py" or "/settings/" in info.path:
+            from plumb.django import django_databases
+
+            text = (repo / info.path).read_text(encoding="utf-8", errors="replace")
+            for name, line in django_databases(text):
+                system.add(Role.STORE, name, Clue(info.path, line, "Django DATABASES ENGINE"))
         if info.path.endswith(".prisma"):
             text = (repo / info.path).read_text(encoding="utf-8", errors="replace")
             for match in _PRISMA_PROVIDER.finditer(text):
