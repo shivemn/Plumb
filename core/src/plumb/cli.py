@@ -214,3 +214,54 @@ def report(
         f"{kept} of {kept + dropped} claims kept, {dropped} removed. "
         f"Wrote {json_path} and {md_path}"
     )
+
+
+DEFAULT_DATABASE = Path.home() / ".plumb" / "jobs.sqlite"
+
+
+@app.command()
+def serve(
+    host: Annotated[str, typer.Option(help="Address to listen on.")] = "127.0.0.1",
+    port: Annotated[int, typer.Option(help="Port to listen on.")] = 8000,
+    database: Annotated[Path, typer.Option(help="The job table.")] = DEFAULT_DATABASE,
+) -> None:
+    """Run the web API that queues repos and serves their facts. Needs plumb[server]."""
+    try:
+        import uvicorn
+
+        from plumb.server.app import default_app
+    except ImportError as error:
+        typer.echo("The server needs extra packages: uv sync --extra server", err=True)
+        raise typer.Exit(1) from error
+    uvicorn.run(default_app(database), host=host, port=port)
+
+
+@app.command()
+def worker(
+    database: Annotated[Path, typer.Option(help="The job table.")] = DEFAULT_DATABASE,
+    workdir: Annotated[Path, typer.Option(help="Where cloned repos are kept.")] = DEFAULT_WORKDIR,
+    max_files: Annotated[int, typer.Option(help="Refuse repos with more tracked files.")] = 20_000,
+    once: Annotated[bool, typer.Option(help="Run one queued job and stop.")] = False,
+    github: Annotated[
+        bool, typer.Option(help="Read starter issues and review speed from GitHub.")
+    ] = True,
+) -> None:
+    """Run queued analysis jobs."""
+    import logging
+
+    from plumb.server.jobs import JobStore
+    from plumb.server.worker import make_analyser, run_forever, run_once
+
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
+    store = JobStore(database)
+    client = (
+        GitHubClient(token=os.environ.get("GITHUB_TOKEN"), cache_dir=GITHUB_CACHE)
+        if github
+        else None
+    )
+    analyse = make_analyser(workdir, Limits(max_files=max_files), client)
+    if once:
+        job = run_once(store, analyse)
+        typer.echo(f"{job.repo}: {job.status.value}" if job else "No jobs queued.")
+        return
+    run_forever(store, analyse)
