@@ -208,6 +208,10 @@ def _is_main_guard(node: Node) -> bool:
     return condition in ('__name__=="__main__"', '"__main__"==__name__')
 
 
+OPTIONAL_COMMAND = "package, needs the cli extra"
+_CLI_EXTRAS = {"cli", "cmd", "console", "command", "commands"}
+
+
 def pyproject_scripts(path: str, source: bytes) -> list[EntryPoint]:
     """Commands a Python package installs, from [project.scripts]."""
     try:
@@ -218,12 +222,19 @@ def pyproject_scripts(path: str, source: bytes) -> list[EntryPoint]:
     if not isinstance(scripts, dict):
         return []
     lines = source.decode("utf-8", "replace").splitlines()
+    extras = data.get("project", {}).get("optional-dependencies", {})
+    # A command whose dependencies sit in an extra such as [cli] only works when
+    # that extra is installed: it is an add-on to the package, not its purpose.
+    optional = isinstance(extras, dict) and bool(
+        _CLI_EXTRAS & set(cast("dict[str, object]", extras))
+    )
+    framework = OPTIONAL_COMMAND if optional else "package"
     found: list[EntryPoint] = []
     for name, target in scripts.items():  # pyright: ignore[reportUnknownVariableType]
         line = next(
             (i + 1 for i, text in enumerate(lines) if text.strip().startswith(f"{name} ")), 1
         )
-        found.append(EntryPoint(EntryKind.COMMAND, f"{name} ({target})", path, line, "package"))
+        found.append(EntryPoint(EntryKind.COMMAND, f"{name} ({target})", path, line, framework))
     return found
 
 

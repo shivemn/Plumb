@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from plumb.deps import Dependency
-from plumb.entrypoints import EntryKind, EntryPoint
+from plumb.entrypoints import OPTIONAL_COMMAND, EntryKind, EntryPoint
 from plumb.inventory import Category, FileInfo
 from plumb.model import RepoKind
 from plumb.system import Clue, Role, System
@@ -32,6 +32,18 @@ class KindDecision:
 
 def _clue(entry: EntryPoint) -> Clue:
     return Clue(entry.path, entry.line, entry.name)
+
+
+def _required(commands: list[EntryPoint]) -> list[EntryPoint]:
+    """Commands that work without an optional extra.
+
+    A script behind a [cli] extra, such as `httpx = "httpx:main"`, makes the
+    function it points at optional too, so the click command `main` it names
+    is left out with it.
+    """
+    optional = [e for e in commands if e.framework == OPTIONAL_COMMAND]
+    targets = {e.name.rsplit(":", 1)[-1].rstrip(")") for e in optional if ":" in e.name}
+    return [e for e in commands if e.framework != OPTIONAL_COMMAND and e.name not in targets]
 
 
 def decide_kind(
@@ -62,7 +74,8 @@ def decide_kind(
             what.append(f"{len(running)} route(s), consumer(s) or scheduled job(s)")
         return KindDecision(RepoKind.SERVICE, " and ".join(what), tuple(clues[:3]))
 
-    commands = [e for e in entry_points if e.kind is EntryKind.COMMAND]
+    all_commands = [e for e in entry_points if e.kind is EntryKind.COMMAND]
+    commands = _required(all_commands)
     if commands:
         return KindDecision(
             RepoKind.CLI,
@@ -95,6 +108,12 @@ def decide_kind(
         )
 
     manifests = [f for f in files if f.path.rsplit("/", 1)[-1] in _MANIFESTS and "/" not in f.path]
+    if manifests and all_commands:
+        return KindDecision(
+            RepoKind.LIBRARY,
+            "a package definition whose only command needs an optional extra",
+            tuple(_clue(e) for e in all_commands[:3]),
+        )
     if manifests:
         return KindDecision(
             RepoKind.LIBRARY,

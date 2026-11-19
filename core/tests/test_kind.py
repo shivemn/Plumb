@@ -1,5 +1,5 @@
 from plumb.deps import Dependency
-from plumb.entrypoints import EntryKind, EntryPoint
+from plumb.entrypoints import OPTIONAL_COMMAND, EntryKind, EntryPoint
 from plumb.inventory import Category, FileInfo
 from plumb.kind import decide_kind
 from plumb.model import RepoKind
@@ -59,3 +59,14 @@ def test_small_and_library() -> None:
     library = [source("shop/core.py", 2000), config("pyproject.toml")]
     assert decide_kind(library, [], System(), []).kind is RepoKind.LIBRARY
     assert decide_kind([source("shop/core.py", 2000)], [], System(), []).kind is RepoKind.UNKNOWN
+
+
+def test_optional_command_keeps_a_library_a_library() -> None:
+    command = EntryPoint(
+        EntryKind.COMMAND, "httpx (httpx:main)", "pyproject.toml", 58, OPTIONAL_COMMAND
+    )
+    click = EntryPoint(EntryKind.COMMAND, "main", "httpx/_main.py", 480, "click")
+    files = [source("httpx/_client.py", 2000), config("pyproject.toml")]
+    decision = decide_kind(files, [command, click], System(), [])
+    assert decision.kind is RepoKind.LIBRARY
+    assert "optional extra" in decision.reason

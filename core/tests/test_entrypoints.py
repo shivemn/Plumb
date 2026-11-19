@@ -263,3 +263,10 @@ def test_express_prefixes_across_files(make_repo: Callable[[str], RepoBuilder]) 
     )
     names = sorted(e.name for e in find_entry_points(repo.path, build_inventory(repo.path)))
     assert names == ["GET /", "GET /api/tags", "POST /api/people/:id"]
+
+
+def test_command_behind_a_cli_extra() -> None:
+    source = b'[project]\nname = "x"\n[project.optional-dependencies]\ncli = ["click"]\n'
+    source += b'[project.scripts]\nx = "x:main"\n'
+    (entry,) = pyproject_scripts("pyproject.toml", source)
+    assert entry.framework == "package, needs the cli extra"
