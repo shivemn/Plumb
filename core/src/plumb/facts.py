@@ -25,6 +25,7 @@ from plumb.model import (
     RepoRef,
     Topic,
 )
+from plumb.publicapi import NameKind, PublicApi, PublicName
 from plumb.source import Checkout
 from plumb.system import Clue, Migrations, Role, System
 
@@ -62,6 +63,7 @@ def build_facts(
     migrations: list[Migrations] | None = None,
     steps: list[Step] | None = None,
     activity: Activity | None = None,
+    api: PublicApi | None = None,
 ) -> FactSet:
     builder = FactBuilder()
     kind = decision.kind if decision else RepoKind.UNKNOWN
@@ -87,6 +89,8 @@ def build_facts(
         )
     if entry_points:
         add_entry_point_facts(builder, entry_points)
+    if api is not None and api.names:
+        add_api_facts(builder, api)
     if steps:
         add_step_facts(builder, steps)
     if activity is not None:
@@ -217,6 +221,65 @@ def add_entry_point_facts(builder: FactBuilder, entry_points: list[EntryPoint]) 
             )
 
 
+_API_ORDER = (
+    NameKind.FUNCTION,
+    NameKind.CLASS,
+    NameKind.INTERFACE,
+    NameKind.MODULE,
+    NameKind.VALUE,
+)
+_API_LABELS = {
+    NameKind.FUNCTION: "function",
+    NameKind.CLASS: "class",
+    NameKind.INTERFACE: "interface",
+    NameKind.MODULE: "module",
+    NameKind.VALUE: "name",
+    NameKind.EXCEPTION: "exception",
+}
+
+
+def _api_evidence(name: PublicName) -> list[Evidence]:
+    found: list[Evidence] = [FileEvidence(path=name.path, start_line=name.line, end_line=name.line)]
+    if name.exported_from and name.exported_from != name.path:
+        found.append(FileEvidence(path=name.exported_from))
+    return found
+
+
+def add_api_facts(builder: FactBuilder, api: PublicApi, limit: int = 30) -> None:
+    """A count by kind, one fact per public name up to a limit, and the exceptions together."""
+    builder.topic = Topic.PUBLIC_API
+    counts = Counter(n.kind for n in api.names)
+    parts = [
+        _plural(counts[kind], _API_LABELS[kind])
+        for kind in (*_API_ORDER, NameKind.EXCEPTION)
+        if counts[kind]
+    ]
+    builder.add(
+        f"{api.root} makes {_plural(len(api.names), 'name')} public for code that uses "
+        f"{api.package}: {', '.join(parts)}",
+        [FileEvidence(path=api.root)],
+    )
+    ranked = sorted(
+        (n for n in api.names if n.kind is not NameKind.EXCEPTION),
+        key=lambda n: (_API_ORDER.index(n.kind), not n.summary),
+    )
+    for name in ranked[:limit]:
+        call = f"({name.signature})" if name.kind is NameKind.FUNCTION else ""
+        about = f": {name.summary}" if name.summary else ""
+        builder.add(
+            f"Public {_API_LABELS[name.kind]} {name.name}{call} in {name.path}{about}",
+            _api_evidence(name),
+        )
+    exceptions = [n for n in api.names if n.kind is NameKind.EXCEPTION]
+    if exceptions:
+        shown = ", ".join(n.name for n in exceptions[:15])
+        more = f" and {len(exceptions) - 15:,} more" if len(exceptions) > 15 else ""
+        builder.add(
+            f"Public exceptions: {shown}{more}",
+            [e for n in exceptions[:5] for e in _api_evidence(n)[:1]],
+        )
+
+
 def add_step_facts(builder: FactBuilder, steps: list[Step], limit: int = 24) -> None:
     builder.topic = Topic.CONTRIBUTE
     seen: set[str] = set()
@@ -333,4 +396,6 @@ def _top_folder(path: str) -> str:
 
 
 def _plural(count: int, noun: str) -> str:
-    return f"{count:,} {noun}" + ("" if count == 1 else "s")
+    if count == 1:
+        return f"1 {noun}"
+    return f"{count:,} {noun}" + ("es" if noun.endswith(("s", "x", "ch", "sh")) else "s")

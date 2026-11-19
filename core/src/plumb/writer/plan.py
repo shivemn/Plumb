@@ -43,6 +43,14 @@ SECTIONS: dict[str, SectionSpec] = {
         "Describe how the code is started or called: routes, commands, consumers, "
         "scheduled jobs. Group similar ones instead of listing every one.",
     ),
+    "api": SectionSpec(
+        "api",
+        "What it lets your code do",
+        (Topic.PUBLIC_API,),
+        "Describe what code that uses this library can do with it: name the main classes "
+        "and functions and what each is for, grouping related ones. Mention the exceptions "
+        "as a group. Do not describe internals.",
+    ),
     "structure": SectionSpec(
         "structure",
         "Code map",
@@ -77,7 +85,7 @@ SECTIONS_BY_KIND: dict[RepoKind, tuple[str, ...]] = {
     ),
     RepoKind.WEBSITE: ("overview", "entry_points", "structure", "hot_spots", "contribute"),
     RepoKind.CLI: ("overview", "entry_points", "structure", "hot_spots", "contribute"),
-    RepoKind.LIBRARY: ("overview", "structure", "hot_spots", "contribute"),
+    RepoKind.LIBRARY: ("overview", "api", "structure", "hot_spots", "contribute"),
     RepoKind.DATA: ("overview", "structure", "hot_spots", "contribute"),
     RepoKind.SMALL: ("overview", "structure", "contribute"),
     RepoKind.DOCS: ("overview", "contribute"),

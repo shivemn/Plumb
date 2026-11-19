@@ -41,6 +41,7 @@ class Topic(StrEnum):
     SETTINGS = "settings"
     MIGRATIONS = "migrations"
     ENTRY_POINTS = "entry_points"
+    PUBLIC_API = "public_api"
     STRUCTURE = "structure"
     HISTORY = "history"
     CONTRIBUTE = "contribute"

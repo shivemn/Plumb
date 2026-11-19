@@ -391,6 +391,626 @@
     },
     {
       "id": "f29",
+      "topic": "public_api",
+      "statement": "src/click/__init__.py makes 64 names public for code that uses click: 31 functions, 17 classes, 6 names, 10 exceptions",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "public_api",
+      "statement": "Public function argument(*param_decls, cls, **attrs) in src/click/decorators.py: Attaches an argument to the command.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 320,
+          "end_line": 320
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "public_api",
+      "statement": "Public function command(name, cls, **attrs) in src/click/decorators.py: Creates a new Command and uses the decorated function as callback.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 164,
+          "end_line": 164
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "public_api",
+      "statement": "Public function confirmation_option(*param_decls, **kwargs) in src/click/decorators.py: Add a `--yes` option which shows a prompt before continuing if not passed.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 376,
+          "end_line": 376
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "public_api",
+      "statement": "Public function custom_version_option(callback, *param_decls, **kwargs) in src/click/decorators.py: Add a `--version` option whose output is produced by `callback`.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 555,
+          "end_line": 555
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "public_api",
+      "statement": "Public function group(name, cls, **attrs) in src/click/decorators.py: Creates a new Group with a function as callback.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 289,
+          "end_line": 289
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "public_api",
+      "statement": "Public function help_option(*param_decls, **kwargs) in src/click/decorators.py: Pre-configured `--help` option which immediately prints the help page and exits the program.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 597,
+          "end_line": 597
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "public_api",
+      "statement": "Public function make_pass_decorator(object_type, ensure) in src/click/decorators.py: Given an object type this creates a decorator that will work similar to pass_obj but instead of passing the object...",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "public_api",
+      "statement": "Public function option(*param_decls, cls, **attrs) in src/click/decorators.py: Attaches an option to the command.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 348,
+          "end_line": 348
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "topic": "public_api",
+      "statement": "Public function pass_context(f) in src/click/decorators.py: Marks a callback as wanting to receive the current context object as first argument.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "topic": "public_api",
+      "statement": "Public function pass_obj(f) in src/click/decorators.py: Similar to pass_context, but only pass the object on the context onwards (Context.obj).",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "topic": "public_api",
+      "statement": "Public function password_option(*param_decls, **kwargs) in src/click/decorators.py: Add a `--password` option which prompts for a password, hiding input and asking to enter the value again for...",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 400,
+          "end_line": 400
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "topic": "public_api",
+      "statement": "Public function version_option(version, *param_decls, package_name, prog_name, message, **kwargs) in src/click/decorators.py: Add a `--version` option which immediately prints the version number and exits the program.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/decorators.py",
+          "start_line": 417,
+          "end_line": 417
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "public_api",
+      "statement": "Public function wrap_text(text, width, initial_indent, subsequent_indent, preserve_paragraphs) in src/click/formatting.py: A helper function that intelligently wraps text.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/formatting.py",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "public_api",
+      "statement": "Public function get_current_context(silent) in src/click/globals.py: Returns the current click context.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/globals.py",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "public_api",
+      "statement": "Public function clear() in src/click/termui.py: Clears the terminal screen.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 602,
+          "end_line": 602
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "public_api",
+      "statement": "Public function confirm(text, default, abort, prompt_suffix, show_default, err) in src/click/termui.py: Prompts for confirmation (yes/no question).",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 289,
+          "end_line": 289
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "topic": "public_api",
+      "statement": "Public function echo_via_pager(text_or_generator, color) in src/click/termui.py: This function takes a text and shows it via an environment specific pager on stdout.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 367,
+          "end_line": 367
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f47",
+      "topic": "public_api",
+      "statement": "Public function edit(text, editor, env, require_save, extension, filename) in src/click/termui.py: Edits the given text in the defined editor.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 848,
+          "end_line": 848
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f48",
+      "topic": "public_api",
+      "statement": "Public function get_pager_file(color) in src/click/termui.py: Context manager.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 348,
+          "end_line": 348
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f49",
+      "topic": "public_api",
+      "statement": "Public function getchar(echo) in src/click/termui.py: Fetches a single character from the terminal and returns it.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 957,
+          "end_line": 957
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f50",
+      "topic": "public_api",
+      "statement": "Public function launch(url, wait, locate) in src/click/termui.py: This function launches the given URL (or filename) in the default viewer application for this file type.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 923,
+          "end_line": 923
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f51",
+      "topic": "public_api",
+      "statement": "Public function pause(info, err) in src/click/termui.py: This command stops execution and waits for the user to press any key to continue.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 993,
+          "end_line": 993
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f52",
+      "topic": "public_api",
+      "statement": "Public function progressbar(iterable, length, label, hidden, show_eta, show_percent, show_pos, item_show_func, fill_char, empty_char, bar_template, info_sep, width, file, color, update_min_steps) in src/click/termui.py: This function creates an iterable context manager that can be used to iterate over something while showing a...",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 443,
+          "end_line": 443
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f53",
+      "topic": "public_api",
+      "statement": "Public function prompt(text, default, hide_input, confirmation_prompt, type, value_proc, prompt_suffix, show_default, err, show_choices) in src/click/termui.py: Prompts a user for input.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 168,
+          "end_line": 168
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f54",
+      "topic": "public_api",
+      "statement": "Public function secho(message, file, nl, err, color, **styles) in src/click/termui.py: This function combines echo and style into one call.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 780,
+          "end_line": 780
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f55",
+      "topic": "public_api",
+      "statement": "Public function style(text, fg, bg, bold, dim, underline, overline, italic, blink, reverse, strikethrough, reset) in src/click/termui.py: Styles a text with ANSI styles and returns the new string.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 641,
+          "end_line": 641
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f56",
+      "topic": "public_api",
+      "statement": "Public function unstyle(text) in src/click/termui.py: Removes ANSI styling information from a string.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/termui.py",
+          "start_line": 768,
+          "end_line": 768
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f57",
+      "topic": "public_api",
+      "statement": "Public function echo(message, file, nl, err, color) in src/click/utils.py: Print a message and newline to stdout or a file.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/utils.py",
+          "start_line": 236,
+          "end_line": 236
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f58",
+      "topic": "public_api",
+      "statement": "Public function format_filename(filename, shorten) in src/click/utils.py: Format a filename as a string for display.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/utils.py",
+          "start_line": 426,
+          "end_line": 426
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f59",
+      "topic": "public_api",
+      "statement": "Public function get_app_dir(app_name, roaming, force_posix) in src/click/utils.py: Returns the config folder for the application.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/utils.py",
+          "start_line": 468,
+          "end_line": 468
+        },
+        {
+          "kind": "file",
+          "path": "src/click/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f60",
+      "topic": "public_api",
+      "statement": "Public exceptions: Abort, BadArgumentUsage, BadOptionUsage, BadParameter, ClickException, FileError, MissingParameter, NoSuchCommand, NoSuchOption, UsageError",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/click/exceptions.py",
+          "start_line": 362,
+          "end_line": 362
+        },
+        {
+          "kind": "file",
+          "path": "src/click/exceptions.py",
+          "start_line": 323,
+          "end_line": 323
+        },
+        {
+          "kind": "file",
+          "path": "src/click/exceptions.py",
+          "start_line": 304,
+          "end_line": 304
+        },
+        {
+          "kind": "file",
+          "path": "src/click/exceptions.py",
+          "start_line": 114,
+          "end_line": 114
+        },
+        {
+          "kind": "file",
+          "path": "src/click/exceptions.py",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ]
+    },
+    {
+      "id": "f61",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/nightly.yaml runs: uv run --locked --no-default-groups --group dev tox run",
       "evidence": [
@@ -403,7 +1023,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f62",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/nightly.yaml runs: uv sync --all-extras",
       "evidence": [
@@ -416,7 +1036,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f63",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/nightly.yaml runs: uv run --with \"git+https://github.com/pallets/click.git@${CLICK_REF}\" -- pytest",
       "evidence": [
@@ -429,7 +1049,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f64",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/pre-commit.yaml runs: uv run --locked --no-default-groups --group pre-commit pre-commit run --show-diff-on-failure --color=always --all-files",
       "evidence": [
@@ -442,7 +1062,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f65",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/publish.yaml runs: uv build",
       "evidence": [
@@ -455,7 +1075,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f66",
       "topic": "contribute",
       "statement": "CI step \"create release\" in .github/workflows/publish.yaml runs: gh release create --draft --repo ${GITHUB_REPOSITORY} ${GITHUB_REF_NAME} dist/*",
       "evidence": [
@@ -468,7 +1088,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f67",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/tests.yaml runs: uv run --locked --no-default-groups --group dev tox run -e typing",
       "evidence": [
@@ -481,7 +1101,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f68",
       "topic": "contribute",
       "statement": "Contribution guide docs/contributing.md has a section \"Extra Test Environments\"",
       "evidence": [
@@ -494,7 +1114,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f69",
       "topic": "contribute",
       "statement": "Contribution guide docs/contributing.md has a section \"Code Style\"",
       "evidence": [
@@ -507,7 +1127,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f70",
       "topic": "contribute",
       "statement": "Contribution guide docs/contributing.md has a section \"Formatting\"",
       "evidence": [
@@ -520,7 +1140,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f71",
       "topic": "structure",
       "statement": "Code in tests uses code in src/click (74 references)",
       "evidence": [
@@ -545,7 +1165,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f72",
       "topic": "structure",
       "statement": "Code in tests/test_utils uses code in src/click (20 references)",
       "evidence": [
@@ -570,7 +1190,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f73",
       "topic": "structure",
       "statement": "Code in tests/typing uses code in src/click (13 references)",
       "evidence": [
@@ -595,7 +1215,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f74",
       "topic": "structure",
       "statement": "Code in tests/test_types uses code in src/click (8 references)",
       "evidence": [
@@ -620,7 +1240,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f75",
       "topic": "structure",
       "statement": "Code in tests/test_exceptions uses code in src/click (1 reference)",
       "evidence": [
@@ -633,7 +1253,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f76",
       "topic": "structure",
       "statement": "src/click/__init__.py is used by 51 other files",
       "evidence": [
@@ -658,7 +1278,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f77",
       "topic": "structure",
       "statement": "src/click/_compat.py is used by 17 other files",
       "evidence": [
@@ -683,7 +1303,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f78",
       "topic": "structure",
       "statement": "src/click/core.py is used by 12 other files",
       "evidence": [
@@ -708,7 +1328,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f79",
       "topic": "structure",
       "statement": "src/click/utils.py is used by 12 other files",
       "evidence": [
@@ -733,7 +1353,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f80",
       "topic": "structure",
       "statement": "src/click/exceptions.py is used by 9 other files",
       "evidence": [
@@ -758,7 +1378,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f81",
       "topic": "history",
       "statement": "48 commits between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -777,7 +1397,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f82",
       "topic": "history",
       "statement": "src/click/core.py changed in 13 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -802,7 +1422,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f83",
       "topic": "history",
       "statement": "tests/test_options.py changed in 9 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -827,7 +1447,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f84",
       "topic": "history",
       "statement": "src/click/_termui_impl.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -852,7 +1472,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f85",
       "topic": "history",
       "statement": "tests/test_arguments.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -877,7 +1497,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f86",
       "topic": "history",
       "statement": "tests/test_termui.py changed in 7 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -902,7 +1522,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f87",
       "topic": "history",
       "statement": "tests/test_deprecations.py changed in 4 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -927,7 +1547,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f88",
       "topic": "history",
       "statement": "tests/test_basic.py changed in 3 commits by 2 authors between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -952,7 +1572,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f89",
       "topic": "history",
       "statement": "src/click/testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -977,7 +1597,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f90",
       "topic": "history",
       "statement": "tests/test_testing.py changed in 3 commits by 1 author between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1002,7 +1622,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f91",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_options.py changed in the same commit 8 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1021,7 +1641,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f92",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_arguments.py changed in the same commit 7 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1040,7 +1660,7 @@
       ]
     },
     {
-      "id": "f61",
+      "id": "f93",
       "topic": "history",
       "statement": "src/click/_termui_impl.py and tests/test_termui.py changed in the same commit 6 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1059,7 +1679,7 @@
       ]
     },
     {
-      "id": "f62",
+      "id": "f94",
       "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_options.py changed in the same commit 5 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1078,7 +1698,7 @@
       ]
     },
     {
-      "id": "f63",
+      "id": "f95",
       "topic": "history",
       "statement": "src/click/core.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1097,7 +1717,7 @@
       ]
     },
     {
-      "id": "f64",
+      "id": "f96",
       "topic": "history",
       "statement": "tests/test_arguments.py and tests/test_deprecations.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1116,7 +1736,7 @@
       ]
     },
     {
-      "id": "f65",
+      "id": "f97",
       "topic": "history",
       "statement": "tests/test_deprecations.py and tests/test_options.py changed in the same commit 4 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [
@@ -1135,7 +1755,7 @@
       ]
     },
     {
-      "id": "f66",
+      "id": "f98",
       "topic": "history",
       "statement": "src/click/testing.py and tests/test_testing.py changed in the same commit 3 times between 14 Aug 2026 and 12 Nov 2026",
       "evidence": [

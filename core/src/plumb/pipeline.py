@@ -16,7 +16,8 @@ from plumb.history import History, is_shallow, mine
 from plumb.imports import Edge
 from plumb.inventory import Category, FileInfo, build_inventory
 from plumb.kind import KindDecision, decide_kind
-from plumb.model import FactSet
+from plumb.model import FactSet, RepoKind
+from plumb.publicapi import PublicApi, find_public_api
 from plumb.source import Checkout, Limits, fetch
 from plumb.system import Migrations, System, find_migrations, find_settings, find_system
 
@@ -34,6 +35,7 @@ class Analysis:
     migrations: list[Migrations]
     facts: FactSet
     activity: Activity | None = None  # None when GitHub was not asked
+    api: PublicApi | None = None  # only looked for in a library
 
     @property
     def first_party(self) -> set[str]:
@@ -70,6 +72,9 @@ def analyse_repo(
     decision = decide_kind(files, entry_points, system, deps)
     migrations = find_migrations(files)
     steps = find_steps(checkout.path, files)
+    api = None
+    if decision.kind is RepoKind.LIBRARY:
+        api = find_public_api(checkout.path, files, checkout.name)
     activity = None
     if github is not None and checkout.owner != "local":
         paths = {f.path for f in files}
@@ -86,6 +91,7 @@ def analyse_repo(
         migrations,
         steps,
         activity,
+        api,
     )
     return Analysis(
         checkout,
@@ -99,4 +105,5 @@ def analyse_repo(
         migrations,
         facts,
         activity,
+        api,
     )

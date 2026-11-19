@@ -397,6 +397,360 @@
     },
     {
       "id": "f29",
+      "topic": "public_api",
+      "statement": "src/requests/__init__.py makes 25 names public for code that uses requests: 9 functions, 4 classes, 2 modules, 1 name, 9 exceptions",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "topic": "public_api",
+      "statement": "Public function delete(url, **kwargs) in src/requests/api.py: Sends a DELETE request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 171,
+          "end_line": 171
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f31",
+      "topic": "public_api",
+      "statement": "Public function get(url, params, **kwargs) in src/requests/api.py: Sends a GET request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f32",
+      "topic": "public_api",
+      "statement": "Public function head(url, **kwargs) in src/requests/api.py: Sends a HEAD request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f33",
+      "topic": "public_api",
+      "statement": "Public function options(url, **kwargs) in src/requests/api.py: Sends an OPTIONS request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 90,
+          "end_line": 90
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f34",
+      "topic": "public_api",
+      "statement": "Public function patch(url, data, **kwargs) in src/requests/api.py: Sends a PATCH request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 154,
+          "end_line": 154
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f35",
+      "topic": "public_api",
+      "statement": "Public function post(url, data, json, **kwargs) in src/requests/api.py: Sends a POST request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 117,
+          "end_line": 117
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f36",
+      "topic": "public_api",
+      "statement": "Public function put(url, data, **kwargs) in src/requests/api.py: Sends a PUT request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f37",
+      "topic": "public_api",
+      "statement": "Public function request(method, url, **kwargs) in src/requests/api.py: Constructs and sends a Request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/api.py",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f38",
+      "topic": "public_api",
+      "statement": "Public function session() in src/requests/sessions.py: Returns a Session for context-management.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/sessions.py",
+          "start_line": 908,
+          "end_line": 908
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f39",
+      "topic": "public_api",
+      "statement": "Public class PreparedRequest in src/requests/models.py: The fully mutable PreparedRequest object, containing the exact bytes that will be sent to the server.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/models.py",
+          "start_line": 378,
+          "end_line": 378
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f40",
+      "topic": "public_api",
+      "statement": "Public class Request in src/requests/models.py: A user-created Request object.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/models.py",
+          "start_line": 284,
+          "end_line": 284
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f41",
+      "topic": "public_api",
+      "statement": "Public class Response in src/requests/models.py: The Response object, which contains a server's response to an HTTP request.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/models.py",
+          "start_line": 732,
+          "end_line": 732
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f42",
+      "topic": "public_api",
+      "statement": "Public class Session in src/requests/sessions.py: A Requests session.",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/sessions.py",
+          "start_line": 395,
+          "end_line": 395
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f43",
+      "topic": "public_api",
+      "statement": "Public module packages in src/requests/packages.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/packages.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f44",
+      "topic": "public_api",
+      "statement": "Public module utils in src/requests/utils.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/utils.py",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f45",
+      "topic": "public_api",
+      "statement": "Public name codes in src/requests/status_codes.py",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/status_codes.py",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/__init__.py",
+          "start_line": null,
+          "end_line": null
+        }
+      ]
+    },
+    {
+      "id": "f46",
+      "topic": "public_api",
+      "statement": "Public exceptions: ConnectionError, ConnectTimeout, HTTPError, JSONDecodeError, ReadTimeout, RequestException, Timeout, TooManyRedirects, URLRequired",
+      "evidence": [
+        {
+          "kind": "file",
+          "path": "src/requests/exceptions.py",
+          "start_line": 70,
+          "end_line": 70
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/exceptions.py",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/exceptions.py",
+          "start_line": 66,
+          "end_line": 66
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/exceptions.py",
+          "start_line": 42,
+          "end_line": 42
+        },
+        {
+          "kind": "file",
+          "path": "src/requests/exceptions.py",
+          "start_line": 98,
+          "end_line": 98
+        }
+      ]
+    },
+    {
+      "id": "f47",
       "topic": "contribute",
       "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Questions\"",
       "evidence": [
@@ -409,7 +763,7 @@
       ]
     },
     {
-      "id": "f30",
+      "id": "f48",
       "topic": "contribute",
       "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Good Bug Reports\"",
       "evidence": [
@@ -422,7 +776,7 @@
       ]
     },
     {
-      "id": "f31",
+      "id": "f49",
       "topic": "contribute",
       "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Good Pull Requests\"",
       "evidence": [
@@ -435,7 +789,7 @@
       ]
     },
     {
-      "id": "f32",
+      "id": "f50",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: gh issue close $ISSUE_URL \\",
       "evidence": [
@@ -448,7 +802,7 @@
       ]
     },
     {
-      "id": "f33",
+      "id": "f51",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --comment \"As described in the template, we won't be able to answer questions on this issue tracker. Please use [Stack Overflow](https://stackoverflow.com/)\" \\",
       "evidence": [
@@ -461,7 +815,7 @@
       ]
     },
     {
-      "id": "f34",
+      "id": "f52",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --reason completed",
       "evidence": [
@@ -474,7 +828,7 @@
       ]
     },
     {
-      "id": "f35",
+      "id": "f53",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: gh issue lock $ISSUE_URL --reason off_topic",
       "evidence": [
@@ -487,7 +841,7 @@
       ]
     },
     {
-      "id": "f36",
+      "id": "f54",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --comment \"As described in the template, Requests is not accepting feature requests\" \\",
       "evidence": [
@@ -500,7 +854,7 @@
       ]
     },
     {
-      "id": "f37",
+      "id": "f55",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/close-issues.yml runs: --reason \"not planned\"",
       "evidence": [
@@ -513,7 +867,7 @@
       ]
     },
     {
-      "id": "f38",
+      "id": "f56",
       "topic": "contribute",
       "statement": "CI step \"\" in .github/workflows/codeql-analysis.yml runs: git checkout HEAD^2",
       "evidence": [
@@ -526,7 +880,7 @@
       ]
     },
     {
-      "id": "f39",
+      "id": "f57",
       "topic": "contribute",
       "statement": "CI step \"Run pre-commit\" in .github/workflows/lint.yml runs: python -m pip install pre-commit==4.6.0",
       "evidence": [
@@ -539,7 +893,7 @@
       ]
     },
     {
-      "id": "f40",
+      "id": "f58",
       "topic": "contribute",
       "statement": "CI step \"Run pre-commit\" in .github/workflows/lint.yml runs: pre-commit run --show-diff-on-failure --color=always --all-files",
       "evidence": [
@@ -552,7 +906,7 @@
       ]
     },
     {
-      "id": "f41",
+      "id": "f59",
       "topic": "contribute",
       "statement": "CI step \"Install dependencies\" in .github/workflows/publish.yml runs: python -m pip install build==1.4.0",
       "evidence": [
@@ -565,7 +919,7 @@
       ]
     },
     {
-      "id": "f42",
+      "id": "f60",
       "topic": "contribute",
       "statement": "CI step \"Build dists\" in .github/workflows/publish.yml runs: SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct) \\",
       "evidence": [
@@ -578,7 +932,7 @@
       ]
     },
     {
-      "id": "f43",
+      "id": "f61",
       "topic": "contribute",
       "statement": "CI step \"Build dists\" in .github/workflows/publish.yml runs: python -m build",
       "evidence": [
@@ -591,7 +945,7 @@
       ]
     },
     {
-      "id": "f44",
+      "id": "f62",
       "topic": "contribute",
       "statement": "CI step \"Install dependencies\" in .github/workflows/run-tests.yml runs: make",
       "evidence": [
@@ -604,7 +958,7 @@
       ]
     },
     {
-      "id": "f45",
+      "id": "f63",
       "topic": "contribute",
       "statement": "CI step \"Run tests\" in .github/workflows/run-tests.yml runs: make ci",
       "evidence": [
@@ -617,7 +971,7 @@
       ]
     },
     {
-      "id": "f46",
+      "id": "f64",
       "topic": "contribute",
       "statement": "CI step \"Install dependencies\" in .github/workflows/run-tests.yml runs: python -m pip uninstall -y \"charset_normalizer\" \"chardet\"",
       "evidence": [
@@ -630,7 +984,7 @@
       ]
     },
     {
-      "id": "f47",
+      "id": "f65",
       "topic": "contribute",
       "statement": "CI step \"Install dependencies\" in .github/workflows/run-tests.yml runs: python  -m pip install \"urllib3<2\"",
       "evidence": [
@@ -643,7 +997,7 @@
       ]
     },
     {
-      "id": "f48",
+      "id": "f66",
       "topic": "contribute",
       "statement": "CI step \"Install dependencies\" in .github/workflows/typecheck.yml runs: python -m pip install pip==26.0.1",
       "evidence": [
@@ -656,7 +1010,7 @@
       ]
     },
     {
-      "id": "f49",
+      "id": "f67",
       "topic": "contribute",
       "statement": "CI step \"Install dependencies\" in .github/workflows/typecheck.yml runs: python -m pip install -e . --group typecheck",
       "evidence": [
@@ -669,7 +1023,7 @@
       ]
     },
     {
-      "id": "f50",
+      "id": "f68",
       "topic": "contribute",
       "statement": "CI step \"Run pyright\" in .github/workflows/typecheck.yml runs: python -m pyright src/requests/",
       "evidence": [
@@ -682,7 +1036,7 @@
       ]
     },
     {
-      "id": "f51",
+      "id": "f69",
       "topic": "contribute",
       "statement": "Makefile target init runs: python -m pip install -r requirements-dev.txt",
       "evidence": [
@@ -695,7 +1049,7 @@
       ]
     },
     {
-      "id": "f52",
+      "id": "f70",
       "topic": "contribute",
       "statement": "Makefile target test runs: python -m pytest tests",
       "evidence": [
@@ -708,7 +1062,7 @@
       ]
     },
     {
-      "id": "f53",
+      "id": "f71",
       "topic": "structure",
       "statement": "Code in tests uses code in src/requests (26 references)",
       "evidence": [
@@ -733,7 +1087,7 @@
       ]
     },
     {
-      "id": "f54",
+      "id": "f72",
       "topic": "structure",
       "statement": "Code in tests uses code in tests/testserver (3 references)",
       "evidence": [
@@ -758,7 +1112,7 @@
       ]
     },
     {
-      "id": "f55",
+      "id": "f73",
       "topic": "structure",
       "statement": "src/requests/compat.py is used by 14 other files",
       "evidence": [
@@ -783,7 +1137,7 @@
       ]
     },
     {
-      "id": "f56",
+      "id": "f74",
       "topic": "structure",
       "statement": "src/requests/models.py is used by 11 other files",
       "evidence": [
@@ -808,7 +1162,7 @@
       ]
     },
     {
-      "id": "f57",
+      "id": "f75",
       "topic": "structure",
       "statement": "src/requests/structures.py is used by 9 other files",
       "evidence": [
@@ -833,7 +1187,7 @@
       ]
     },
     {
-      "id": "f58",
+      "id": "f76",
       "topic": "structure",
       "statement": "src/requests/cookies.py is used by 8 other files",
       "evidence": [
@@ -858,7 +1212,7 @@
       ]
     },
     {
-      "id": "f59",
+      "id": "f77",
       "topic": "structure",
       "statement": "src/requests/_types.py is used by 7 other files",
       "evidence": [
@@ -883,7 +1237,7 @@
       ]
     },
     {
-      "id": "f60",
+      "id": "f78",
       "topic": "history",
       "statement": "8 commits between 28 Jul 2026 and 26 Oct 2026",
       "evidence": [
