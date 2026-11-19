@@ -17,3 +17,18 @@ Scores to track on every change:
 - **Claim precision:** share of kept claims that are correct.
 - **Recall:** share of answer-key items the report covers.
 - **Removal rate:** share of model claims the verifier dropped.
+
+## Running it
+
+    cd core
+    uv run python ../eval/run.py          # analysis checks: kind, routes, stores, modules
+
+Claim precision needs a person. Write a report with a model, then judge
+each kept claim against the facts and source lines it cites:
+
+    uv run plumb report encode/httpx --out ../eval/results/httpx.report.json
+    uv run python ../eval/judge.py ../eval/results/httpx.report.json
+    uv run python ../eval/judge.py --summary   # writes results/precision.md
+
+Judgments are saved to `judgments/` as you go, so judging can stop and
+carry on later.
