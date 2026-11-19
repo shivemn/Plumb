@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from pathlib import Path
 
 from plumb.entrypoints import (
     EntryKind,
@@ -7,6 +8,7 @@ from plumb.entrypoints import (
     java_entry_points,
     js_entry_points,
     package_json_entry_points,
+    package_manager,
     pyproject_scripts,
     python_entry_points,
     setup_scripts,
@@ -270,3 +272,18 @@ def test_command_behind_a_cli_extra() -> None:
     source += b'[project.scripts]\nx = "x:main"\n'
     (entry,) = pyproject_scripts("pyproject.toml", source)
     assert entry.framework == "package, needs the cli extra"
+
+
+def test_package_manager_comes_from_the_lockfile(tmp_path: Path) -> None:
+    (tmp_path / "frontend").mkdir()
+    source = b'{"scripts": {"dev": "vite"}}'
+    (tmp_path / "frontend" / "package.json").write_bytes(source)
+    assert package_manager(tmp_path, "frontend/package.json", source) == "npm"
+    (tmp_path / "bun.lock").write_text("")  # a workspace lockfile at the root counts
+    assert package_manager(tmp_path, "frontend/package.json", source) == "bun"
+    (tmp_path / "frontend" / "pnpm-lock.yaml").write_text("")  # the nearest one wins
+    assert package_manager(tmp_path, "frontend/package.json", source) == "pnpm"
+    pinned = b'{"packageManager": "yarn@4.5.0"}'
+    assert package_manager(tmp_path, "frontend/package.json", pinned) == "yarn"
+    (script,) = package_json_entry_points("frontend/package.json", source, "bun")
+    assert script.name == "bun run dev: vite" and script.framework == "bun"

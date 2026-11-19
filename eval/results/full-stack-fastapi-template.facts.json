@@ -1282,7 +1282,7 @@
     {
       "id": "f85",
       "topic": "entry_points",
-      "statement": "Package script npm run dev: vite (npm) in frontend/package.json",
+      "statement": "Package script bun run dev: vite (bun) in frontend/package.json",
       "evidence": [
         {
           "kind": "file",
@@ -1295,7 +1295,7 @@
     {
       "id": "f86",
       "topic": "entry_points",
-      "statement": "Package script npm run build: tsc -p tsconfig.build.json && vite build (npm) in frontend/package.json",
+      "statement": "Package script bun run build: tsc -p tsconfig.build.json && vite build (bun) in frontend/package.json",
       "evidence": [
         {
           "kind": "file",
@@ -1308,7 +1308,7 @@
     {
       "id": "f87",
       "topic": "entry_points",
-      "statement": "Package script npm run test: bunx playwright test (npm) in frontend/package.json",
+      "statement": "Package script bun run test: bunx playwright test (bun) in frontend/package.json",
       "evidence": [
         {
           "kind": "file",
@@ -1321,7 +1321,7 @@
     {
       "id": "f88",
       "topic": "entry_points",
-      "statement": "Package script npm run dev: bun run --filter frontend dev (npm) in package.json",
+      "statement": "Package script bun run dev: bun run --filter frontend dev (bun) in package.json",
       "evidence": [
         {
           "kind": "file",
@@ -1334,7 +1334,7 @@
     {
       "id": "f89",
       "topic": "entry_points",
-      "statement": "Package script npm run test: bun run --filter frontend test (npm) in package.json",
+      "statement": "Package script bun run test: bun run --filter frontend test (bun) in package.json",
       "evidence": [
         {
           "kind": "file",
@@ -1347,7 +1347,7 @@
     {
       "id": "f90",
       "topic": "entry_points",
-      "statement": "Package script npm run build: email build (npm) in packages/react-email/package.json",
+      "statement": "Package script bun run build: email build (bun) in packages/react-email/package.json",
       "evidence": [
         {
           "kind": "file",
@@ -1360,7 +1360,7 @@
     {
       "id": "f91",
       "topic": "entry_points",
-      "statement": "Package script npm run dev: email dev --port 3333 (npm) in packages/react-email/package.json",
+      "statement": "Package script bun run dev: email dev --port 3333 (bun) in packages/react-email/package.json",
       "evidence": [
         {
           "kind": "file",

@@ -422,7 +422,34 @@ def _js_string(node: Node | None) -> str | None:
 _SCRIPT_NAMES = ("start", "dev", "serve", "build", "test", "worker")
 
 
-def package_json_entry_points(path: str, source: bytes) -> list[EntryPoint]:
+_LOCKFILES = (
+    ("bun.lock", "bun"),
+    ("bun.lockb", "bun"),
+    ("pnpm-lock.yaml", "pnpm"),
+    ("yarn.lock", "yarn"),
+    ("package-lock.json", "npm"),
+)
+# Frameworks whose "${...}" is shell or template text, not a Spring placeholder.
+_NO_PLACEHOLDERS = (None, "npm", "pnpm", "yarn", "bun", "package")
+_RUN = {"npm": "npm run", "pnpm": "pnpm run", "yarn": "yarn", "bun": "bun run"}
+
+
+def package_manager(repo: Path, path: str, source: bytes) -> str:
+    """npm, pnpm, yarn or bun: from "packageManager", else the nearest lockfile up to the root."""
+    match = re.search(rb'"packageManager"\s*:\s*"(npm|pnpm|yarn|bun)@', source)
+    if match:
+        return match.group(1).decode()
+    folder = PurePosixPath(path).parent
+    while True:
+        for lockfile, manager in _LOCKFILES:
+            if (repo / folder / lockfile).is_file():
+                return manager
+        if str(folder) in (".", ""):
+            return "npm"
+        folder = folder.parent
+
+
+def package_json_entry_points(path: str, source: bytes, manager: str = "npm") -> list[EntryPoint]:
     """Installed commands ("bin") and the usual run scripts from package.json."""
     try:
         data: object = json.loads(source.decode("utf-8", "replace"))
@@ -455,8 +482,8 @@ def package_json_entry_points(path: str, source: bytes) -> list[EntryPoint]:
         for name, command in cast("dict[str, object]", scripts).items():
             if name in _SCRIPT_NAMES:
                 line = line_of(name, start)
-                label = f"npm run {name}: {command}"
-                found.append(EntryPoint(EntryKind.SCRIPT, label, path, line, "npm"))
+                label = f"{_RUN.get(manager, 'npm run')} {name}: {command}"
+                found.append(EntryPoint(EntryKind.SCRIPT, label, path, line, manager))
     return found
 
 
@@ -506,7 +533,9 @@ def find_entry_points(repo: Path, files: list[FileInfo]) -> list[EntryPoint]:
         elif info.category is Category.CONFIG and name == "pyproject.toml":
             found.extend(pyproject_scripts(info.path, (repo / info.path).read_bytes()))
         elif info.category is Category.CONFIG and name == "package.json":
-            found.extend(package_json_entry_points(info.path, (repo / info.path).read_bytes()))
+            source = (repo / info.path).read_bytes()
+            manager = package_manager(repo, info.path, source)
+            found.extend(package_json_entry_points(info.path, source, manager))
     if any("${" in e.name for e in found):
         found = resolve_placeholders(found, load_spring_settings(repo, files))
     # These modules build on this one, so they are imported here.
@@ -532,7 +561,14 @@ def resolve_placeholders(found: list[EntryPoint], settings: SpringSettings) -> l
     """Fill in ${...} values in Spring entry points from the settings files."""
     result: list[EntryPoint] = []
     for entry in found:
-        if "${" not in entry.name or entry.framework in (None, "npm", "package"):
+        if "${" not in entry.name or entry.framework in (
+            None,
+            "npm",
+            "pnpm",
+            "yarn",
+            "bun",
+            "package",
+        ):
             result.append(entry)
             continue
         name, used = settings.resolve(entry.name)
