@@ -1,85 +1,48 @@
 # shivemn/Plumb
 
-Commit 391a3d8. Kind: service. Written by openrouter:nvidia/nemotron-3-ultra-550b-a55b:free.
-49 of 49 claims kept after checking them against the code.
+Commit cc9ebcb. Kind: service. Written by openrouter:nvidia/nemotron-3-ultra-550b-a55b:free.
+16 of 17 claims kept after checking them against the code.
 
-## Overview
+## In short
 
-- This is a service repository with 4 routes, consumers, or scheduled jobs. ([f1](#f1))
-- It is built primarily with Python (43 source files, 8,201 lines), along with JavaScript (3 files, 852 lines), CSS (1 file, 234 lines), and HTML (2 files, 38 lines). ([f2](#f2), [f3](#f3), [f4](#f4), [f5](#f5))
-- The project uses GitHub Actions for CI/CD with workflows for CI, evaluation, and pages deployment. ([f7](#f7), [f8](#f8), [f9](#f9))
-- The Python project configuration is managed via core/pyproject.toml. ([f10](#f10))
+- This is a Python service built around a FastAPI server exposing four routes under /api for health checks and job management, backed by SQLite, with a Typer-based CLI offering eight commands including serve, worker, and analysis tools. ([f1](#f1), [f11](#f11), [f13](#f13), [f14](#f14), [f15](#f15), [f16](#f16), [f17](#f17), [f18](#f18), [f19](#f19), [f20](#f20), [f21](#f21), [f22](#f22), [f23](#f23), [f24](#f24), [f25](#f25), [f26](#f26))
+- It is run via the plumb CLI commands such as serve to start the API server or worker to process jobs, while continuous integration and deployment are handled through three GitHub Actions workflows and a pyproject.toml build configuration. ([f7](#f7), [f8](#f8), [f9](#f9), [f10](#f10), [f19](#f19), [f23](#f23), [f24](#f24))
 
 ## System design
 
-- SQLite is used as a database, cache, or queue. ([f11](#f11))
-- The GITHUB_TOKEN setting is read from the environment in core/src/plumb/cli.py. ([f12](#f12))
+- The service stores data locally in SQLite and authenticates to GitHub using a GITHUB_TOKEN read from the environment at runtime. ([f11](#f11), [f12](#f12))
 
 ## How a request moves
 
-- A POST request to /api/jobs is handled by the add_job function in core/src/plumb/server/app.py, which calls parse_github in core/src/plumb/source.py and _view. ([f31](#f31))
-- A GET request to /api/jobs/{job_id} is handled by the get_job function in core/src/plumb/server/app.py, which calls _view. ([f32](#f32))
+- Requests enter through route handlers in core/src/plumb/server/app.py (e.g., add_job for POST /api/jobs), which then delegate to core/src/plumb/source.py for parsing and to a _view function for further processing. ([f31](#f31), [f32](#f32))
 
-## Ways into the code
+## Ways in
 
-- The service exposes four HTTP routes under the /api prefix, all defined in core/src/plumb/server/app.py using FastAPI. ([f13](#f13), [f14](#f14), [f15](#f15), [f16](#f16), [f17](#f17))
-- The routes are GET /api/health, POST /api/jobs, GET /api/jobs/{job_id}, and GET /api/jobs/{job_id}/facts. ([f14](#f14), [f15](#f15), [f16](#f16), [f17](#f17))
-- A CLI package entry point named plumb is declared in core/pyproject.toml pointing to plumb.cli:app. ([f19](#f19))
-- Eight Typer commands are implemented in core/src/plumb/cli.py: schema, analyse, report, serve, worker, build, and index. ([f18](#f18), [f20](#f20), [f21](#f21), [f22](#f22), [f23](#f23), [f24](#f24), [f25](#f25), [f26](#f26))
-- Three standalone script entry points exist in the eval directory: judge.py, provider_cors.py, and run.py. ([f27](#f27), [f28](#f28), [f29](#f29), [f30](#f30))
+- The service exposes a FastAPI HTTP interface with four routes defined in core/src/plumb/server/app.py, while the main CLI entry point plumb is declared in core/pyproject.toml and dispatches eight Typer commands implemented in core/src/plumb/cli.py. ([f13](#f13), [f14](#f14), [f15](#f15), [f16](#f16), [f17](#f17), [f19](#f19), [f20](#f20), [f21](#f21), [f22](#f22), [f23](#f23), [f24](#f24), [f25](#f25), [f26](#f26))
+- Separately, the eval directory contains three standalone script entry points (judge.py, provider_cors.py, run.py) that run independently of the core service and CLI. ([f27](#f27), [f28](#f28), [f29](#f29), [f30](#f30))
 
 ## Code map
 
-- core/src/plumb and core/src/plumb/server each use the other. ([f48](#f48))
-- core/src/plumb and core/src/plumb/writer each use the other. ([f49](#f49))
-- Code in core/src/plumb uses code in core/src/plumb/writer with 6 references. ([f41](#f41))
-- Code in core/src/plumb/writer uses code in core/src/plumb with 1 reference. ([f45](#f45))
-- Code in core/src/plumb/server uses code in core/src/plumb with 5 references. ([f43](#f43))
-- Code in core/src/plumb uses code in core/src/plumb/server with 3 references. ([f44](#f44))
-- Code in eval uses code in core/src/plumb with 6 references. ([f42](#f42))
-- Code in core/tests uses code in core/src/plumb with 78 references. ([f46](#f46))
-- Code in core/tests uses code in core/src/plumb/writer with 7 references. ([f47](#f47))
-- core/src/plumb/inventory.py is used by 35 other files. ([f50](#f50))
-- core/src/plumb/entrypoints.py is used by 20 other files. ([f51](#f51))
-- core/src/plumb/model.py is used by 20 other files. ([f52](#f52))
-- core/src/plumb/imports.py is used by 10 other files. ([f54](#f54))
-- core/tests/conftest.py is used by 20 other files. ([f53](#f53))
+- The core package (core/src/plumb) sits at the center with bidirectional dependencies to its server and writer submodules, while the separate eval module depends on core. ([f41](#f41), [f42](#f42), [f43](#f43), [f44](#f44), [f45](#f45), [f48](#f48), [f49](#f49))
+- Tests in core/tests rely heavily on core (78 references) and writer (7 references), and share a common conftest.py used by 20 test files. ([f46](#f46), [f47](#f47), [f53](#f53))
+- Within core, inventory.py (35 dependents), entrypoints.py (20), model.py (20), and imports.py (10) are the most reused files, making them key entry points for understanding the codebase. ([f50](#f50), [f51](#f51), [f52](#f52), [f54](#f54))
 
 ## Hot spots
 
-- Between 22 Aug 2026 and 20 Nov 2026, the repository saw 69 commits. ([f55](#f55))
-- core/src/plumb/facts.py was the most changed file with 18 commits by one author. ([f56](#f56))
-- core/src/plumb/cli.py followed with 15 commits by one author. ([f57](#f57))
-- core/src/plumb/entrypoints.py had 12 commits by one author. ([f58](#f58))
-- eval/run.py had 10 commits by one author. ([f59](#f59))
-- core/tests/test_entrypoints.py had 9 commits by one author. ([f60](#f60))
-- core/src/plumb/model.py and core/src/plumb/system.py each had 8 commits by one author. ([f61](#f61), [f62](#f62))
-- core/src/plumb/pipeline.py, core/src/plumb/writer/plan.py, and core/tests/test_system.py each had 6 commits by one author. ([f63](#f63), [f64](#f64), [f65](#f65))
-- core/src/plumb/entrypoints.py and core/tests/test_entrypoints.py changed together in 9 commits. ([f66](#f66))
-- core/src/plumb/cli.py and core/src/plumb/facts.py changed together in 9 commits. ([f67](#f67))
-- core/src/plumb/cli.py and eval/run.py changed together in 7 commits. ([f68](#f68))
-- core/src/plumb/facts.py changed together with core/src/plumb/pipeline.py, core/src/plumb/model.py, and eval/run.py each in 6 commits. ([f69](#f69), [f71](#f71), [f72](#f72))
-- core/src/plumb/system.py and core/tests/test_system.py changed together in 6 commits. ([f70](#f70))
-- core/src/plumb/model.py and core/src/plumb/pipeline.py changed together in 5 commits. ([f73](#f73))
-- core/src/plumb/facts.py and core/src/plumb/writer/plan.py changed together in 4 commits, as did core/src/plumb/model.py and core/src/plumb/writer/plan.py. ([f74](#f74), [f75](#f75))
+- Recent development centers on the core pipeline modules — facts.py, cli.py, entrypoints.py, model.py, and pipeline.py — which together account for most commits and frequently change in tandem. ([f55](#f55), [f56](#f56), [f57](#f57), [f58](#f58), [f61](#f61), [f63](#f63), [f67](#f67), [f69](#f69), [f71](#f71), [f73](#f73))
+- The tightest change coupling appears between entrypoints.py and its test file (9 co-changes), cli.py with facts.py (9), and system.py with its test file (6), indicating feature work and test updates happen together. ([f66](#f66), [f67](#f67), [f70](#f70))
 
 ## How to contribute
 
-- Set up the project with uv sync --locked. ([f33](#f33))
-- Run linting and formatting checks with uv run ruff check . ../eval and uv run ruff format --check . ../eval. ([f34](#f34), [f35](#f35))
-- Run type checking with uv run pyright. ([f36](#f36))
-- Run tests with uv run pytest. ([f37](#f37))
-- Validate the schema with uv run plumb schema and git diff --exit-code ../schema. ([f38](#f38), [f39](#f39))
-- Run the evaluation suite with uv run python ../eval/run.py. ([f40](#f40))
-- Available CLI commands include plumb, schema, analyse, report, serve, worker, build, and index. ([f19](#f19), [f20](#f20), [f21](#f21), [f22](#f22), [f23](#f23), [f24](#f24), [f25](#f25), [f26](#f26))
+- Set up the project by running uv sync --locked to install locked dependencies as the CI does. ([f33](#f33))
+- Run linting and format checks across both the core and eval directories with uv run ruff check . ../eval and uv run ruff format --check . ../eval. ([f34](#f34), [f35](#f35))
+- Type-check the codebase with uv run pyright and run the test suite with uv run pytest. ([f36](#f36), [f37](#f37))
+- Validate the generated schema matches the Python models by running uv run plumb schema and confirming no uncommitted changes with git diff --exit-code ../schema. ([f38](#f38), [f39](#f39))
+- Execute the evaluation suite with uv run python ../eval/run.py as the eval workflow does. ([f40](#f40))
 
 ## Sources
 
 - <a id="f1"></a>**f1**: Looks like a service repo: 4 route(s), consumer(s) or scheduled job(s). `core/src/plumb/server/app.py` line 67; `core/src/plumb/server/app.py` line 71; `core/src/plumb/server/app.py` line 86
-- <a id="f2"></a>**f2**: 43 source files in python, 8,201 lines in all. `core/src/plumb/entrypoints.py`; `core/src/plumb/facts.py`; `core/src/plumb/system.py`
-- <a id="f3"></a>**f3**: 3 source files in javascript, 852 lines in all. `web/assets/report.js`; `web/assets/common.js`; `web/assets/gallery.js`
-- <a id="f4"></a>**f4**: 1 source file in css, 234 lines in all. `web/assets/plumb.css`
-- <a id="f5"></a>**f5**: 2 source files in html, 38 lines in all. `web/index.html`; `web/report.html`
 - <a id="f7"></a>**f7**: GitHub Actions workflow .github/workflows/ci.yml. `.github/workflows/ci.yml`
 - <a id="f8"></a>**f8**: GitHub Actions workflow .github/workflows/eval.yml. `.github/workflows/eval.yml`
 - <a id="f9"></a>**f9**: GitHub Actions workflow .github/workflows/pages.yml. `.github/workflows/pages.yml`
@@ -128,24 +91,21 @@ Commit 391a3d8. Kind: service. Written by openrouter:nvidia/nemotron-3-ultra-550
 - <a id="f52"></a>**f52**: core/src/plumb/model.py is used by 20 other files. `core/src/plumb/model.py`; `core/src/plumb/cli.py` line 15; `core/src/plumb/facts.py` line 19
 - <a id="f53"></a>**f53**: core/tests/conftest.py is used by 20 other files. `core/tests/conftest.py`; `core/tests/test_contrib.py` line 6; `core/tests/test_deps.py` line 13
 - <a id="f54"></a>**f54**: core/src/plumb/imports.py is used by 10 other files. `core/src/plumb/imports.py`; `core/src/plumb/django.py` line 28; `core/src/plumb/facts.py` line 16
-- <a id="f55"></a>**f55**: 69 commits between 22 Aug 2026 and 20 Nov 2026. commit 391a3d8; commit 88506d8; commit 775d929
+- <a id="f55"></a>**f55**: 70 commits between 22 Aug 2026 and 20 Nov 2026. commit cc9ebcb; commit 391a3d8; commit 88506d8
 - <a id="f56"></a>**f56**: core/src/plumb/facts.py changed in 18 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/facts.py`; commit 69a5fea; commit c75b94b; commit b5c3e99
 - <a id="f57"></a>**f57**: core/src/plumb/cli.py changed in 15 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/cli.py`; commit 775d929; commit 2f5477d; commit 970ae3b
 - <a id="f58"></a>**f58**: core/src/plumb/entrypoints.py changed in 12 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/entrypoints.py`; commit 88aaddc; commit 0ca099a; commit 7bead85
-- <a id="f59"></a>**f59**: eval/run.py changed in 10 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `eval/run.py`; commit 1cea4d2; commit 4cf1b1f; commit 43c22e5
-- <a id="f60"></a>**f60**: core/tests/test_entrypoints.py changed in 9 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/tests/test_entrypoints.py`; commit 88aaddc; commit 0ca099a; commit 82c0662
 - <a id="f61"></a>**f61**: core/src/plumb/model.py changed in 8 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/model.py`; commit ee58de9; commit 5ef9fd4; commit 376e4b2
-- <a id="f62"></a>**f62**: core/src/plumb/system.py changed in 8 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/system.py`; commit ee58de9; commit b50106f; commit 7bead85
 - <a id="f63"></a>**f63**: core/src/plumb/pipeline.py changed in 6 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/pipeline.py`; commit 5ef9fd4; commit 6eab98a; commit 376e4b2
-- <a id="f64"></a>**f64**: core/src/plumb/writer/plan.py changed in 6 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/writer/plan.py`; commit 5ef9fd4; commit 376e4b2; commit a67896f
-- <a id="f65"></a>**f65**: core/tests/test_system.py changed in 6 commits by 1 author between 22 Aug 2026 and 20 Nov 2026. `core/tests/test_system.py`; commit ee58de9; commit b50106f; commit ae0ea2a
 - <a id="f66"></a>**f66**: core/src/plumb/entrypoints.py and core/tests/test_entrypoints.py changed in the same commit 9 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/entrypoints.py`; `core/tests/test_entrypoints.py`
 - <a id="f67"></a>**f67**: core/src/plumb/cli.py and core/src/plumb/facts.py changed in the same commit 9 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/cli.py`; `core/src/plumb/facts.py`
-- <a id="f68"></a>**f68**: core/src/plumb/cli.py and eval/run.py changed in the same commit 7 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/cli.py`; `eval/run.py`
 - <a id="f69"></a>**f69**: core/src/plumb/facts.py and core/src/plumb/pipeline.py changed in the same commit 6 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/facts.py`; `core/src/plumb/pipeline.py`
 - <a id="f70"></a>**f70**: core/src/plumb/system.py and core/tests/test_system.py changed in the same commit 6 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/system.py`; `core/tests/test_system.py`
 - <a id="f71"></a>**f71**: core/src/plumb/facts.py and core/src/plumb/model.py changed in the same commit 6 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/facts.py`; `core/src/plumb/model.py`
-- <a id="f72"></a>**f72**: core/src/plumb/facts.py and eval/run.py changed in the same commit 6 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/facts.py`; `eval/run.py`
 - <a id="f73"></a>**f73**: core/src/plumb/model.py and core/src/plumb/pipeline.py changed in the same commit 5 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/model.py`; `core/src/plumb/pipeline.py`
-- <a id="f74"></a>**f74**: core/src/plumb/facts.py and core/src/plumb/writer/plan.py changed in the same commit 4 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/facts.py`; `core/src/plumb/writer/plan.py`
-- <a id="f75"></a>**f75**: core/src/plumb/model.py and core/src/plumb/writer/plan.py changed in the same commit 4 times between 22 Aug 2026 and 20 Nov 2026. `core/src/plumb/model.py`; `core/src/plumb/writer/plan.py`
+
+## Removed
+
+These were written by the model and failed a check.
+
+- "The codebase centers on a core package where server/app.py defines the HTTP endpoints and cli.py registers all commands, alongside a small set of JavaScript, CSS, and HTML assets and three evaluation scripts run as standalone entry points." (overview): names something its facts do not: cli.py

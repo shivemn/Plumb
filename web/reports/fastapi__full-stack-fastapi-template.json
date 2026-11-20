@@ -10,36 +10,27 @@
  "sections": [
   {
    "id": "overview",
-   "title": "Overview",
+   "title": "In short",
    "claims": [
     {
-     "text": "This repository contains a service with one deployable service and 23 routes, consumers, or scheduled jobs.",
+     "text": "The application is containerized with Docker Compose (compose.yml) and runs alongside PostgreSQL, a Traefik proxy, and supporting services for email testing, database administration, and Playwright testing.",
      "fact_ids": [
-      "f1"
+      "f25",
+      "f30",
+      "f31",
+      "f33",
+      "f34",
+      "f35",
+      "f36"
      ]
     },
     {
-     "text": "The codebase is written primarily in TypeScript with 96 source files and Python with 28 source files.",
+     "text": "The backend service starts via its Dockerfile using \"fastapi run --workers 4\" and the frontend uses Bun for development, building, and test scripts defined across package.json files.",
      "fact_ids": [
-      "f2",
-      "f3"
-     ]
-    },
-    {
-     "text": "It uses Docker and docker-compose for deployment, with a backend Dockerfile and compose.yml configuration.",
-     "fact_ids": [
-      "f23",
-      "f25"
-     ]
-    },
-    {
-     "text": "The project includes GitHub Actions workflows for testing, deployment, and release automation.",
-     "fact_ids": [
-      "f8",
-      "f11",
-      "f12",
-      "f20",
-      "f21"
+      "f30",
+      "f85",
+      "f86",
+      "f87"
      ]
     }
    ]
@@ -49,51 +40,36 @@
    "title": "System design",
    "claims": [
     {
-     "text": "The backend service runs FastAPI with four workers and is built from the repository Dockerfile.",
+     "text": "The repository runs a FastAPI backend service backed by a PostgreSQL database with schema managed through 5 Alembic migrations.",
      "fact_ids": [
-      "f30"
+      "f30",
+      "f31",
+      "f51"
      ]
     },
     {
-     "text": "PostgreSQL runs as the db service using the postgres:18 image and is accessed via psycopg.",
-     "fact_ids": [
-      "f31"
-     ]
-    },
-    {
-     "text": "Sentry is used as an outside service with the sentry-sdk dependency.",
+     "text": "External error tracking integrates with Sentry via the sentry-sdk dependency.",
      "fact_ids": [
       "f32"
      ]
     },
     {
-     "text": "Adminer runs as a Compose service using the adminer image.",
+     "text": "All services are configured through environment variables read from multiple Compose files and the frontend configuration, covering secrets, domain, email, and database settings.",
      "fact_ids": [
-      "f33"
-     ]
-    },
-    {
-     "text": "Mailpit runs as a Compose service using the axllent/mailpit image.",
-     "fact_ids": [
-      "f34"
-     ]
-    },
-    {
-     "text": "Playwright runs as a Compose service built from the repository and is used for tests.",
-     "fact_ids": [
-      "f35"
-     ]
-    },
-    {
-     "text": "A proxy runs as a Compose service using the traefik:v3.7 image.",
-     "fact_ids": [
-      "f36"
-     ]
-    },
-    {
-     "text": "There are five Alembic database migrations in backend/app/alembic/versions.",
-     "fact_ids": [
-      "f51"
+      "f37",
+      "f38",
+      "f39",
+      "f40",
+      "f41",
+      "f42",
+      "f43",
+      "f44",
+      "f45",
+      "f46",
+      "f47",
+      "f48",
+      "f49",
+      "f50"
      ]
     }
    ]
@@ -103,73 +79,34 @@
    "title": "How a request moves",
    "claims": [
     {
-     "text": "A typical request passes through backend/app/api/routes then backend/app then backend/app/core.",
+     "text": "A request typically enters through a route handler in backend/app/api/routes/, which calls into backend/app/crud.py for data access and backend/app/core/security.py for authentication helpers, before reaching the database via session.exec, session.add, or session.get.",
      "fact_ids": [
-      "f92"
+      "f92",
+      "f93",
+      "f94",
+      "f95",
+      "f96",
+      "f97",
+      "f98",
+      "f99",
+      "f100",
+      "f101"
      ]
     },
     {
-     "text": "19 of 23 traced routes reach the database.",
-     "fact_ids": [
-      "f93"
-     ]
-    },
-    {
-     "text": "POST /api/v1/users/ is handled by create_user in backend/app/api/routes/users.py.",
+     "text": "For example, POST /api/v1/users/ is handled by create_user in backend/app/api/routes/users.py, which calls get_user_by_email and create_user in backend/app/crud.py, get_password_hash in backend/app/core/security.py, and generate_new_account_email in backend/app/utils.py, with get_user_by_email reaching the database via session.exec in backend/app/crud.py.",
      "fact_ids": [
       "f94"
-     ]
-    },
-    {
-     "text": "create_user calls get_user_by_email in backend/app/crud.py, create_user in backend/app/crud.py, generate_new_account_email in backend/app/utils.py and send_email.",
-     "fact_ids": [
-      "f94"
-     ]
-    },
-    {
-     "text": "create_user in backend/app/crud.py calls get_password_hash in backend/app/core/security.py.",
-     "fact_ids": [
-      "f94"
-     ]
-    },
-    {
-     "text": "get_user_by_email reaches the database via session.exec in backend/app/crud.py.",
-     "fact_ids": [
-      "f94"
-     ]
-    },
-    {
-     "text": "POST /api/v1/login/access-token is handled by login_access_token in backend/app/api/routes/login.py.",
-     "fact_ids": [
-      "f95"
-     ]
-    },
-    {
-     "text": "login_access_token calls authenticate in backend/app/crud.py and create_access_token in backend/app/core/security.py.",
-     "fact_ids": [
-      "f95"
-     ]
-    },
-    {
-     "text": "authenticate calls get_user_by_email and verify_password.",
-     "fact_ids": [
-      "f95"
-     ]
-    },
-    {
-     "text": "authenticate reaches the database via session.add in backend/app/crud.py.",
-     "fact_ids": [
-      "f95"
      ]
     }
    ]
   },
   {
    "id": "entry_points",
-   "title": "Ways into the code",
+   "title": "Ways in",
    "claims": [
     {
-     "text": "The backend exposes 23 HTTP routes across five route modules: items, login, private, users, and utils.",
+     "text": "The backend exposes 23 FastAPI routes under /api/v1 grouped into items, authentication, user management, private admin, and utility endpoints across five route modules.",
      "fact_ids": [
       "f52",
       "f53",
@@ -198,17 +135,12 @@
      ]
     },
     {
-     "text": "Three Typer CLI commands are defined in scripts/prepare_release.py: prepare, current-version, and release-notes.",
+     "text": "Three Typer CLI commands for release preparation live in scripts/prepare_release.py, which also serves as a direct script entry point alongside initial_data.py and add_latest_release_date.py.",
      "fact_ids": [
       "f76",
       "f77",
       "f78",
-      "f79"
-     ]
-    },
-    {
-     "text": "Three Python scripts serve as program entry points: backend/app/initial_data.py, scripts/add_latest_release_date.py, and scripts/prepare_release.py.",
-     "fact_ids": [
+      "f79",
       "f80",
       "f81",
       "f82",
@@ -216,7 +148,7 @@
      ]
     },
     {
-     "text": "Seven package scripts are defined across frontend/package.json, packages/react-email/package.json, and the root package.json for development, building, and testing.",
+     "text": "Frontend development, build, and test workflows run via Bun package scripts, with a root workspace script proxying to the frontend and a separate react-email package for email template development.",
      "fact_ids": [
       "f84",
       "f85",
@@ -235,92 +167,40 @@
    "title": "Code map",
    "claims": [
     {
-     "text": "The repository contains 96 TypeScript source files totaling 10,010 lines, 28 Python source files totaling 1,736 lines, 1 CSS file with 124 lines, 8 shell files with 76 lines, and 3 HTML files with 16 lines.",
+     "text": "The backend centers on a trio of mutually dependent directories — app, app/api, and app/core — with app/core/config.py and app/models.py as the two most widely imported files across the service.",
      "fact_ids": [
-      "f2",
-      "f3",
-      "f4",
-      "f5",
-      "f6"
+      "f133",
+      "f139",
+      "f140",
+      "f141",
+      "f142",
+      "f143",
+      "f144",
+      "f149",
+      "f150"
      ]
     },
     {
-     "text": "Frontend components in Admin, Items, UserSettings, and Common all depend on the ui component library with 20, 18, 10, and 8 references respectively.",
+     "text": "The frontend organizes components in layers: ui sits at the base and is imported by Admin, Items, Common, UserSettings, and the route modules, while routes also pull in Common and hooks, and the top-level src imports routes back.",
      "fact_ids": [
+      "f127",
       "f128",
       "f129",
-      "f134",
-      "f135"
-     ]
-    },
-    {
-     "text": "The frontend ui component library depends on frontend/src/lib with 23 references.",
-     "fact_ids": [
-      "f127"
-     ]
-    },
-    {
-     "text": "Frontend routes depend on the ui component library with 15 references, on the Common component with 7 references, and on hooks with 7 references.",
-     "fact_ids": [
       "f130",
+      "f134",
+      "f135",
       "f136",
-      "f137"
-     ]
-    },
-    {
-     "text": "Frontend src and frontend/src/routes have a bidirectional dependency with 6 references from src to routes.",
-     "fact_ids": [
+      "f137",
       "f138",
       "f145"
      ]
     },
     {
-     "text": "The frontend client/client module depends on client/core with 14 references.",
-     "fact_ids": [
-      "f131"
-     ]
-    },
-    {
-     "text": "In the react-email package, emails depend on ui with 12 references.",
-     "fact_ids": [
-      "f132"
-     ]
-    },
-    {
-     "text": "Backend app/api/routes depends on backend/app with 10 references.",
-     "fact_ids": [
-      "f133"
-     ]
-    },
-    {
-     "text": "Backend app depends on backend/app/core with 5 references, and these two have a bidirectional dependency.",
-     "fact_ids": [
-      "f139",
-      "f143"
-     ]
-    },
-    {
-     "text": "Backend app/api and backend/app/api/routes have a bidirectional dependency, each with 5 references to the other.",
-     "fact_ids": [
-      "f140",
-      "f141",
-      "f144"
-     ]
-    },
-    {
-     "text": "Backend app and backend/app/api have a bidirectional dependency.",
-     "fact_ids": [
-      "f142"
-     ]
-    },
-    {
-     "text": "The most depended-upon files are frontend/src/lib/utils.ts used by 27 files, frontend/src/client/index.ts used by 20 files, frontend/src/components/ui/button.tsx used by 18 files, backend/app/core/config.py used by 16 files, and backend/app/models.py used by 16 files.",
+     "text": ": Across the frontend, lib/utils.ts, client/index.ts, and components/ui/button.tsx are the three most reused modules, each referenced by 18–27 other files.",
      "fact_ids": [
       "f146",
       "f147",
-      "f148",
-      "f149",
-      "f150"
+      "f148"
      ]
     }
    ]
@@ -335,67 +215,27 @@
    "title": "How to contribute",
    "claims": [
     {
-     "text": "Run the frontend development server with bun run dev in the frontend directory.",
+     "text": "Frontend tests run with `bunx playwright test` in the frontend directory or `bun run test` from the repository root.",
      "fact_ids": [
-      "f85"
-     ]
-    },
-    {
-     "text": "Build the frontend with bun run build in the frontend directory.",
-     "fact_ids": [
-      "f86"
-     ]
-    },
-    {
-     "text": "Run frontend tests with bun run test in the frontend directory.",
-     "fact_ids": [
-      "f87"
-     ]
-    },
-    {
-     "text": "Run the frontend development server from the repository root with bun run dev.",
-     "fact_ids": [
-      "f88"
-     ]
-    },
-    {
-     "text": "Run frontend tests from the repository root with bun run test.",
-     "fact_ids": [
+      "f87",
       "f89"
      ]
     },
     {
-     "text": "Build react-email templates with bun run build in the packages/react-email directory.",
+     "text": "Start the frontend dev server with `bun run dev` in the frontend directory or `bun run dev` from the root.",
      "fact_ids": [
-      "f90"
+      "f85",
+      "f88"
      ]
     },
     {
-     "text": "Run react-email development server on port 3333 with bun run dev in the packages/react-email directory.",
-     "fact_ids": [
-      "f91"
-     ]
-    },
-    {
-     "text": "CI updates pre-commit hooks with uv run prek update --freeze --cooldown-days 7.",
+     "text": "CI updates pre-commit hooks using `uv run prek update --freeze --cooldown-days 7`.",
      "fact_ids": [
       "f102"
      ]
     },
     {
-     "text": "CI extracts release version with uv run python scripts/prepare_release.py current-version.",
-     "fact_ids": [
-      "f121"
-     ]
-    },
-    {
-     "text": "CI generates release notes with uv run python scripts/prepare_release.py release-notes.",
-     "fact_ids": [
-      "f122"
-     ]
-    },
-    {
-     "text": "Recently closed pull requests were merged a median of 43 hours after being opened.",
+     "text": "Pull requests were merged a median of 43 hours after opening across 19 recent PRs.",
      "fact_ids": [
       "f126"
      ]
@@ -403,224 +243,19 @@
    ]
   }
  ],
- "removed": [],
+ "removed": [
+  {
+   "section": "overview",
+   "text": "This repository contains a full-stack FastAPI service with a Python backend (28 files) and a TypeScript frontend (96 files) that exposes 23 REST API routes for items, users, authentication, and utilities.",
+   "reason": "names technology its facts do not: FastAPI"
+  },
+  {
+   "section": "system",
+   "text": "The stack includes supporting containers for database administration (adminer), email testing (mailpit), end-to-end testing (playwright), and a Traefik reverse proxy all orchestrated via Docker Compose.",
+   "reason": "names technology its facts do not: Docker"
+  }
+ ],
  "facts": [
-  {
-   "id": "f1",
-   "topic": "kind",
-   "statement": "Looks like a service repo: 1 deployable service(s) and 23 route(s), consumer(s) or scheduled job(s)",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "backend/Dockerfile",
-     "start_line": 1,
-     "end_line": 1
-    },
-    {
-     "kind": "file",
-     "path": "backend/app/api/routes/items.py",
-     "start_line": 13,
-     "end_line": 13
-    },
-    {
-     "kind": "file",
-     "path": "backend/app/api/routes/items.py",
-     "start_line": 48,
-     "end_line": 48
-    }
-   ]
-  },
-  {
-   "id": "f2",
-   "topic": "languages",
-   "statement": "96 source files in typescript, 10,010 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "frontend/src/client/types.gen.ts",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "frontend/src/components/ui/sidebar.tsx",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "frontend/src/client/sdk.gen.ts",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f3",
-   "topic": "languages",
-   "statement": "28 source files in python, 1,736 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "backend/app/api/routes/users.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "scripts/prepare_release.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "backend/app/models.py",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f4",
-   "topic": "languages",
-   "statement": "1 source file in css, 124 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "frontend/src/index.css",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f5",
-   "topic": "languages",
-   "statement": "8 source files in shell, 76 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "scripts/test-local.sh",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "scripts/test.sh",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "scripts/generate-client.sh",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f6",
-   "topic": "languages",
-   "statement": "3 source files in html, 16 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "frontend/index.html",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "backend/app/email-templates/new_account.html",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "backend/app/email-templates/reset_password.html",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f8",
-   "topic": "build",
-   "statement": "GitHub Actions workflow .github/workflows/add-to-project.yml",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/add-to-project.yml",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f11",
-   "topic": "build",
-   "statement": "GitHub Actions workflow .github/workflows/deploy-docker-compose.yml",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/deploy-docker-compose.yml",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f12",
-   "topic": "build",
-   "statement": "GitHub Actions workflow .github/workflows/deploy.yml",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/deploy.yml",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f20",
-   "topic": "build",
-   "statement": "GitHub Actions workflow .github/workflows/test-backend.yml",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/test-backend.yml",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f21",
-   "topic": "build",
-   "statement": "GitHub Actions workflow .github/workflows/test-docker-compose.yml",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/test-docker-compose.yml",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f23",
-   "topic": "build",
-   "statement": "Build or deploy file backend/Dockerfile",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "backend/Dockerfile",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
   {
    "id": "f25",
    "topic": "build",
@@ -764,6 +399,212 @@
      "path": "compose.yml",
      "start_line": 3,
      "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f37",
+   "topic": "settings",
+   "statement": "Setting CI is read from the environment in compose.override.yml, frontend/playwright.config.ts",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 95,
+     "end_line": 95
+    },
+    {
+     "kind": "file",
+     "path": "frontend/playwright.config.ts",
+     "start_line": 19,
+     "end_line": 19
+    }
+   ]
+  },
+  {
+   "id": "f38",
+   "topic": "settings",
+   "statement": "Setting DOMAIN is read from the environment in compose.deploy.yml, compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.deploy.yml",
+     "start_line": 41,
+     "end_line": 41
+    },
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 44,
+     "end_line": 44
+    }
+   ]
+  },
+  {
+   "id": "f39",
+   "topic": "settings",
+   "statement": "Setting EMAILS_FROM_EMAIL is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 63,
+     "end_line": 63
+    }
+   ]
+  },
+  {
+   "id": "f40",
+   "topic": "settings",
+   "statement": "Setting FIRST_SUPERUSER is read from the environment in compose.override.yml, compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 88,
+     "end_line": 88
+    },
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 58,
+     "end_line": 58
+    }
+   ]
+  },
+  {
+   "id": "f41",
+   "topic": "settings",
+   "statement": "Setting FIRST_SUPERUSER_PASSWORD is read from the environment in compose.override.yml, compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 89,
+     "end_line": 89
+    },
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 59,
+     "end_line": 59
+    }
+   ]
+  },
+  {
+   "id": "f42",
+   "topic": "settings",
+   "statement": "Setting PLAYWRIGHT_BASE_URL is read from the environment in frontend/playwright.config.ts",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/playwright.config.ts",
+     "start_line": 4,
+     "end_line": 4
+    }
+   ]
+  },
+  {
+   "id": "f43",
+   "topic": "settings",
+   "statement": "Setting POSTGRES_PASSWORD is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 31,
+     "end_line": 31
+    }
+   ]
+  },
+  {
+   "id": "f44",
+   "topic": "settings",
+   "statement": "Setting PROJECT_NAME is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 56,
+     "end_line": 56
+    }
+   ]
+  },
+  {
+   "id": "f45",
+   "topic": "settings",
+   "statement": "Setting SECRET_KEY is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 57,
+     "end_line": 57
+    }
+   ]
+  },
+  {
+   "id": "f46",
+   "topic": "settings",
+   "statement": "Setting SENTRY_DSN is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 65,
+     "end_line": 65
+    }
+   ]
+  },
+  {
+   "id": "f47",
+   "topic": "settings",
+   "statement": "Setting SMTP_HOST is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 60,
+     "end_line": 60
+    }
+   ]
+  },
+  {
+   "id": "f48",
+   "topic": "settings",
+   "statement": "Setting SMTP_PASSWORD is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 62,
+     "end_line": 62
+    }
+   ]
+  },
+  {
+   "id": "f49",
+   "topic": "settings",
+   "statement": "Setting SMTP_USER is read from the environment in compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 61,
+     "end_line": 61
+    }
+   ]
+  },
+  {
+   "id": "f50",
+   "topic": "settings",
+   "statement": "Setting VITE_API_URL is read from the environment in frontend/src/main.tsx",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/main.tsx",
+     "start_line": 18,
+     "end_line": 18
     }
    ]
   },
@@ -1479,6 +1320,186 @@
    ]
   },
   {
+   "id": "f96",
+   "topic": "flow",
+   "statement": "POST /api/v1/password-recovery/{email} is handled by recover_password in backend/app/api/routes/login.py; recover_password calls get_user_by_email in backend/app/crud.py, generate_password_reset_token in backend/app/utils.py, generate_reset_password_email and send_email; generate_reset_password_email calls render_email_template; get_user_by_email reaches the database (session.exec in backend/app/crud.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 53,
+     "end_line": 53
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 105,
+     "end_line": 105
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 70,
+     "end_line": 70
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 36,
+     "end_line": 36
+    }
+   ]
+  },
+  {
+   "id": "f97",
+   "topic": "flow",
+   "statement": "POST /api/v1/password-recovery-html-content/{email} is handled by recover_password_html_content in backend/app/api/routes/login.py; recover_password_html_content calls get_user_by_email in backend/app/crud.py, generate_password_reset_token in backend/app/utils.py and generate_reset_password_email; generate_reset_password_email calls render_email_template; get_user_by_email reaches the database (session.exec in backend/app/crud.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 100,
+     "end_line": 100
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 105,
+     "end_line": 105
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 70,
+     "end_line": 70
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 25,
+     "end_line": 25
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 36,
+     "end_line": 36
+    }
+   ]
+  },
+  {
+   "id": "f98",
+   "topic": "flow",
+   "statement": "PATCH /api/v1/users/me/password is handled by update_password_me in backend/app/api/routes/users.py; update_password_me calls verify_password in backend/app/core/security.py and get_password_hash; update_password_me reaches the database (session.add in backend/app/api/routes/users.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 103,
+     "end_line": 103
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/security.py",
+     "start_line": 29,
+     "end_line": 29
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/security.py",
+     "start_line": 35,
+     "end_line": 35
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 119,
+     "end_line": 119
+    }
+   ]
+  },
+  {
+   "id": "f99",
+   "topic": "flow",
+   "statement": "POST /api/v1/private/users/ is handled by create_user in backend/app/api/routes/private.py; create_user calls get_password_hash in backend/app/core/security.py; create_user reaches the database (session.add in backend/app/api/routes/private.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/private.py",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/security.py",
+     "start_line": 35,
+     "end_line": 35
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/private.py",
+     "start_line": 35,
+     "end_line": 35
+    }
+   ]
+  },
+  {
+   "id": "f100",
+   "topic": "flow",
+   "statement": "GET /api/v1/items/ is handled by read_items in backend/app/api/routes/items.py; read_items reaches the database (session.exec in backend/app/api/routes/items.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 13,
+     "end_line": 13
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 23,
+     "end_line": 23
+    }
+   ]
+  },
+  {
+   "id": "f101",
+   "topic": "flow",
+   "statement": "GET /api/v1/items/{id} is handled by read_item in backend/app/api/routes/items.py; read_item reaches the database (session.get in backend/app/api/routes/items.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 48,
+     "end_line": 48
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 53,
+     "end_line": 53
+    }
+   ]
+  },
+  {
    "id": "f102",
    "topic": "contribute",
    "statement": "CI step \"Bump pre-commit hooks\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: uv run prek update --freeze --cooldown-days 7",
@@ -1488,32 +1509,6 @@
      "path": ".github/workflows/bump-pre-commit-hooks.yml",
      "start_line": 38,
      "end_line": 38
-    }
-   ]
-  },
-  {
-   "id": "f121",
-   "topic": "contribute",
-   "statement": "CI step \"Extract release details\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: version=\"$(uv run python scripts/prepare_release.py current-version)\"",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/create-draft-release.yml",
-     "start_line": 39,
-     "end_line": 39
-    }
-   ]
-  },
-  {
-   "id": "f122",
-   "topic": "contribute",
-   "statement": "CI step \"Extract release details\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: uv run python scripts/prepare_release.py release-notes > draft-release-notes.md",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": ".github/workflows/create-draft-release.yml",
-     "start_line": 40,
-     "end_line": 40
     }
    ]
   },
@@ -1633,56 +1628,6 @@
      "path": "frontend/src/routes/login.tsx",
      "start_line": 20,
      "end_line": 20
-    }
-   ]
-  },
-  {
-   "id": "f131",
-   "topic": "structure",
-   "statement": "Code in frontend/src/client/client uses code in frontend/src/client/core (14 references)",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "frontend/src/client/client/client.gen.ts",
-     "start_line": 6,
-     "end_line": 6
-    },
-    {
-     "kind": "file",
-     "path": "frontend/src/client/client/client.gen.ts",
-     "start_line": 7,
-     "end_line": 7
-    },
-    {
-     "kind": "file",
-     "path": "frontend/src/client/client/client.gen.ts",
-     "start_line": 8,
-     "end_line": 8
-    }
-   ]
-  },
-  {
-   "id": "f132",
-   "topic": "structure",
-   "statement": "Code in packages/react-email/emails uses code in packages/react-email/ui (12 references)",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "packages/react-email/emails/new_account.tsx",
-     "start_line": 2,
-     "end_line": 2
-    },
-    {
-     "kind": "file",
-     "path": "packages/react-email/emails/new_account.tsx",
-     "start_line": 3,
-     "end_line": 3
-    },
-    {
-     "kind": "file",
-     "path": "packages/react-email/emails/new_account.tsx",
-     "start_line": 4,
-     "end_line": 4
     }
    ]
   },

@@ -3,115 +3,27 @@
  "repo": {
   "owner": "shivemn",
   "name": "Plumb",
-  "commit": "391a3d8a5e527dacb86f5cc70868638cee7373b1"
+  "commit": "cc9ebcb41d2878dc0ea9394114c4dbbc4ade125e"
  },
  "kind": "service",
  "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
  "sections": [
   {
    "id": "overview",
-   "title": "Overview",
+   "title": "In short",
    "claims": [
     {
-     "text": "This is a service repository with 4 routes, consumers, or scheduled jobs.",
+     "text": "This is a Python service built around a FastAPI server exposing four routes under /api for health checks and job management, backed by SQLite, with a Typer-based CLI offering eight commands including serve, worker, and analysis tools.",
      "fact_ids": [
-      "f1"
-     ]
-    },
-    {
-     "text": "It is built primarily with Python (43 source files, 8,201 lines), along with JavaScript (3 files, 852 lines), CSS (1 file, 234 lines), and HTML (2 files, 38 lines).",
-     "fact_ids": [
-      "f2",
-      "f3",
-      "f4",
-      "f5"
-     ]
-    },
-    {
-     "text": "The project uses GitHub Actions for CI/CD with workflows for CI, evaluation, and pages deployment.",
-     "fact_ids": [
-      "f7",
-      "f8",
-      "f9"
-     ]
-    },
-    {
-     "text": "The Python project configuration is managed via core/pyproject.toml.",
-     "fact_ids": [
-      "f10"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "system",
-   "title": "System design",
-   "claims": [
-    {
-     "text": "SQLite is used as a database, cache, or queue.",
-     "fact_ids": [
-      "f11"
-     ]
-    },
-    {
-     "text": "The GITHUB_TOKEN setting is read from the environment in core/src/plumb/cli.py.",
-     "fact_ids": [
-      "f12"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "flow",
-   "title": "How a request moves",
-   "claims": [
-    {
-     "text": "A POST request to /api/jobs is handled by the add_job function in core/src/plumb/server/app.py, which calls parse_github in core/src/plumb/source.py and _view.",
-     "fact_ids": [
-      "f31"
-     ]
-    },
-    {
-     "text": "A GET request to /api/jobs/{job_id} is handled by the get_job function in core/src/plumb/server/app.py, which calls _view.",
-     "fact_ids": [
-      "f32"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "entry_points",
-   "title": "Ways into the code",
-   "claims": [
-    {
-     "text": "The service exposes four HTTP routes under the /api prefix, all defined in core/src/plumb/server/app.py using FastAPI.",
-     "fact_ids": [
+      "f1",
+      "f11",
       "f13",
       "f14",
       "f15",
       "f16",
-      "f17"
-     ]
-    },
-    {
-     "text": "The routes are GET /api/health, POST /api/jobs, GET /api/jobs/{job_id}, and GET /api/jobs/{job_id}/facts.",
-     "fact_ids": [
-      "f14",
-      "f15",
-      "f16",
-      "f17"
-     ]
-    },
-    {
-     "text": "A CLI package entry point named plumb is declared in core/pyproject.toml pointing to plumb.cli:app.",
-     "fact_ids": [
-      "f19"
-     ]
-    },
-    {
-     "text": "Eight Typer commands are implemented in core/src/plumb/cli.py: schema, analyse, report, serve, worker, build, and index.",
-     "fact_ids": [
+      "f17",
       "f18",
+      "f19",
       "f20",
       "f21",
       "f22",
@@ -122,7 +34,69 @@
      ]
     },
     {
-     "text": "Three standalone script entry points exist in the eval directory: judge.py, provider_cors.py, and run.py.",
+     "text": "It is run via the plumb CLI commands such as serve to start the API server or worker to process jobs, while continuous integration and deployment are handled through three GitHub Actions workflows and a pyproject.toml build configuration.",
+     "fact_ids": [
+      "f7",
+      "f8",
+      "f9",
+      "f10",
+      "f19",
+      "f23",
+      "f24"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "system",
+   "title": "System design",
+   "claims": [
+    {
+     "text": "The service stores data locally in SQLite and authenticates to GitHub using a GITHUB_TOKEN read from the environment at runtime.",
+     "fact_ids": [
+      "f11",
+      "f12"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "title": "How a request moves",
+   "claims": [
+    {
+     "text": "Requests enter through route handlers in core/src/plumb/server/app.py (e.g., add_job for POST /api/jobs), which then delegate to core/src/plumb/source.py for parsing and to a _view function for further processing.",
+     "fact_ids": [
+      "f31",
+      "f32"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "entry_points",
+   "title": "Ways in",
+   "claims": [
+    {
+     "text": "The service exposes a FastAPI HTTP interface with four routes defined in core/src/plumb/server/app.py, while the main CLI entry point plumb is declared in core/pyproject.toml and dispatches eight Typer commands implemented in core/src/plumb/cli.py.",
+     "fact_ids": [
+      "f13",
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f19",
+      "f20",
+      "f21",
+      "f22",
+      "f23",
+      "f24",
+      "f25",
+      "f26"
+     ]
+    },
+    {
+     "text": "Separately, the eval directory contains three standalone script entry points (judge.py, provider_cors.py, run.py) that run independently of the core service and CLI.",
      "fact_ids": [
       "f27",
       "f28",
@@ -137,87 +111,32 @@
    "title": "Code map",
    "claims": [
     {
-     "text": "core/src/plumb and core/src/plumb/server each use the other.",
+     "text": "The core package (core/src/plumb) sits at the center with bidirectional dependencies to its server and writer submodules, while the separate eval module depends on core.",
      "fact_ids": [
-      "f48"
-     ]
-    },
-    {
-     "text": "core/src/plumb and core/src/plumb/writer each use the other.",
-     "fact_ids": [
+      "f41",
+      "f42",
+      "f43",
+      "f44",
+      "f45",
+      "f48",
       "f49"
      ]
     },
     {
-     "text": "Code in core/src/plumb uses code in core/src/plumb/writer with 6 references.",
+     "text": "Tests in core/tests rely heavily on core (78 references) and writer (7 references), and share a common conftest.py used by 20 test files.",
      "fact_ids": [
-      "f41"
-     ]
-    },
-    {
-     "text": "Code in core/src/plumb/writer uses code in core/src/plumb with 1 reference.",
-     "fact_ids": [
-      "f45"
-     ]
-    },
-    {
-     "text": "Code in core/src/plumb/server uses code in core/src/plumb with 5 references.",
-     "fact_ids": [
-      "f43"
-     ]
-    },
-    {
-     "text": "Code in core/src/plumb uses code in core/src/plumb/server with 3 references.",
-     "fact_ids": [
-      "f44"
-     ]
-    },
-    {
-     "text": "Code in eval uses code in core/src/plumb with 6 references.",
-     "fact_ids": [
-      "f42"
-     ]
-    },
-    {
-     "text": "Code in core/tests uses code in core/src/plumb with 78 references.",
-     "fact_ids": [
-      "f46"
-     ]
-    },
-    {
-     "text": "Code in core/tests uses code in core/src/plumb/writer with 7 references.",
-     "fact_ids": [
-      "f47"
-     ]
-    },
-    {
-     "text": "core/src/plumb/inventory.py is used by 35 other files.",
-     "fact_ids": [
-      "f50"
-     ]
-    },
-    {
-     "text": "core/src/plumb/entrypoints.py is used by 20 other files.",
-     "fact_ids": [
-      "f51"
-     ]
-    },
-    {
-     "text": "core/src/plumb/model.py is used by 20 other files.",
-     "fact_ids": [
-      "f52"
-     ]
-    },
-    {
-     "text": "core/src/plumb/imports.py is used by 10 other files.",
-     "fact_ids": [
-      "f54"
-     ]
-    },
-    {
-     "text": "core/tests/conftest.py is used by 20 other files.",
-     "fact_ids": [
+      "f46",
+      "f47",
       "f53"
+     ]
+    },
+    {
+     "text": "Within core, inventory.py (35 dependents), entrypoints.py (20), model.py (20), and imports.py (10) are the most reused files, making them key entry points for understanding the codebase.",
+     "fact_ids": [
+      "f50",
+      "f51",
+      "f52",
+      "f54"
      ]
     }
    ]
@@ -227,99 +146,26 @@
    "title": "Hot spots",
    "claims": [
     {
-     "text": "Between 22 Aug 2026 and 20 Nov 2026, the repository saw 69 commits.",
+     "text": "Recent development centers on the core pipeline modules — facts.py, cli.py, entrypoints.py, model.py, and pipeline.py — which together account for most commits and frequently change in tandem.",
      "fact_ids": [
-      "f55"
-     ]
-    },
-    {
-     "text": "core/src/plumb/facts.py was the most changed file with 18 commits by one author.",
-     "fact_ids": [
-      "f56"
-     ]
-    },
-    {
-     "text": "core/src/plumb/cli.py followed with 15 commits by one author.",
-     "fact_ids": [
-      "f57"
-     ]
-    },
-    {
-     "text": "core/src/plumb/entrypoints.py had 12 commits by one author.",
-     "fact_ids": [
-      "f58"
-     ]
-    },
-    {
-     "text": "eval/run.py had 10 commits by one author.",
-     "fact_ids": [
-      "f59"
-     ]
-    },
-    {
-     "text": "core/tests/test_entrypoints.py had 9 commits by one author.",
-     "fact_ids": [
-      "f60"
-     ]
-    },
-    {
-     "text": "core/src/plumb/model.py and core/src/plumb/system.py each had 8 commits by one author.",
-     "fact_ids": [
+      "f55",
+      "f56",
+      "f57",
+      "f58",
       "f61",
-      "f62"
-     ]
-    },
-    {
-     "text": "core/src/plumb/pipeline.py, core/src/plumb/writer/plan.py, and core/tests/test_system.py each had 6 commits by one author.",
-     "fact_ids": [
       "f63",
-      "f64",
-      "f65"
-     ]
-    },
-    {
-     "text": "core/src/plumb/entrypoints.py and core/tests/test_entrypoints.py changed together in 9 commits.",
-     "fact_ids": [
-      "f66"
-     ]
-    },
-    {
-     "text": "core/src/plumb/cli.py and core/src/plumb/facts.py changed together in 9 commits.",
-     "fact_ids": [
-      "f67"
-     ]
-    },
-    {
-     "text": "core/src/plumb/cli.py and eval/run.py changed together in 7 commits.",
-     "fact_ids": [
-      "f68"
-     ]
-    },
-    {
-     "text": "core/src/plumb/facts.py changed together with core/src/plumb/pipeline.py, core/src/plumb/model.py, and eval/run.py each in 6 commits.",
-     "fact_ids": [
+      "f67",
       "f69",
       "f71",
-      "f72"
-     ]
-    },
-    {
-     "text": "core/src/plumb/system.py and core/tests/test_system.py changed together in 6 commits.",
-     "fact_ids": [
-      "f70"
-     ]
-    },
-    {
-     "text": "core/src/plumb/model.py and core/src/plumb/pipeline.py changed together in 5 commits.",
-     "fact_ids": [
       "f73"
      ]
     },
     {
-     "text": "core/src/plumb/facts.py and core/src/plumb/writer/plan.py changed together in 4 commits, as did core/src/plumb/model.py and core/src/plumb/writer/plan.py.",
+     "text": "The tightest change coupling appears between entrypoints.py and its test file (9 co-changes), cli.py with facts.py (9), and system.py with its test file (6), indicating feature work and test updates happen together.",
      "fact_ids": [
-      "f74",
-      "f75"
+      "f66",
+      "f67",
+      "f70"
      ]
     }
    ]
@@ -329,60 +175,48 @@
    "title": "How to contribute",
    "claims": [
     {
-     "text": "Set up the project with uv sync --locked.",
+     "text": "Set up the project by running uv sync --locked to install locked dependencies as the CI does.",
      "fact_ids": [
       "f33"
      ]
     },
     {
-     "text": "Run linting and formatting checks with uv run ruff check . ../eval and uv run ruff format --check . ../eval.",
+     "text": "Run linting and format checks across both the core and eval directories with uv run ruff check . ../eval and uv run ruff format --check . ../eval.",
      "fact_ids": [
       "f34",
       "f35"
      ]
     },
     {
-     "text": "Run type checking with uv run pyright.",
+     "text": "Type-check the codebase with uv run pyright and run the test suite with uv run pytest.",
      "fact_ids": [
-      "f36"
-     ]
-    },
-    {
-     "text": "Run tests with uv run pytest.",
-     "fact_ids": [
+      "f36",
       "f37"
      ]
     },
     {
-     "text": "Validate the schema with uv run plumb schema and git diff --exit-code ../schema.",
+     "text": "Validate the generated schema matches the Python models by running uv run plumb schema and confirming no uncommitted changes with git diff --exit-code ../schema.",
      "fact_ids": [
       "f38",
       "f39"
      ]
     },
     {
-     "text": "Run the evaluation suite with uv run python ../eval/run.py.",
+     "text": "Execute the evaluation suite with uv run python ../eval/run.py as the eval workflow does.",
      "fact_ids": [
       "f40"
-     ]
-    },
-    {
-     "text": "Available CLI commands include plumb, schema, analyse, report, serve, worker, build, and index.",
-     "fact_ids": [
-      "f19",
-      "f20",
-      "f21",
-      "f22",
-      "f23",
-      "f24",
-      "f25",
-      "f26"
      ]
     }
    ]
   }
  ],
- "removed": [],
+ "removed": [
+  {
+   "section": "overview",
+   "text": "The codebase centers on a core package where server/app.py defines the HTTP endpoints and cli.py registers all commands, alongside a small set of JavaScript, CSS, and HTML assets and three evaluation scripts run as standalone entry points.",
+   "reason": "names something its facts do not: cli.py"
+  }
+ ],
  "facts": [
   {
    "id": "f1",
@@ -406,88 +240,6 @@
      "path": "core/src/plumb/server/app.py",
      "start_line": 86,
      "end_line": 86
-    }
-   ]
-  },
-  {
-   "id": "f2",
-   "topic": "languages",
-   "statement": "43 source files in python, 8,201 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/entrypoints.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "core/src/plumb/facts.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "core/src/plumb/system.py",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f3",
-   "topic": "languages",
-   "statement": "3 source files in javascript, 852 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "web/assets/report.js",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "web/assets/common.js",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "web/assets/gallery.js",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f4",
-   "topic": "languages",
-   "statement": "1 source file in css, 234 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "web/assets/plumb.css",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f5",
-   "topic": "languages",
-   "statement": "2 source files in html, 38 lines in all",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "web/index.html",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "web/report.html",
-     "start_line": null,
-     "end_line": null
     }
    ]
   },
@@ -1322,8 +1074,12 @@
   {
    "id": "f55",
    "topic": "history",
-   "statement": "69 commits between 22 Aug 2026 and 20 Nov 2026",
+   "statement": "70 commits between 22 Aug 2026 and 20 Nov 2026",
    "evidence": [
+    {
+     "kind": "commit",
+     "sha": "cc9ebcb41d2878dc0ea9394114c4dbbc4ade125e"
+    },
     {
      "kind": "commit",
      "sha": "391a3d8a5e527dacb86f5cc70868638cee7373b1"
@@ -1331,10 +1087,6 @@
     {
      "kind": "commit",
      "sha": "88506d8043b46a4401cca8b1a8b5861fdd2677c5"
-    },
-    {
-     "kind": "commit",
-     "sha": "775d9298b69bd532832fdace1162c00ca94353e4"
     }
    ]
   },
@@ -1414,56 +1166,6 @@
    ]
   },
   {
-   "id": "f59",
-   "topic": "history",
-   "statement": "eval/run.py changed in 10 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "eval/run.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "commit",
-     "sha": "1cea4d20a900356556c697405f277ff229a549b8"
-    },
-    {
-     "kind": "commit",
-     "sha": "4cf1b1fa48db0a88587810a3856354a2d001c806"
-    },
-    {
-     "kind": "commit",
-     "sha": "43c22e5ce3579b42b85ee626b33198377b666381"
-    }
-   ]
-  },
-  {
-   "id": "f60",
-   "topic": "history",
-   "statement": "core/tests/test_entrypoints.py changed in 9 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/tests/test_entrypoints.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "commit",
-     "sha": "88aaddc3400b5f9f0bb822ac718f8b03eb6f44a9"
-    },
-    {
-     "kind": "commit",
-     "sha": "0ca099a34b3db50722f5f9fe53d2b024939cf145"
-    },
-    {
-     "kind": "commit",
-     "sha": "82c06621640a64ff117b713b5e290091adb65e93"
-    }
-   ]
-  },
-  {
    "id": "f61",
    "topic": "history",
    "statement": "core/src/plumb/model.py changed in 8 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
@@ -1489,31 +1191,6 @@
    ]
   },
   {
-   "id": "f62",
-   "topic": "history",
-   "statement": "core/src/plumb/system.py changed in 8 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/system.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "commit",
-     "sha": "ee58de9f2f4b90f7f7a635b35e1e4ff815f12814"
-    },
-    {
-     "kind": "commit",
-     "sha": "b50106fa5c429100614f651891df2bd6e85b134c"
-    },
-    {
-     "kind": "commit",
-     "sha": "7bead857b6785db2e760a99fe720cee945424920"
-    }
-   ]
-  },
-  {
    "id": "f63",
    "topic": "history",
    "statement": "core/src/plumb/pipeline.py changed in 6 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
@@ -1535,56 +1212,6 @@
     {
      "kind": "commit",
      "sha": "376e4b2a0973d5c76d828d86c33c0a4fb9fd86cb"
-    }
-   ]
-  },
-  {
-   "id": "f64",
-   "topic": "history",
-   "statement": "core/src/plumb/writer/plan.py changed in 6 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/writer/plan.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "commit",
-     "sha": "5ef9fd4eb5ab4a2296dfeb0cf75267cc7c2cf6b3"
-    },
-    {
-     "kind": "commit",
-     "sha": "376e4b2a0973d5c76d828d86c33c0a4fb9fd86cb"
-    },
-    {
-     "kind": "commit",
-     "sha": "a67896f31e1af1363bf2f47f8d8465be0e11e85f"
-    }
-   ]
-  },
-  {
-   "id": "f65",
-   "topic": "history",
-   "statement": "core/tests/test_system.py changed in 6 commits by 1 author between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/tests/test_system.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "commit",
-     "sha": "ee58de9f2f4b90f7f7a635b35e1e4ff815f12814"
-    },
-    {
-     "kind": "commit",
-     "sha": "b50106fa5c429100614f651891df2bd6e85b134c"
-    },
-    {
-     "kind": "commit",
-     "sha": "ae0ea2abb79d559068dd423b29e0b32c93fcc1ea"
     }
    ]
   },
@@ -1621,25 +1248,6 @@
     {
      "kind": "file",
      "path": "core/src/plumb/facts.py",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f68",
-   "topic": "history",
-   "statement": "core/src/plumb/cli.py and eval/run.py changed in the same commit 7 times between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/cli.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "eval/run.py",
      "start_line": null,
      "end_line": null
     }
@@ -1703,25 +1311,6 @@
    ]
   },
   {
-   "id": "f72",
-   "topic": "history",
-   "statement": "core/src/plumb/facts.py and eval/run.py changed in the same commit 6 times between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/facts.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "eval/run.py",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
    "id": "f73",
    "topic": "history",
    "statement": "core/src/plumb/model.py and core/src/plumb/pipeline.py changed in the same commit 5 times between 22 Aug 2026 and 20 Nov 2026",
@@ -1739,51 +1328,13 @@
      "end_line": null
     }
    ]
-  },
-  {
-   "id": "f74",
-   "topic": "history",
-   "statement": "core/src/plumb/facts.py and core/src/plumb/writer/plan.py changed in the same commit 4 times between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/facts.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "core/src/plumb/writer/plan.py",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
-  },
-  {
-   "id": "f75",
-   "topic": "history",
-   "statement": "core/src/plumb/model.py and core/src/plumb/writer/plan.py changed in the same commit 4 times between 22 Aug 2026 and 20 Nov 2026",
-   "evidence": [
-    {
-     "kind": "file",
-     "path": "core/src/plumb/model.py",
-     "start_line": null,
-     "end_line": null
-    },
-    {
-     "kind": "file",
-     "path": "core/src/plumb/writer/plan.py",
-     "start_line": null,
-     "end_line": null
-    }
-   ]
   }
  ],
  "views": {
   "stats": [
    {
     "label": "Commit",
-    "value": "391a3d8"
+    "value": "cc9ebcb"
    },
    {
     "label": "Language",
