@@ -23,3 +23,15 @@ jobs:
         run: |
           uv run plumb schema
           git diff --exit-code ../schema
+
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t plumb .
+      - name: The container starts and answers
+        run: |
+          docker run -d --name plumb -p 8000:7860 plumb
+          for i in $(seq 1 30); do curl -sf localhost:8000/api/health && exit 0; sleep 1; done
+          docker logs plumb
+          exit 1

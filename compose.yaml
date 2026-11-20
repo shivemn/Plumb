@@ -1,0 +1,39 @@
+# The whole of Plumb on one machine: `docker compose up`, then open
+# http://localhost:8080. The site talks to the API on http://localhost:8000.
+#
+# To have the server write reports, put these in a .env file beside this one
+# (it is git-ignored):
+#   PLUMB_MODEL=openrouter:nvidia/nemotron-3-ultra-550b-a55b:free
+#   OPENROUTER_API_KEY=sk-or-...
+# Without them, repos are still analysed, and the site offers to write the
+# report in your browser with your own key.
+
+services:
+  api:
+    build: .
+    image: plumb:local
+    init: true
+    ports:
+      - "8000:7860"
+    environment:
+      PLUMB_ALLOWED_ORIGINS: "http://localhost:8080"
+      PLUMB_MODEL: ${PLUMB_MODEL:-}
+      PLUMB_DAILY_REPORTS: ${PLUMB_DAILY_REPORTS:-6}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+    volumes:
+      - plumb-data:/data
+
+  site:
+    image: plumb:local
+    depends_on: [api]
+    init: true
+    command: ["python", "-m", "http.server", "8080", "--directory", "/web"]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./web:/web:ro
+
+volumes:
+  plumb-data:

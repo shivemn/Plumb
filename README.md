@@ -78,18 +78,24 @@ lines, commits or issues it came from. Set `GITHUB_TOKEN` to read issues
 and pull requests past GitHub's limit of 60 requests an hour, or pass
 `--no-github` to skip them.
 
-To run the web API and a worker on your machine:
+To run the web API, with its worker, on your machine:
 
 ```
 uv sync --extra server
 uv run plumb serve                     # http://127.0.0.1:8000/api/docs
-uv run plumb worker                    # in a second terminal
 curl -X POST localhost:8000/api/jobs -H 'content-type: application/json' \
      -d '{"repo": "pallets/click"}'
 ```
 
-The server only produces facts. Reports are written in the browser with
-the reader's own key, so no model key ever reaches it.
+Or the whole thing, site included, in Docker: `docker compose up`, then
+open http://localhost:8080.
+
+With `PLUMB_MODEL` and its key set, the server writes a few reports a day
+itself (`PLUMB_DAILY_REPORTS`, 6 by default). Past that, or with no model
+set, it still finds the facts, and the reader's browser writes the report
+with the reader's own key. That key goes from their browser straight to
+the model provider and never reaches the server. `plumb serve --help`
+lists every setting.
 
 ## Licence
 

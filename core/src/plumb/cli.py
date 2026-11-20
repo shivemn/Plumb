@@ -52,8 +52,11 @@ def schema(
         typer.echo(f"Wrote {target}")
 
 
-DEFAULT_WORKDIR = Path.home() / ".plumb" / "repos"
-GITHUB_CACHE = Path.home() / ".plumb" / "github"
+# Plumb's own files: clones, caches and the job table. PLUMB_HOME moves them,
+# for a container with its data on a volume.
+PLUMB_HOME = Path(os.environ.get("PLUMB_HOME") or Path.home() / ".plumb")
+DEFAULT_WORKDIR = PLUMB_HOME / "repos"
+GITHUB_CACHE = PLUMB_HOME / "github"
 
 
 @app.command()
@@ -131,7 +134,7 @@ def _analyse_or_exit(
     return analysis
 
 
-DEFAULT_CACHE = Path.home() / ".plumb" / "answers.sqlite"
+DEFAULT_CACHE = PLUMB_HOME / "answers.sqlite"
 
 
 @app.command()
@@ -215,7 +218,7 @@ def report(
     )
 
 
-DEFAULT_DATABASE = Path.home() / ".plumb" / "jobs.sqlite"
+DEFAULT_DATABASE = PLUMB_HOME / "jobs.sqlite"
 
 
 @app.command()

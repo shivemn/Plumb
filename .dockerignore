@@ -1,0 +1,7 @@
+# Only what the image needs; everything else stays out of the build.
+*
+!core/pyproject.toml
+!core/uv.lock
+!core/README.md
+!core/src/
+**/__pycache__
