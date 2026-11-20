@@ -87,29 +87,28 @@ export function plural(count, noun, many) {
   return `${count.toLocaleString("en")} ${count === 1 ? noun : many || `${noun}s`}`;
 }
 
+const NS = "http://www.w3.org/2000/svg";
+
+export function svg(markup, attrs = {}) {
+  const node = document.createElementNS(NS, "svg");
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  node.innerHTML = markup;
+  return node;
+}
+
+export function bobShape() {
+  return svg('<path d="M6.5 0 L13 7 L6.5 17 L0 7 Z"/>', { width: "13", height: "17", viewBox: "0 0 13 17", "aria-hidden": "true" });
+}
+
 export function brand() {
-  return h(
-    "a",
-    { class: "brand", href: "./" },
-    logo(),
-    "Plumb",
+  const mark = svg(
+    '<path d="M11 1v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M11 8.5l5 5-5 7.5-5-7.5z" fill="currentColor"/>',
+    { width: "22", height: "22", viewBox: "0 0 22 22", "aria-hidden": "true" },
   );
+  return h("a", { class: "brand", href: "./" }, mark, "Plumb");
 }
 
-function logo() {
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.setAttribute("width", "22");
-  svg.setAttribute("height", "22");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("aria-hidden", "true");
-  svg.innerHTML =
-    '<path d="M12 2v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
-    '<path d="M12 11l-5 9h10z" fill="currentColor"/>';
-  return svg;
-}
-
-export function header(current) {
+export function header() {
   return h(
     "header",
     { class: "site-header" },
@@ -117,8 +116,7 @@ export function header(current) {
     h(
       "nav",
       { class: "site-nav", "aria-label": "Site" },
-      h("a", { href: "./", "aria-current": current === "gallery" ? "page" : null, text: "Gallery" }),
-      h("a", { href: "./#try", text: "Analyse a repo" }),
+      h("a", { href: "./#recent", text: "Reports" }),
       h("a", { href: "https://github.com/shivemn/Plumb", text: "GitHub" }),
     ),
   );
@@ -128,11 +126,30 @@ export function footer() {
   return h(
     "footer",
     { class: "site-footer" },
-    h("span", { text: "Plumb explains a repo from its code. Every claim links to the lines it came from." }),
-    h("a", { href: "https://github.com/shivemn/Plumb", text: "Source on GitHub" }),
-    h("a", { href: "https://github.com/shivemn/Plumb/blob/main/docs/design.md", text: "How claims are checked" }),
+    h("span", { text: "Plumb explains a repo from its code, and every sentence links to the lines it came from." }),
+    h("a", { href: "https://github.com/shivemn/Plumb", text: "Source" }),
+    h("a", { href: "https://github.com/shivemn/Plumb/blob/main/docs/design.md", text: "How sentences are checked" }),
   );
 }
+
+// Run `onEnter` once when the node scrolls into view (at once if motion is reduced).
+export function whenSeen(node, onEnter, margin = "0px 0px -15% 0px") {
+  if (!("IntersectionObserver" in window)) return onEnter(node);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          onEnter(node);
+        }
+      }
+    },
+    { rootMargin: margin },
+  );
+  observer.observe(node);
+}
+
+export const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // A path that may break after each slash, never inside a name.
 export function pathText(path) {
