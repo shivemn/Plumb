@@ -7,7 +7,7 @@ import pytest
 from plumb.model import Fact, FactSet, FileEvidence, RepoKind, RepoRef, Topic
 from plumb.writer import models
 from plumb.writer.models import ModelError, ResponseCache, make_client
-from plumb.writer.plan import SYSTEM_PROMPT, plan_report
+from plumb.writer.plan import plan_report
 from plumb.writer.write import parse_answer, write_report, write_section
 
 
@@ -37,7 +37,7 @@ class FakeClient:
         self.prompts: list[str] = []
 
     def complete(self, system: str, prompt: str, max_tokens: int = 2000) -> str:
-        assert system == SYSTEM_PROMPT
+        assert system.startswith("You write one short section") and "{" not in system[:900]
         self.prompts.append(prompt)
         return self.answers.pop(0)
 
@@ -233,3 +233,12 @@ def test_chat_provider_needs_its_key() -> None:
     with pytest.raises(ModelError, match="set GROQ_API_KEY"):
         make_client("groq:some-model", env={})
     assert make_client("ollama:llama3", env={}).name == "ollama:llama3"
+
+
+def test_instructions_carry_the_sections_sentence_limit() -> None:
+    from plumb.writer.plan import SECTIONS
+
+    tasks = {t.section.id: t for t in plan_report(FACTS)}
+    assert "At most 3 sentences" in tasks["overview"].system
+    assert SECTIONS["contribute"].max_claims == 5
+    assert '{"claims": [{"text"' in tasks["overview"].system

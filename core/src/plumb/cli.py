@@ -17,7 +17,7 @@ from plumb.pipeline import Analysis, analyse_repo
 from plumb.site import load_repos, save_report, write_full_report, write_index
 from plumb.source import Limits, SourceError
 from plumb.writer.models import ModelError, ResponseCache, make_client
-from plumb.writer.plan import SYSTEM_PROMPT, plan_report
+from plumb.writer.plan import plan_report
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -180,7 +180,7 @@ def report(
         folder.mkdir(exist_ok=True)
         for number, task in enumerate(tasks, start=1):
             target = folder / f"{number:02d}-{task.section.id}.txt"
-            target.write_text(f"{SYSTEM_PROMPT}\n---\n{task.prompt}", encoding="utf-8")
+            target.write_text(f"{task.system}\n---\n{task.prompt}", encoding="utf-8")
             typer.echo(
                 f"{task.section.title}: {len(task.facts)} facts, "
                 f"about {task.estimated_tokens:,} input tokens"

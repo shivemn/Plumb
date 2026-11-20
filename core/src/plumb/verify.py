@@ -144,11 +144,14 @@ def verify(drafts: list[Draft], facts: FactSet, model: str) -> Report:
         for claim in draft.claims:
             result = check_claim(claim, given, all_ids)
             if result.ok:
+                if len(kept) < spec.max_claims:
+                    cited.update(claim.fact_ids)
                 kept.append(Claim(text=claim.text.strip(), fact_ids=claim.fact_ids))
-                cited.update(claim.fact_ids)
             else:
                 removed.append(RemovedClaim(section=spec.id, text=claim.text, reason=result.reason))
-        sections.append(Section(id=spec.id, title=spec.title, claims=kept))
+        # A model that writes more than asked keeps its first sentences only: the
+        # extra ones are not wrong, so they are not listed as removed.
+        sections.append(Section(id=spec.id, title=spec.title, claims=kept[: spec.max_claims]))
     return Report(
         repo=facts.repo,
         kind=facts.kind,

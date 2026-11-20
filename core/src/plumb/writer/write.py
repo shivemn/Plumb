@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from pydantic import BaseModel, ValidationError
 
 from plumb.writer.models import ModelClient, ResponseCache
-from plumb.writer.plan import SYSTEM_PROMPT, SectionTask
+from plumb.writer.plan import SectionTask
 
 
 class DraftClaim(BaseModel):
@@ -56,7 +56,7 @@ def write_section(
     Only answers that can be read are cached, so a bad answer is never
     replayed on the next run.
     """
-    key = ResponseCache.key(client.name, SYSTEM_PROMPT, task.cache_text)
+    key = ResponseCache.key(client.name, task.system, task.cache_text)
     cached = cache.get(key) if cache is not None else None
     if cached is not None:
         try:
@@ -66,7 +66,7 @@ def write_section(
     prompt = task.prompt
     for attempt in range(2):
         # Room for models that think before answering; only tokens used are billed.
-        text = client.complete(SYSTEM_PROMPT, prompt, max_tokens=4000)
+        text = client.complete(task.system, prompt, max_tokens=4000)
         try:
             claims = parse_answer(text).claims
         except ValueError as error:
