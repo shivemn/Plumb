@@ -216,6 +216,8 @@ def test_a_model_failure_still_leaves_the_facts(store: JobStore) -> None:
     job = run_once(store, fake_analyse, StubWriter(daily_reports=5, fail=True))
     assert job is not None and job.status is Status.DONE
     assert job.facts is not None and job.report is None
+    assert job.note is not None and "rate limited" in job.note
+    assert api(store).get(f"/api/jobs/{job.id}").json()["note"] == job.note
 
 
 def test_api(store: JobStore) -> None:

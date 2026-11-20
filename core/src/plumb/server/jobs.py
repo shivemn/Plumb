@@ -35,13 +35,14 @@ CREATE TABLE IF NOT EXISTS jobs (
     stage TEXT,
     report TEXT,
     client TEXT,
-    views TEXT
+    views TEXT,
+    note TEXT
 );
 CREATE INDEX IF NOT EXISTS jobs_queue ON jobs (status, created_at);
 CREATE INDEX IF NOT EXISTS jobs_repo ON jobs (repo, commit_sha);
 """
 # Columns added after the first version, for tables made before them.
-_LATER_COLUMNS = ("stage", "report", "client", "views")
+_LATER_COLUMNS = ("stage", "report", "client", "views", "note")
 
 # A running job not finished in this time is taken to be from a worker that died.
 STALE_AFTER = timedelta(minutes=15)
@@ -70,6 +71,7 @@ class Job:
     stage: str | None = None  # what the worker is doing, for the progress view
     report: str | None = None  # Report JSON, when the server wrote one
     views: str | None = None  # Views JSON: the diagrams and tables, written without a model
+    note: str | None = None  # why a finished job has no report, when the model failed
 
 
 def _now() -> datetime:
@@ -94,6 +96,7 @@ def _job(row: sqlite3.Row) -> Job:
         stage=row["stage"],
         report=row["report"],
         views=row["views"],
+        note=row["note"],
     )
 
 
@@ -199,11 +202,12 @@ class JobStore:
         facts: str,
         report: str | None = None,
         views: str | None = None,
+        note: str | None = None,
     ) -> None:
         self._run(
             "UPDATE jobs SET status = ?, finished_at = ?, commit_sha = ?, facts = ?, report = ?, "
-            "views = ?, stage = NULL WHERE id = ?",
-            (Status.DONE.value, _now().isoformat(), commit, facts, report, views, job_id),
+            "views = ?, note = ?, stage = NULL WHERE id = ?",
+            (Status.DONE.value, _now().isoformat(), commit, facts, report, views, note, job_id),
         )
 
     def set_stage(self, job_id: str, stage: str) -> None:

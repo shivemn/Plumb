@@ -108,6 +108,7 @@ def run_once(
         with time_limit(seconds):
             analysis = analyse(job, progress)
             report = None
+            note = None
             if writer is not None and writer.has_room(store):
                 progress("Writing and checking the report")
                 try:
@@ -115,6 +116,7 @@ def run_once(
                 except ModelError as error:
                     # The facts still stand; the visitor can write the report themselves.
                     log.warning("job %s: the model failed: %s", job.id, error)
+                    note = f"The server's model could not write the report. {error}"[:400]
     except SourceError as error:
         store.fail(job.id, str(error))
         log.info("job %s for %s failed: %s", job.id, job.repo, error)
@@ -132,6 +134,7 @@ def run_once(
             analysis.facts.model_dump_json(),
             report.model_dump_json() if report is not None else None,
             build_views(analysis).model_dump_json(),
+            note,
         )
         log.info("job %s for %s done in %.1f s", job.id, job.repo, time.monotonic() - started)
     finally:

@@ -67,7 +67,7 @@ export async function showJob(id) {
   if (saved) return show(root, render(saved, { download: jsonDownload(saved) }));
   const [facts, views] = await Promise.all([getJobPart(id, "facts"), getJobPart(id, "views").catch(() => null)]);
   const bare = { repo: facts.repo, kind: facts.kind, model: null, sections: [], removed: [], facts: [], views };
-  show(root, render(bare, { lead: writer(id) }));
+  show(root, render(bare, { lead: writer(id, job.note) }));
 }
 
 function stageIndex(line, stage) {
@@ -135,7 +135,7 @@ function plumbLine(stages) {
 }
 
 // The panel that writes the explanation with the visitor's own key.
-function writer(id) {
+function writer(id, note) {
   const remembered = load("plumb:writer") || {};
   let provider = PROVIDERS[remembered.provider] ? remembered.provider : "openrouter";
   let tasks = null;
@@ -229,11 +229,17 @@ function writer(id) {
       go.disabled = true;
       error.replaceChildren(notice(failure.message));
     });
-  getHealth()
-    .then((health) => {
-      if (health.server_model && health.server_reports_left_today === 0) why.prepend("Plumb's free reports for today have been used. ");
-    })
-    .catch(() => {});
+  if (note) {
+    // The server's own model tried and failed; say so, with its reason tucked away.
+    why.prepend("Plumb's free model could not write this one just now. ");
+    why.after(h("details", { class: "why-not" }, h("summary", { text: "What went wrong" }), h("p", { text: note })));
+  } else {
+    getHealth()
+      .then((health) => {
+        if (health.server_model && health.server_reports_left_today === 0) why.prepend("Plumb's free reports for today have been used. ");
+      })
+      .catch(() => {});
+  }
   return panel;
 }
 

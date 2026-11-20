@@ -76,6 +76,7 @@ class JobView(BaseModel):
     facts_url: str | None
     report_url: str | None
     tasks_url: str | None
+    note: str | None = None  # why there is no report, when the server's model failed
     queue_position: int | None = None
 
 
@@ -106,6 +107,7 @@ def _view(job: Job, waiting: int | None = None) -> JobView:
         report_url=f"{base}/report" if done and job.report else None,
         tasks_url=f"{base}/tasks" if done and not job.report else None,
         queue_position=waiting if job.status is Status.QUEUED else None,
+        note=job.note,
     )
 
 
