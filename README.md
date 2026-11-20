@@ -5,10 +5,13 @@ where it changes most, and how to start contributing. Every claim in a
 report links to the file, commit or issue it came from. Anything the
 repo does not show is marked "not determined" instead of guessed.
 
+**Site:** https://shivemn.github.io/Plumb/ has a gallery of reports.
+
 **Status:** early development. Analysis works for Python, Java, JavaScript
 and TypeScript repos, and `plumb report` writes a checked report with a
-model. A web API queues repos and serves their facts; there is no website
-yet. See [docs/roadmap.md](docs/roadmap.md).
+model, free ones included. The site shows reports written ahead of time;
+submitting your own repo there, with your own key, comes next. See
+[docs/roadmap.md](docs/roadmap.md).
 
 ## How it works
 
@@ -27,7 +30,7 @@ yet. See [docs/roadmap.md](docs/roadmap.md).
 |----------|---------------|
 | `core`   | Python analysis pipeline, verifier and command-line tool |
 | `miner`  | Go version of the repo miner (later phase) |
-| `web`    | Astro and React site (later phase) |
+| `web`    | The static site: gallery and report page, published to GitHub Pages |
 | `schema` | JSON Schema shared by the Python, Go and TypeScript parts |
 | `eval`   | Test repos and hand-written answer keys |
 | `docs`   | Design notes and roadmap |

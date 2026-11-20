@@ -124,7 +124,12 @@ These three are now tuned against too.
 
 ## Weeks 13 to 16 (next)
 
-- [ ] Website: report page, system design and code map diagrams, gallery
+- [x] Static site on GitHub Pages: gallery, report page with the system
+      design diagram, request traces, code map, hot spots and sources
+      beside every claim. Reports are written ahead of time with a free
+      model by `plumb site build`, which carries on the next day when it
+      reaches the model's daily limit
+- [ ] Submit a repo on the site: job page, then the report page above
 - [ ] Bring-your-own-key in the browser: model picker, cost estimate,
       verifier run in the page
 - [ ] Go miner and speed comparison
