@@ -45,6 +45,10 @@ class Part:
 class System:
     def __init__(self) -> None:
         self.parts: dict[tuple[Role, str], Part] = {}
+        # Who uses whom, where a file says so: (part, part it uses, where)
+        self.links: list[tuple[str, str, Clue]] = []
+        # The folder a service is built from, from Compose build contexts
+        self.folders: dict[str, str] = {}
 
     def add(self, role: Role, name: str, clue: Clue) -> None:
         part = self.parts.setdefault((role, name), Part(role, name))
@@ -125,26 +129,55 @@ _TEST_SERVICE = re.compile(r"(playwright|cypress|selenium|e2e|\btests?\b|-tests?
 
 def compose_parts(system: System, path: str, text: str) -> None:
     root = _load_nodes(text)
+    names: dict[str, str] = {}  # Compose service name -> part name
+    depends: list[tuple[str, Node, int]] = []
     for name, service, line in _items(_get(root, "services")):
         image = _scalar(_get(service, "image"))
         build = _get(service, "build")
         known = image_part(image) if image else None
+        depends_on = _get(service, "depends_on")
+        if depends_on is not None:
+            depends.append((name, depends_on, line))
         if known is not None:
             role, part = known
+            names[name] = part
             system.add(role, part, Clue(path, line, f"Compose service {name}, image {image}"))
         elif build is not None:
             context = _scalar(build) or _scalar(_get(build, "context")) or "."
+            names[name] = name
             if _TEST_SERVICE.search(name):  # browser tests and the like, not the app
                 detail = f"Compose service built from {context}, used for tests"
                 system.add(Role.CONTAINER, name, Clue(path, line, detail))
                 continue
+            folder = PurePosixPath(path).parent / context
+            system.folders[name] = _normal(str(folder))
             system.add(
                 Role.SERVICE, name, Clue(path, line, f"Compose service built from {context}")
             )
         elif image:
             # Built elsewhere in the same setup (often tagged by another file), or a
             # third-party container. Say only what the file says.
+            names[name] = name
             system.add(Role.CONTAINER, name, Clue(path, line, f"Compose service, image {image}"))
+    for name, depends_on, line in depends:
+        targets = [t for t, _, _ in _items(depends_on)]
+        if isinstance(depends_on, SequenceNode):  # depends_on: [db, redis]
+            items = cast("list[Node]", depends_on.value)
+            targets = [str(i.value) for i in items if isinstance(i, ScalarNode)]
+        for target in targets:
+            if target in names and name in names:
+                system.links.append((names[name], names[target], Clue(path, line, "depends_on")))
+
+
+def _normal(path: str) -> str:
+    parts: list[str] = []
+    for part in path.split("/"):
+        if part == "..":
+            if parts:
+                parts.pop()
+        elif part not in (".", ""):
+            parts.append(part)
+    return "/".join(parts)
 
 
 # Folders whose Dockerfiles build packages or run tools rather than the app.

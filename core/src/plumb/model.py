@@ -139,6 +139,125 @@ class RemovedClaim(Strict):
     reason: str
 
 
+# Views: what the page draws beside the claims. They come straight from the
+# analysis, not from a model, so a section can show its diagram or table even
+# when every claim in it was removed. Each item names the file it came from.
+
+
+class Place(Strict):
+    path: str
+    line: int | None = None
+
+
+class Stat(Strict):
+    label: str
+    value: str
+
+
+class SystemPart(Strict):
+    name: str
+    role: Literal["service", "store", "monitoring", "outside", "container"]
+    detail: str
+    places: list[Place]
+
+
+class SystemLink(Strict):
+    source: str  # a part name, or "Clients" for whatever calls the routes
+    target: str
+    label: str
+    place: Place | None = None
+
+
+class SystemView(Strict):
+    parts: list[SystemPart]
+    links: list[SystemLink]
+    links_known: bool = Field(description="False when parts exist but who uses what is unknown.")
+
+
+class FileBlock(Strict):
+    path: str
+    lines: int
+    commits: int
+
+
+class Folder(Strict):
+    path: str
+    files: int
+    lines: int
+    blocks: list[FileBlock]
+    uses: list[str]
+
+
+class CodeMap(Strict):
+    rows: list[list[Folder]] = Field(description="Folders higher up use folders lower down.")
+    shown_files: int
+    left_out: str
+    warm: int = Field(description="Commits from which a file counts as often changed.")
+    hot: int
+
+
+class HotSpot(Strict):
+    path: str
+    commits: int
+    authors: int
+    changes_with: list[str]
+
+
+class ApiName(Strict):
+    name: str
+    kind: str
+    signature: str = ""
+    summary: str = ""
+    place: Place
+
+
+class FlowStep(Strict):
+    name: str
+    place: Place
+    caller: int | None = None
+    before: bool = False
+
+
+class FlowReach(Strict):
+    what: str
+    call: str
+    place: Place
+    by: int
+
+
+class FlowView(Strict):
+    route: str
+    place: Place
+    steps: list[FlowStep]
+    reaches: list[FlowReach]
+
+
+class RouteRow(Strict):
+    kind: str  # "HTTP route", "Command", ...
+    name: str
+    framework: str = ""
+    place: Place
+
+
+class Gap(Strict):
+    title: str
+    detail: str
+
+
+class Views(Strict):
+    stats: list[Stat]
+    system: SystemView | None = None
+    code_map: CodeMap | None = None
+    hot_spots: list[HotSpot] = Field(default_factory=list[HotSpot])
+    window: str = ""
+    api: list[ApiName] = Field(default_factory=list[ApiName])
+    api_root: str = ""
+    flows: list[FlowView] = Field(default_factory=list[FlowView])
+    flows_traced: int = 0
+    routes: list[RouteRow] = Field(default_factory=list[RouteRow])
+    gaps: list[Gap] = Field(default_factory=list[Gap])
+
+
 class Report(Strict):
     """What the web app renders: verified claims, grouped into sections."""
 
@@ -150,4 +269,8 @@ class Report(Strict):
     removed: list[RemovedClaim]
     facts: list[Fact] = Field(
         description="Every fact a kept claim cites, so the report stands alone."
+    )
+    views: Views | None = None
+    written_at: str | None = Field(
+        default=None, description="When the report was written, ISO date."
     )

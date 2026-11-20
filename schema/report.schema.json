@@ -1,5 +1,38 @@
 {
   "$defs": {
+    "ApiName": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "signature": {
+          "default": "",
+          "title": "Signature",
+          "type": "string"
+        },
+        "summary": {
+          "default": "",
+          "title": "Summary",
+          "type": "string"
+        },
+        "place": {
+          "$ref": "#/$defs/Place"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "place"
+      ],
+      "title": "ApiName",
+      "type": "object"
+    },
     "Claim": {
       "additionalProperties": false,
       "description": "A sentence the model wrote. It must cite at least one fact.",
@@ -23,6 +56,48 @@
         "fact_ids"
       ],
       "title": "Claim",
+      "type": "object"
+    },
+    "CodeMap": {
+      "additionalProperties": false,
+      "properties": {
+        "rows": {
+          "description": "Folders higher up use folders lower down.",
+          "items": {
+            "items": {
+              "$ref": "#/$defs/Folder"
+            },
+            "type": "array"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "shown_files": {
+          "title": "Shown Files",
+          "type": "integer"
+        },
+        "left_out": {
+          "title": "Left Out",
+          "type": "string"
+        },
+        "warm": {
+          "description": "Commits from which a file counts as often changed.",
+          "title": "Warm",
+          "type": "integer"
+        },
+        "hot": {
+          "title": "Hot",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "rows",
+        "shown_files",
+        "left_out",
+        "warm",
+        "hot"
+      ],
+      "title": "CodeMap",
       "type": "object"
     },
     "CommitEvidence": {
@@ -99,6 +174,30 @@
       "title": "Fact",
       "type": "object"
     },
+    "FileBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "lines": {
+          "title": "Lines",
+          "type": "integer"
+        },
+        "commits": {
+          "title": "Commits",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "lines",
+        "commits"
+      ],
+      "title": "FileBlock",
+      "type": "object"
+    },
     "FileEvidence": {
       "additionalProperties": false,
       "properties": {
@@ -147,6 +246,194 @@
       "title": "FileEvidence",
       "type": "object"
     },
+    "FlowReach": {
+      "additionalProperties": false,
+      "properties": {
+        "what": {
+          "title": "What",
+          "type": "string"
+        },
+        "call": {
+          "title": "Call",
+          "type": "string"
+        },
+        "place": {
+          "$ref": "#/$defs/Place"
+        },
+        "by": {
+          "title": "By",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "what",
+        "call",
+        "place",
+        "by"
+      ],
+      "title": "FlowReach",
+      "type": "object"
+    },
+    "FlowStep": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "place": {
+          "$ref": "#/$defs/Place"
+        },
+        "caller": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caller"
+        },
+        "before": {
+          "default": false,
+          "title": "Before",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "place"
+      ],
+      "title": "FlowStep",
+      "type": "object"
+    },
+    "FlowView": {
+      "additionalProperties": false,
+      "properties": {
+        "route": {
+          "title": "Route",
+          "type": "string"
+        },
+        "place": {
+          "$ref": "#/$defs/Place"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/FlowStep"
+          },
+          "title": "Steps",
+          "type": "array"
+        },
+        "reaches": {
+          "items": {
+            "$ref": "#/$defs/FlowReach"
+          },
+          "title": "Reaches",
+          "type": "array"
+        }
+      },
+      "required": [
+        "route",
+        "place",
+        "steps",
+        "reaches"
+      ],
+      "title": "FlowView",
+      "type": "object"
+    },
+    "Folder": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "files": {
+          "title": "Files",
+          "type": "integer"
+        },
+        "lines": {
+          "title": "Lines",
+          "type": "integer"
+        },
+        "blocks": {
+          "items": {
+            "$ref": "#/$defs/FileBlock"
+          },
+          "title": "Blocks",
+          "type": "array"
+        },
+        "uses": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Uses",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "files",
+        "lines",
+        "blocks",
+        "uses"
+      ],
+      "title": "Folder",
+      "type": "object"
+    },
+    "Gap": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "detail"
+      ],
+      "title": "Gap",
+      "type": "object"
+    },
+    "HotSpot": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "commits": {
+          "title": "Commits",
+          "type": "integer"
+        },
+        "authors": {
+          "title": "Authors",
+          "type": "integer"
+        },
+        "changes_with": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Changes With",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "commits",
+        "authors",
+        "changes_with"
+      ],
+      "title": "HotSpot",
+      "type": "object"
+    },
     "IssueEvidence": {
       "additionalProperties": false,
       "properties": {
@@ -166,6 +453,32 @@
         "number"
       ],
       "title": "IssueEvidence",
+      "type": "object"
+    },
+    "Place": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "Place",
       "type": "object"
     },
     "RemovedClaim": {
@@ -235,6 +548,34 @@
       "title": "RepoRef",
       "type": "object"
     },
+    "RouteRow": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "framework": {
+          "default": "",
+          "title": "Framework",
+          "type": "string"
+        },
+        "place": {
+          "$ref": "#/$defs/Place"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "place"
+      ],
+      "title": "RouteRow",
+      "type": "object"
+    },
     "Section": {
       "additionalProperties": false,
       "description": "One part of a report, such as the system design or how to contribute.",
@@ -265,6 +606,130 @@
       "title": "Section",
       "type": "object"
     },
+    "Stat": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ],
+      "title": "Stat",
+      "type": "object"
+    },
+    "SystemLink": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "place": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Place"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "source",
+        "target",
+        "label"
+      ],
+      "title": "SystemLink",
+      "type": "object"
+    },
+    "SystemPart": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "service",
+            "store",
+            "monitoring",
+            "outside",
+            "container"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "places": {
+          "items": {
+            "$ref": "#/$defs/Place"
+          },
+          "title": "Places",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "role",
+        "detail",
+        "places"
+      ],
+      "title": "SystemPart",
+      "type": "object"
+    },
+    "SystemView": {
+      "additionalProperties": false,
+      "properties": {
+        "parts": {
+          "items": {
+            "$ref": "#/$defs/SystemPart"
+          },
+          "title": "Parts",
+          "type": "array"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/$defs/SystemLink"
+          },
+          "title": "Links",
+          "type": "array"
+        },
+        "links_known": {
+          "description": "False when parts exist but who uses what is unknown.",
+          "title": "Links Known",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "parts",
+        "links",
+        "links_known"
+      ],
+      "title": "SystemView",
+      "type": "object"
+    },
     "Topic": {
       "description": "What a fact is about. The prompt planner picks facts for each section by topic.",
       "enum": [
@@ -286,6 +751,95 @@
       ],
       "title": "Topic",
       "type": "string"
+    },
+    "Views": {
+      "additionalProperties": false,
+      "properties": {
+        "stats": {
+          "items": {
+            "$ref": "#/$defs/Stat"
+          },
+          "title": "Stats",
+          "type": "array"
+        },
+        "system": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SystemView"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "code_map": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CodeMap"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "hot_spots": {
+          "items": {
+            "$ref": "#/$defs/HotSpot"
+          },
+          "title": "Hot Spots",
+          "type": "array"
+        },
+        "window": {
+          "default": "",
+          "title": "Window",
+          "type": "string"
+        },
+        "api": {
+          "items": {
+            "$ref": "#/$defs/ApiName"
+          },
+          "title": "Api",
+          "type": "array"
+        },
+        "api_root": {
+          "default": "",
+          "title": "Api Root",
+          "type": "string"
+        },
+        "flows": {
+          "items": {
+            "$ref": "#/$defs/FlowView"
+          },
+          "title": "Flows",
+          "type": "array"
+        },
+        "flows_traced": {
+          "default": 0,
+          "title": "Flows Traced",
+          "type": "integer"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/$defs/RouteRow"
+          },
+          "title": "Routes",
+          "type": "array"
+        },
+        "gaps": {
+          "items": {
+            "$ref": "#/$defs/Gap"
+          },
+          "title": "Gaps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stats"
+      ],
+      "title": "Views",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -329,6 +883,30 @@
       },
       "title": "Facts",
       "type": "array"
+    },
+    "views": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Views"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "written_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "When the report was written, ISO date.",
+      "title": "Written At"
     }
   },
   "required": [

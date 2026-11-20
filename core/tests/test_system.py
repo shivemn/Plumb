@@ -210,3 +210,22 @@ def test_compose_test_containers_are_not_services() -> None:
     compose_parts(system, "docker-compose.yml", compose)
     assert [p.name for p in system.of(Role.SERVICE)] == ["backend"]
     assert [p.name for p in system.of(Role.CONTAINER)] == ["playwright"]
+
+
+def test_compose_depends_on_and_build_folders() -> None:
+    system = System()
+    compose = (
+        "services:\n"
+        "  api:\n    build: ./backend\n    depends_on: [db, cache]\n"
+        "  worker:\n    build:\n      context: backend\n"
+        "    depends_on:\n      db:\n        condition: service_healthy\n"
+        "  db:\n    image: postgres:16\n"
+        "  cache:\n    image: redis:7\n"
+    )
+    compose_parts(system, "deploy/compose.yml", compose)
+    assert [(a, b) for a, b, _ in system.links] == [
+        ("api", "PostgreSQL"),
+        ("api", "Redis"),
+        ("worker", "PostgreSQL"),
+    ]
+    assert system.folders == {"api": "deploy/backend", "worker": "deploy/backend"}
