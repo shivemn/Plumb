@@ -1,3 +1,81 @@
 {
- "reports": []
+ "reports": [
+  {
+   "slug": "shivemn__Plumb",
+   "repo": "shivemn/Plumb",
+   "commit": "391a3d8a5e527dacb86f5cc70868638cee7373b1",
+   "kind": "service",
+   "summary": "This is a service repository with 4 routes, consumers, or scheduled jobs.",
+   "kept": 49,
+   "removed": 0,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  },
+  {
+   "slug": "fastapi__full-stack-fastapi-template",
+   "repo": "fastapi/full-stack-fastapi-template",
+   "commit": "77e550a73bb49dd2967622c5ed11bf7a49603c93",
+   "kind": "service",
+   "summary": "This repository contains a service with one deployable service and 23 routes, consumers, or scheduled jobs.",
+   "kept": 49,
+   "removed": 0,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  },
+  {
+   "slug": "spring-projects__spring-petclinic",
+   "repo": "spring-projects/spring-petclinic",
+   "commit": "500158f732419217507c7656904b8e6aa1bcc0d6",
+   "kind": "service",
+   "summary": "This repository is a service with 17 routes, consumers, or scheduled jobs.",
+   "kept": 50,
+   "removed": 0,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  },
+  {
+   "slug": "encode__httpx",
+   "repo": "encode/httpx",
+   "commit": "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016",
+   "kind": "library",
+   "summary": "This is a library repository with a package definition whose only command needs an optional extra.",
+   "kept": 26,
+   "removed": 2,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  },
+  {
+   "slug": "pallets__click",
+   "repo": "pallets/click",
+   "commit": "08b803cf32ceb2ae6a772c62d5da42757a897d44",
+   "kind": "library",
+   "summary": "This repository is a Python library with 17 source files totaling 12,823 lines of code.",
+   "kept": 39,
+   "removed": 0,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  },
+  {
+   "slug": "shivemn__market-lab",
+   "repo": "shivemn/market-lab",
+   "commit": "129b31b76e87c0fe87bbdc8e8a649615e349e882",
+   "kind": "service",
+   "summary": "This is a service repository with one deployable service and 30 routes, consumers, or scheduled jobs.",
+   "kept": 52,
+   "removed": 1,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  },
+  {
+   "slug": "gothinkster__node-express-realworld-example-app",
+   "repo": "gothinkster/node-express-realworld-example-app",
+   "commit": "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b",
+   "kind": "service",
+   "summary": "This repository contains a single deployable service with 20 routes, consumers, or scheduled jobs.",
+   "kept": 24,
+   "removed": 5,
+   "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+   "written_at": "2026-11-20"
+  }
+ ]
 }

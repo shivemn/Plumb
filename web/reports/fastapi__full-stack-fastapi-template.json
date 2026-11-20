@@ -1,0 +1,3361 @@
+{
+ "schema_version": 1,
+ "repo": {
+  "owner": "fastapi",
+  "name": "full-stack-fastapi-template",
+  "commit": "77e550a73bb49dd2967622c5ed11bf7a49603c93"
+ },
+ "kind": "service",
+ "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+ "sections": [
+  {
+   "id": "overview",
+   "title": "Overview",
+   "claims": [
+    {
+     "text": "This repository contains a service with one deployable service and 23 routes, consumers, or scheduled jobs.",
+     "fact_ids": [
+      "f1"
+     ]
+    },
+    {
+     "text": "The codebase is written primarily in TypeScript with 96 source files and Python with 28 source files.",
+     "fact_ids": [
+      "f2",
+      "f3"
+     ]
+    },
+    {
+     "text": "It uses Docker and docker-compose for deployment, with a backend Dockerfile and compose.yml configuration.",
+     "fact_ids": [
+      "f23",
+      "f25"
+     ]
+    },
+    {
+     "text": "The project includes GitHub Actions workflows for testing, deployment, and release automation.",
+     "fact_ids": [
+      "f8",
+      "f11",
+      "f12",
+      "f20",
+      "f21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "system",
+   "title": "System design",
+   "claims": [
+    {
+     "text": "The backend service runs FastAPI with four workers and is built from the repository Dockerfile.",
+     "fact_ids": [
+      "f30"
+     ]
+    },
+    {
+     "text": "PostgreSQL runs as the db service using the postgres:18 image and is accessed via psycopg.",
+     "fact_ids": [
+      "f31"
+     ]
+    },
+    {
+     "text": "Sentry is used as an outside service with the sentry-sdk dependency.",
+     "fact_ids": [
+      "f32"
+     ]
+    },
+    {
+     "text": "Adminer runs as a Compose service using the adminer image.",
+     "fact_ids": [
+      "f33"
+     ]
+    },
+    {
+     "text": "Mailpit runs as a Compose service using the axllent/mailpit image.",
+     "fact_ids": [
+      "f34"
+     ]
+    },
+    {
+     "text": "Playwright runs as a Compose service built from the repository and is used for tests.",
+     "fact_ids": [
+      "f35"
+     ]
+    },
+    {
+     "text": "A proxy runs as a Compose service using the traefik:v3.7 image.",
+     "fact_ids": [
+      "f36"
+     ]
+    },
+    {
+     "text": "There are five Alembic database migrations in backend/app/alembic/versions.",
+     "fact_ids": [
+      "f51"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "title": "How a request moves",
+   "claims": [
+    {
+     "text": "A typical request passes through backend/app/api/routes then backend/app then backend/app/core.",
+     "fact_ids": [
+      "f92"
+     ]
+    },
+    {
+     "text": "19 of 23 traced routes reach the database.",
+     "fact_ids": [
+      "f93"
+     ]
+    },
+    {
+     "text": "POST /api/v1/users/ is handled by create_user in backend/app/api/routes/users.py.",
+     "fact_ids": [
+      "f94"
+     ]
+    },
+    {
+     "text": "create_user calls get_user_by_email in backend/app/crud.py, create_user in backend/app/crud.py, generate_new_account_email in backend/app/utils.py and send_email.",
+     "fact_ids": [
+      "f94"
+     ]
+    },
+    {
+     "text": "create_user in backend/app/crud.py calls get_password_hash in backend/app/core/security.py.",
+     "fact_ids": [
+      "f94"
+     ]
+    },
+    {
+     "text": "get_user_by_email reaches the database via session.exec in backend/app/crud.py.",
+     "fact_ids": [
+      "f94"
+     ]
+    },
+    {
+     "text": "POST /api/v1/login/access-token is handled by login_access_token in backend/app/api/routes/login.py.",
+     "fact_ids": [
+      "f95"
+     ]
+    },
+    {
+     "text": "login_access_token calls authenticate in backend/app/crud.py and create_access_token in backend/app/core/security.py.",
+     "fact_ids": [
+      "f95"
+     ]
+    },
+    {
+     "text": "authenticate calls get_user_by_email and verify_password.",
+     "fact_ids": [
+      "f95"
+     ]
+    },
+    {
+     "text": "authenticate reaches the database via session.add in backend/app/crud.py.",
+     "fact_ids": [
+      "f95"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "entry_points",
+   "title": "Ways into the code",
+   "claims": [
+    {
+     "text": "The backend exposes 23 HTTP routes across five route modules: items, login, private, users, and utils.",
+     "fact_ids": [
+      "f52",
+      "f53",
+      "f54",
+      "f55",
+      "f56",
+      "f57",
+      "f58",
+      "f59",
+      "f60",
+      "f61",
+      "f62",
+      "f63",
+      "f64",
+      "f65",
+      "f66",
+      "f67",
+      "f68",
+      "f69",
+      "f70",
+      "f71",
+      "f72",
+      "f73",
+      "f74",
+      "f75"
+     ]
+    },
+    {
+     "text": "Three Typer CLI commands are defined in scripts/prepare_release.py: prepare, current-version, and release-notes.",
+     "fact_ids": [
+      "f76",
+      "f77",
+      "f78",
+      "f79"
+     ]
+    },
+    {
+     "text": "Three Python scripts serve as program entry points: backend/app/initial_data.py, scripts/add_latest_release_date.py, and scripts/prepare_release.py.",
+     "fact_ids": [
+      "f80",
+      "f81",
+      "f82",
+      "f83"
+     ]
+    },
+    {
+     "text": "Seven package scripts are defined across frontend/package.json, packages/react-email/package.json, and the root package.json for development, building, and testing.",
+     "fact_ids": [
+      "f84",
+      "f85",
+      "f86",
+      "f87",
+      "f88",
+      "f89",
+      "f90",
+      "f91"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "structure",
+   "title": "Code map",
+   "claims": [
+    {
+     "text": "The repository contains 96 TypeScript source files totaling 10,010 lines, 28 Python source files totaling 1,736 lines, 1 CSS file with 124 lines, 8 shell files with 76 lines, and 3 HTML files with 16 lines.",
+     "fact_ids": [
+      "f2",
+      "f3",
+      "f4",
+      "f5",
+      "f6"
+     ]
+    },
+    {
+     "text": "Frontend components in Admin, Items, UserSettings, and Common all depend on the ui component library with 20, 18, 10, and 8 references respectively.",
+     "fact_ids": [
+      "f128",
+      "f129",
+      "f134",
+      "f135"
+     ]
+    },
+    {
+     "text": "The frontend ui component library depends on frontend/src/lib with 23 references.",
+     "fact_ids": [
+      "f127"
+     ]
+    },
+    {
+     "text": "Frontend routes depend on the ui component library with 15 references, on the Common component with 7 references, and on hooks with 7 references.",
+     "fact_ids": [
+      "f130",
+      "f136",
+      "f137"
+     ]
+    },
+    {
+     "text": "Frontend src and frontend/src/routes have a bidirectional dependency with 6 references from src to routes.",
+     "fact_ids": [
+      "f138",
+      "f145"
+     ]
+    },
+    {
+     "text": "The frontend client/client module depends on client/core with 14 references.",
+     "fact_ids": [
+      "f131"
+     ]
+    },
+    {
+     "text": "In the react-email package, emails depend on ui with 12 references.",
+     "fact_ids": [
+      "f132"
+     ]
+    },
+    {
+     "text": "Backend app/api/routes depends on backend/app with 10 references.",
+     "fact_ids": [
+      "f133"
+     ]
+    },
+    {
+     "text": "Backend app depends on backend/app/core with 5 references, and these two have a bidirectional dependency.",
+     "fact_ids": [
+      "f139",
+      "f143"
+     ]
+    },
+    {
+     "text": "Backend app/api and backend/app/api/routes have a bidirectional dependency, each with 5 references to the other.",
+     "fact_ids": [
+      "f140",
+      "f141",
+      "f144"
+     ]
+    },
+    {
+     "text": "Backend app and backend/app/api have a bidirectional dependency.",
+     "fact_ids": [
+      "f142"
+     ]
+    },
+    {
+     "text": "The most depended-upon files are frontend/src/lib/utils.ts used by 27 files, frontend/src/client/index.ts used by 20 files, frontend/src/components/ui/button.tsx used by 18 files, backend/app/core/config.py used by 16 files, and backend/app/models.py used by 16 files.",
+     "fact_ids": [
+      "f146",
+      "f147",
+      "f148",
+      "f149",
+      "f150"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hot_spots",
+   "title": "Hot spots",
+   "claims": []
+  },
+  {
+   "id": "contribute",
+   "title": "How to contribute",
+   "claims": [
+    {
+     "text": "Run the frontend development server with bun run dev in the frontend directory.",
+     "fact_ids": [
+      "f85"
+     ]
+    },
+    {
+     "text": "Build the frontend with bun run build in the frontend directory.",
+     "fact_ids": [
+      "f86"
+     ]
+    },
+    {
+     "text": "Run frontend tests with bun run test in the frontend directory.",
+     "fact_ids": [
+      "f87"
+     ]
+    },
+    {
+     "text": "Run the frontend development server from the repository root with bun run dev.",
+     "fact_ids": [
+      "f88"
+     ]
+    },
+    {
+     "text": "Run frontend tests from the repository root with bun run test.",
+     "fact_ids": [
+      "f89"
+     ]
+    },
+    {
+     "text": "Build react-email templates with bun run build in the packages/react-email directory.",
+     "fact_ids": [
+      "f90"
+     ]
+    },
+    {
+     "text": "Run react-email development server on port 3333 with bun run dev in the packages/react-email directory.",
+     "fact_ids": [
+      "f91"
+     ]
+    },
+    {
+     "text": "CI updates pre-commit hooks with uv run prek update --freeze --cooldown-days 7.",
+     "fact_ids": [
+      "f102"
+     ]
+    },
+    {
+     "text": "CI extracts release version with uv run python scripts/prepare_release.py current-version.",
+     "fact_ids": [
+      "f121"
+     ]
+    },
+    {
+     "text": "CI generates release notes with uv run python scripts/prepare_release.py release-notes.",
+     "fact_ids": [
+      "f122"
+     ]
+    },
+    {
+     "text": "Recently closed pull requests were merged a median of 43 hours after being opened.",
+     "fact_ids": [
+      "f126"
+     ]
+    }
+   ]
+  }
+ ],
+ "removed": [],
+ "facts": [
+  {
+   "id": "f1",
+   "topic": "kind",
+   "statement": "Looks like a service repo: 1 deployable service(s) and 23 route(s), consumer(s) or scheduled job(s)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/Dockerfile",
+     "start_line": 1,
+     "end_line": 1
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 13,
+     "end_line": 13
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 48,
+     "end_line": 48
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "topic": "languages",
+   "statement": "96 source files in typescript, 10,010 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/client/types.gen.ts",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/ui/sidebar.tsx",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/client/sdk.gen.ts",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "topic": "languages",
+   "statement": "28 source files in python, 1,736 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/models.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "topic": "languages",
+   "statement": "1 source file in css, 124 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/index.css",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "topic": "languages",
+   "statement": "8 source files in shell, 76 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/test-local.sh",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "scripts/test.sh",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "scripts/generate-client.sh",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f6",
+   "topic": "languages",
+   "statement": "3 source files in html, 16 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/index.html",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/email-templates/new_account.html",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/email-templates/reset_password.html",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f8",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/add-to-project.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/add-to-project.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f11",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/deploy-docker-compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/deploy-docker-compose.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f12",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/deploy.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/deploy.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f20",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/test-backend.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/test-backend.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f21",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/test-docker-compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/test-docker-compose.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f23",
+   "topic": "build",
+   "statement": "Build or deploy file backend/Dockerfile",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/Dockerfile",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f25",
+   "topic": "build",
+   "statement": "Build or deploy file compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f30",
+   "topic": "system",
+   "statement": "Service run from this repo: backend (Dockerfile, runs [\"fastapi\", \"run\", \"--workers\", \"4\"]; Compose service built from .)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/Dockerfile",
+     "start_line": 1,
+     "end_line": 1
+    },
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 49,
+     "end_line": 49
+    }
+   ]
+  },
+  {
+   "id": "f31",
+   "topic": "system",
+   "statement": "Database, cache or queue: PostgreSQL (dependency psycopg; setting mentions postgresql://; setting mentions postgres://; setting mentions postgresql+psycopg://; Compose service db, image postgres:18)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/pyproject.toml",
+     "start_line": 15,
+     "end_line": 15
+    },
+    {
+     "kind": "file",
+     "path": ".env",
+     "start_line": 18,
+     "end_line": 18
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/config.py",
+     "start_line": 37,
+     "end_line": 37
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/config.py",
+     "start_line": 39,
+     "end_line": 39
+    },
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 20,
+     "end_line": 20
+    }
+   ]
+  },
+  {
+   "id": "f32",
+   "topic": "system",
+   "statement": "Outside service: Sentry (dependency sentry-sdk)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/pyproject.toml",
+     "start_line": 18,
+     "end_line": 18
+    }
+   ]
+  },
+  {
+   "id": "f33",
+   "topic": "system",
+   "statement": "Other container: adminer (Compose service, image adminer)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 34,
+     "end_line": 34
+    }
+   ]
+  },
+  {
+   "id": "f34",
+   "topic": "system",
+   "statement": "Other container: mailpit (Compose service, image axllent/mailpit)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 71,
+     "end_line": 71
+    }
+   ]
+  },
+  {
+   "id": "f35",
+   "topic": "system",
+   "statement": "Other container: playwright (Compose service built from ., used for tests)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 77,
+     "end_line": 77
+    }
+   ]
+  },
+  {
+   "id": "f36",
+   "topic": "system",
+   "statement": "Other container: proxy (Compose service, image traefik:v3.7)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "compose.override.yml",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "compose.yml",
+     "start_line": 3,
+     "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f51",
+   "topic": "migrations",
+   "statement": "5 Alembic database migrations in backend/app/alembic/versions",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/alembic/versions/1a31ce608336_add_cascade_delete_relationships.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/alembic/versions/fe56fa70289e_add_created_at_to_user_and_item.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f52",
+   "topic": "entry_points",
+   "statement": "23 http routes found",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 13,
+     "end_line": 13
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 48,
+     "end_line": 48
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 61,
+     "end_line": 61
+    }
+   ]
+  },
+  {
+   "id": "f53",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /api/v1/items/ (fastapi) in backend/app/api/routes/items.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 13,
+     "end_line": 13
+    }
+   ]
+  },
+  {
+   "id": "f54",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /api/v1/items/{id} (fastapi) in backend/app/api/routes/items.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 48,
+     "end_line": 48
+    }
+   ]
+  },
+  {
+   "id": "f55",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/items/ (fastapi) in backend/app/api/routes/items.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 61,
+     "end_line": 61
+    }
+   ]
+  },
+  {
+   "id": "f56",
+   "topic": "entry_points",
+   "statement": "HTTP route PUT /api/v1/items/{id} (fastapi) in backend/app/api/routes/items.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 75,
+     "end_line": 75
+    }
+   ]
+  },
+  {
+   "id": "f57",
+   "topic": "entry_points",
+   "statement": "HTTP route DELETE /api/v1/items/{id} (fastapi) in backend/app/api/routes/items.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 99,
+     "end_line": 99
+    }
+   ]
+  },
+  {
+   "id": "f58",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/login/access-token (fastapi) in backend/app/api/routes/login.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 23,
+     "end_line": 23
+    }
+   ]
+  },
+  {
+   "id": "f59",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/login/test-token (fastapi) in backend/app/api/routes/login.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 45,
+     "end_line": 45
+    }
+   ]
+  },
+  {
+   "id": "f60",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/password-recovery/{email} (fastapi) in backend/app/api/routes/login.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 53,
+     "end_line": 53
+    }
+   ]
+  },
+  {
+   "id": "f61",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/reset-password/ (fastapi) in backend/app/api/routes/login.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 77,
+     "end_line": 77
+    }
+   ]
+  },
+  {
+   "id": "f62",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/password-recovery-html-content/{email} (fastapi) in backend/app/api/routes/login.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 100,
+     "end_line": 100
+    }
+   ]
+  },
+  {
+   "id": "f63",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/private/users/ (fastapi) in backend/app/api/routes/private.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/private.py",
+     "start_line": 23,
+     "end_line": 23
+    }
+   ]
+  },
+  {
+   "id": "f64",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /api/v1/users/ (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 32,
+     "end_line": 32
+    }
+   ]
+  },
+  {
+   "id": "f65",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/users/ (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 54,
+     "end_line": 54
+    }
+   ]
+  },
+  {
+   "id": "f66",
+   "topic": "entry_points",
+   "statement": "HTTP route PATCH /api/v1/users/me (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 81,
+     "end_line": 81
+    }
+   ]
+  },
+  {
+   "id": "f67",
+   "topic": "entry_points",
+   "statement": "HTTP route PATCH /api/v1/users/me/password (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 103,
+     "end_line": 103
+    }
+   ]
+  },
+  {
+   "id": "f68",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /api/v1/users/me (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 124,
+     "end_line": 124
+    }
+   ]
+  },
+  {
+   "id": "f69",
+   "topic": "entry_points",
+   "statement": "HTTP route DELETE /api/v1/users/me (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 132,
+     "end_line": 132
+    }
+   ]
+  },
+  {
+   "id": "f70",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/users/signup (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 146,
+     "end_line": 146
+    }
+   ]
+  },
+  {
+   "id": "f71",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /api/v1/users/{user_id} (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 162,
+     "end_line": 162
+    }
+   ]
+  },
+  {
+   "id": "f72",
+   "topic": "entry_points",
+   "statement": "HTTP route PATCH /api/v1/users/{user_id} (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 182,
+     "end_line": 182
+    }
+   ]
+  },
+  {
+   "id": "f73",
+   "topic": "entry_points",
+   "statement": "HTTP route DELETE /api/v1/users/{user_id} (fastapi) in backend/app/api/routes/users.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 214,
+     "end_line": 214
+    }
+   ]
+  },
+  {
+   "id": "f74",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /api/v1/utils/test-email/ (fastapi) in backend/app/api/routes/utils.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/utils.py",
+     "start_line": 11,
+     "end_line": 11
+    }
+   ]
+  },
+  {
+   "id": "f75",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /api/v1/utils/health-check/ (fastapi) in backend/app/api/routes/utils.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/utils.py",
+     "start_line": 29,
+     "end_line": 29
+    }
+   ]
+  },
+  {
+   "id": "f76",
+   "topic": "entry_points",
+   "statement": "3 commands found",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 103,
+     "end_line": 103
+    },
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 133,
+     "end_line": 133
+    },
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 153,
+     "end_line": 153
+    }
+   ]
+  },
+  {
+   "id": "f77",
+   "topic": "entry_points",
+   "statement": "Command prepare (typer) in scripts/prepare_release.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 103,
+     "end_line": 103
+    }
+   ]
+  },
+  {
+   "id": "f78",
+   "topic": "entry_points",
+   "statement": "Command current-version (typer) in scripts/prepare_release.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 133,
+     "end_line": 133
+    }
+   ]
+  },
+  {
+   "id": "f79",
+   "topic": "entry_points",
+   "statement": "Command release-notes (typer) in scripts/prepare_release.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 153,
+     "end_line": 153
+    }
+   ]
+  },
+  {
+   "id": "f80",
+   "topic": "entry_points",
+   "statement": "3 program entrys found",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/initial_data.py",
+     "start_line": 22,
+     "end_line": 22
+    },
+    {
+     "kind": "file",
+     "path": "scripts/add_latest_release_date.py",
+     "start_line": 39,
+     "end_line": 39
+    },
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 174,
+     "end_line": 174
+    }
+   ]
+  },
+  {
+   "id": "f81",
+   "topic": "entry_points",
+   "statement": "Program entry run as a script in backend/app/initial_data.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/initial_data.py",
+     "start_line": 22,
+     "end_line": 22
+    }
+   ]
+  },
+  {
+   "id": "f82",
+   "topic": "entry_points",
+   "statement": "Program entry run as a script in scripts/add_latest_release_date.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/add_latest_release_date.py",
+     "start_line": 39,
+     "end_line": 39
+    }
+   ]
+  },
+  {
+   "id": "f83",
+   "topic": "entry_points",
+   "statement": "Program entry run as a script in scripts/prepare_release.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "scripts/prepare_release.py",
+     "start_line": 174,
+     "end_line": 174
+    }
+   ]
+  },
+  {
+   "id": "f84",
+   "topic": "entry_points",
+   "statement": "7 package scripts found",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/package.json",
+     "start_line": 7,
+     "end_line": 7
+    },
+    {
+     "kind": "file",
+     "path": "frontend/package.json",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "frontend/package.json",
+     "start_line": 12,
+     "end_line": 12
+    }
+   ]
+  },
+  {
+   "id": "f85",
+   "topic": "entry_points",
+   "statement": "Package script bun run dev: vite (bun) in frontend/package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/package.json",
+     "start_line": 7,
+     "end_line": 7
+    }
+   ]
+  },
+  {
+   "id": "f86",
+   "topic": "entry_points",
+   "statement": "Package script bun run build: tsc -p tsconfig.build.json && vite build (bun) in frontend/package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/package.json",
+     "start_line": 8,
+     "end_line": 8
+    }
+   ]
+  },
+  {
+   "id": "f87",
+   "topic": "entry_points",
+   "statement": "Package script bun run test: bunx playwright test (bun) in frontend/package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/package.json",
+     "start_line": 12,
+     "end_line": 12
+    }
+   ]
+  },
+  {
+   "id": "f88",
+   "topic": "entry_points",
+   "statement": "Package script bun run dev: bun run --filter frontend dev (bun) in package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "package.json",
+     "start_line": 9,
+     "end_line": 9
+    }
+   ]
+  },
+  {
+   "id": "f89",
+   "topic": "entry_points",
+   "statement": "Package script bun run test: bun run --filter frontend test (bun) in package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "package.json",
+     "start_line": 11,
+     "end_line": 11
+    }
+   ]
+  },
+  {
+   "id": "f90",
+   "topic": "entry_points",
+   "statement": "Package script bun run build: email build (bun) in packages/react-email/package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "packages/react-email/package.json",
+     "start_line": 6,
+     "end_line": 6
+    }
+   ]
+  },
+  {
+   "id": "f91",
+   "topic": "entry_points",
+   "statement": "Package script bun run dev: email dev --port 3333 (bun) in packages/react-email/package.json",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "packages/react-email/package.json",
+     "start_line": 7,
+     "end_line": 7
+    }
+   ]
+  },
+  {
+   "id": "f92",
+   "topic": "flow",
+   "statement": "5 of 23 traced routes pass through backend/app/api/routes then backend/app then backend/app/core",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 24,
+     "end_line": 24
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 78,
+     "end_line": 78
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 57,
+     "end_line": 57
+    }
+   ]
+  },
+  {
+   "id": "f93",
+   "topic": "flow",
+   "statement": "19 of 23 traced routes reach the database",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 23,
+     "end_line": 23
+    }
+   ]
+  },
+  {
+   "id": "f94",
+   "topic": "flow",
+   "statement": "POST /api/v1/users/ is handled by create_user in backend/app/api/routes/users.py; create_user in backend/app/api/routes/users.py calls get_user_by_email in backend/app/crud.py, create_user in backend/app/crud.py, generate_new_account_email in backend/app/utils.py and send_email; create_user in backend/app/crud.py calls get_password_hash in backend/app/core/security.py; 1 more step not shown; get_user_by_email reaches the database (session.exec in backend/app/crud.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/users.py",
+     "start_line": 54,
+     "end_line": 54
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 10,
+     "end_line": 10
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 87,
+     "end_line": 87
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/utils.py",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 36,
+     "end_line": 36
+    }
+   ]
+  },
+  {
+   "id": "f95",
+   "topic": "flow",
+   "statement": "POST /api/v1/login/access-token is handled by login_access_token in backend/app/api/routes/login.py; login_access_token calls authenticate in backend/app/crud.py and create_access_token in backend/app/core/security.py; authenticate calls get_user_by_email and verify_password; authenticate reaches the database (session.add in backend/app/crud.py)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 45,
+     "end_line": 45
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/security.py",
+     "start_line": 22,
+     "end_line": 22
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/security.py",
+     "start_line": 29,
+     "end_line": 29
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 57,
+     "end_line": 57
+    }
+   ]
+  },
+  {
+   "id": "f102",
+   "topic": "contribute",
+   "statement": "CI step \"Bump pre-commit hooks\" in job bump-pre-commit-hooks of .github/workflows/bump-pre-commit-hooks.yml runs: uv run prek update --freeze --cooldown-days 7",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/bump-pre-commit-hooks.yml",
+     "start_line": 38,
+     "end_line": 38
+    }
+   ]
+  },
+  {
+   "id": "f121",
+   "topic": "contribute",
+   "statement": "CI step \"Extract release details\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: version=\"$(uv run python scripts/prepare_release.py current-version)\"",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/create-draft-release.yml",
+     "start_line": 39,
+     "end_line": 39
+    }
+   ]
+  },
+  {
+   "id": "f122",
+   "topic": "contribute",
+   "statement": "CI step \"Extract release details\" in job create-draft-release of .github/workflows/create-draft-release.yml runs: uv run python scripts/prepare_release.py release-notes > draft-release-notes.md",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/create-draft-release.yml",
+     "start_line": 40,
+     "end_line": 40
+    }
+   ]
+  },
+  {
+   "id": "f126",
+   "topic": "activity",
+   "statement": "Recently closed pull requests were merged a median of 43 hours after being opened (19 merged pull requests measured)",
+   "evidence": [
+    {
+     "kind": "issue",
+     "number": 2529
+    },
+    {
+     "kind": "issue",
+     "number": 2525
+    },
+    {
+     "kind": "issue",
+     "number": 2521
+    }
+   ]
+  },
+  {
+   "id": "f127",
+   "topic": "structure",
+   "statement": "Code in frontend/src/components/ui uses code in frontend/src/lib (23 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/components/ui/alert.tsx",
+     "start_line": 4,
+     "end_line": 4
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/ui/avatar.tsx",
+     "start_line": 4,
+     "end_line": 4
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/ui/badge.tsx",
+     "start_line": 5,
+     "end_line": 5
+    }
+   ]
+  },
+  {
+   "id": "f128",
+   "topic": "structure",
+   "statement": "Code in frontend/src/components/Admin uses code in frontend/src/components/ui (20 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/AddUser.tsx",
+     "start_line": 9,
+     "end_line": 9
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/AddUser.tsx",
+     "start_line": 10,
+     "end_line": 10
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/AddUser.tsx",
+     "start_line": 11,
+     "end_line": 11
+    }
+   ]
+  },
+  {
+   "id": "f129",
+   "topic": "structure",
+   "statement": "Code in frontend/src/components/Items uses code in frontend/src/components/ui (18 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Items/AddItem.tsx",
+     "start_line": 9,
+     "end_line": 9
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Items/AddItem.tsx",
+     "start_line": 10,
+     "end_line": 10
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Items/AddItem.tsx",
+     "start_line": 20,
+     "end_line": 20
+    }
+   ]
+  },
+  {
+   "id": "f130",
+   "topic": "structure",
+   "statement": "Code in frontend/src/routes uses code in frontend/src/components/ui (15 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/_layout.tsx",
+     "start_line": 5,
+     "end_line": 5
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/login.tsx",
+     "start_line": 12,
+     "end_line": 12
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/login.tsx",
+     "start_line": 20,
+     "end_line": 20
+    }
+   ]
+  },
+  {
+   "id": "f131",
+   "topic": "structure",
+   "statement": "Code in frontend/src/client/client uses code in frontend/src/client/core (14 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/client/client/client.gen.ts",
+     "start_line": 6,
+     "end_line": 6
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/client/client/client.gen.ts",
+     "start_line": 7,
+     "end_line": 7
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/client/client/client.gen.ts",
+     "start_line": 8,
+     "end_line": 8
+    }
+   ]
+  },
+  {
+   "id": "f132",
+   "topic": "structure",
+   "statement": "Code in packages/react-email/emails uses code in packages/react-email/ui (12 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "packages/react-email/emails/new_account.tsx",
+     "start_line": 2,
+     "end_line": 2
+    },
+    {
+     "kind": "file",
+     "path": "packages/react-email/emails/new_account.tsx",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "packages/react-email/emails/new_account.tsx",
+     "start_line": 4,
+     "end_line": 4
+    }
+   ]
+  },
+  {
+   "id": "f133",
+   "topic": "structure",
+   "statement": "Code in backend/app/api/routes uses code in backend/app (10 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 12,
+     "end_line": 12
+    }
+   ]
+  },
+  {
+   "id": "f134",
+   "topic": "structure",
+   "statement": "Code in frontend/src/components/UserSettings uses code in frontend/src/components/ui (10 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/components/UserSettings/ChangePassword.tsx",
+     "start_line": 7,
+     "end_line": 7
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/UserSettings/ChangePassword.tsx",
+     "start_line": 15,
+     "end_line": 15
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/UserSettings/ChangePassword.tsx",
+     "start_line": 16,
+     "end_line": 16
+    }
+   ]
+  },
+  {
+   "id": "f135",
+   "topic": "structure",
+   "statement": "Code in frontend/src/components/Common uses code in frontend/src/components/ui (8 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Common/Appearance.tsx",
+     "start_line": 4,
+     "end_line": 4
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Common/Appearance.tsx",
+     "start_line": 5,
+     "end_line": 5
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Common/Appearance.tsx",
+     "start_line": 11,
+     "end_line": 11
+    }
+   ]
+  },
+  {
+   "id": "f136",
+   "topic": "structure",
+   "statement": "Code in frontend/src/routes uses code in frontend/src/components/Common (7 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/__root.tsx",
+     "start_line": 4,
+     "end_line": 4
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/__root.tsx",
+     "start_line": 5,
+     "end_line": 5
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/_layout.tsx",
+     "start_line": 3,
+     "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f137",
+   "topic": "structure",
+   "statement": "Code in frontend/src/routes uses code in frontend/src/hooks (7 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/_layout.tsx",
+     "start_line": 10,
+     "end_line": 10
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/login.tsx",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/recover-password.tsx",
+     "start_line": 23,
+     "end_line": 23
+    }
+   ]
+  },
+  {
+   "id": "f138",
+   "topic": "structure",
+   "statement": "Code in frontend/src uses code in frontend/src/routes (6 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/routeTree.gen.ts",
+     "start_line": 11,
+     "end_line": 11
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routeTree.gen.ts",
+     "start_line": 12,
+     "end_line": 12
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routeTree.gen.ts",
+     "start_line": 13,
+     "end_line": 13
+    }
+   ]
+  },
+  {
+   "id": "f139",
+   "topic": "structure",
+   "statement": "Code in backend/app uses code in backend/app/core (5 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 6,
+     "end_line": 6
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/initial_data.py",
+     "start_line": 5,
+     "end_line": 5
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/main.py",
+     "start_line": 9,
+     "end_line": 9
+    }
+   ]
+  },
+  {
+   "id": "f140",
+   "topic": "structure",
+   "statement": "Code in backend/app/api uses code in backend/app/api/routes (5 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/main.py",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/main.py",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/main.py",
+     "start_line": 3,
+     "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f141",
+   "topic": "structure",
+   "statement": "Code in backend/app/api/routes uses code in backend/app/api (5 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 7,
+     "end_line": 7
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/login.py",
+     "start_line": 9,
+     "end_line": 9
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/private.py",
+     "start_line": 6,
+     "end_line": 6
+    }
+   ]
+  },
+  {
+   "id": "f142",
+   "topic": "structure",
+   "statement": "backend/app and backend/app/api each use the other",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/main.py",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/deps.py",
+     "start_line": 14,
+     "end_line": 14
+    }
+   ]
+  },
+  {
+   "id": "f143",
+   "topic": "structure",
+   "statement": "backend/app and backend/app/core each use the other",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/crud.py",
+     "start_line": 6,
+     "end_line": 6
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/core/db.py",
+     "start_line": 3,
+     "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f144",
+   "topic": "structure",
+   "statement": "backend/app/api and backend/app/api/routes each use the other",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/api/main.py",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/routes/items.py",
+     "start_line": 7,
+     "end_line": 7
+    }
+   ]
+  },
+  {
+   "id": "f145",
+   "topic": "structure",
+   "statement": "frontend/src and frontend/src/routes each use the other",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/routeTree.gen.ts",
+     "start_line": 11,
+     "end_line": 11
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/routes/recover-password.tsx",
+     "start_line": 25,
+     "end_line": 25
+    }
+   ]
+  },
+  {
+   "id": "f146",
+   "topic": "structure",
+   "statement": "frontend/src/lib/utils.ts is used by 27 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/lib/utils.ts",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/columns.tsx",
+     "start_line": 6,
+     "end_line": 6
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Common/Logo.tsx",
+     "start_line": 4,
+     "end_line": 4
+    }
+   ]
+  },
+  {
+   "id": "f147",
+   "topic": "structure",
+   "statement": "frontend/src/client/index.ts is used by 20 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/client/index.ts",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/AddUser.tsx",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/DeleteUser.tsx",
+     "start_line": 6,
+     "end_line": 6
+    }
+   ]
+  },
+  {
+   "id": "f148",
+   "topic": "structure",
+   "statement": "frontend/src/components/ui/button.tsx is used by 18 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "frontend/src/components/ui/button.tsx",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/AddUser.tsx",
+     "start_line": 9,
+     "end_line": 9
+    },
+    {
+     "kind": "file",
+     "path": "frontend/src/components/Admin/DeleteUser.tsx",
+     "start_line": 7,
+     "end_line": 7
+    }
+   ]
+  },
+  {
+   "id": "f149",
+   "topic": "structure",
+   "statement": "backend/app/core/config.py is used by 16 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/core/config.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/alembic/env.py",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/deps.py",
+     "start_line": 12,
+     "end_line": 12
+    }
+   ]
+  },
+  {
+   "id": "f150",
+   "topic": "structure",
+   "statement": "backend/app/models.py is used by 16 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "backend/app/models.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/alembic/env.py",
+     "start_line": 22,
+     "end_line": 22
+    },
+    {
+     "kind": "file",
+     "path": "backend/app/api/deps.py",
+     "start_line": 14,
+     "end_line": 14
+    }
+   ]
+  }
+ ],
+ "views": {
+  "stats": [
+   {
+    "label": "Commit",
+    "value": "77e550a"
+   },
+   {
+    "label": "Language",
+    "value": "TypeScript"
+   },
+   {
+    "label": "Source files",
+    "value": "136"
+   },
+   {
+    "label": "Lines of code",
+    "value": "11,962"
+   },
+   {
+    "label": "Authors in 90 days",
+    "value": "7"
+   },
+   {
+    "label": "Kind",
+    "value": "Service"
+   }
+  ],
+  "system": {
+   "parts": [
+    {
+     "name": "PostgreSQL",
+     "role": "store",
+     "detail": "dependency psycopg; setting mentions postgresql://; setting mentions postgres://; setting mentions postgresql+psycopg://; Compose service db, image postgres:18",
+     "places": [
+      {
+       "path": "backend/pyproject.toml",
+       "line": 15
+      },
+      {
+       "path": ".env",
+       "line": 18
+      },
+      {
+       "path": "backend/app/core/config.py",
+       "line": 37
+      },
+      {
+       "path": "backend/app/core/config.py",
+       "line": 39
+      }
+     ]
+    },
+    {
+     "name": "Sentry",
+     "role": "outside",
+     "detail": "dependency sentry-sdk",
+     "places": [
+      {
+       "path": "backend/pyproject.toml",
+       "line": 18
+      }
+     ]
+    },
+    {
+     "name": "backend",
+     "role": "service",
+     "detail": "Dockerfile, runs [\"fastapi\", \"run\", \"--workers\", \"4\"]; Compose service built from .",
+     "places": [
+      {
+       "path": "backend/Dockerfile",
+       "line": 1
+      },
+      {
+       "path": "compose.override.yml",
+       "line": 34
+      },
+      {
+       "path": "compose.yml",
+       "line": 49
+      }
+     ]
+    },
+    {
+     "name": "proxy",
+     "role": "container",
+     "detail": "Compose service, image traefik:v3.7",
+     "places": [
+      {
+       "path": "compose.override.yml",
+       "line": 3
+      },
+      {
+       "path": "compose.yml",
+       "line": 3
+      }
+     ]
+    },
+    {
+     "name": "mailpit",
+     "role": "container",
+     "detail": "Compose service, image axllent/mailpit",
+     "places": [
+      {
+       "path": "compose.override.yml",
+       "line": 71
+      }
+     ]
+    },
+    {
+     "name": "playwright",
+     "role": "container",
+     "detail": "Compose service built from ., used for tests",
+     "places": [
+      {
+       "path": "compose.override.yml",
+       "line": 77
+      }
+     ]
+    },
+    {
+     "name": "adminer",
+     "role": "container",
+     "detail": "Compose service, image adminer",
+     "places": [
+      {
+       "path": "compose.yml",
+       "line": 34
+      }
+     ]
+    }
+   ],
+   "links": [
+    {
+     "source": "Clients",
+     "target": "backend",
+     "label": "HTTP",
+     "place": null
+    },
+    {
+     "source": "playwright",
+     "target": "backend",
+     "label": "depends on",
+     "place": {
+      "path": "compose.override.yml",
+      "line": 77
+     }
+    },
+    {
+     "source": "playwright",
+     "target": "mailpit",
+     "label": "depends on",
+     "place": {
+      "path": "compose.override.yml",
+      "line": 77
+     }
+    },
+    {
+     "source": "adminer",
+     "target": "PostgreSQL",
+     "label": "depends on",
+     "place": {
+      "path": "compose.yml",
+      "line": 34
+     }
+    },
+    {
+     "source": "backend",
+     "target": "PostgreSQL",
+     "label": "depends on",
+     "place": {
+      "path": "compose.yml",
+      "line": 49
+     }
+    }
+   ],
+   "links_known": true
+  },
+  "code_map": {
+   "rows": [
+    [
+     {
+      "path": "frontend/src/routes",
+      "files": 10,
+      "lines": 919,
+      "blocks": [
+       {
+        "path": "frontend/src/routes/signup.tsx",
+        "lines": 187,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/reset-password.tsx",
+        "lines": 166,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/login.tsx",
+        "lines": 142,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/recover-password.tsx",
+        "lines": 130,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/_layout/admin.tsx",
+        "lines": 74,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/_layout/items.tsx",
+        "lines": 70,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/_layout/settings.tsx",
+        "lines": 61,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/_layout.tsx",
+        "lines": 40,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/_layout/index.tsx",
+        "lines": 31,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/routes/__root.tsx",
+        "lines": 18,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "frontend/src",
+       "frontend/src/client",
+       "frontend/src/components"
+      ]
+     },
+     {
+      "path": "backend/app/api",
+      "files": 7,
+      "lines": 608,
+      "blocks": [
+       {
+        "path": "backend/app/api/routes/users.py",
+        "lines": 232,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/api/routes/login.py",
+        "lines": 123,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/api/routes/items.py",
+        "lines": 113,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/api/deps.py",
+        "lines": 57,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/api/routes/private.py",
+        "lines": 38,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/api/routes/utils.py",
+        "lines": 31,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/api/main.py",
+        "lines": 14,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "backend/app"
+      ]
+     },
+     {
+      "path": "backend/app/alembic",
+      "files": 6,
+      "lines": 367,
+      "blocks": [
+       {
+        "path": "backend/app/alembic/versions/d98dd8ec85a3_edit_replace_id_integers_in_all_models_.py",
+        "lines": 90,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/alembic/env.py",
+        "lines": 86,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/alembic/versions/9c0a54914c78_add_max_length_for_string_varchar_.py",
+        "lines": 69,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/alembic/versions/e2412789c190_initialize_models.py",
+        "lines": 54,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/alembic/versions/1a31ce608336_add_cascade_delete_relationships.py",
+        "lines": 37,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/alembic/versions/fe56fa70289e_add_created_at_to_user_and_item.py",
+        "lines": 31,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "backend/app"
+      ]
+     },
+     {
+      "path": "packages/react-email",
+      "files": 7,
+      "lines": 339,
+      "blocks": [
+       {
+        "path": "packages/react-email/ui/Layout.tsx",
+        "lines": 111,
+        "commits": 1
+       },
+       {
+        "path": "packages/react-email/emails/new_account.tsx",
+        "lines": 65,
+        "commits": 1
+       },
+       {
+        "path": "packages/react-email/emails/reset_password.tsx",
+        "lines": 61,
+        "commits": 1
+       },
+       {
+        "path": "packages/react-email/ui/Callout.tsx",
+        "lines": 46,
+        "commits": 1
+       },
+       {
+        "path": "packages/react-email/ui/Button.tsx",
+        "lines": 23,
+        "commits": 1
+       },
+       {
+        "path": "packages/react-email/ui/Heading.tsx",
+        "lines": 18,
+        "commits": 1
+       },
+       {
+        "path": "packages/react-email/ui/Link.tsx",
+        "lines": 15,
+        "commits": 1
+       }
+      ],
+      "uses": []
+     },
+     {
+      "path": "frontend/src",
+      "files": 4,
+      "lines": 329,
+      "blocks": [
+       {
+        "path": "frontend/src/routeTree.gen.ts",
+        "lines": 235,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/main.tsx",
+        "lines": 56,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/utils.ts",
+        "lines": 29,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/vite-env.d.ts",
+        "lines": 9,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "frontend/src/client",
+       "frontend/src/components",
+       "frontend/src/routes"
+      ]
+     }
+    ],
+    [
+     {
+      "path": "frontend/src/components",
+      "files": 51,
+      "lines": 5159,
+      "blocks": [
+       {
+        "path": "frontend/src/components/ui/sidebar.tsx",
+        "lines": 737,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/dropdown-menu.tsx",
+        "lines": 257,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Admin/EditUser.tsx",
+        "lines": 239,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Admin/AddUser.tsx",
+        "lines": 237,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Common/DataTable.tsx",
+        "lines": 200,
+        "commits": 1
+       },
+       {
+        "path": "frontend/src/components/ui/select.tsx",
+        "lines": 185,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/UserSettings/UserInformation.tsx",
+        "lines": 171,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/form.tsx",
+        "lines": 165,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/UserSettings/ChangePassword.tsx",
+        "lines": 146,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Items/EditItem.tsx",
+        "lines": 145,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Items/AddItem.tsx",
+        "lines": 143,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/dialog.tsx",
+        "lines": 141,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/sheet.tsx",
+        "lines": 139,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/pagination.tsx",
+        "lines": 127,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/theme-provider.tsx",
+        "lines": 115,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/table.tsx",
+        "lines": 114,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Common/Appearance.tsx",
+        "lines": 105,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Sidebar/User.tsx",
+        "lines": 97,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Admin/DeleteUser.tsx",
+        "lines": 95,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Items/DeleteItem.tsx",
+        "lines": 94,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/card.tsx",
+        "lines": 92,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/button-group.tsx",
+        "lines": 83,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/UserSettings/DeleteConfirmation.tsx",
+        "lines": 82,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/Admin/columns.tsx",
+        "lines": 77,
+        "commits": 1
+       },
+       {
+        "path": "frontend/src/components/Items/columns.tsx",
+        "lines": 74,
+        "commits": 1
+       },
+       {
+        "path": "frontend/src/components/ui/loading-button.tsx",
+        "lines": 67,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/alert.tsx",
+        "lines": 66,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/components/ui/tabs.tsx",
+        "lines": 64,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "frontend/src",
+       "frontend/src/client"
+      ]
+     },
+     {
+      "path": "backend/app",
+      "files": 5,
+      "lines": 378,
+      "blocks": [
+       {
+        "path": "backend/app/models.py",
+        "lines": 126,
+        "commits": 1
+       },
+       {
+        "path": "backend/app/utils.py",
+        "lines": 125,
+        "commits": 1
+       },
+       {
+        "path": "backend/app/crud.py",
+        "lines": 68,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/main.py",
+        "lines": 36,
+        "commits": 0
+       },
+       {
+        "path": "backend/app/initial_data.py",
+        "lines": 23,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "backend/app/api"
+      ]
+     }
+    ],
+    [
+     {
+      "path": "frontend/src/client",
+      "files": 4,
+      "lines": 1351,
+      "blocks": [
+       {
+        "path": "frontend/src/client/types.gen.ts",
+        "lines": 947,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/sdk.gen.ts",
+        "lines": 384,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/client.gen.ts",
+        "lines": 16,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/index.ts",
+        "lines": 4,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "frontend/src/client/client"
+      ]
+     }
+    ],
+    [
+     {
+      "path": "frontend/src/client/core",
+      "files": 8,
+      "lines": 1066,
+      "blocks": [
+       {
+        "path": "frontend/src/client/core/serverSentEvents.gen.ts",
+        "lines": 242,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/pathSerializer.gen.ts",
+        "lines": 171,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/params.gen.ts",
+        "lines": 169,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/utils.gen.ts",
+        "lines": 140,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/queryKeySerializer.gen.ts",
+        "lines": 117,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/types.gen.ts",
+        "lines": 104,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/bodySerializer.gen.ts",
+        "lines": 82,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/core/auth.gen.ts",
+        "lines": 41,
+        "commits": 0
+       }
+      ],
+      "uses": []
+     },
+     {
+      "path": "frontend/src/client/client",
+      "files": 4,
+      "lines": 559,
+      "blocks": [
+       {
+        "path": "frontend/src/client/client/utils.gen.ts",
+        "lines": 206,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/client/types.gen.ts",
+        "lines": 169,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/client/client.gen.ts",
+        "lines": 161,
+        "commits": 0
+       },
+       {
+        "path": "frontend/src/client/client/index.ts",
+        "lines": 23,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "frontend/src/client/core"
+      ]
+     }
+    ]
+   ],
+   "shown_files": 106,
+   "left_out": "6 smaller folders with 14 files are not shown. Tests, examples and configuration are left out.",
+   "warm": 3,
+   "hot": 10
+  },
+  "hot_spots": [],
+  "window": "18 Aug 2026 and 16 Nov 2026",
+  "api": [],
+  "api_root": "",
+  "flows": [
+   {
+    "route": "POST /api/v1/users/",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 54
+    },
+    "steps": [
+     {
+      "name": "create_user",
+      "place": {
+       "path": "backend/app/api/routes/users.py",
+       "line": 57
+      },
+      "caller": null,
+      "before": false
+     },
+     {
+      "name": "get_user_by_email",
+      "place": {
+       "path": "backend/app/crud.py",
+       "line": 34
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "create_user",
+      "place": {
+       "path": "backend/app/crud.py",
+       "line": 10
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "generate_new_account_email",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 87
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "send_email",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 34
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "get_password_hash",
+      "place": {
+       "path": "backend/app/core/security.py",
+       "line": 35
+      },
+      "caller": 2,
+      "before": false
+     },
+     {
+      "name": "render_email_template",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 25
+      },
+      "caller": 3,
+      "before": false
+     }
+    ],
+    "reaches": [
+     {
+      "what": "the database",
+      "call": "session.exec",
+      "place": {
+       "path": "backend/app/crud.py",
+       "line": 36
+      },
+      "by": 1
+     }
+    ]
+   },
+   {
+    "route": "POST /api/v1/password-recovery/{email}",
+    "place": {
+     "path": "backend/app/api/routes/login.py",
+     "line": 53
+    },
+    "steps": [
+     {
+      "name": "recover_password",
+      "place": {
+       "path": "backend/app/api/routes/login.py",
+       "line": 54
+      },
+      "caller": null,
+      "before": false
+     },
+     {
+      "name": "get_user_by_email",
+      "place": {
+       "path": "backend/app/crud.py",
+       "line": 34
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "generate_password_reset_token",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 105
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "generate_reset_password_email",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 70
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "send_email",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 34
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "render_email_template",
+      "place": {
+       "path": "backend/app/utils.py",
+       "line": 25
+      },
+      "caller": 3,
+      "before": false
+     }
+    ],
+    "reaches": [
+     {
+      "what": "the database",
+      "call": "session.exec",
+      "place": {
+       "path": "backend/app/crud.py",
+       "line": 36
+      },
+      "by": 1
+     }
+    ]
+   },
+   {
+    "route": "POST /api/v1/private/users/",
+    "place": {
+     "path": "backend/app/api/routes/private.py",
+     "line": 23
+    },
+    "steps": [
+     {
+      "name": "create_user",
+      "place": {
+       "path": "backend/app/api/routes/private.py",
+       "line": 24
+      },
+      "caller": null,
+      "before": false
+     },
+     {
+      "name": "get_password_hash",
+      "place": {
+       "path": "backend/app/core/security.py",
+       "line": 35
+      },
+      "caller": 0,
+      "before": false
+     }
+    ],
+    "reaches": [
+     {
+      "what": "the database",
+      "call": "session.add",
+      "place": {
+       "path": "backend/app/api/routes/private.py",
+       "line": 35
+      },
+      "by": 0
+     }
+    ]
+   }
+  ],
+  "flows_traced": 23,
+  "routes": [
+   {
+    "kind": "HTTP route",
+    "name": "GET /api/v1/items/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/items.py",
+     "line": 13
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /api/v1/items/{id}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/items.py",
+     "line": 48
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/items/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/items.py",
+     "line": 61
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "PUT /api/v1/items/{id}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/items.py",
+     "line": 75
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "DELETE /api/v1/items/{id}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/items.py",
+     "line": 99
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/login/access-token",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/login.py",
+     "line": 23
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/login/test-token",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/login.py",
+     "line": 45
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/password-recovery/{email}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/login.py",
+     "line": 53
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/reset-password/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/login.py",
+     "line": 77
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/password-recovery-html-content/{email}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/login.py",
+     "line": 100
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/private/users/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/private.py",
+     "line": 23
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /api/v1/users/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 32
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/users/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 54
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "PATCH /api/v1/users/me",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 81
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "PATCH /api/v1/users/me/password",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 103
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /api/v1/users/me",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 124
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "DELETE /api/v1/users/me",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 132
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/users/signup",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 146
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /api/v1/users/{user_id}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 162
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "PATCH /api/v1/users/{user_id}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 182
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "DELETE /api/v1/users/{user_id}",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/users.py",
+     "line": 214
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /api/v1/utils/test-email/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/utils.py",
+     "line": 11
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /api/v1/utils/health-check/",
+    "framework": "fastapi",
+    "place": {
+     "path": "backend/app/api/routes/utils.py",
+     "line": 29
+    }
+   },
+   {
+    "kind": "Program entry",
+    "name": "run as a script",
+    "framework": "",
+    "place": {
+     "path": "backend/app/initial_data.py",
+     "line": 22
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run dev: vite",
+    "framework": "bun",
+    "place": {
+     "path": "frontend/package.json",
+     "line": 7
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run build: tsc -p tsconfig.build.json && vite build",
+    "framework": "bun",
+    "place": {
+     "path": "frontend/package.json",
+     "line": 8
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run test: bunx playwright test",
+    "framework": "bun",
+    "place": {
+     "path": "frontend/package.json",
+     "line": 12
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run dev: bun run --filter frontend dev",
+    "framework": "bun",
+    "place": {
+     "path": "package.json",
+     "line": 9
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run test: bun run --filter frontend test",
+    "framework": "bun",
+    "place": {
+     "path": "package.json",
+     "line": 11
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run build: email build",
+    "framework": "bun",
+    "place": {
+     "path": "packages/react-email/package.json",
+     "line": 6
+    }
+   },
+   {
+    "kind": "Package script",
+    "name": "bun run dev: email dev --port 3333",
+    "framework": "bun",
+    "place": {
+     "path": "packages/react-email/package.json",
+     "line": 7
+    }
+   },
+   {
+    "kind": "Program entry",
+    "name": "run as a script",
+    "framework": "",
+    "place": {
+     "path": "scripts/add_latest_release_date.py",
+     "line": 39
+    }
+   },
+   {
+    "kind": "Command",
+    "name": "prepare",
+    "framework": "typer",
+    "place": {
+     "path": "scripts/prepare_release.py",
+     "line": 103
+    }
+   },
+   {
+    "kind": "Command",
+    "name": "current-version",
+    "framework": "typer",
+    "place": {
+     "path": "scripts/prepare_release.py",
+     "line": 133
+    }
+   },
+   {
+    "kind": "Command",
+    "name": "release-notes",
+    "framework": "typer",
+    "place": {
+     "path": "scripts/prepare_release.py",
+     "line": 153
+    }
+   },
+   {
+    "kind": "Program entry",
+    "name": "run as a script",
+    "framework": "",
+    "place": {
+     "path": "scripts/prepare_release.py",
+     "line": 174
+    }
+   }
+  ],
+  "gaps": [
+   {
+    "title": "Expected traffic, scale and why it was built this way",
+    "detail": "These are rarely written in code, and this report does not guess them."
+   }
+  ]
+ },
+ "written_at": "2026-11-20"
+}

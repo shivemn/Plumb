@@ -1,0 +1,2307 @@
+{
+ "schema_version": 1,
+ "repo": {
+  "owner": "spring-projects",
+  "name": "spring-petclinic",
+  "commit": "500158f732419217507c7656904b8e6aa1bcc0d6"
+ },
+ "kind": "service",
+ "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+ "sections": [
+  {
+   "id": "overview",
+   "title": "Overview",
+   "claims": [
+    {
+     "text": "This repository is a service with 17 routes, consumers, or scheduled jobs.",
+     "fact_ids": [
+      "f1"
+     ]
+    },
+    {
+     "text": "It contains 30 Java source files totaling 1,899 lines, 12 HTML files, 5 CSS files, and 7 SQL files.",
+     "fact_ids": [
+      "f2",
+      "f3",
+      "f4",
+      "f5"
+     ]
+    },
+    {
+     "text": "The project supports both Maven and Gradle builds as indicated by the presence of pom.xml and build.gradle.",
+     "fact_ids": [
+      "f10",
+      "f12"
+     ]
+    },
+    {
+     "text": "CI/CD is configured via GitHub Actions workflows for Maven builds, Gradle builds, and cluster deployment, and Docker support includes a Dockerfile and docker-compose.yml.",
+     "fact_ids": [
+      "f6",
+      "f7",
+      "f8",
+      "f9",
+      "f11"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "system",
+   "title": "System design",
+   "claims": [
+    {
+     "text": "The application includes dependencies for three databases: H2, MySQL, and PostgreSQL.",
+     "fact_ids": [
+      "f13",
+      "f14",
+      "f15"
+     ]
+    },
+    {
+     "text": "Docker Compose defines a MySQL service using image mysql:9.7 and a PostgreSQL service using image postgres:18.4.",
+     "fact_ids": [
+      "f14",
+      "f15"
+     ]
+    },
+    {
+     "text": "MySQL connection settings MYSQL_URL, MYSQL_USER, and MYSQL_PASS are read from the environment in src/main/resources/application-mysql.properties.",
+     "fact_ids": [
+      "f16",
+      "f17",
+      "f18"
+     ]
+    },
+    {
+     "text": "PostgreSQL connection settings POSTGRES_URL, POSTGRES_USER, and POSTGRES_PASS are read from the environment in src/main/resources/application-postgres.properties.",
+     "fact_ids": [
+      "f19",
+      "f20",
+      "f21"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "title": "How a request moves",
+   "claims": [
+    {
+     "text": "15 of 17 traced routes reach the database.",
+     "fact_ids": [
+      "f42"
+     ]
+    },
+    {
+     "text": "POST /owners/{ownerId}/pets/{petId}/edit is handled by PetController.processUpdateForm in src/main/java/org/springframework/samples/petclinic/owner/PetController.java.",
+     "fact_ids": [
+      "f43"
+     ]
+    },
+    {
+     "text": "The framework first runs PetController.populatePetTypes, PetController.findOwner, and PetController.findPet before the handler.",
+     "fact_ids": [
+      "f43"
+     ]
+    },
+    {
+     "text": "PetController.processUpdateForm calls PetController.updatePetDetails and PetController.isDuplicatePetNameViolation.",
+     "fact_ids": [
+      "f43"
+     ]
+    },
+    {
+     "text": "PetController.populatePetTypes reaches the database via PetTypeRepository.findPetTypes in PetController.java.",
+     "fact_ids": [
+      "f43"
+     ]
+    },
+    {
+     "text": "POST /owners/{ownerId}/pets/new is handled by PetController.processCreationForm in PetController.java.",
+     "fact_ids": [
+      "f44"
+     ]
+    },
+    {
+     "text": "The framework first runs PetController.populatePetTypes, PetController.findOwner, and PetController.findPet before the handler.",
+     "fact_ids": [
+      "f44"
+     ]
+    },
+    {
+     "text": "PetController.processCreationForm calls Owner.addPet in Owner.java and PetController.isDuplicatePetNameViolation.",
+     "fact_ids": [
+      "f44"
+     ]
+    },
+    {
+     "text": "PetController.processCreationForm reaches the database via OwnerRepository.saveAndFlush in PetController.java.",
+     "fact_ids": [
+      "f44"
+     ]
+    },
+    {
+     "text": "GET /vets.html is handled by VetController.showVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java.",
+     "fact_ids": [
+      "f45"
+     ]
+    },
+    {
+     "text": "VetController.showVetList calls VetController.findPaginated and VetController.addPaginationModel.",
+     "fact_ids": [
+      "f45"
+     ]
+    },
+    {
+     "text": "VetController.findPaginated reaches the database via VetRepository.findAll in VetController.java.",
+     "fact_ids": [
+      "f45"
+     ]
+    },
+    {
+     "text": "GET /vets is handled by VetController.showResourcesVetList in VetController.java.",
+     "fact_ids": [
+      "f46"
+     ]
+    },
+    {
+     "text": "VetController.showResourcesVetList calls Vets.getVetList in Vets.java.",
+     "fact_ids": [
+      "f46"
+     ]
+    },
+    {
+     "text": "VetController.showResourcesVetList reaches the database via VetRepository.findAll in VetController.java.",
+     "fact_ids": [
+      "f46"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "entry_points",
+   "title": "Ways into the code",
+   "claims": [
+    {
+     "text": "The application starts from the PetClinicApplication class in src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java.",
+     "fact_ids": [
+      "f40",
+      "f41"
+     ]
+    },
+    {
+     "text": "There are 17 HTTP routes defined across six controllers.",
+     "fact_ids": [
+      "f22"
+     ]
+    },
+    {
+     "text": "OwnerController handles seven routes for owner management including listing, finding, creating, viewing, and editing owners.",
+     "fact_ids": [
+      "f23",
+      "f24",
+      "f25",
+      "f26",
+      "f27",
+      "f28",
+      "f29"
+     ]
+    },
+    {
+     "text": "PetController provides four routes for creating and editing pets under specific owners.",
+     "fact_ids": [
+      "f30",
+      "f31",
+      "f32",
+      "f33"
+     ]
+    },
+    {
+     "text": "VisitController exposes two routes for creating visits for specific pets.",
+     "fact_ids": [
+      "f34",
+      "f35"
+     ]
+    },
+    {
+     "text": "VetController serves two routes for viewing veterinarians at /vets and /vets.html.",
+     "fact_ids": [
+      "f38",
+      "f39"
+     ]
+    },
+    {
+     "text": "WelcomeController maps the root path /.",
+     "fact_ids": [
+      "f37"
+     ]
+    },
+    {
+     "text": "CrashController provides a single route at /oups.",
+     "fact_ids": [
+      "f36"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "structure",
+   "title": "Code map",
+   "claims": [
+    {
+     "text": "The codebase has 30 Java source files totaling 1,899 lines, 5 CSS files with 9,920 lines, 12 HTML files with 546 lines, and 7 SQL files with 344 lines.",
+     "fact_ids": [
+      "f2",
+      "f3",
+      "f4",
+      "f5"
+     ]
+    },
+    {
+     "text": "The owner package (src/main/java/org/springframework/samples/petclinic/owner) uses the model package with 4 references.",
+     "fact_ids": [
+      "f52"
+     ]
+    },
+    {
+     "text": "The vet package (src/main/java/org/springframework/samples/petclinic/vet) uses the model package with 3 references.",
+     "fact_ids": [
+      "f53"
+     ]
+    },
+    {
+     "text": "The root petclinic package uses the model package with 2 references.",
+     "fact_ids": [
+      "f54"
+     ]
+    },
+    {
+     "text": "The root petclinic package uses the vet package with 1 reference.",
+     "fact_ids": [
+      "f55"
+     ]
+    },
+    {
+     "text": "Test code in the owner test package references the main owner package 25 times.",
+     "fact_ids": [
+      "f56"
+     ]
+    },
+    {
+     "text": "Test code in the service test package references the main owner package 6 times.",
+     "fact_ids": [
+      "f57"
+     ]
+    },
+    {
+     "text": "Owner.java is used by 10 other files.",
+     "fact_ids": [
+      "f58"
+     ]
+    },
+    {
+     "text": "Pet.java is used by 10 other files.",
+     "fact_ids": [
+      "f59"
+     ]
+    },
+    {
+     "text": "PetType.java is used by 9 other files.",
+     "fact_ids": [
+      "f60"
+     ]
+    },
+    {
+     "text": "OwnerRepository.java is used by 8 other files.",
+     "fact_ids": [
+      "f61"
+     ]
+    },
+    {
+     "text": "Vet.java is used by 7 other files.",
+     "fact_ids": [
+      "f62"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hot_spots",
+   "title": "Hot spots",
+   "claims": [
+    {
+     "text": "There were 13 commits between 01 Jul 2026 and 29 Sep 2026.",
+     "fact_ids": [
+      "f63"
+     ]
+    },
+    {
+     "text": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java changed in 3 commits by 2 authors during that period.",
+     "fact_ids": [
+      "f65"
+     ]
+    },
+    {
+     "text": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java changed in 3 commits by 3 authors during that period.",
+     "fact_ids": [
+      "f64"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "contribute",
+   "title": "How to contribute",
+   "claims": [
+    {
+     "text": "CI runs ./gradlew build in the gradle-build.yml workflow.",
+     "fact_ids": [
+      "f50"
+     ]
+    },
+    {
+     "text": "CI runs ./mvnw -B verify in the maven-build.yml workflow.",
+     "fact_ids": [
+      "f51"
+     ]
+    },
+    {
+     "text": "CI deploys to a cluster with kubectl apply -f k8s/ in the deploy-and-test-cluster.yml workflow.",
+     "fact_ids": [
+      "f47"
+     ]
+    },
+    {
+     "text": "CI waits for demo-db and petclinic pods to become ready with kubectl wait commands.",
+     "fact_ids": [
+      "f48",
+      "f49"
+     ]
+    }
+   ]
+  }
+ ],
+ "removed": [],
+ "facts": [
+  {
+   "id": "f1",
+   "topic": "kind",
+   "statement": "Looks like a service repo: 17 route(s), consumer(s) or scheduled job(s)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 72,
+     "end_line": 72
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 77,
+     "end_line": 77
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 89,
+     "end_line": 89
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "topic": "languages",
+   "statement": "5 source files in css, 9,920 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/static/resources/css/petclinic.css",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/scss/petclinic.scss",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/scss/header.scss",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "topic": "languages",
+   "statement": "30 source files in java, 1,899 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "topic": "languages",
+   "statement": "12 source files in html, 546 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/templates/owners/ownerDetails.html",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/resources/templates/fragments/layout.html",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/resources/templates/owners/ownersList.html",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "topic": "languages",
+   "statement": "7 source files in sql, 344 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/db/h2/schema.sql",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/resources/db/mysql/schema.sql",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/resources/db/h2/data.sql",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f6",
+   "topic": "build",
+   "statement": "Build or deploy file .devcontainer/Dockerfile",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".devcontainer/Dockerfile",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f7",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/deploy-and-test-cluster.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/deploy-and-test-cluster.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f8",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/gradle-build.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/gradle-build.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f9",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/maven-build.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/maven-build.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f10",
+   "topic": "build",
+   "statement": "Build or deploy file build.gradle",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "build.gradle",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f11",
+   "topic": "build",
+   "statement": "Build or deploy file docker-compose.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "docker-compose.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f12",
+   "topic": "build",
+   "statement": "Build or deploy file pom.xml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "pom.xml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f13",
+   "topic": "system",
+   "statement": "Database, cache or queue: H2 (dependency com.h2database:h2)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "build.gradle",
+     "start_line": 46,
+     "end_line": 46
+    },
+    {
+     "kind": "file",
+     "path": "pom.xml",
+     "start_line": 78,
+     "end_line": 78
+    }
+   ]
+  },
+  {
+   "id": "f14",
+   "topic": "system",
+   "statement": "Database, cache or queue: MySQL (dependency com.mysql:mysql-connector-j; setting mentions jdbc:mysql:; Compose service mysql, image mysql:9.7)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "build.gradle",
+     "start_line": 47,
+     "end_line": 47
+    },
+    {
+     "kind": "file",
+     "path": "pom.xml",
+     "start_line": 88,
+     "end_line": 88
+    },
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-mysql.properties",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "docker-compose.yml",
+     "start_line": 2,
+     "end_line": 2
+    }
+   ]
+  },
+  {
+   "id": "f15",
+   "topic": "system",
+   "statement": "Database, cache or queue: PostgreSQL (dependency org.postgresql:postgresql; setting mentions jdbc:postgresql:; Compose service postgres, image postgres:18.4)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "build.gradle",
+     "start_line": 48,
+     "end_line": 48
+    },
+    {
+     "kind": "file",
+     "path": "pom.xml",
+     "start_line": 93,
+     "end_line": 93
+    },
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-postgres.properties",
+     "start_line": 3,
+     "end_line": 3
+    },
+    {
+     "kind": "file",
+     "path": "docker-compose.yml",
+     "start_line": 14,
+     "end_line": 14
+    }
+   ]
+  },
+  {
+   "id": "f16",
+   "topic": "settings",
+   "statement": "Setting MYSQL_PASS is read from the environment in src/main/resources/application-mysql.properties",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-mysql.properties",
+     "start_line": 5,
+     "end_line": 5
+    }
+   ]
+  },
+  {
+   "id": "f17",
+   "topic": "settings",
+   "statement": "Setting MYSQL_URL is read from the environment in src/main/resources/application-mysql.properties",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-mysql.properties",
+     "start_line": 3,
+     "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f18",
+   "topic": "settings",
+   "statement": "Setting MYSQL_USER is read from the environment in src/main/resources/application-mysql.properties",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-mysql.properties",
+     "start_line": 4,
+     "end_line": 4
+    }
+   ]
+  },
+  {
+   "id": "f19",
+   "topic": "settings",
+   "statement": "Setting POSTGRES_PASS is read from the environment in src/main/resources/application-postgres.properties",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-postgres.properties",
+     "start_line": 5,
+     "end_line": 5
+    }
+   ]
+  },
+  {
+   "id": "f20",
+   "topic": "settings",
+   "statement": "Setting POSTGRES_URL is read from the environment in src/main/resources/application-postgres.properties",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-postgres.properties",
+     "start_line": 3,
+     "end_line": 3
+    }
+   ]
+  },
+  {
+   "id": "f21",
+   "topic": "settings",
+   "statement": "Setting POSTGRES_USER is read from the environment in src/main/resources/application-postgres.properties",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/resources/application-postgres.properties",
+     "start_line": 4,
+     "end_line": 4
+    }
+   ]
+  },
+  {
+   "id": "f22",
+   "topic": "entry_points",
+   "statement": "17 http routes found",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 72,
+     "end_line": 72
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 77,
+     "end_line": 77
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 89,
+     "end_line": 89
+    }
+   ]
+  },
+  {
+   "id": "f23",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 72,
+     "end_line": 72
+    }
+   ]
+  },
+  {
+   "id": "f24",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /owners/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 77,
+     "end_line": 77
+    }
+   ]
+  },
+  {
+   "id": "f25",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/find (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 89,
+     "end_line": 89
+    }
+   ]
+  },
+  {
+   "id": "f26",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 94,
+     "end_line": 94
+    }
+   ]
+  },
+  {
+   "id": "f27",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/{ownerId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 148,
+     "end_line": 148
+    }
+   ]
+  },
+  {
+   "id": "f28",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /owners/{ownerId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 153,
+     "end_line": 153
+    }
+   ]
+  },
+  {
+   "id": "f29",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/{ownerId} (spring) in src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 178,
+     "end_line": 178
+    }
+   ]
+  },
+  {
+   "id": "f30",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/{ownerId}/pets/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 100,
+     "end_line": 100
+    }
+   ]
+  },
+  {
+   "id": "f31",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /owners/{ownerId}/pets/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 107,
+     "end_line": 107
+    }
+   ]
+  },
+  {
+   "id": "f32",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/{ownerId}/pets/{petId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 139,
+     "end_line": 139
+    }
+   ]
+  },
+  {
+   "id": "f33",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /owners/{ownerId}/pets/{petId}/edit (spring) in src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 144,
+     "end_line": 144
+    }
+   ]
+  },
+  {
+   "id": "f34",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /owners/{ownerId}/pets/{petId}/visits/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+     "start_line": 90,
+     "end_line": 90
+    }
+   ]
+  },
+  {
+   "id": "f35",
+   "topic": "entry_points",
+   "statement": "HTTP route POST /owners/{ownerId}/pets/{petId}/visits/new (spring) in src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+     "start_line": 97,
+     "end_line": 97
+    }
+   ]
+  },
+  {
+   "id": "f36",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /oups (spring) in src/main/java/org/springframework/samples/petclinic/system/CrashController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/system/CrashController.java",
+     "start_line": 31,
+     "end_line": 31
+    }
+   ]
+  },
+  {
+   "id": "f37",
+   "topic": "entry_points",
+   "statement": "HTTP route GET / (spring) in src/main/java/org/springframework/samples/petclinic/system/WelcomeController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/system/WelcomeController.java",
+     "start_line": 25,
+     "end_line": 25
+    }
+   ]
+  },
+  {
+   "id": "f38",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /vets.html (spring) in src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 45,
+     "end_line": 45
+    }
+   ]
+  },
+  {
+   "id": "f39",
+   "topic": "entry_points",
+   "statement": "HTTP route GET /vets (spring) in src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 72,
+     "end_line": 72
+    }
+   ]
+  },
+  {
+   "id": "f40",
+   "topic": "entry_points",
+   "statement": "1 program entry found",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+     "start_line": 32,
+     "end_line": 32
+    }
+   ]
+  },
+  {
+   "id": "f41",
+   "topic": "entry_points",
+   "statement": "Program entry PetClinicApplication in src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+     "start_line": 32,
+     "end_line": 32
+    }
+   ]
+  },
+  {
+   "id": "f42",
+   "topic": "flow",
+   "statement": "15 of 17 traced routes reach the database",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 67,
+     "end_line": 67
+    }
+   ]
+  },
+  {
+   "id": "f43",
+   "topic": "flow",
+   "statement": "POST /owners/{ownerId}/pets/{petId}/edit is handled by PetController.processUpdateForm in src/main/java/org/springframework/samples/petclinic/owner/PetController.java; the framework first runs PetController.populatePetTypes, PetController.findOwner and PetController.findPet; PetController.processUpdateForm calls PetController.updatePetDetails and PetController.isDuplicatePetNameViolation; 1 more step not shown; PetController.populatePetTypes reaches the database (PetTypeRepository.findPetTypes in src/main/java/org/springframework/samples/petclinic/owner/PetController.java)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 144,
+     "end_line": 144
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 62,
+     "end_line": 62
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 67,
+     "end_line": 67
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 75,
+     "end_line": 75
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 186,
+     "end_line": 186
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 64,
+     "end_line": 64
+    }
+   ]
+  },
+  {
+   "id": "f44",
+   "topic": "flow",
+   "statement": "POST /owners/{ownerId}/pets/new is handled by PetController.processCreationForm in src/main/java/org/springframework/samples/petclinic/owner/PetController.java; the framework first runs PetController.populatePetTypes, PetController.findOwner and PetController.findPet; PetController.processCreationForm calls Owner.addPet in src/main/java/org/springframework/samples/petclinic/owner/Owner.java and PetController.isDuplicatePetNameViolation; PetController.processCreationForm reaches the database (OwnerRepository.saveAndFlush in src/main/java/org/springframework/samples/petclinic/owner/PetController.java)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 107,
+     "end_line": 107
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 62,
+     "end_line": 62
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 67,
+     "end_line": 67
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 75,
+     "end_line": 75
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+     "start_line": 100,
+     "end_line": 100
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 126,
+     "end_line": 126
+    }
+   ]
+  },
+  {
+   "id": "f45",
+   "topic": "flow",
+   "statement": "GET /vets.html is handled by VetController.showVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java; VetController.showVetList calls VetController.findPaginated and VetController.addPaginationModel; VetController.findPaginated reaches the database (VetRepository.findAll in src/main/java/org/springframework/samples/petclinic/vet/VetController.java)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 45,
+     "end_line": 45
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 65,
+     "end_line": 65
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 56,
+     "end_line": 56
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 69,
+     "end_line": 69
+    }
+   ]
+  },
+  {
+   "id": "f46",
+   "topic": "flow",
+   "statement": "GET /vets is handled by VetController.showResourcesVetList in src/main/java/org/springframework/samples/petclinic/vet/VetController.java; VetController.showResourcesVetList calls Vets.getVetList in src/main/java/org/springframework/samples/petclinic/vet/Vets.java; VetController.showResourcesVetList reaches the database (VetRepository.findAll in src/main/java/org/springframework/samples/petclinic/vet/VetController.java)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 72,
+     "end_line": 72
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/Vets.java",
+     "start_line": 35,
+     "end_line": 35
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 77,
+     "end_line": 77
+    }
+   ]
+  },
+  {
+   "id": "f47",
+   "topic": "contribute",
+   "statement": "CI step \"Deploy application\" in job deploy-and-test-cluster of .github/workflows/deploy-and-test-cluster.yml runs: kubectl apply -f k8s/",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/deploy-and-test-cluster.yml",
+     "start_line": 25,
+     "end_line": 25
+    }
+   ]
+  },
+  {
+   "id": "f48",
+   "topic": "contribute",
+   "statement": "CI step \"Wait for Pods to be ready\" in job deploy-and-test-cluster of .github/workflows/deploy-and-test-cluster.yml runs: kubectl wait --for=condition=ready pod -l app=demo-db --timeout=180s",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/deploy-and-test-cluster.yml",
+     "start_line": 29,
+     "end_line": 29
+    }
+   ]
+  },
+  {
+   "id": "f49",
+   "topic": "contribute",
+   "statement": "CI step \"Wait for Pods to be ready\" in job deploy-and-test-cluster of .github/workflows/deploy-and-test-cluster.yml runs: kubectl wait --for=condition=ready pod -l app=petclinic --timeout=180s",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/deploy-and-test-cluster.yml",
+     "start_line": 30,
+     "end_line": 30
+    }
+   ]
+  },
+  {
+   "id": "f50",
+   "topic": "contribute",
+   "statement": "CI step \"Build with Gradle\" in job build of .github/workflows/gradle-build.yml runs: ./gradlew build",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/gradle-build.yml",
+     "start_line": 31,
+     "end_line": 31
+    }
+   ]
+  },
+  {
+   "id": "f51",
+   "topic": "contribute",
+   "statement": "CI step \"Build with Maven Wrapper\" in job build of .github/workflows/maven-build.yml runs: ./mvnw -B verify",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/maven-build.yml",
+     "start_line": 29,
+     "end_line": 29
+    }
+   ]
+  },
+  {
+   "id": "f52",
+   "topic": "structure",
+   "statement": "Code in src/main/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/model (4 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java",
+     "start_line": 24,
+     "end_line": 24
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java",
+     "start_line": 18,
+     "end_line": 18
+    }
+   ]
+  },
+  {
+   "id": "f53",
+   "topic": "structure",
+   "statement": "Code in src/main/java/org/springframework/samples/petclinic/vet uses code in src/main/java/org/springframework/samples/petclinic/model (3 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java",
+     "start_line": 18,
+     "end_line": 18
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java",
+     "start_line": 24,
+     "end_line": 24
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java",
+     "start_line": 25,
+     "end_line": 25
+    }
+   ]
+  },
+  {
+   "id": "f54",
+   "topic": "structure",
+   "statement": "Code in src/main/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/model (2 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicRuntimeHints.java",
+     "start_line": 21,
+     "end_line": 21
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicRuntimeHints.java",
+     "start_line": 22,
+     "end_line": 22
+    }
+   ]
+  },
+  {
+   "id": "f55",
+   "topic": "structure",
+   "statement": "Code in src/main/java/org/springframework/samples/petclinic uses code in src/main/java/org/springframework/samples/petclinic/vet (1 reference)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicRuntimeHints.java",
+     "start_line": 23,
+     "end_line": 23
+    }
+   ]
+  },
+  {
+   "id": "f56",
+   "topic": "structure",
+   "statement": "Code in src/test/java/org/springframework/samples/petclinic/owner uses code in src/main/java/org/springframework/samples/petclinic/owner (25 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+     "start_line": 60,
+     "end_line": 60
+    },
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+     "start_line": 71,
+     "end_line": 71
+    },
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+     "start_line": 73,
+     "end_line": 73
+    }
+   ]
+  },
+  {
+   "id": "f57",
+   "topic": "structure",
+   "statement": "Code in src/test/java/org/springframework/samples/petclinic/service uses code in src/main/java/org/springframework/samples/petclinic/owner (6 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
+     "start_line": 34,
+     "end_line": 34
+    },
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
+     "start_line": 35,
+     "end_line": 35
+    },
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/service/ClinicServiceTests.java",
+     "start_line": 36,
+     "end_line": 36
+    }
+   ]
+  },
+  {
+   "id": "f58",
+   "topic": "structure",
+   "statement": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java is used by 10 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 65,
+     "end_line": 65
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerRepository.java",
+     "start_line": 36,
+     "end_line": 36
+    }
+   ]
+  },
+  {
+   "id": "f59",
+   "topic": "structure",
+   "statement": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java is used by 10 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+     "start_line": 70,
+     "end_line": 70
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 76,
+     "end_line": 76
+    }
+   ]
+  },
+  {
+   "id": "f60",
+   "topic": "structure",
+   "statement": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java is used by 9 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java",
+     "start_line": 54,
+     "end_line": 54
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 63,
+     "end_line": 63
+    }
+   ]
+  },
+  {
+   "id": "f61",
+   "topic": "structure",
+   "statement": "src/main/java/org/springframework/samples/petclinic/owner/OwnerRepository.java is used by 8 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerRepository.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": 53,
+     "end_line": 53
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "start_line": 53,
+     "end_line": 53
+    }
+   ]
+  },
+  {
+   "id": "f62",
+   "topic": "structure",
+   "statement": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java is used by 7 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicRuntimeHints.java",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "start_line": 48,
+     "end_line": 48
+    }
+   ]
+  },
+  {
+   "id": "f63",
+   "topic": "history",
+   "statement": "13 commits between 01 Jul 2026 and 29 Sep 2026",
+   "evidence": [
+    {
+     "kind": "commit",
+     "sha": "500158f732419217507c7656904b8e6aa1bcc0d6"
+    },
+    {
+     "kind": "commit",
+     "sha": "0d064b04958da7715a9138459bafbde3bd10949d"
+    },
+    {
+     "kind": "commit",
+     "sha": "b33136f5e6151b4da44c5cba452955b79449dcb8"
+    }
+   ]
+  },
+  {
+   "id": "f64",
+   "topic": "history",
+   "statement": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java changed in 3 commits by 3 authors between 01 Jul 2026 and 29 Sep 2026",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "commit",
+     "sha": "500158f732419217507c7656904b8e6aa1bcc0d6"
+    },
+    {
+     "kind": "commit",
+     "sha": "3c7ab98ae7ebb433fad746ea891fd97f5103671b"
+    },
+    {
+     "kind": "commit",
+     "sha": "bb37aad8c332264723817d855e8b3b96b7c392bc"
+    }
+   ]
+  },
+  {
+   "id": "f65",
+   "topic": "history",
+   "statement": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java changed in 3 commits by 2 authors between 01 Jul 2026 and 29 Sep 2026",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "commit",
+     "sha": "500158f732419217507c7656904b8e6aa1bcc0d6"
+    },
+    {
+     "kind": "commit",
+     "sha": "0d064b04958da7715a9138459bafbde3bd10949d"
+    },
+    {
+     "kind": "commit",
+     "sha": "bb37aad8c332264723817d855e8b3b96b7c392bc"
+    }
+   ]
+  }
+ ],
+ "views": {
+  "stats": [
+   {
+    "label": "Commit",
+    "value": "500158f"
+   },
+   {
+    "label": "Language",
+    "value": "Java"
+   },
+   {
+    "label": "Source files",
+    "value": "54"
+   },
+   {
+    "label": "Lines of code",
+    "value": "12,709"
+   },
+   {
+    "label": "Authors in 90 days",
+    "value": "11"
+   },
+   {
+    "label": "Kind",
+    "value": "Service"
+   }
+  ],
+  "system": {
+   "parts": [
+    {
+     "name": "H2",
+     "role": "store",
+     "detail": "dependency com.h2database:h2",
+     "places": [
+      {
+       "path": "build.gradle",
+       "line": 46
+      },
+      {
+       "path": "pom.xml",
+       "line": 78
+      }
+     ]
+    },
+    {
+     "name": "MySQL",
+     "role": "store",
+     "detail": "dependency com.mysql:mysql-connector-j; setting mentions jdbc:mysql:; Compose service mysql, image mysql:9.7",
+     "places": [
+      {
+       "path": "build.gradle",
+       "line": 47
+      },
+      {
+       "path": "pom.xml",
+       "line": 88
+      },
+      {
+       "path": "src/main/resources/application-mysql.properties",
+       "line": 3
+      },
+      {
+       "path": "docker-compose.yml",
+       "line": 2
+      }
+     ]
+    },
+    {
+     "name": "PostgreSQL",
+     "role": "store",
+     "detail": "dependency org.postgresql:postgresql; setting mentions jdbc:postgresql:; Compose service postgres, image postgres:18.4",
+     "places": [
+      {
+       "path": "build.gradle",
+       "line": 48
+      },
+      {
+       "path": "pom.xml",
+       "line": 93
+      },
+      {
+       "path": "src/main/resources/application-postgres.properties",
+       "line": 3
+      },
+      {
+       "path": "docker-compose.yml",
+       "line": 14
+      }
+     ]
+    }
+   ],
+   "links": [
+    {
+     "source": "Clients",
+     "target": "spring-petclinic",
+     "label": "HTTP",
+     "place": null
+    },
+    {
+     "source": "spring-petclinic",
+     "target": "H2",
+     "label": "uses",
+     "place": null
+    },
+    {
+     "source": "spring-petclinic",
+     "target": "MySQL",
+     "label": "uses",
+     "place": null
+    },
+    {
+     "source": "spring-petclinic",
+     "target": "PostgreSQL",
+     "label": "uses",
+     "place": null
+    }
+   ],
+   "links_known": true
+  },
+  "code_map": {
+   "rows": [
+    [
+     {
+      "path": "src/main/java/org/springframework/samples/petclinic/owner",
+      "files": 12,
+      "lines": 1130,
+      "blocks": [
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+        "lines": 207,
+        "commits": 1
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+        "lines": 188,
+        "commits": 2
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+        "lines": 188,
+        "commits": 3
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+        "lines": 114,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java",
+        "lines": 85,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/Visit.java",
+        "lines": 70,
+        "commits": 1
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java",
+        "lines": 69,
+        "commits": 1
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerRepository.java",
+        "lines": 62,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/PetTypeFormatter.java",
+        "lines": 62,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/PetTypeRepository.java",
+        "lines": 39,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java",
+        "lines": 30,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/owner/package-info.java",
+        "lines": 16,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "src/main/java/org/springframework/samples/petclinic/model"
+      ]
+     },
+     {
+      "path": "src/main/java/org/springframework/samples/petclinic/system",
+      "files": 5,
+      "lines": 196,
+      "blocks": [
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/system/WebConfiguration.java",
+        "lines": 60,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/system/CacheConfiguration.java",
+        "lines": 53,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/system/CrashController.java",
+        "lines": 37,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/system/WelcomeController.java",
+        "lines": 30,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/system/package-info.java",
+        "lines": 16,
+        "commits": 0
+       }
+      ],
+      "uses": []
+     },
+     {
+      "path": "src/main/java/org/springframework/samples/petclinic",
+      "files": 3,
+      "lines": 90,
+      "blocks": [
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/PetClinicRuntimeHints.java",
+        "lines": 38,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+        "lines": 36,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/package-info.java",
+        "lines": 16,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "src/main/java/org/springframework/samples/petclinic/model",
+       "src/main/java/org/springframework/samples/petclinic/vet"
+      ]
+     }
+    ],
+    [
+     {
+      "path": "src/main/java/org/springframework/samples/petclinic/vet",
+      "files": 6,
+      "lines": 304,
+      "blocks": [
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+        "lines": 81,
+        "commits": 2
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java",
+        "lines": 74,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/vet/VetRepository.java",
+        "lines": 58,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/vet/Vets.java",
+        "lines": 43,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java",
+        "lines": 32,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/vet/package-info.java",
+        "lines": 16,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "src/main/java/org/springframework/samples/petclinic/model"
+      ]
+     }
+    ],
+    [
+     {
+      "path": "src/main/java/org/springframework/samples/petclinic/model",
+      "files": 4,
+      "lines": 179,
+      "blocks": [
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/model/Person.java",
+        "lines": 57,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/model/BaseEntity.java",
+        "lines": 51,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/model/NamedEntity.java",
+        "lines": 51,
+        "commits": 0
+       },
+       {
+        "path": "src/main/java/org/springframework/samples/petclinic/model/package-info.java",
+        "lines": 20,
+        "commits": 0
+       }
+      ],
+      "uses": []
+     }
+    ]
+   ],
+   "shown_files": 30,
+   "left_out": "Tests, examples and configuration are left out.",
+   "warm": 3,
+   "hot": 10
+  },
+  "hot_spots": [
+   {
+    "path": "src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java",
+    "commits": 3,
+    "authors": 3,
+    "changes_with": []
+   },
+   {
+    "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+    "commits": 3,
+    "authors": 2,
+    "changes_with": []
+   }
+  ],
+  "window": "01 Jul 2026 and 29 Sep 2026",
+  "api": [],
+  "api_root": "",
+  "flows": [
+   {
+    "route": "POST /owners/{ownerId}/pets/{petId}/edit",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "line": 144
+    },
+    "steps": [
+     {
+      "name": "PetController.processUpdateForm",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 144
+      },
+      "caller": null,
+      "before": false
+     },
+     {
+      "name": "PetController.populatePetTypes",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 62
+      },
+      "caller": 0,
+      "before": true
+     },
+     {
+      "name": "PetController.findOwner",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 67
+      },
+      "caller": 0,
+      "before": true
+     },
+     {
+      "name": "PetController.findPet",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 75
+      },
+      "caller": 0,
+      "before": true
+     },
+     {
+      "name": "PetController.updatePetDetails",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 186
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "PetController.isDuplicatePetNameViolation",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 202
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "Owner.addPet",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+       "line": 100
+      },
+      "caller": 4,
+      "before": false
+     }
+    ],
+    "reaches": [
+     {
+      "what": "the database",
+      "call": "PetTypeRepository.findPetTypes",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+       "line": 64
+      },
+      "by": 1
+     }
+    ]
+   },
+   {
+    "route": "POST /owners/{ownerId}/pets/{petId}/visits/new",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+     "line": 97
+    },
+    "steps": [
+     {
+      "name": "VisitController.processNewVisitForm",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+       "line": 97
+      },
+      "caller": null,
+      "before": false
+     },
+     {
+      "name": "VisitController.loadPetWithVisit",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+       "line": 63
+      },
+      "caller": 0,
+      "before": true
+     },
+     {
+      "name": "VisitController.minVisitDate",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+       "line": 83
+      },
+      "caller": 0,
+      "before": true
+     },
+     {
+      "name": "Owner.addVisit",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java",
+       "line": 176
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "Pet.addVisit",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java",
+       "line": 81
+      },
+      "caller": 1,
+      "before": false
+     }
+    ],
+    "reaches": [
+     {
+      "what": "the database",
+      "call": "OwnerRepository.save",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+       "line": 109
+      },
+      "by": 0
+     }
+    ]
+   },
+   {
+    "route": "GET /owners",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 94
+    },
+    "steps": [
+     {
+      "name": "OwnerController.processFindForm",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+       "line": 94
+      },
+      "caller": null,
+      "before": false
+     },
+     {
+      "name": "OwnerController.findOwner",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+       "line": 64
+      },
+      "caller": 0,
+      "before": true
+     },
+     {
+      "name": "OwnerController.findPaginatedForOwnersLastName",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+       "line": 141
+      },
+      "caller": 0,
+      "before": false
+     },
+     {
+      "name": "OwnerController.addPaginationModel",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+       "line": 132
+      },
+      "caller": 0,
+      "before": false
+     }
+    ],
+    "reaches": [
+     {
+      "what": "the database",
+      "call": "OwnerRepository.findById",
+      "place": {
+       "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+       "line": 67
+      },
+      "by": 1
+     }
+    ]
+   }
+  ],
+  "flows_traced": 17,
+  "routes": [
+   {
+    "kind": "Program entry",
+    "name": "PetClinicApplication",
+    "framework": "",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+     "line": 32
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/new",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 72
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /owners/new",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 77
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/find",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 89
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 94
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/{ownerId}/edit",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 148
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /owners/{ownerId}/edit",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 153
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/{ownerId}",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+     "line": 178
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/{ownerId}/pets/new",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "line": 100
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /owners/{ownerId}/pets/new",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "line": 107
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/{ownerId}/pets/{petId}/edit",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "line": 139
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /owners/{ownerId}/pets/{petId}/edit",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java",
+     "line": 144
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /owners/{ownerId}/pets/{petId}/visits/new",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+     "line": 90
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "POST /owners/{ownerId}/pets/{petId}/visits/new",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java",
+     "line": 97
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /oups",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/system/CrashController.java",
+     "line": 31
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/system/WelcomeController.java",
+     "line": 25
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /vets.html",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "line": 45
+    }
+   },
+   {
+    "kind": "HTTP route",
+    "name": "GET /vets",
+    "framework": "spring",
+    "place": {
+     "path": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java",
+     "line": 72
+    }
+   }
+  ],
+  "gaps": [
+   {
+    "title": "Expected traffic, scale and why it was built this way",
+    "detail": "These are rarely written in code, and this report does not guess them."
+   }
+  ]
+ },
+ "written_at": "2026-11-20"
+}

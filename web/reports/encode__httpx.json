@@ -1,0 +1,1898 @@
+{
+ "schema_version": 1,
+ "repo": {
+  "owner": "encode",
+  "name": "httpx",
+  "commit": "7cff5f79bc78649bbcd3fd9aa7a74c86e0f63016"
+ },
+ "kind": "library",
+ "model": "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+ "sections": [
+  {
+   "id": "overview",
+   "title": "Overview",
+   "claims": [
+    {
+     "text": "This is a library repository with a package definition whose only command needs an optional extra.",
+     "fact_ids": [
+      "f1"
+     ]
+    },
+    {
+     "text": "It is built with Python across 23 source files totaling 8,827 lines.",
+     "fact_ids": [
+      "f2"
+     ]
+    },
+    {
+     "text": "The project includes build or deploy files pyproject.toml and requirements.txt.",
+     "fact_ids": [
+      "f6",
+      "f7"
+     ]
+    },
+    {
+     "text": "GitHub Actions workflows are present at .github/workflows/publish.yml and .github/workflows/test-suite.yml.",
+     "fact_ids": [
+      "f4",
+      "f5"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "api",
+   "title": "What it lets your code do",
+   "claims": [
+    {
+     "text": "The library exposes 10 public functions for making HTTP requests: delete, get, head, options, patch, post, put, request, stream, and create_ssl_context.",
+     "fact_ids": [
+      "f13",
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f18",
+      "f19",
+      "f20",
+      "f21",
+      "f22",
+      "f23"
+     ]
+    },
+    {
+     "text": "The delete, get, head, options, patch, post, and put functions send HTTP requests using their respective methods.",
+     "fact_ids": [
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f18",
+      "f19",
+      "f20"
+     ]
+    },
+    {
+     "text": "The request function sends an HTTP request with a configurable method.",
+     "fact_ids": [
+      "f21"
+     ]
+    },
+    {
+     "text": "The stream function is an alternative to request that streams the response body instead of loading it into memory at once.",
+     "fact_ids": [
+      "f22"
+     ]
+    },
+    {
+     "text": "The create_ssl_context function creates an SSL context for verified connections.",
+     "fact_ids": [
+      "f23"
+     ]
+    },
+    {
+     "text": "Client and AsyncClient provide synchronous and asynchronous HTTP clients with connection pooling, HTTP/2, redirects, and cookie persistence.",
+     "fact_ids": [
+      "f25",
+      "f28"
+     ]
+    },
+    {
+     "text": "ASGITransport and WSGITransport are custom transports for sending requests directly to ASGI and WSGI applications respectively.",
+     "fact_ids": [
+      "f24",
+      "f38"
+     ]
+    },
+    {
+     "text": "AsyncHTTPTransport, BaseTransport, and AsyncBaseTransport are transport base classes for custom connection handling.",
+     "fact_ids": [
+      "f39",
+      "f41",
+      "f42"
+     ]
+    },
+    {
+     "text": "Auth is the base class for authentication schemes, with BasicAuth for HTTP Basic authentication, FunctionAuth for callable authentication, and NetRCAuth for netrc file credentials.",
+     "fact_ids": [
+      "f26",
+      "f27",
+      "f31",
+      "f34"
+     ]
+    },
+    {
+     "text": "Headers provides case-insensitive multi-dict HTTP headers, Cookies provides mutable mapping HTTP cookies, and QueryParams provides multi-dict URL query parameters.",
+     "fact_ids": [
+      "f30",
+      "f32",
+      "f35"
+     ]
+    },
+    {
+     "text": "URL breaks down URL components.",
+     "fact_ids": [
+      "f37"
+     ]
+    },
+    {
+     "text": "Timeout configures timeout behavior and Limits configures limits on client behaviors.",
+     "fact_ids": [
+      "f33",
+      "f36"
+     ]
+    },
+    {
+     "text": "codes provides HTTP status codes and reason phrases.",
+     "fact_ids": [
+      "f29"
+     ]
+    },
+    {
+     "text": "ByteStream and AsyncByteStream handle synchronous and asynchronous byte streaming.",
+     "fact_ids": [
+      "f40",
+      "f43"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "structure",
+   "title": "Code map",
+   "claims": [
+    {
+     "text": "The repository contains 23 Python source files totaling 8,827 lines.",
+     "fact_ids": [
+      "f2"
+     ]
+    },
+    {
+     "text": "The httpx package and httpx/_transports package have mutual dependencies, with httpx/_transports referencing httpx 12 times and httpx referencing httpx/_transports 3 times.",
+     "fact_ids": [
+      "f67",
+      "f68",
+      "f71"
+     ]
+    },
+    {
+     "text": "The test directory references httpx 17 times, and tests/client references httpx 10 times.",
+     "fact_ids": [
+      "f69",
+      "f70"
+     ]
+    },
+    {
+     "text": "The most depended-upon file is httpx/__init__.py, used by 32 other files.",
+     "fact_ids": [
+      "f72"
+     ]
+    },
+    {
+     "text": "Other core modules with high usage include httpx/_models.py used by 13 files, httpx/_types.py used by 12 files, httpx/_exceptions.py used by 9 files, and httpx/_urls.py used by 8 files.",
+     "fact_ids": [
+      "f73",
+      "f74",
+      "f75",
+      "f76"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hot_spots",
+   "title": "Hot spots",
+   "claims": []
+  },
+  {
+   "id": "contribute",
+   "title": "How to contribute",
+   "claims": [
+    {
+     "text": "The repository has two contribution guides at .github/CONTRIBUTING.md and docs/contributing.md.",
+     "fact_ids": [
+      "f45",
+      "f58"
+     ]
+    },
+    {
+     "text": "CI runs scripts/install to install dependencies, scripts/check for linting, scripts/test for tests, and scripts/coverage to enforce coverage.",
+     "fact_ids": [
+      "f52",
+      "f55",
+      "f56",
+      "f57"
+     ]
+    },
+    {
+     "text": "Recently closed pull requests were merged a median of 2 hours after opening, with first review a median of 2 hours after opening.",
+     "fact_ids": [
+      "f65",
+      "f66"
+     ]
+    }
+   ]
+  }
+ ],
+ "removed": [
+  {
+   "section": "api",
+   "text": "The library defines 28 public exceptions including CloseError, ConnectError, ConnectTimeout, CookieConflict, DecodingError, HTTPError, HTTPStatusError, InvalidURL, LocalProtocolError, NetworkError, PoolTimeout, ProtocolError, ProxyError, ReadError, and ReadTimeout.",
+   "reason": "states numbers its facts do not: 28"
+  },
+  {
+   "section": "contribute",
+   "text": "Both guides include sections for Reporting Bugs, Development, Testing and Linting, Documenting, Resolving Build/CI Failures, Releasing, and Development proxy setup.",
+   "reason": "names something its facts do not: Build/CI"
+  }
+ ],
+ "facts": [
+  {
+   "id": "f1",
+   "topic": "kind",
+   "statement": "Looks like a library repo: a package definition whose only command needs an optional extra",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_main.py",
+     "start_line": 313,
+     "end_line": 313
+    },
+    {
+     "kind": "file",
+     "path": "pyproject.toml",
+     "start_line": 59,
+     "end_line": 59
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "topic": "languages",
+   "statement": "23 source files in python, 8,827 lines in all",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_client.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_models.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_urls.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/publish.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/publish.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "topic": "build",
+   "statement": "GitHub Actions workflow .github/workflows/test-suite.yml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/test-suite.yml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f6",
+   "topic": "build",
+   "statement": "Build or deploy file pyproject.toml",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "pyproject.toml",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f7",
+   "topic": "build",
+   "statement": "Build or deploy file requirements.txt",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "requirements.txt",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f13",
+   "topic": "public_api",
+   "statement": "httpx/__init__.py makes 67 names public for code that uses httpx: 10 functions, 27 classes, 2 names, 28 exceptions",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f14",
+   "topic": "public_api",
+   "statement": "Public function delete(url, *, params, headers, cookies, auth, proxy, follow_redirects, timeout, verify, trust_env) in httpx/_api.py: Sends a `DELETE` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 405,
+     "end_line": 405
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f15",
+   "topic": "public_api",
+   "statement": "Public function get(url, *, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env) in httpx/_api.py: Sends a `GET` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 174,
+     "end_line": 174
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f16",
+   "topic": "public_api",
+   "statement": "Public function head(url, *, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env) in httpx/_api.py: Sends a `HEAD` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 246,
+     "end_line": 246
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f17",
+   "topic": "public_api",
+   "statement": "Public function options(url, *, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env) in httpx/_api.py: Sends an `OPTIONS` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 210,
+     "end_line": 210
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f18",
+   "topic": "public_api",
+   "statement": "Public function patch(url, *, content, data, files, json, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env) in httpx/_api.py: Sends a `PATCH` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 364,
+     "end_line": 364
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f19",
+   "topic": "public_api",
+   "statement": "Public function post(url, *, content, data, files, json, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env) in httpx/_api.py: Sends a `POST` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 282,
+     "end_line": 282
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f20",
+   "topic": "public_api",
+   "statement": "Public function put(url, *, content, data, files, json, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env) in httpx/_api.py: Sends a `PUT` request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 323,
+     "end_line": 323
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f21",
+   "topic": "public_api",
+   "statement": "Public function request(method, url, *, params, content, data, files, json, headers, cookies, auth, proxy, timeout, follow_redirects, verify, trust_env) in httpx/_api.py: Sends an HTTP request.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 39,
+     "end_line": 39
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f22",
+   "topic": "public_api",
+   "statement": "Public function stream(method, url, *, params, content, data, files, json, headers, cookies, auth, proxy, timeout, follow_redirects, verify, trust_env) in httpx/_api.py: Alternative to `httpx.request()` that streams the response body instead of loading it into memory at once.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 123,
+     "end_line": 123
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f23",
+   "topic": "public_api",
+   "statement": "Public function create_ssl_context(verify, cert, trust_env) in httpx/_config.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_config.py",
+     "start_line": 23,
+     "end_line": 23
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f24",
+   "topic": "public_api",
+   "statement": "Public class ASGITransport in httpx/_transports/asgi.py: A custom AsyncTransport that handles sending requests directly to an ASGI app.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_transports/asgi.py",
+     "start_line": 63,
+     "end_line": 63
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f25",
+   "topic": "public_api",
+   "statement": "Public class AsyncClient in httpx/_client.py: An asynchronous HTTP client, with connection pooling, HTTP/2, redirects, cookie persistence, etc.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_client.py",
+     "start_line": 1307,
+     "end_line": 1307
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f26",
+   "topic": "public_api",
+   "statement": "Public class Auth in httpx/_auth.py: Base class for all authentication schemes.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_auth.py",
+     "start_line": 22,
+     "end_line": 22
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f27",
+   "topic": "public_api",
+   "statement": "Public class BasicAuth in httpx/_auth.py: Allows the 'auth' argument to be passed as a (username, password) pair, and uses HTTP Basic authentication.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_auth.py",
+     "start_line": 126,
+     "end_line": 126
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f28",
+   "topic": "public_api",
+   "statement": "Public class Client in httpx/_client.py: An HTTP client, with connection pooling, HTTP/2, redirects, cookie persistence, etc.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_client.py",
+     "start_line": 594,
+     "end_line": 594
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f29",
+   "topic": "public_api",
+   "statement": "Public class codes in httpx/_status_codes.py: HTTP status codes and reason phrases",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_status_codes.py",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f30",
+   "topic": "public_api",
+   "statement": "Public class Cookies in httpx/_models.py: HTTP Cookies, as a mutable mapping.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_models.py",
+     "start_line": 1079,
+     "end_line": 1079
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f31",
+   "topic": "public_api",
+   "statement": "Public class FunctionAuth in httpx/_auth.py: Allows the 'auth' argument to be passed as a simple callable function, that takes the request, and returns a new,...",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_auth.py",
+     "start_line": 113,
+     "end_line": 113
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f32",
+   "topic": "public_api",
+   "statement": "Public class Headers in httpx/_models.py: HTTP headers, as a case-insensitive multi-dict.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_models.py",
+     "start_line": 139,
+     "end_line": 139
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f33",
+   "topic": "public_api",
+   "statement": "Public class Limits in httpx/_config.py: Configuration for limits to various client behaviors.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_config.py",
+     "start_line": 159,
+     "end_line": 159
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f34",
+   "topic": "public_api",
+   "statement": "Public class NetRCAuth in httpx/_auth.py: Use a 'netrc' file to lookup basic auth credentials based on the url host.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_auth.py",
+     "start_line": 145,
+     "end_line": 145
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f35",
+   "topic": "public_api",
+   "statement": "Public class QueryParams in httpx/_urls.py: URL query parameters, as a multi-dict.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_urls.py",
+     "start_line": 420,
+     "end_line": 420
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f36",
+   "topic": "public_api",
+   "statement": "Public class Timeout in httpx/_config.py: Timeout configuration.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_config.py",
+     "start_line": 72,
+     "end_line": 72
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f37",
+   "topic": "public_api",
+   "statement": "Public class URL in httpx/_urls.py: The components of a URL are broken down like this:",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_urls.py",
+     "start_line": 15,
+     "end_line": 15
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f38",
+   "topic": "public_api",
+   "statement": "Public class WSGITransport in httpx/_transports/wsgi.py: A custom transport that handles sending requests directly to an WSGI app.",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_transports/wsgi.py",
+     "start_line": 44,
+     "end_line": 44
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f39",
+   "topic": "public_api",
+   "statement": "Public class AsyncBaseTransport in httpx/_transports/base.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_transports/base.py",
+     "start_line": 65,
+     "end_line": 65
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f40",
+   "topic": "public_api",
+   "statement": "Public class AsyncByteStream in httpx/_types.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_types.py",
+     "start_line": 106,
+     "end_line": 106
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f41",
+   "topic": "public_api",
+   "statement": "Public class AsyncHTTPTransport in httpx/_transports/default.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_transports/default.py",
+     "start_line": 279,
+     "end_line": 279
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f42",
+   "topic": "public_api",
+   "statement": "Public class BaseTransport in httpx/_transports/base.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_transports/base.py",
+     "start_line": 14,
+     "end_line": 14
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f43",
+   "topic": "public_api",
+   "statement": "Public class ByteStream in httpx/_content.py",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_content.py",
+     "start_line": 31,
+     "end_line": 31
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    }
+   ]
+  },
+  {
+   "id": "f45",
+   "topic": "contribute",
+   "statement": "Contribution guide .github/CONTRIBUTING.md has a section \"Reporting Bugs\"",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/CONTRIBUTING.md",
+     "start_line": 11,
+     "end_line": 11
+    }
+   ]
+  },
+  {
+   "id": "f52",
+   "topic": "contribute",
+   "statement": "CI step \"Install dependencies\" in job Publish release of .github/workflows/publish.yml runs: scripts/install",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/publish.yml",
+     "start_line": 22,
+     "end_line": 22
+    }
+   ]
+  },
+  {
+   "id": "f55",
+   "topic": "contribute",
+   "statement": "CI step \"Run linting checks\" in job tests of .github/workflows/test-suite.yml runs: scripts/check",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/test-suite.yml",
+     "start_line": 28,
+     "end_line": 28
+    }
+   ]
+  },
+  {
+   "id": "f56",
+   "topic": "contribute",
+   "statement": "CI step \"Run tests\" in job tests of .github/workflows/test-suite.yml runs: scripts/test",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/test-suite.yml",
+     "start_line": 32,
+     "end_line": 32
+    }
+   ]
+  },
+  {
+   "id": "f57",
+   "topic": "contribute",
+   "statement": "CI step \"Enforce coverage\" in job tests of .github/workflows/test-suite.yml runs: scripts/coverage",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": ".github/workflows/test-suite.yml",
+     "start_line": 34,
+     "end_line": 34
+    }
+   ]
+  },
+  {
+   "id": "f58",
+   "topic": "contribute",
+   "statement": "Contribution guide docs/contributing.md has a section \"Reporting Bugs or Other Issues\"",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "docs/contributing.md",
+     "start_line": 12,
+     "end_line": 12
+    }
+   ]
+  },
+  {
+   "id": "f65",
+   "topic": "activity",
+   "statement": "Recently closed pull requests were merged a median of 2 hours after being opened (9 merged pull requests measured)",
+   "evidence": [
+    {
+     "kind": "issue",
+     "number": 3836
+    },
+    {
+     "kind": "issue",
+     "number": 3832
+    },
+    {
+     "kind": "issue",
+     "number": 3834
+    }
+   ]
+  },
+  {
+   "id": "f66",
+   "topic": "activity",
+   "statement": "Their first review by someone other than the author came a median of 2 hours after opening (7 pull requests measured)",
+   "evidence": [
+    {
+     "kind": "issue",
+     "number": 3836
+    },
+    {
+     "kind": "issue",
+     "number": 3832
+    },
+    {
+     "kind": "issue",
+     "number": 3834
+    }
+   ]
+  },
+  {
+   "id": "f67",
+   "topic": "structure",
+   "statement": "Code in httpx/_transports uses code in httpx (12 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_transports/asgi.py",
+     "start_line": 5,
+     "end_line": 5
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_transports/asgi.py",
+     "start_line": 6,
+     "end_line": 6
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_transports/base.py",
+     "start_line": 6,
+     "end_line": 6
+    }
+   ]
+  },
+  {
+   "id": "f68",
+   "topic": "structure",
+   "statement": "Code in httpx uses code in httpx/_transports (3 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": 10,
+     "end_line": 10
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_client.py",
+     "start_line": 31,
+     "end_line": 31
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_client.py",
+     "start_line": 32,
+     "end_line": 32
+    }
+   ]
+  },
+  {
+   "id": "f69",
+   "topic": "structure",
+   "statement": "Code in tests uses code in httpx (17 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "tests/conftest.py",
+     "start_line": 20,
+     "end_line": 20
+    },
+    {
+     "kind": "file",
+     "path": "tests/test_api.py",
+     "start_line": 5,
+     "end_line": 5
+    },
+    {
+     "kind": "file",
+     "path": "tests/test_api.py",
+     "start_line": 98,
+     "end_line": 98
+    }
+   ]
+  },
+  {
+   "id": "f70",
+   "topic": "structure",
+   "statement": "Code in tests/client uses code in httpx (10 references)",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "tests/client/test_async_client.py",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "tests/client/test_auth.py",
+     "start_line": 18,
+     "end_line": 18
+    },
+    {
+     "kind": "file",
+     "path": "tests/client/test_client.py",
+     "start_line": 9,
+     "end_line": 9
+    }
+   ]
+  },
+  {
+   "id": "f71",
+   "topic": "structure",
+   "statement": "httpx and httpx/_transports each use the other",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": 10,
+     "end_line": 10
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_transports/asgi.py",
+     "start_line": 5,
+     "end_line": 5
+    }
+   ]
+  },
+  {
+   "id": "f72",
+   "topic": "structure",
+   "statement": "httpx/__init__.py is used by 32 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_transports/default.py",
+     "start_line": 36,
+     "end_line": 36
+    },
+    {
+     "kind": "file",
+     "path": "tests/client/test_async_client.py",
+     "start_line": 8,
+     "end_line": 8
+    }
+   ]
+  },
+  {
+   "id": "f73",
+   "topic": "structure",
+   "statement": "httpx/_models.py is used by 13 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_models.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": 8,
+     "end_line": 8
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 8,
+     "end_line": 8
+    }
+   ]
+  },
+  {
+   "id": "f74",
+   "topic": "structure",
+   "statement": "httpx/_types.py is used by 12 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_types.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": 11,
+     "end_line": 11
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 9,
+     "end_line": 9
+    }
+   ]
+  },
+  {
+   "id": "f75",
+   "topic": "structure",
+   "statement": "httpx/_exceptions.py is used by 9 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_exceptions.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": 7,
+     "end_line": 7
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_auth.py",
+     "start_line": 11,
+     "end_line": 11
+    }
+   ]
+  },
+  {
+   "id": "f76",
+   "topic": "structure",
+   "statement": "httpx/_urls.py is used by 8 other files",
+   "evidence": [
+    {
+     "kind": "file",
+     "path": "httpx/_urls.py",
+     "start_line": null,
+     "end_line": null
+    },
+    {
+     "kind": "file",
+     "path": "httpx/__init__.py",
+     "start_line": 12,
+     "end_line": 12
+    },
+    {
+     "kind": "file",
+     "path": "httpx/_api.py",
+     "start_line": 20,
+     "end_line": 20
+    }
+   ]
+  }
+ ],
+ "views": {
+  "stats": [
+   {
+    "label": "Commit",
+    "value": "7cff5f7"
+   },
+   {
+    "label": "Language",
+    "value": "Python"
+   },
+   {
+    "label": "Source files",
+    "value": "23"
+   },
+   {
+    "label": "Lines of code",
+    "value": "8,827"
+   },
+   {
+    "label": "Authors in 90 days",
+    "value": "1"
+   },
+   {
+    "label": "Kind",
+    "value": "Library"
+   }
+  ],
+  "system": null,
+  "code_map": {
+   "rows": [
+    [
+     {
+      "path": "httpx",
+      "files": 17,
+      "lines": 7941,
+      "blocks": [
+       {
+        "path": "httpx/_client.py",
+        "lines": 2019,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_models.py",
+        "lines": 1277,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_urls.py",
+        "lines": 641,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_urlparse.py",
+        "lines": 527,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_main.py",
+        "lines": 506,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_api.py",
+        "lines": 438,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_decoders.py",
+        "lines": 393,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_exceptions.py",
+        "lines": 377,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_auth.py",
+        "lines": 348,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_multipart.py",
+        "lines": 300,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_config.py",
+        "lines": 248,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_utils.py",
+        "lines": 242,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_content.py",
+        "lines": 240,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_status_codes.py",
+        "lines": 162,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_types.py",
+        "lines": 114,
+        "commits": 0
+       },
+       {
+        "path": "httpx/__init__.py",
+        "lines": 106,
+        "commits": 0
+       },
+       {
+        "path": "httpx/__version__.py",
+        "lines": 3,
+        "commits": 1
+       }
+      ],
+      "uses": [
+       "httpx/_transports"
+      ]
+     },
+     {
+      "path": "httpx/_transports",
+      "files": 6,
+      "lines": 886,
+      "blocks": [
+       {
+        "path": "httpx/_transports/default.py",
+        "lines": 406,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_transports/asgi.py",
+        "lines": 187,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_transports/wsgi.py",
+        "lines": 149,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_transports/base.py",
+        "lines": 86,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_transports/mock.py",
+        "lines": 43,
+        "commits": 0
+       },
+       {
+        "path": "httpx/_transports/__init__.py",
+        "lines": 15,
+        "commits": 0
+       }
+      ],
+      "uses": [
+       "httpx"
+      ]
+     }
+    ]
+   ],
+   "shown_files": 23,
+   "left_out": "Tests, examples and configuration are left out.",
+   "warm": 3,
+   "hot": 10
+  },
+  "hot_spots": [],
+  "window": "18 Aug 2026 and 16 Nov 2026",
+  "api": [
+   {
+    "name": "delete",
+    "kind": "function",
+    "signature": "url, *, params, headers, cookies, auth, proxy, follow_redirects, timeout, verify, trust_env",
+    "summary": "Sends a `DELETE` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 405
+    }
+   },
+   {
+    "name": "get",
+    "kind": "function",
+    "signature": "url, *, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env",
+    "summary": "Sends a `GET` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 174
+    }
+   },
+   {
+    "name": "head",
+    "kind": "function",
+    "signature": "url, *, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env",
+    "summary": "Sends a `HEAD` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 246
+    }
+   },
+   {
+    "name": "options",
+    "kind": "function",
+    "signature": "url, *, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env",
+    "summary": "Sends an `OPTIONS` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 210
+    }
+   },
+   {
+    "name": "patch",
+    "kind": "function",
+    "signature": "url, *, content, data, files, json, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env",
+    "summary": "Sends a `PATCH` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 364
+    }
+   },
+   {
+    "name": "post",
+    "kind": "function",
+    "signature": "url, *, content, data, files, json, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env",
+    "summary": "Sends a `POST` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 282
+    }
+   },
+   {
+    "name": "put",
+    "kind": "function",
+    "signature": "url, *, content, data, files, json, params, headers, cookies, auth, proxy, follow_redirects, verify, timeout, trust_env",
+    "summary": "Sends a `PUT` request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 323
+    }
+   },
+   {
+    "name": "request",
+    "kind": "function",
+    "signature": "method, url, *, params, content, data, files, json, headers, cookies, auth, proxy, timeout, follow_redirects, verify, trust_env",
+    "summary": "Sends an HTTP request.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 39
+    }
+   },
+   {
+    "name": "stream",
+    "kind": "function",
+    "signature": "method, url, *, params, content, data, files, json, headers, cookies, auth, proxy, timeout, follow_redirects, verify, trust_env",
+    "summary": "Alternative to `httpx.request()` that streams the response body instead of loading it into memory at once.",
+    "place": {
+     "path": "httpx/_api.py",
+     "line": 123
+    }
+   },
+   {
+    "name": "create_ssl_context",
+    "kind": "function",
+    "signature": "verify, cert, trust_env",
+    "summary": "",
+    "place": {
+     "path": "httpx/_config.py",
+     "line": 23
+    }
+   },
+   {
+    "name": "ASGITransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "A custom AsyncTransport that handles sending requests directly to an ASGI app.",
+    "place": {
+     "path": "httpx/_transports/asgi.py",
+     "line": 63
+    }
+   },
+   {
+    "name": "AsyncClient",
+    "kind": "class",
+    "signature": "",
+    "summary": "An asynchronous HTTP client, with connection pooling, HTTP/2, redirects, cookie persistence, etc.",
+    "place": {
+     "path": "httpx/_client.py",
+     "line": 1307
+    }
+   },
+   {
+    "name": "Auth",
+    "kind": "class",
+    "signature": "",
+    "summary": "Base class for all authentication schemes.",
+    "place": {
+     "path": "httpx/_auth.py",
+     "line": 22
+    }
+   },
+   {
+    "name": "BasicAuth",
+    "kind": "class",
+    "signature": "",
+    "summary": "Allows the 'auth' argument to be passed as a (username, password) pair, and uses HTTP Basic authentication.",
+    "place": {
+     "path": "httpx/_auth.py",
+     "line": 126
+    }
+   },
+   {
+    "name": "Client",
+    "kind": "class",
+    "signature": "",
+    "summary": "An HTTP client, with connection pooling, HTTP/2, redirects, cookie persistence, etc.",
+    "place": {
+     "path": "httpx/_client.py",
+     "line": 594
+    }
+   },
+   {
+    "name": "codes",
+    "kind": "class",
+    "signature": "",
+    "summary": "HTTP status codes and reason phrases",
+    "place": {
+     "path": "httpx/_status_codes.py",
+     "line": 8
+    }
+   },
+   {
+    "name": "Cookies",
+    "kind": "class",
+    "signature": "",
+    "summary": "HTTP Cookies, as a mutable mapping.",
+    "place": {
+     "path": "httpx/_models.py",
+     "line": 1079
+    }
+   },
+   {
+    "name": "FunctionAuth",
+    "kind": "class",
+    "signature": "",
+    "summary": "Allows the 'auth' argument to be passed as a simple callable function, that takes the request, and returns a new,...",
+    "place": {
+     "path": "httpx/_auth.py",
+     "line": 113
+    }
+   },
+   {
+    "name": "Headers",
+    "kind": "class",
+    "signature": "",
+    "summary": "HTTP headers, as a case-insensitive multi-dict.",
+    "place": {
+     "path": "httpx/_models.py",
+     "line": 139
+    }
+   },
+   {
+    "name": "Limits",
+    "kind": "class",
+    "signature": "",
+    "summary": "Configuration for limits to various client behaviors.",
+    "place": {
+     "path": "httpx/_config.py",
+     "line": 159
+    }
+   },
+   {
+    "name": "NetRCAuth",
+    "kind": "class",
+    "signature": "",
+    "summary": "Use a 'netrc' file to lookup basic auth credentials based on the url host.",
+    "place": {
+     "path": "httpx/_auth.py",
+     "line": 145
+    }
+   },
+   {
+    "name": "QueryParams",
+    "kind": "class",
+    "signature": "",
+    "summary": "URL query parameters, as a multi-dict.",
+    "place": {
+     "path": "httpx/_urls.py",
+     "line": 420
+    }
+   },
+   {
+    "name": "Timeout",
+    "kind": "class",
+    "signature": "",
+    "summary": "Timeout configuration.",
+    "place": {
+     "path": "httpx/_config.py",
+     "line": 72
+    }
+   },
+   {
+    "name": "URL",
+    "kind": "class",
+    "signature": "",
+    "summary": "The components of a URL are broken down like this:",
+    "place": {
+     "path": "httpx/_urls.py",
+     "line": 15
+    }
+   },
+   {
+    "name": "WSGITransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "A custom transport that handles sending requests directly to an WSGI app.",
+    "place": {
+     "path": "httpx/_transports/wsgi.py",
+     "line": 44
+    }
+   },
+   {
+    "name": "AsyncBaseTransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_transports/base.py",
+     "line": 65
+    }
+   },
+   {
+    "name": "AsyncByteStream",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_types.py",
+     "line": 106
+    }
+   },
+   {
+    "name": "AsyncHTTPTransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_transports/default.py",
+     "line": 279
+    }
+   },
+   {
+    "name": "BaseTransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_transports/base.py",
+     "line": 14
+    }
+   },
+   {
+    "name": "ByteStream",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_content.py",
+     "line": 31
+    }
+   },
+   {
+    "name": "DigestAuth",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_auth.py",
+     "line": 175
+    }
+   },
+   {
+    "name": "HTTPTransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_transports/default.py",
+     "line": 135
+    }
+   },
+   {
+    "name": "MockTransport",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_transports/mock.py",
+     "line": 15
+    }
+   },
+   {
+    "name": "Proxy",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_config.py",
+     "line": 201
+    }
+   },
+   {
+    "name": "Request",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_models.py",
+     "line": 382
+    }
+   },
+   {
+    "name": "Response",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_models.py",
+     "line": 515
+    }
+   },
+   {
+    "name": "SyncByteStream",
+    "kind": "class",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_types.py",
+     "line": 92
+    }
+   },
+   {
+    "name": "main",
+    "kind": "value",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/__init__.py",
+     "line": 2
+    }
+   },
+   {
+    "name": "USE_CLIENT_DEFAULT",
+    "kind": "value",
+    "signature": "",
+    "summary": "",
+    "place": {
+     "path": "httpx/_client.py",
+     "line": 114
+    }
+   },
+   {
+    "name": "CloseError",
+    "kind": "exception",
+    "signature": "",
+    "summary": "Failed to close a connection.",
+    "place": {
+     "path": "httpx/_exceptions.py",
+     "line": 193
+    }
+   }
+  ],
+  "api_root": "httpx/__init__.py",
+  "flows": [],
+  "flows_traced": 0,
+  "routes": [
+   {
+    "kind": "Command",
+    "name": "main",
+    "framework": "click",
+    "place": {
+     "path": "httpx/_main.py",
+     "line": 313
+    }
+   },
+   {
+    "kind": "Command",
+    "name": "httpx (httpx:main)",
+    "framework": "package, needs the cli extra",
+    "place": {
+     "path": "pyproject.toml",
+     "line": 59
+    }
+   }
+  ],
+  "gaps": [
+   {
+    "title": "Expected traffic, scale and why it was built this way",
+    "detail": "These are rarely written in code, and this report does not guess them."
+   }
+  ]
+ },
+ "written_at": "2026-11-20"
+}
