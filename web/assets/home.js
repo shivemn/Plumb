@@ -1,5 +1,5 @@
 // Home: paste a repo, get its report. Repos already analysed open at once.
-import { startJob } from "./api.js";
+import { getHealth, startJob } from "./api.js";
 import { footer, getJSON, h, header, modelName, niceDate, reducedMotion, svg, whenSeen } from "./common.js";
 import { API } from "./config.js";
 
@@ -16,6 +16,9 @@ async function start() {
   }
   root.replaceChildren(page());
   typePlaceholder();
+  // A free host sleeps when unused; knocking now means it is likely awake
+  // by the time a repo is pasted.
+  if (API) getHealth().catch(() => {});
   const want = new URLSearchParams(location.search).get("repo");
   if (want) submit(want);
 }
@@ -103,13 +106,24 @@ async function submit(text) {
   const form = ask.querySelector("form");
   if (form.getAttribute("aria-busy") === "true") return;
   form.setAttribute("aria-busy", "true");
-  try {
-    const job = await startJob(repo);
-    dropTo(`report.html?job=${encodeURIComponent(job.id)}`);
-  } catch (error) {
-    form.removeAttribute("aria-busy");
-    if (error.status === 0) return runLocally(answer, repo, error.message, " You can also run Plumb on your own machine:");
-    answer.replaceChildren(h("div", { class: "notice reveal-in" }, error.message));
+  const started = Date.now();
+  for (;;) {
+    try {
+      const job = await startJob(repo);
+      return dropTo(`report.html?job=${encodeURIComponent(job.id)}`);
+    } catch (error) {
+      // Give a sleeping server up to two minutes to wake.
+      if (error.waking && Date.now() - started < 120_000) {
+        if (!answer.querySelector(".waking")) {
+          answer.replaceChildren(h("div", { class: "notice waking reveal-in" }, h("strong", { text: "Waking Plumb's server." }), " It sleeps when nobody has used it for a while, and takes about a minute to start. Your repo goes in as soon as it is up."));
+        }
+        await new Promise((done) => setTimeout(done, 5000));
+        continue;
+      }
+      form.removeAttribute("aria-busy");
+      if (error.waking) return runLocally(answer, repo, error.message, " You can also run Plumb on your own machine:");
+      return answer.replaceChildren(h("div", { class: "notice reveal-in" }, error.message));
+    }
   }
 }
 

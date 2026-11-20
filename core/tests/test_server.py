@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+import uuid
 from collections.abc import Callable, Iterator
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -15,7 +16,12 @@ from plumb.model import FactSet, RepoKind, RepoRef, Report
 from plumb.pipeline import Analysis, analyse_repo
 from plumb.server import worker
 from plumb.server.app import Settings, create_app
-from plumb.server.config import server_settings, server_writer, worker_seconds
+from plumb.server.config import (
+    server_settings,
+    server_writer,
+    worker_max_files,
+    worker_seconds,
+)
 from plumb.server.jobs import Job, JobStore, Status
 from plumb.server.worker import JobTimeout, ServerWriter, run_once, time_limit
 from plumb.source import Checkout, SourceError
@@ -262,6 +268,16 @@ def test_api_reads_the_visitor_behind_a_proxy(store: JobStore) -> None:
     assert all("203.0.113" not in row[0] for row in raw)  # addresses are not stored
 
 
+def test_api_prefers_the_header_the_proxy_sets(store: JobStore) -> None:
+    settings = Settings(jobs_per_hour=1, trust_proxy=True, client_ip_header="cf-connecting-ip")
+    client = api(store, settings)
+    one = {"cf-connecting-ip": "203.0.113.1", "x-forwarded-for": "198.51.100.1"}
+    forged = {"cf-connecting-ip": "203.0.113.1", "x-forwarded-for": "198.51.100.2"}
+    assert client.post("/api/jobs", json={"repo": "o/a"}, headers=one).status_code == 202
+    # A new X-Forwarded-For does not make a new visitor.
+    assert client.post("/api/jobs", json={"repo": "o/b"}, headers=forged).status_code == 429
+
+
 def test_api_refuses_when_the_queue_is_full(store: JobStore) -> None:
     client = api(store, Settings(max_waiting=1, jobs_per_hour=10))
     assert client.post("/api/jobs", json={"repo": "o/a"}).status_code == 202
@@ -347,11 +363,15 @@ def test_settings_come_from_the_environment(tmp_path: Path) -> None:
         "PLUMB_MAX_WAITING": "oops",
         "PLUMB_TRUST_PROXY": "1",
         "PLUMB_JOB_SECONDS": "60",
+        "PLUMB_CLIENT_IP_HEADER": " CF-Connecting-IP ",
+        "PLUMB_MAX_FILES": "4000",
     }
     settings = server_settings(env)
     assert settings.allowed_origins == ("https://a.example", "http://localhost:8000")
     assert settings.jobs_per_hour == 3 and settings.max_waiting == 25 and settings.trust_proxy
     assert settings.server_model is None and worker_seconds(env) == 60
+    assert settings.client_ip_header == "cf-connecting-ip"
+    assert worker_max_files(env, 20_000) == 4000 and worker_max_files({}, 20_000) == 20_000
     assert server_writer(env, tmp_path / "cache") is None  # no model
     no_key = {"PLUMB_MODEL": "openrouter:x/y:free"}
     assert server_writer(no_key, tmp_path / "cache") is None  # no key
@@ -378,3 +398,23 @@ def test_an_old_table_gains_the_new_columns(tmp_path: Path) -> None:
     store.set_stage(job.id, "Fetching the repo")
     assert store.get(job.id) is not None
     store.close()
+
+
+def test_two_processes_can_open_the_table_at_once(tmp_path: Path) -> None:
+    import multiprocessing
+
+    path = tmp_path / "shared.sqlite"
+    context = multiprocessing.get_context("spawn")
+    with context.Pool(4) as pool:
+        counts = pool.map(_open_and_add, [str(path)] * 8)
+    assert counts == [1] * 8
+    store = JobStore(path)
+    assert store.waiting() == 8
+    store.close()
+
+
+def _open_and_add(path: str) -> int:
+    store = JobStore(Path(path))
+    job = store.add(f"o/{uuid.uuid4().hex[:8]}")
+    store.close()
+    return 1 if job.status is Status.QUEUED else 0

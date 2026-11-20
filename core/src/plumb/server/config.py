@@ -24,6 +24,7 @@ def server_settings(env: Mapping[str, str]) -> Settings:
         jobs_per_hour=_int(env, "PLUMB_JOBS_PER_HOUR", 10),
         max_waiting=_int(env, "PLUMB_MAX_WAITING", 25),
         trust_proxy=env.get("PLUMB_TRUST_PROXY", "") in ("1", "true", "yes"),
+        client_ip_header=env.get("PLUMB_CLIENT_IP_HEADER", "").strip().lower() or None,
         server_model=env.get("PLUMB_MODEL") or None,
         daily_reports=_int(env, "PLUMB_DAILY_REPORTS", 6),
     )
@@ -43,3 +44,8 @@ def server_writer(env: Mapping[str, str], cache: Path) -> ServerWriter | None:
 
 def worker_seconds(env: Mapping[str, str]) -> int:
     return _int(env, "PLUMB_JOB_SECONDS", 300)
+
+
+def worker_max_files(env: Mapping[str, str], default: int) -> int:
+    """Repos with more tracked files are refused; a small host needs a lower cap."""
+    return _int(env, "PLUMB_MAX_FILES", default)

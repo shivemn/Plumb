@@ -113,7 +113,12 @@ class JobStore:
             path.parent.mkdir(parents=True, exist_ok=True)
         # One connection, shared by the web server's threads and the worker
         # thread; the lock keeps them from using it at the same time.
-        self._db = sqlite3.connect(str(path), check_same_thread=False, isolation_level=None)
+        # The web server and the worker are separate processes that open the
+        # table at the same moment; on a slow host, setting it up can take a
+        # while, so each waits up to 30 seconds for the other.
+        self._db = sqlite3.connect(
+            str(path), check_same_thread=False, isolation_level=None, timeout=30
+        )
         self._db.row_factory = sqlite3.Row
         self._lock = threading.RLock()
         self._db.execute("PRAGMA journal_mode=WAL")

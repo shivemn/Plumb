@@ -2,30 +2,37 @@
 import { API } from "./config.js";
 
 export class ApiError extends Error {
-  constructor(message, status) {
+  // `waking`: the server did not answer as itself, which on a free host
+  // usually means it is starting after a sleep. Worth trying again shortly.
+  constructor(message, status, waking = false) {
     super(message);
     this.status = status;
+    this.waking = waking;
   }
 }
+
+const ASLEEP = "Plumb's server could not be reached. Check your connection, then try again.";
 
 async function call(path, init = {}) {
   let response;
   try {
     response = await fetch(API + path, init);
   } catch {
-    throw new ApiError("Plumb's server could not be reached. Check your connection, then try again.", 0);
+    throw new ApiError(ASLEEP, 0, true);
+  }
+  let body;
+  try {
+    body = await response.json();
+  } catch {
+    // A host's own page (a gateway error, or a "starting up" screen), not Plumb.
+    throw new ApiError(ASLEEP, response.status, true);
   }
   if (!response.ok) {
-    let detail = "";
-    try {
-      detail = (await response.json()).detail;
-    } catch {
-      detail = "";
-    }
+    const detail = body?.detail;
     const text = typeof detail === "string" && detail ? detail : `The server answered ${response.status}.`;
     throw new ApiError(text.charAt(0).toUpperCase() + text.slice(1).replace(/([^.])$/, "$1."), response.status);
   }
-  return response.json();
+  return body;
 }
 
 const post = (path, body) => call(path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });

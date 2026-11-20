@@ -91,7 +91,8 @@ curl -X POST localhost:8000/api/jobs -H 'content-type: application/json' \
 ```
 
 Or the whole thing, site included, in Docker: `docker compose up`, then
-open http://localhost:8080.
+open http://localhost:8080. The hosted API runs on Render's free plan;
+[docs/hosting.md](docs/hosting.md) has the setup.
 
 With `PLUMB_MODEL` and its key set, the server writes a few reports a day
 itself (`PLUMB_DAILY_REPORTS`, 6 by default). Past that, or with no model

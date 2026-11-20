@@ -141,6 +141,11 @@ These three are now tuned against too.
 - [ ] Rewrite the site's reports with the shorter prompt
       (`plumb site build --force`)
 - [ ] First published claim precision, and a third held-out round
-- [ ] Host the API, then set its address in `web/assets/config.js`
+- [x] Hosting chosen and prepared: Render's free plan from `render.yaml`
+      (see [hosting.md](hosting.md)); the site wakes a sleeping server
+- [x] Light and dark switch; a dot-grid background under each page's top
+- [ ] Create the Render service, then set its address in
+      `web/assets/config.js` and the content security policy
+- [ ] Pick a logo
 - [ ] Go miner and speed comparison
 - [ ] Job table on PostgreSQL, if one machine stops being enough

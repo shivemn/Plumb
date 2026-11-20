@@ -50,6 +50,10 @@ class Settings:
     jobs_per_hour: int = 10  # per visitor
     max_waiting: int = 25  # queued jobs, for everyone
     trust_proxy: bool = False  # read the visitor's address from X-Forwarded-For
+    # A header the host's proxy sets to the visitor's address and visitors
+    # cannot set themselves, such as cf-connecting-ip behind Cloudflare.
+    # X-Forwarded-For can be forged where the proxy only appends to it.
+    client_ip_header: str | None = None
     salt: str = field(default_factory=lambda: secrets.token_hex(16))  # visitor addresses are hashed
     server_model: str | None = None  # shown on the health page
     daily_reports: int = 0
@@ -118,7 +122,10 @@ def create_app(store: JobStore, settings: Settings | None = None) -> FastAPI:
     def visitor(request: Request) -> str:
         address = request.client.host if request.client else "unknown"
         forwarded = request.headers.get("x-forwarded-for")
-        if config.trust_proxy and forwarded:
+        set_by_proxy = request.headers.get(config.client_ip_header or "")
+        if config.client_ip_header and set_by_proxy:
+            address = set_by_proxy.strip()
+        elif config.trust_proxy and forwarded:
             address = forwarded.split(",")[0].strip()
         return hashlib.sha256(f"{config.salt}:{address}".encode()).hexdigest()[:24]
 

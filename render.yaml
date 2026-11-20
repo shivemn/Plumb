@@ -1,0 +1,42 @@
+# Plumb's API on Render's free plan. In the Render dashboard: New, then
+# Blueprint, then pick this repo. Render asks for the two keys marked
+# `sync: false`; nothing else needs setting.
+#
+# The free plan sleeps after 15 minutes without visitors and takes about a
+# minute to wake. Its disk is wiped when it sleeps, so the job table starts
+# empty again; reports written then are lost, which costs only a free model's
+# requests.
+services:
+  - type: web
+    name: plumb-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    # Rebuild only when the server's code changes, not for site or doc edits.
+    buildFilter:
+      paths:
+        - Dockerfile
+        - .dockerignore
+        - core/pyproject.toml
+        - core/uv.lock
+        - core/src/**
+    envVars:
+      - key: PLUMB_MODEL
+        value: openrouter:nvidia/nemotron-3-ultra-550b-a55b:free
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: PLUMB_DAILY_REPORTS
+        value: "6"
+      - key: PLUMB_ALLOWED_ORIGINS
+        value: https://shivemn.github.io
+      # Render sits behind Cloudflare, which sets this header to the visitor's
+      # address; X-Forwarded-For there can be forged.
+      - key: PLUMB_CLIENT_IP_HEADER
+        value: cf-connecting-ip
+      - key: PLUMB_JOB_SECONDS
+        value: "600"
+      - key: PLUMB_MAX_FILES
+        value: "15000"

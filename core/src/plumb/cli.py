@@ -241,8 +241,9 @@ def serve(
     command line: PLUMB_MODEL (the server's own model, such as
     openrouter:nvidia/nemotron-3-ultra-550b-a55b:free, with its key in
     OPENROUTER_API_KEY), PLUMB_DAILY_REPORTS, PLUMB_ALLOWED_ORIGINS
-    (comma-separated), PLUMB_JOBS_PER_HOUR, PLUMB_TRUST_PROXY=1 behind a
-    proxy, and PLUMB_JOB_SECONDS.
+    (comma-separated), PLUMB_JOBS_PER_HOUR, PLUMB_MAX_WAITING, PLUMB_JOB_SECONDS,
+    PLUMB_MAX_FILES, and behind a proxy PLUMB_CLIENT_IP_HEADER (a header the
+    proxy sets to the visitor's address) or PLUMB_TRUST_PROXY=1.
     """
     try:
         import uvicorn
@@ -291,7 +292,7 @@ def worker(
     """Run queued jobs: analyse each repo and, within the daily cap, write its report."""
     import logging
 
-    from plumb.server.config import server_writer, worker_seconds
+    from plumb.server.config import server_writer, worker_max_files, worker_seconds
     from plumb.server.jobs import JobStore
     from plumb.server.worker import make_analyser, run_forever, run_once
 
@@ -302,7 +303,8 @@ def worker(
         if github
         else None
     )
-    analyse = make_analyser(workdir, Limits(max_files=max_files), client)
+    limits = Limits(max_files=worker_max_files(os.environ, max_files))
+    analyse = make_analyser(workdir, limits, client)
     writer = server_writer(os.environ, DEFAULT_CACHE)
     seconds = worker_seconds(os.environ)
     if writer is None:
