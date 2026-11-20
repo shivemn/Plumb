@@ -221,33 +221,74 @@ DEFAULT_DATABASE = Path.home() / ".plumb" / "jobs.sqlite"
 @app.command()
 def serve(
     host: Annotated[str, typer.Option(help="Address to listen on.")] = "127.0.0.1",
-    port: Annotated[int, typer.Option(help="Port to listen on.")] = 8000,
-    database: Annotated[Path, typer.Option(help="The job table.")] = DEFAULT_DATABASE,
+    port: Annotated[int, typer.Option(envvar="PORT", help="Port to listen on.")] = 8000,
+    database: Annotated[
+        Path, typer.Option(envvar="PLUMB_DATABASE", help="The job table.")
+    ] = DEFAULT_DATABASE,
+    workdir: Annotated[
+        Path, typer.Option(envvar="PLUMB_WORKDIR", help="Where repos are cloned.")
+    ] = DEFAULT_WORKDIR,
+    with_worker: Annotated[
+        bool, typer.Option(help="Also run a worker, in its own process.")
+    ] = True,
 ) -> None:
-    """Run the web API that queues repos and serves their facts. Needs plumb[server]."""
+    """Run the web API, and a worker beside it. Needs plumb[server].
+
+    Settings come from the environment, so a host can set them without a
+    command line: PLUMB_MODEL (the server's own model, such as
+    openrouter:nvidia/nemotron-3-ultra-550b-a55b:free, with its key in
+    OPENROUTER_API_KEY), PLUMB_DAILY_REPORTS, PLUMB_ALLOWED_ORIGINS
+    (comma-separated), PLUMB_JOBS_PER_HOUR, PLUMB_TRUST_PROXY=1 behind a
+    proxy, and PLUMB_JOB_SECONDS.
+    """
     try:
         import uvicorn
 
-        from plumb.server.app import default_app
+        from plumb.server.app import create_app
+        from plumb.server.jobs import JobStore
     except ImportError as error:
         typer.echo("The server needs extra packages: uv sync --extra server", err=True)
         raise typer.Exit(1) from error
-    uvicorn.run(default_app(database), host=host, port=port)
+    import multiprocessing
+
+    from plumb.server.config import server_settings
+
+    settings = server_settings(os.environ)
+    process = None
+    if with_worker:
+        process = multiprocessing.Process(
+            target=_worker_process, args=(database, workdir), daemon=True, name="plumb-worker"
+        )
+        process.start()
+    try:
+        uvicorn.run(create_app(JobStore(database), settings), host=host, port=port)
+    finally:
+        if process is not None:
+            process.terminate()
+
+
+def _worker_process(database: Path, workdir: Path) -> None:
+    worker(database=database, workdir=workdir)
 
 
 @app.command()
 def worker(
-    database: Annotated[Path, typer.Option(help="The job table.")] = DEFAULT_DATABASE,
-    workdir: Annotated[Path, typer.Option(help="Where cloned repos are kept.")] = DEFAULT_WORKDIR,
+    database: Annotated[
+        Path, typer.Option(envvar="PLUMB_DATABASE", help="The job table.")
+    ] = DEFAULT_DATABASE,
+    workdir: Annotated[
+        Path, typer.Option(envvar="PLUMB_WORKDIR", help="Where repos are cloned.")
+    ] = DEFAULT_WORKDIR,
     max_files: Annotated[int, typer.Option(help="Refuse repos with more tracked files.")] = 20_000,
     once: Annotated[bool, typer.Option(help="Run one queued job and stop.")] = False,
     github: Annotated[
         bool, typer.Option(help="Read starter issues and review speed from GitHub.")
     ] = True,
 ) -> None:
-    """Run queued analysis jobs."""
+    """Run queued jobs: analyse each repo and, within the daily cap, write its report."""
     import logging
 
+    from plumb.server.config import server_writer, worker_seconds
     from plumb.server.jobs import JobStore
     from plumb.server.worker import make_analyser, run_forever, run_once
 
@@ -259,11 +300,15 @@ def worker(
         else None
     )
     analyse = make_analyser(workdir, Limits(max_files=max_files), client)
+    writer = server_writer(os.environ, DEFAULT_CACHE)
+    seconds = worker_seconds(os.environ)
+    if writer is None:
+        typer.echo("No PLUMB_MODEL set: jobs will produce facts, and no reports.", err=True)
     if once:
-        job = run_once(store, analyse)
+        job = run_once(store, analyse, writer, seconds, workdir)
         typer.echo(f"{job.repo}: {job.status.value}" if job else "No jobs queued.")
         return
-    run_forever(store, analyse)
+    run_forever(store, analyse, writer, seconds, workdir)
 
 
 site_app = typer.Typer(no_args_is_help=True, help="Build the reports for the static site.")

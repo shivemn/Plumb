@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -45,6 +46,10 @@ class Analysis:
         return {f.path for f in self.files if f.category in (Category.SOURCE, Category.TEST)}
 
 
+def _quiet(stage: str) -> None:
+    pass
+
+
 def analyse_repo(
     ref: str,
     workdir: Path,
@@ -53,13 +58,17 @@ def analyse_repo(
     window_days: int = 90,
     limits: Limits | None = None,
     github: GitHubClient | None = None,
+    progress: Callable[[str], None] | None = None,
 ) -> Analysis:
     """Fetch `ref` and run every analysis step. Raises SourceError if it cannot be fetched.
 
     With a GitHub client, starter issues and review speed are read too; a
     local folder that is not a GitHub clone has neither.
     """
+    say = progress or _quiet
+    say("Fetching the repo")
     checkout = fetch(ref, workdir=workdir, limits=limits, commit=commit)
+    say("Reading files and history")
     files = build_inventory(checkout.path)
     first_party = {f.path for f in files if f.category in (Category.SOURCE, Category.TEST)}
     history = (
@@ -67,6 +76,7 @@ def analyse_repo(
         if is_shallow(checkout.path)
         else mine(checkout.path, window_days=window_days, keep=first_party)
     )
+    say("Finding services, routes and imports")
     edges = all_edges(checkout.path, files)
     entry_points = find_entry_points(checkout.path, files)
     deps = find_dependencies(checkout.path, files)
@@ -75,12 +85,14 @@ def analyse_repo(
     decision = decide_kind(files, entry_points, system, deps)
     migrations = find_migrations(files)
     steps = find_steps(checkout.path, files)
+    say("Tracing requests through the code")
     flows = trace_flows(checkout.path, files, entry_points)
     api = None
     if decision.kind is RepoKind.LIBRARY:
         api = find_public_api(checkout.path, files, edges, checkout.name)
     activity = None
     if github is not None and checkout.owner != "local":
+        say("Reading issues and pull requests")
         paths = {f.path for f in files}
         activity = read_activity(github, checkout.owner, checkout.name, paths)
     facts = build_facts(

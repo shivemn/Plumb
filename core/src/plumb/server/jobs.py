@@ -13,6 +13,7 @@ driver, not of design.
 from __future__ import annotations
 
 import sqlite3
+import threading
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -30,11 +31,17 @@ CREATE TABLE IF NOT EXISTS jobs (
     started_at TEXT,
     finished_at TEXT,
     error TEXT,
-    facts TEXT
+    facts TEXT,
+    stage TEXT,
+    report TEXT,
+    client TEXT,
+    views TEXT
 );
 CREATE INDEX IF NOT EXISTS jobs_queue ON jobs (status, created_at);
 CREATE INDEX IF NOT EXISTS jobs_repo ON jobs (repo, commit_sha);
 """
+# Columns added after the first version, for tables made before them.
+_LATER_COLUMNS = ("stage", "report", "client", "views")
 
 # A running job not finished in this time is taken to be from a worker that died.
 STALE_AFTER = timedelta(minutes=15)
@@ -60,6 +67,9 @@ class Job:
     finished_at: datetime | None
     error: str | None
     facts: str | None  # FactSet JSON, once done
+    stage: str | None = None  # what the worker is doing, for the progress view
+    report: str | None = None  # Report JSON, when the server wrote one
+    views: str | None = None  # Views JSON: the diagrams and tables, written without a model
 
 
 def _now() -> datetime:
@@ -81,19 +91,43 @@ def _job(row: sqlite3.Row) -> Job:
         finished_at=_time(row["finished_at"]),
         error=row["error"],
         facts=row["facts"],
+        stage=row["stage"],
+        report=row["report"],
+        views=row["views"],
     )
+
+
+class _Rows:
+    """Rows read while holding the lock, so no cursor is shared between threads."""
+
+    def __init__(self, rows: list[sqlite3.Row]) -> None:
+        self.rows = rows
+
+    def fetchone(self) -> sqlite3.Row | None:
+        return self.rows[0] if self.rows else None
 
 
 class JobStore:
     def __init__(self, path: Path | str) -> None:
         if isinstance(path, Path):
             path.parent.mkdir(parents=True, exist_ok=True)
+        # One connection, shared by the web server's threads and the worker
+        # thread; the lock keeps them from using it at the same time.
         self._db = sqlite3.connect(str(path), check_same_thread=False, isolation_level=None)
         self._db.row_factory = sqlite3.Row
+        self._lock = threading.RLock()
         self._db.execute("PRAGMA journal_mode=WAL")
         self._db.executescript(SCHEMA)
+        have = {row[1] for row in self._db.execute("PRAGMA table_info(jobs)")}
+        for column in _LATER_COLUMNS:
+            if column not in have:
+                self._db.execute(f"ALTER TABLE jobs ADD COLUMN {column} TEXT")
 
-    def add(self, repo: str, commit: str | None = None) -> Job:
+    def _run(self, sql: str, args: tuple[object, ...] = ()) -> _Rows:
+        with self._lock:
+            return _Rows(self._db.execute(sql, args).fetchall())
+
+    def add(self, repo: str, commit: str | None = None, client: str | None = None) -> Job:
         """Queue a job, or return one that already answers the same request.
 
         With a commit, any job that ran or will run at that commit answers it.
@@ -102,7 +136,7 @@ class JobStore:
         """
         failed = Status.FAILED.value
         if commit is not None:
-            row = self._db.execute(
+            row = self._run(
                 "SELECT * FROM jobs WHERE repo = ? AND status != ? AND "
                 "(requested = ? OR commit_sha LIKE ? || '%') ORDER BY created_at DESC LIMIT 1",
                 (repo, failed, commit, commit),
@@ -110,7 +144,7 @@ class JobStore:
             if row is not None:
                 return _job(row)
         else:
-            row = self._db.execute(
+            row = self._run(
                 "SELECT * FROM jobs WHERE repo = ? AND status != ? AND requested IS NULL "
                 "ORDER BY created_at DESC LIMIT 1",
                 (repo, failed),
@@ -121,24 +155,24 @@ class JobStore:
                 if finished is None or _now() - finished < FRESH_FOR:
                     return job
         job_id = uuid.uuid4().hex
-        self._db.execute(
-            "INSERT INTO jobs (id, repo, requested, commit_sha, status, created_at) "
-            "VALUES (?, ?, ?, ?, ?, ?)",
-            (job_id, repo, commit, commit, Status.QUEUED.value, _now().isoformat()),
+        self._run(
+            "INSERT INTO jobs (id, repo, requested, commit_sha, status, created_at, client) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (job_id, repo, commit, commit, Status.QUEUED.value, _now().isoformat(), client),
         )
         job = self.get(job_id)
         assert job is not None
         return job
 
     def get(self, job_id: str) -> Job | None:
-        row = self._db.execute("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
+        row = self._run("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
         return _job(row) if row is not None else None
 
     def claim(self) -> Job | None:
         """Take the oldest queued job, or one whose worker stopped answering."""
         now = _now()
         stale = (now - STALE_AFTER).isoformat()
-        row = self._db.execute(
+        row = self._run(
             "UPDATE jobs SET status = ?, started_at = ? WHERE id = ("
             "  SELECT id FROM jobs WHERE status = ? OR (status = ? AND started_at < ?)"
             "  ORDER BY created_at LIMIT 1"
@@ -153,23 +187,58 @@ class JobStore:
         ).fetchone()
         return _job(row) if row is not None else None
 
-    def finish(self, job_id: str, commit: str, facts: str) -> None:
-        self._db.execute(
-            "UPDATE jobs SET status = ?, finished_at = ?, commit_sha = ?, facts = ? WHERE id = ?",
-            (Status.DONE.value, _now().isoformat(), commit, facts, job_id),
+    def finish(
+        self,
+        job_id: str,
+        commit: str,
+        facts: str,
+        report: str | None = None,
+        views: str | None = None,
+    ) -> None:
+        self._run(
+            "UPDATE jobs SET status = ?, finished_at = ?, commit_sha = ?, facts = ?, report = ?, "
+            "views = ?, stage = NULL WHERE id = ?",
+            (Status.DONE.value, _now().isoformat(), commit, facts, report, views, job_id),
         )
 
+    def set_stage(self, job_id: str, stage: str) -> None:
+        self._run("UPDATE jobs SET stage = ? WHERE id = ?", (stage, job_id))
+
+    def reports_written_since(self, since: datetime) -> int:
+        """Reports the server's own model wrote, for its daily cap."""
+        row = self._run(
+            "SELECT COUNT(*) FROM jobs WHERE report IS NOT NULL AND finished_at >= ?",
+            (since.isoformat(),),
+        ).fetchone()
+        return int(row[0]) if row is not None else 0
+
+    def requests_from(self, client: str, since: datetime) -> int:
+        row = self._run(
+            "SELECT COUNT(*) FROM jobs WHERE client = ? AND created_at >= ?",
+            (client, since.isoformat()),
+        ).fetchone()
+        return int(row[0]) if row is not None else 0
+
+    def latest_report(self, repo: str, commit: str) -> Job | None:
+        """A finished job with a written report for this repo at this commit."""
+        row = self._run(
+            "SELECT * FROM jobs WHERE repo = ? AND commit_sha = ? AND report IS NOT NULL "
+            "ORDER BY finished_at DESC LIMIT 1",
+            (repo, commit),
+        ).fetchone()
+        return _job(row) if row is not None else None
+
     def fail(self, job_id: str, error: str) -> None:
-        self._db.execute(
+        self._run(
             "UPDATE jobs SET status = ?, finished_at = ?, error = ? WHERE id = ?",
             (Status.FAILED.value, _now().isoformat(), error, job_id),
         )
 
     def waiting(self) -> int:
-        row = self._db.execute(
+        row = self._run(
             "SELECT COUNT(*) FROM jobs WHERE status = ?", (Status.QUEUED.value,)
         ).fetchone()
-        return int(row[0])
+        return int(row[0]) if row is not None else 0
 
     def close(self) -> None:
         self._db.close()

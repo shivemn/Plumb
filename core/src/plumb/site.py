@@ -34,7 +34,9 @@ class SiteRepo:
         return self.ref.replace("/", "__")
 
 
-def write_full_report(analysis: Analysis, client: ModelClient, answers: ResponseCache) -> Report:
+def write_full_report(
+    analysis: Analysis, client: ModelClient, answers: ResponseCache | None
+) -> Report:
     """Analysis in, verified report with its views out. Raises ModelError."""
     drafts = write_report(plan_report(analysis.facts), client, answers)
     verified = verify(drafts, analysis.facts, client.name)
