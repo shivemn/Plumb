@@ -321,6 +321,8 @@ def test_a_visitor_writes_the_report_with_their_own_model(
     assert "This section has facts." in kept
     assert all("secret.py" not in text for text in kept)  # the invented path is dropped
     assert report.model == "openrouter:some/model:free" and report.views is not None
+    views = client.get(f"/api/jobs/{job['id']}/views").json()
+    assert views == report.views.model_dump(mode="json")
     assert store.get(job["id"]) is not None and store.get(job["id"]).report is None  # pyright: ignore[reportOptionalMemberAccess]
 
 

@@ -1,4 +1,5 @@
-// The report page: reads reports/<owner>__<name>.json and draws it.
+// The report page: reads reports/<owner>__<name>.json and draws it, or, with
+// ?job=<id>, follows a job on Plumb's server (see job.js).
 // Short text first; diagrams, traces and tables carry the detail, and every
 // sentence has a small count that opens the files behind it.
 import {
@@ -47,6 +48,10 @@ start().catch((error) => {
 
 async function start() {
   const params = new URLSearchParams(location.search);
+  if (params.get("job")) {
+    const { showJob } = await import("./job.js");
+    return showJob(params.get("job"));
+  }
   const slug = (params.get("r") || params.get("repo") || "").replace("/", "__");
   if (!/^[\w.-]+__[\w.-]+$/.test(slug)) {
     location.replace("./");
@@ -54,13 +59,20 @@ async function start() {
   }
   const report = await getJSON(`reports/${slug}.json`);
   document.title = `${report.repo.owner}/${report.repo.name} · Plumb`;
-  root.replaceChildren(render(report, slug));
+  show(root, render(report, { download: { href: `reports/${slug}.md`, name: `${report.repo.name}-plumb.md`, text: "Download Markdown" } }));
+}
+
+// Put a rendered report on the page and wire up its moving parts.
+export function show(into, node) {
+  into.replaceChildren(node);
   wireSpine();
   wireSources();
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 }
 
-function render(report, slug) {
+// `options.download`: a link for the spine; `options.lead`: a node shown first,
+// above the summary (the panel that writes a report not yet written).
+export function render(report, options = {}) {
   const ctx = { repo: report.repo, facts: new Map(report.facts.map((f) => [f.id, f])), views: report.views || { stats: [] }, kind: report.kind };
   const claimsBy = new Map(report.sections.map((s) => [s.id, s.claims]));
   const sections = [];
@@ -87,8 +99,8 @@ function render(report, slug) {
         { class: "commit" },
         "At commit ",
         h("a", { href: githubCommit(report.repo, report.repo.commit), class: "mono", text: report.repo.commit.slice(0, 7) }),
-        report.written_at ? `, explained on ${niceDate(report.written_at)}` : "",
-        ` by ${modelName(report.model)}.`,
+        report.model ? (report.written_at ? `, explained on ${niceDate(report.written_at)}` : "") : ". Not explained yet",
+        report.model ? ` by ${modelName(report.model)}.` : ".",
       ),
     ),
     h(
@@ -103,13 +115,14 @@ function render(report, slug) {
         h(
           "div",
           { class: "tools" },
-          h("a", { class: "pill", href: `reports/${slug}.md`, download: `${report.repo.name}-plumb.md`, text: "Download Markdown" }),
+          options.download ? h("a", { class: "pill", href: options.download.href, download: options.download.name, text: options.download.text }) : null,
           h("a", { class: "pill", href: `https://github.com/${report.repo.owner}/${report.repo.name}`, text: "Open on GitHub" }),
         ),
       ),
       h(
         "main",
         { class: "report", id: "main" },
+        options.lead || null,
         h(
           "section",
           { id: "top-summary", "aria-label": "In short" },
@@ -118,7 +131,7 @@ function render(report, slug) {
             "dl",
             { class: "stats" },
             stats.map((s) => h("div", {}, h("dt", { text: s.label }), h("dd", { text: s.value }))),
-            h("div", { class: "checked" }, h("dt", { text: "Sentences checked" }), h("dd", { text: `${kept} kept, ${removed} removed` })),
+            report.model ? h("div", { class: "checked" }, h("dt", { text: "Sentences checked" }), h("dd", { text: `${kept} kept, ${removed} removed` })) : null,
           ),
         ),
         sections.map((s) => h("section", { class: "section", id: s.id, "aria-labelledby": `${s.id}-h` }, h("h2", { id: `${s.id}-h`, text: s.title }), s.node)),

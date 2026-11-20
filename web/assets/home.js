@@ -1,5 +1,7 @@
 // Home: paste a repo, get its report. Repos already analysed open at once.
+import { startJob } from "./api.js";
 import { footer, getJSON, h, header, modelName, niceDate, reducedMotion, svg, whenSeen } from "./common.js";
+import { API } from "./config.js";
 
 const root = document.getElementById("app");
 let reports = [];
@@ -84,7 +86,7 @@ export function parseRepo(text) {
   return match ? `${match[1]}/${match[2]}` : null;
 }
 
-function submit(text) {
+async function submit(text) {
   const ask = document.getElementById("ask");
   const answer = document.getElementById("answer");
   const repo = parseRepo(text);
@@ -96,19 +98,35 @@ function submit(text) {
     return;
   }
   const known = reports.find((r) => r.repo.toLowerCase() === repo.toLowerCase());
-  if (known) {
-    const go = () => (location.href = `report.html?r=${encodeURIComponent(known.slug)}`);
-    if (reducedMotion()) return go();
-    document.getElementById("hero").classList.add("dropping");
-    setTimeout(go, 480);
-    return;
+  if (known) return dropTo(`report.html?r=${encodeURIComponent(known.slug)}`);
+  if (!API) return runLocally(answer, repo, `${repo} has not been analysed yet.`, " Analysing new repos here is being switched on. Until then you can run Plumb on your own machine with a free model:");
+  const form = ask.querySelector("form");
+  if (form.getAttribute("aria-busy") === "true") return;
+  form.setAttribute("aria-busy", "true");
+  try {
+    const job = await startJob(repo);
+    dropTo(`report.html?job=${encodeURIComponent(job.id)}`);
+  } catch (error) {
+    form.removeAttribute("aria-busy");
+    if (error.status === 0) return runLocally(answer, repo, error.message, " You can also run Plumb on your own machine:");
+    answer.replaceChildren(h("div", { class: "notice reveal-in" }, error.message));
   }
+}
+
+// The bob drops into the box, then the next page opens.
+function dropTo(url) {
+  if (reducedMotion()) return location.assign(url);
+  document.getElementById("hero").classList.add("dropping");
+  setTimeout(() => location.assign(url), 480);
+}
+
+function runLocally(answer, repo, title, text) {
   answer.replaceChildren(
     h(
       "div",
       { class: "notice reveal-in" },
-      h("strong", { text: `${repo} has not been analysed yet.` }),
-      " Analysing new repos here is being switched on. Until then you can run Plumb on your own machine with a free model:",
+      h("strong", { text: title }),
+      text,
       h("pre", {}, h("code", { text: `git clone https://github.com/shivemn/Plumb\ncd Plumb/core && uv sync\nuv run plumb report ${repo} --model openrouter:<free-model>` })),
     ),
   );

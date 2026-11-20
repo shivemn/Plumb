@@ -4,6 +4,7 @@
     GET  /api/jobs/{id}           status, the step it is on, and links once done
     GET  /api/jobs/{id}/report    the report, when the server's model wrote one
     GET  /api/jobs/{id}/facts     the facts
+    GET  /api/jobs/{id}/views     the diagrams and tables, which need no model
     GET  /api/jobs/{id}/tasks     the prompts, for a visitor writing the report with their own key
     POST /api/jobs/{id}/verify    the visitor's model answers in; the checked report out
     GET  /api/health
@@ -177,6 +178,13 @@ def create_app(store: JobStore, settings: Settings | None = None) -> FastAPI:
     @app.get("/api/jobs/{job_id}/facts")
     def get_facts(job_id: str) -> Response:
         return Response(finished(job_id).facts, media_type="application/json")
+
+    @app.get("/api/jobs/{job_id}/views")
+    def get_views(job_id: str) -> Response:
+        job = finished(job_id)
+        if not job.views:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, "no views for this job")
+        return Response(job.views, media_type="application/json")
 
     @app.get("/api/jobs/{job_id}/report")
     def get_report(job_id: str) -> Response:
