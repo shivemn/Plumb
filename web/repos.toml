@@ -1,0 +1,25 @@
+# Repos the site has reports for, in the order the gallery shows them.
+# Build their reports with:  cd core; uv run plumb site build
+# A free model's daily limit may stop the build part-way; run it again the
+# next day and it carries on with the repos that have no report yet.
+
+[[repo]]
+ref = "shivemn/Plumb"
+
+[[repo]]
+ref = "fastapi/full-stack-fastapi-template"
+
+[[repo]]
+ref = "spring-projects/spring-petclinic"
+
+[[repo]]
+ref = "encode/httpx"
+
+[[repo]]
+ref = "pallets/click"
+
+[[repo]]
+ref = "shivemn/market-lab"
+
+[[repo]]
+ref = "gothinkster/node-express-realworld-example-app"

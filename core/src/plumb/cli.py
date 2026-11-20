@@ -14,11 +14,10 @@ from plumb.github import GitHubClient
 from plumb.markdown import render_markdown
 from plumb.model import FactSet, Report
 from plumb.pipeline import Analysis, analyse_repo
+from plumb.site import load_repos, save_report, write_full_report, write_index
 from plumb.source import Limits, SourceError
-from plumb.verify import verify
 from plumb.writer.models import ModelError, ResponseCache, make_client
 from plumb.writer.plan import SYSTEM_PROMPT, plan_report
-from plumb.writer.write import write_report
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -197,13 +196,12 @@ def report(
         raise typer.Exit(1) from error
     answers = ResponseCache(cache)
     try:
-        drafts = write_report(tasks, client, answers)
+        verified = write_full_report(analysis, client, answers)
     except ModelError as error:
         typer.echo(str(error), err=True)
         raise typer.Exit(1) from error
     finally:
         answers.close()
-    verified = verify(drafts, analysis.facts, client.name)
 
     json_path = out or Path(f"{name}.report.json")
     md_path = markdown or Path(f"{name}.report.md")
@@ -266,3 +264,75 @@ def worker(
         typer.echo(f"{job.repo}: {job.status.value}" if job else "No jobs queued.")
         return
     run_forever(store, analyse)
+
+
+site_app = typer.Typer(no_args_is_help=True, help="Build the reports for the static site.")
+app.add_typer(site_app, name="site")
+DEFAULT_WEB = Path(__file__).resolve().parents[3] / "web"
+
+
+@site_app.command("build")
+def site_build(
+    model: Annotated[
+        str, typer.Option(help="provider:model, as for plumb report.")
+    ] = "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free",
+    web: Annotated[Path, typer.Option(help="The site folder, with repos.toml.")] = DEFAULT_WEB,
+    force: Annotated[bool, typer.Option(help="Write reports that already exist again.")] = False,
+    only: Annotated[
+        list[str] | None, typer.Option(help="Only this repo (owner/name). Can be repeated.")
+    ] = None,
+    workdir: Annotated[Path, typer.Option(help="Where cloned repos are kept.")] = DEFAULT_WORKDIR,
+    cache: Annotated[Path, typer.Option(help="Where model answers are cached.")] = DEFAULT_CACHE,
+    github: Annotated[bool, typer.Option(help="Read issues and pull requests.")] = True,
+) -> None:
+    """Write a report for each repo in web/repos.toml that does not have one yet.
+
+    Stops at the first model error, such as a free model's daily limit. Run it
+    again later: finished reports are kept and answers already paid for are
+    cached, so it carries on where it stopped.
+    """
+    repos = load_repos(web / "repos.toml")
+    reports_dir = web / "reports"
+    try:
+        client = make_client(model)
+    except ModelError as error:
+        typer.echo(str(error), err=True)
+        raise typer.Exit(1) from error
+    todo = [
+        r
+        for r in repos
+        if (not only or r.ref in only) and (force or not (reports_dir / f"{r.slug}.json").exists())
+    ]
+    typer.echo(f"{len(repos) - len(todo)} of {len(repos)} reports already written.")
+    answers = ResponseCache(cache)
+    stopped = False
+    try:
+        for number, repo in enumerate(todo, start=1):
+            typer.echo(f"[{number}/{len(todo)}] {repo.ref}")
+            analysis = _analyse_or_exit(
+                f"https://github.com/{repo.ref}", workdir, repo.commit, 90, 20_000, github
+            )
+            try:
+                report = write_full_report(analysis, client, answers)
+            except ModelError as error:
+                typer.echo(f"  stopped: {error}", err=True)
+                stopped = True
+                break
+            md = save_report(report, reports_dir / f"{repo.slug}.json")
+            kept = sum(len(s.claims) for s in report.sections)
+            typer.echo(f"  {kept} claims kept; wrote {md.with_suffix('.json').name}")
+    finally:
+        answers.close()
+    index = write_index(reports_dir, repos)
+    typer.echo(f"Updated {index}")
+    if stopped:
+        typer.echo("Run the same command again later to finish; finished reports are kept.")
+        raise typer.Exit(1)
+
+
+@site_app.command("index")
+def site_index(
+    web: Annotated[Path, typer.Option(help="The site folder, with repos.toml.")] = DEFAULT_WEB,
+) -> None:
+    """Rebuild web/reports/index.json from the reports that exist."""
+    typer.echo(f"Wrote {write_index(web / 'reports', load_repos(web / 'repos.toml'))}")
