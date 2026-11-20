@@ -121,8 +121,57 @@ export function header() {
       { class: "site-nav", "aria-label": "Site" },
       h("a", { href: "./#recent", text: "Reports" }),
       h("a", { href: "https://github.com/shivemn/Plumb", text: "GitHub" }),
+      themeSwitch(),
     ),
   );
+}
+
+// Light or dark. The choice is kept in this browser; until one is made, the
+// page follows the system setting.
+function currentTheme() {
+  const chosen = document.documentElement.dataset.theme;
+  if (chosen) return chosen;
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
+function themeSwitch() {
+  const button = h(
+    "button",
+    { class: "theme-switch", type: "button" },
+    svg('<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/>', { viewBox: "0 0 24 24", "aria-hidden": "true" }),
+  );
+  const label = () => button.setAttribute("aria-label", currentTheme() === "dark" ? "Switch to light mode" : "Switch to dark mode");
+  label();
+  button.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    const apply = () => {
+      document.documentElement.dataset.theme = next;
+      label();
+    };
+    try {
+      localStorage.setItem("plumb:theme", next);
+    } catch {
+      /* kept for this page only */
+    }
+    if (!document.startViewTransition || reducedMotion()) return apply();
+    // The new theme opens as a circle from the switch.
+    const box = button.getBoundingClientRect();
+    const x = box.left + box.width / 2;
+    const y = box.top + box.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.documentElement.classList.add("theming");
+    const transition = document.startViewTransition(apply);
+    transition.ready
+      .then(() =>
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 520, easing: "cubic-bezier(0.22, 1, 0.36, 1)", pseudoElement: "::view-transition-new(root)" },
+        ),
+      )
+      .catch(() => {});
+    transition.finished.finally(() => document.documentElement.classList.remove("theming"));
+  });
+  return button;
 }
 
 export function footer() {
