@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://openrouter.ai https://api.anthropic.com http://localhost:8000 http://127.0.0.1:8000; base-uri 'none'; form-action 'none'">
+<title>Privacy · Plumb</title>
+<meta name="description" content="What Plumb's site and server receive, what they keep, and where your model key goes.">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/plumb.css">
+<script type="module" src="assets/page.js"></script>
+</head>
+<body>
+<div class="wrap">
+<div id="header"></div>
+<main class="page-text">
+<h1>Privacy</h1>
+<p class="lead">Plumb reads public code, so there is little about you for it to hold. This page says what it does hold, and for how long.</p>
+
+<h2>Your model key</h2>
+<p>When you write an explanation with your own key, your browser sends the key straight to the provider you picked, OpenRouter or Anthropic. Plumb's server never receives it. The server gets only the model's answers, which it checks against the facts before sending the report back.</p>
+<p>The key is kept only if you tick <em>Remember this key in this browser</em>. It is then stored in this browser's local storage, on this device, and nowhere else. Untick the box and write again, or clear the site's data, to remove it.</p>
+
+<h2>What the server receives and keeps</h2>
+<ul>
+<li><strong>The repo you ask for.</strong> The server keeps a record of each job: the repo, the commit, when it ran, and the facts and diagrams it found. A report its own model wrote is kept too, and shown to anyone who asks for the same repo at the same commit, so it is not written twice.</li>
+<li><strong>Your network address, hashed.</strong> To allow each visitor a limited number of repos an hour, the server stores a hash of your address with a random value that changes whenever the server restarts. The address itself is not stored.</li>
+<li><strong>The clone.</strong> The repo is copied to the server to be read, and the copy is deleted when the job finishes. Its code is never run.</li>
+<li><strong>A report written with your key</strong> is sent back to you and not stored on the server. Your browser keeps it for this tab, so a reload does not spend more requests.</li>
+</ul>
+
+<h2>Other services</h2>
+<ul>
+<li><strong>GitHub</strong> hosts this site and the repos Plumb reads. The server asks GitHub's API for open issues and pull request history.</li>
+<li><strong>The model provider</strong> you pick receives the facts about the repo and the instructions. Its own privacy policy applies to what it does with them.</li>
+<li><strong>Google Fonts</strong> serves the typefaces, so Google sees a request from your browser when a page loads.</li>
+</ul>
+<p>There are no cookies, no analytics and no advertising.</p>
+
+<h2>Questions</h2>
+<p>Open an issue on <a href="https://github.com/shivemn/Plumb/issues">Plumb's GitHub repository</a>.</p>
+</main>
+<div id="footer"></div>
+</div>
+</body>
+</html>

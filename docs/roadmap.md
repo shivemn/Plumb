@@ -129,9 +129,18 @@ These three are now tuned against too.
       beside every claim. Reports are written ahead of time with a free
       model by `plumb site build`, which carries on the next day when it
       reaches the model's daily limit
-- [ ] Submit a repo on the site: job page, then the report page above
-- [ ] Bring-your-own-key in the browser: model picker, cost estimate,
-      verifier run in the page
-- [ ] Go miner and speed comparison
-- [ ] Job table on PostgreSQL, rate limits, deploy
+- [x] Submit a repo on the site: the job page follows it down the plumb
+      line, step by step, then opens the report
+- [x] The server writes a few reports a day with a free model, and keeps
+      them for the next reader of the same commit
+- [x] Bring-your-own-key in the browser: OpenRouter's free models or
+      Anthropic, a request and token estimate, the server's verifier
+- [x] Limits: repos per visitor an hour, queue size, time per job, clones
+      deleted after each job; a content security policy; a privacy page
+- [x] Dockerfile and compose file; CI builds and starts the image
+- [ ] Rewrite the site's reports with the shorter prompt
+      (`plumb site build --force`)
 - [ ] First published claim precision, and a third held-out round
+- [ ] Host the API, then set its address in `web/assets/config.js`
+- [ ] Go miner and speed comparison
+- [ ] Job table on PostgreSQL, if one machine stops being enough

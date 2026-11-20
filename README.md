@@ -5,12 +5,14 @@ where it changes most, and how to start contributing. Every claim in a
 report links to the file, commit or issue it came from. Anything the
 repo does not show is marked "not determined" instead of guessed.
 
-**Site:** https://shivemn.github.io/Plumb/ has a gallery of reports.
+**Site:** https://shivemn.github.io/Plumb/
 
 **Status:** early development. Analysis works for Python, Java, JavaScript
 and TypeScript repos, and `plumb report` writes a checked report with a
-model, free ones included. The site shows reports written ahead of time;
-submitting your own repo there, with your own key, comes next. See
+model, free ones included. The site and its server are built: paste a
+repo, follow it as it is read, and get its report, written by the
+server's free model or with your own key. Until the server is hosted, the
+published site shows reports written ahead of time. See
 [docs/roadmap.md](docs/roadmap.md).
 
 ## How it works
@@ -19,9 +21,10 @@ submitting your own repo there, with your own key, comes next. See
 2. **Analyse** without AI: parse the code, build the dependency graph,
    detect services, databases and outside APIs, and work out what kind
    of repo it is.
-3. **Write** with an AI model, using only the facts from step 2. The
-   model runs in your browser with your own API key, which never reaches
-   Plumb's server.
+3. **Write** with an AI model, using only the facts from step 2: the
+   server's free model for a few reports a day, or your own key, which
+   goes from your browser to the provider and never reaches Plumb's
+   server.
 4. **Verify** every claim against the facts and drop the ones that fail.
 
 ## Layout
@@ -30,10 +33,10 @@ submitting your own repo there, with your own key, comes next. See
 |----------|---------------|
 | `core`   | Python analysis pipeline, verifier and command-line tool |
 | `miner`  | Go version of the repo miner (later phase) |
-| `web`    | The static site: gallery and report page, published to GitHub Pages |
+| `web`    | The site: repo box, job progress, report page and privacy page, published to GitHub Pages |
 | `schema` | JSON Schema shared by the Python, Go and TypeScript parts |
 | `eval`   | Test repos and hand-written answer keys |
-| `docs`   | Design notes and roadmap |
+| `docs`   | Design notes, provider notes and roadmap |
 
 ## Development
 

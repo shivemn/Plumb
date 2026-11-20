@@ -25,8 +25,12 @@ answer a question, the report says "not determined".
    SQL PostgreSQL also accepts.
 6. **Prompt planner.** Summarises bottom-up: file, module, system. The
    model sees facts, not the raw repo.
-7. **AI runner.** Runs in the user's browser (or the local tool) with the
-   user's own key. The key never reaches Plumb's server.
+7. **AI runner.** The server writes a few reports a day with a free model
+   (`PLUMB_MODEL`, `PLUMB_DAILY_REPORTS`). Past that cap, or with no model
+   set, the reader's browser fetches the prompts (`/api/jobs/{id}/tasks`),
+   calls OpenRouter or Anthropic with the reader's own key, and posts back
+   only the answers (`/verify`). The local tool runs the same prompts with
+   a key from the environment.
 8. **Verifier.** Every claim must cite fact ids that exist, and named
    files, symbols and issues must exist in the facts. Failures are dropped
    and counted.
@@ -115,9 +119,20 @@ by hand.
 
 - Repo code is never executed.
 - Clone size, file count and time are capped.
-- The web app's content security policy lists the only hosts the page may
-  contact, and the analyse page loads no third-party scripts.
-- API keys are kept in memory for the session, never stored or logged.
+- The site's content security policy lists the only hosts a page may
+  contact (Plumb's API, OpenRouter, Anthropic, Google Fonts) and loads no
+  third-party scripts. Styles are set through the style object, never as
+  markup, so no inline style is allowed either.
+- A reader's model key goes from their browser to the provider only. It is
+  kept in memory, or in that browser's local storage if they tick
+  "Remember this key". The server never sees it.
+- Each visitor may queue `PLUMB_JOBS_PER_HOUR` repos an hour, counted by a
+  salted hash of their address; the queue as a whole holds
+  `PLUMB_MAX_WAITING` jobs. Each job has a time limit (`PLUMB_JOB_SECONDS`),
+  and its clone is deleted when it finishes.
+- An internal error is reported to the visitor as "internal error", without
+  its message, which could name paths on the server.
+- The container runs as a non-root user, with its data in `/data`.
 - The web API accepts only GitHub repos. The worker always clones from a
   `https://github.com/` URL, so a request cannot name a folder on the
   server. Commits must be hex SHAs.

@@ -388,7 +388,7 @@ function systemFigure(ctx, view) {
   layer.setAttribute("width", String(width));
   layer.setAttribute("height", String(height));
   layer.setAttribute("aria-hidden", "true");
-  layer.innerHTML = '<defs><marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill: var(--line-strong)"/></marker></defs>';
+  layer.innerHTML = '<defs><marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="tip" d="M0 0L10 5L0 10z"/></marker></defs>';
   canvas.append(layer);
 
   const drawn = new Set();

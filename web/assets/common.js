@@ -8,6 +8,9 @@ export function h(tag, attrs = {}, ...children) {
     if (value === undefined || value === null || value === false) continue;
     if (key === "class") node.className = value;
     else if (key === "text") node.textContent = value;
+    // Through the style object, which the content security policy allows; a
+    // style attribute in markup would be blocked.
+    else if (key === "style") node.style.cssText = value;
     else if (key.startsWith("on") && typeof value === "function") node.addEventListener(key.slice(2), value);
     else node.setAttribute(key, value === true ? "" : String(value));
   }
@@ -129,6 +132,7 @@ export function footer() {
     h("span", { text: "Plumb explains a repo from its code, and every sentence links to the lines it came from." }),
     h("a", { href: "https://github.com/shivemn/Plumb", text: "Source" }),
     h("a", { href: "https://github.com/shivemn/Plumb/blob/main/docs/design.md", text: "How sentences are checked" }),
+    h("a", { href: "privacy.html", text: "Privacy" }),
   );
 }
 

@@ -141,7 +141,12 @@ function writer(id) {
   let tasks = null;
   const answers = new Map();
 
-  const why = h("p", { class: "lead-text", text: "The diagrams and tables below come straight from the code. A model can add a short explanation, with every sentence checked against the facts. Use your own key: it goes from this browser to the model provider and never to Plumb's server." });
+  const why = h(
+    "p",
+    { class: "lead-text" },
+    "The diagrams and tables below come straight from the code. A model can add a short explanation, with every sentence checked against the facts. Use your own key: it goes from this browser to the model provider and never to Plumb's server. ",
+    h("a", { href: "privacy.html", text: "More on privacy" }),
+  );
   const modelBox = h("div", { class: "field" });
   const key = h("input", { id: "key", type: "password", autocomplete: "off", spellcheck: "false" });
   const keyLink = h("a", { target: "_blank", rel: "noopener" });

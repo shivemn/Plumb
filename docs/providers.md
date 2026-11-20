@@ -15,10 +15,10 @@ python eval/provider_cors.py
 
 | Provider | Checked | Browser calls | Notes |
 |----------|---------|---------------|-------|
-| Anthropic | 16 Nov 2026 | Yes | Allows any origin when the request sends `anthropic-dangerous-direct-browser-access: true`. |
+| Anthropic | 20 Nov 2026 | Yes | Allows any origin when the request sends `anthropic-dangerous-direct-browser-access: true`. Checked again from https://shivemn.github.io. |
 | OpenAI | Not yet | Unknown | Not reachable from the build environment. Run the script locally. |
 | Google Gemini | Not yet | Unknown | Not reachable from the build environment. Run the script locally. |
-| OpenRouter | Not yet | Unknown | Not reachable from the build environment. Run the script locally. |
+| OpenRouter | 20 Nov 2026 | Yes | Checked from https://shivemn.github.io in a real browser: the model list and chat completions both answer the page. This is the site's default. |
 | Groq | Not yet | Unknown | Not reachable from the build environment. Run the script locally. |
 
 A provider that blocks browser calls is still usable through the local
