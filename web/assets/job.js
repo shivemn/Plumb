@@ -5,7 +5,7 @@
 // visitor's own key.
 import { ApiError, checkAnswers, getHealth, getJob, getJobPart, startJob } from "./api.js";
 import { bobShape, footer, h, header, plural } from "./common.js";
-import { complete, freeModels, ModelError, PROVIDERS, readable } from "./models.js";
+import { complete, isFree, ModelError, openRouterModels, PROVIDERS, readable } from "./models.js";
 import { render, show } from "./report.js";
 
 const root = document.getElementById("app");
@@ -164,14 +164,25 @@ function writer(id, note) {
     remember.checked = Boolean(key.value);
     keyLink.href = p.keyPage;
     keyLink.textContent = "Get a key";
-    modelBox.replaceChildren(h("label", { for: "model", text: "Model" }), h("input", { id: "model", type: "text", value: remembered.provider === name && remembered.model ? remembered.model : p.model, spellcheck: "false" }));
-    if (name === "openrouter") listFreeModels(modelBox, remembered.model);
+    const input = h("input", {
+      id: "model",
+      type: "text",
+      list: "model-list",
+      autocomplete: "off",
+      spellcheck: "false",
+      value: remembered.provider === name && remembered.model ? remembered.model : p.model,
+      oninput: sayEstimate,
+    });
+    modelBox.replaceChildren(h("label", { for: "model", text: "Model" }), input, h("datalist", { id: "model-list" }), h("p", { class: "hint", text: p.hint }));
+    if (name === "openrouter") suggestModels(modelBox);
     sayEstimate();
   };
   const sayEstimate = () => {
     if (!tasks) return;
     const tokens = tasks.tasks.reduce((n, t) => n + t.estimated_tokens, 0);
-    estimate.textContent = `${plural(tasks.tasks.length, "request")}, about ${Math.round(tokens / 1000)}k input tokens in all. ${PROVIDERS[provider].note}`;
+    const model = modelBox.querySelector("#model")?.value.trim() || "";
+    const cost = isFree(provider, model) ? "This model is free." : provider === "openrouter" ? "This model is billed to your OpenRouter account at its rates." : PROVIDERS[provider].note;
+    estimate.textContent = `${plural(tasks.tasks.length, "request")}, about ${Math.round(tokens / 1000)}k input tokens in all. ${cost}`;
   };
 
   const choices = h(
@@ -243,18 +254,11 @@ function writer(id, note) {
   return panel;
 }
 
-async function listFreeModels(box, chosen) {
-  const models = await freeModels();
-  const input = box.querySelector("#model");
-  if (!models.length || !input || !box.isConnected) return;
-  const current = chosen && models.some((m) => m.id === chosen) ? chosen : input.value;
-  const select = h(
-    "select",
-    { id: "model" },
-    models.map((m) => h("option", { value: m.id, selected: m.id === current, text: m.name.replace(/\s*\(free\)$/i, "") })),
-  );
-  if (!models.some((m) => m.id === current)) select.prepend(h("option", { value: current, selected: true, text: current }));
-  input.replaceWith(select);
+async function suggestModels(box) {
+  const models = await openRouterModels();
+  const list = box.querySelector("datalist");
+  if (!models.length || !list || !box.isConnected) return;
+  list.replaceChildren(...models.map((m) => h("option", { value: m.id, label: m.free ? `${m.name.replace(/\s*\(free\)$/i, "")} · free` : m.name })));
 }
 
 async function write(id, tasks, answers, chosen, into) {

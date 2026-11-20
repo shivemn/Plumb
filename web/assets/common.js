@@ -87,7 +87,9 @@ export function niceDate(iso) {
 }
 
 export function plural(count, noun, many) {
-  return `${count.toLocaleString("en")} ${count === 1 ? noun : many || `${noun}s`}`;
+  // entry → entries, but day → days
+  const regular = /[^aeiou]y$/.test(noun) ? `${noun.slice(0, -1)}ies` : /(s|x|ch|sh)$/.test(noun) ? `${noun}es` : `${noun}s`;
+  return `${count.toLocaleString("en")} ${count === 1 ? noun : many || regular}`;
 }
 
 const NS = "http://www.w3.org/2000/svg";
@@ -103,12 +105,17 @@ export function bobShape() {
   return svg('<path d="M6.5 0 L13 7 L6.5 17 L0 7 Z"/>', { width: "13", height: "17", viewBox: "0 0 13 17", "aria-hidden": "true" });
 }
 
-export function brand() {
-  const mark = svg(
-    '<path d="M11 1v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M11 8.5l5 5-5 7.5-5-7.5z" fill="currentColor"/>',
-    { width: "22", height: "22", viewBox: "0 0 22 22", "aria-hidden": "true" },
+// The mark: a plumb line, with a branch that leaves it and merges back
+// before the bob, on a tile.
+export function mark(size = 28) {
+  return svg(
+    '<rect x="1" y="1" width="46" height="46" rx="12" fill="var(--mark-tile)" stroke="var(--mark-edge)" stroke-width="1.5"/><path d="M10 24h28" stroke="#e6ede9" stroke-opacity="0.32" stroke-width="2.6" stroke-linecap="round"/><path d="M21 1.75V29" stroke="#e6ede9" stroke-width="2.6" stroke-linecap="round"/><path d="M21 8c0 5.5 9 4.5 9 9.5s-9 5.5-9 10.5" fill="none" stroke="#e6ede9" stroke-width="2.4" stroke-linecap="round"/><circle cx="30" cy="17" r="3" fill="#e6ede9"/><path d="M21 28.5l5.5 6.5L21 43l-5.5-8z" fill="#d4a72c"/>',
+    { width: String(size), height: String(size), viewBox: "0 0 48 48", "aria-hidden": "true" },
   );
-  return h("a", { class: "brand", href: "./" }, mark, "Plumb");
+}
+
+export function brand() {
+  return h("a", { class: "brand", href: "./" }, mark(), "Plumb");
 }
 
 export function header() {

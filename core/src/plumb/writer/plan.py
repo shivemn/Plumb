@@ -34,7 +34,7 @@ SECTIONS: dict[str, SectionSpec] = {
     ),
     "system": SectionSpec(
         "system",
-        "System design",
+        "How it connects",
         (Topic.SYSTEM, Topic.MIGRATIONS, Topic.SETTINGS),
         "Explain how the running parts fit together: what runs from this repo, what it "
         "stores data in, what outside services it calls, and how it is configured. The page "

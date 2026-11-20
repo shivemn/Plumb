@@ -40,7 +40,7 @@ answer a question, the report says "not determined".
 
 | Kind    | Leads with |
 |---------|------------|
-| service | System design diagram, then how a request moves |
+| service | Diagram of how the parts connect, then how a request moves |
 | library | What it lets other code do, main modules, how a call flows |
 | cli     | Commands and the path from input to output |
 | data    | Data sources, the order scripts run in, outputs |

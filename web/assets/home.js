@@ -106,25 +106,40 @@ async function submit(text) {
   const form = ask.querySelector("form");
   if (form.getAttribute("aria-busy") === "true") return;
   form.setAttribute("aria-busy", "true");
+  // Answer the click at once: the bob drops while the server takes the repo.
+  const hero = document.getElementById("hero");
+  if (!reducedMotion()) hero.classList.add("dropping");
+  const dropped = new Promise((done) => setTimeout(done, reducedMotion() ? 0 : 520));
   const started = Date.now();
-  for (;;) {
-    try {
-      const job = await startJob(repo);
-      return dropTo(`report.html?job=${encodeURIComponent(job.id)}`);
-    } catch (error) {
-      // Give a sleeping server up to two minutes to wake.
-      if (error.waking && Date.now() - started < 120_000) {
-        if (!answer.querySelector(".waking")) {
-          answer.replaceChildren(h("div", { class: "notice waking reveal-in" }, h("strong", { text: "Waking Plumb's server." }), " It sleeps when nobody has used it for a while, and takes about a minute to start. Your repo goes in as soon as it is up."));
+  // A sleeping server holds the request while it starts; say so if it is slow.
+  const slow = setTimeout(() => showWaking(answer), 2500);
+  try {
+    for (;;) {
+      try {
+        const job = await startJob(repo);
+        await dropped;
+        return location.assign(`report.html?job=${encodeURIComponent(job.id)}`);
+      } catch (error) {
+        // Give a sleeping server up to two minutes to wake.
+        if (error.waking && Date.now() - started < 120_000) {
+          showWaking(answer);
+          await new Promise((done) => setTimeout(done, 5000));
+          continue;
         }
-        await new Promise((done) => setTimeout(done, 5000));
-        continue;
+        form.removeAttribute("aria-busy");
+        hero.classList.remove("dropping");
+        if (error.waking) return runLocally(answer, repo, error.message, " You can also run Plumb on your own machine:");
+        return answer.replaceChildren(h("div", { class: "notice reveal-in" }, error.message));
       }
-      form.removeAttribute("aria-busy");
-      if (error.waking) return runLocally(answer, repo, error.message, " You can also run Plumb on your own machine:");
-      return answer.replaceChildren(h("div", { class: "notice reveal-in" }, error.message));
     }
+  } finally {
+    clearTimeout(slow);
   }
+}
+
+function showWaking(answer) {
+  if (answer.querySelector(".waking")) return;
+  answer.replaceChildren(h("div", { class: "notice waking reveal-in" }, h("strong", { text: "Waking Plumb's server." }), " It sleeps when nobody has used it for a while, and takes about a minute to start. Your repo goes in as soon as it is up."));
 }
 
 // The bob drops into the box, then the next page opens.

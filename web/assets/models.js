@@ -7,7 +7,8 @@ export const PROVIDERS = {
     keyPage: "https://openrouter.ai/keys",
     keyShape: "sk-or-…",
     model: "nvidia/nemotron-3-ultra-550b-a55b:free",
-    note: "Free models cost nothing. OpenRouter allows 50 free requests a day on a new account.",
+    note: "Models ending in :free cost nothing; OpenRouter allows 50 free requests a day on an account without credits. Other models are billed to your OpenRouter account.",
+    hint: "Pick from the list, or type the name of any OpenRouter model. Free ones end in :free.",
   },
   anthropic: {
     label: "Anthropic",
@@ -15,24 +16,29 @@ export const PROVIDERS = {
     keyShape: "sk-ant-…",
     model: "claude-opus-5-5",
     note: "Billed to your Anthropic account at its usual rates.",
+    hint: "Type any model your Anthropic account can use.",
   },
 };
 
 export class ModelError extends Error {}
 
-// OpenRouter's free models, largest context first. Empty if the list cannot be read.
-export async function freeModels() {
+// Every model OpenRouter offers, the free ones first, for the model box to
+// suggest. Empty if the list cannot be read; any name can still be typed.
+export async function openRouterModels() {
   try {
     const response = await fetch("https://openrouter.ai/api/v1/models");
     const { data } = await response.json();
+    const free = (m) => m.id.endsWith(":free");
     return data
-      .filter((m) => typeof m.id === "string" && m.id.endsWith(":free"))
-      .sort((a, b) => (b.context_length || 0) - (a.context_length || 0))
-      .map((m) => ({ id: m.id, name: m.name || m.id }));
+      .filter((m) => typeof m.id === "string")
+      .sort((a, b) => free(b) - free(a) || (b.context_length || 0) - (a.context_length || 0))
+      .map((m) => ({ id: m.id, name: m.name || m.id, free: free(m) }));
   } catch {
     return [];
   }
 }
+
+export const isFree = (provider, model) => provider === "openrouter" && model.endsWith(":free");
 
 async function send(url, headers, body) {
   let response;

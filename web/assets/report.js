@@ -29,7 +29,7 @@ const ORDER = {
 };
 const DEFAULT_ORDER = ["system", "entry_points", "structure", "hot_spots", "contribute", "gaps"];
 const TITLES = {
-  system: "System design",
+  system: "How it connects",
   flow: "How a request moves",
   api: "What it lets your code do",
   entry_points: "Ways in",
@@ -160,18 +160,33 @@ function wireSpine() {
       if (on && getComputedStyle(spine).display === "flex") a.scrollIntoView({ block: "nearest", inline: "center" });
     }
   };
-  mark("top-summary");
-  if (!("IntersectionObserver" in window)) return;
-  const seen = new Map();
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
-      const best = targets.find((t) => (seen.get(t.id) || 0) > 0);
-      if (best) mark(best.id);
-    },
-    { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.01, 0.5] },
-  );
-  targets.forEach((t) => observer.observe(t));
+  // The current section is the last one whose top has passed a third of the
+  // way down the window. Short sections at the end may never get there, so
+  // at the bottom of the page the last section is current.
+  let current = "";
+  let queued = false;
+  const update = () => {
+    queued = false;
+    if (!targets.length) return;
+    const line = innerHeight / 3;
+    let id = targets[0].id;
+    for (const t of targets) if (t.getBoundingClientRect().top <= line) id = t.id;
+    const root = document.documentElement;
+    if (root.scrollTop > 0 && root.scrollTop + innerHeight >= root.scrollHeight - 4) id = targets.at(-1).id;
+    if (id !== current) {
+      current = id;
+      mark(id);
+    }
+  };
+  const later = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(update);
+    }
+  };
+  addEventListener("scroll", later, { passive: true });
+  addEventListener("resize", later);
+  update();
 }
 
 // One source list open at a time; Escape or a click elsewhere closes it.

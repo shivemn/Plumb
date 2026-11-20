@@ -22,6 +22,8 @@
   --hot: #d4a72c;
   --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 18px 40px -24px rgba(0, 0, 0, 0.7);
   --grid: rgba(230, 237, 233, 0.1);
+  --mark-tile: #22322d;
+  --mark-edge: rgba(230, 237, 233, 0.14);
   --glow: rgba(212, 167, 44, 0.11);
   --sans: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Atkinson Hyperlegible Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
@@ -53,6 +55,8 @@
     --hot: #d39a00;
     --shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 18px 40px -26px rgba(31, 42, 46, 0.35);
     --grid: rgba(31, 42, 46, 0.11);
+    --mark-tile: #15201d;
+    --mark-edge: transparent;
     --glow: rgba(154, 114, 8, 0.09);
     color-scheme: light;
   }
@@ -77,6 +81,8 @@
   --hot: #d39a00;
   --shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 18px 40px -26px rgba(31, 42, 46, 0.35);
   --grid: rgba(31, 42, 46, 0.11);
+  --mark-tile: #15201d;
+  --mark-edge: transparent;
   --glow: rgba(154, 114, 8, 0.09);
   color-scheme: light;
 }
@@ -135,10 +141,16 @@ code { overflow-wrap: anywhere; }
 .ask label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .ask input { flex: 1; min-width: 0; height: 48px; border: 0; background: transparent; color: var(--ink); font: inherit; font-family: var(--mono); font-size: 16px; outline: none; }
 .ask input::placeholder { color: var(--faint); }
-.go { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--brass); color: var(--bg); cursor: pointer; transition: transform var(--quick) var(--ease), filter var(--quick) ease; }
-.go:hover { transform: scale(1.06); filter: brightness(1.08); }
-.go:active { transform: scale(0.96); }
-.go svg { width: 20px; height: 20px; }
+.go { position: relative; flex: none; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--brass); color: var(--bg); cursor: pointer; transition: transform var(--quick) var(--ease), filter var(--quick) ease; -webkit-tap-highlight-color: transparent; }
+.go:hover { transform: scale(1.05); filter: brightness(1.08); }
+.go:active { transform: scale(0.95); transition-duration: 60ms; }
+.go svg { width: 20px; height: 20px; transition: opacity var(--quick) ease, transform var(--quick) var(--ease); }
+/* Busy: the arrow slips away and a ring turns, with no change of size. */
+.go::after { content: ""; position: absolute; inset: 11px; border: 2.5px solid currentColor; border-right-color: transparent; border-radius: 50%; opacity: 0; transition: opacity var(--quick) ease; }
+form[aria-busy="true"] .go { transform: none; filter: none; cursor: progress; pointer-events: none; }
+form[aria-busy="true"] .go svg { opacity: 0; transform: translateX(6px); }
+form[aria-busy="true"] .go::after { opacity: 1; animation: turn 800ms linear infinite; }
+@keyframes turn { to { transform: rotate(1turn); } }
 .ask.shake form { animation: shake 380ms var(--ease); }
 @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 
@@ -318,8 +330,6 @@ td a { font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
 .removed .why { display: block; color: var(--faint); font-size: 13px; }
 
 /* A job on the server: the bob drops down the steps as they happen */
-.ask form[aria-busy="true"] .go { animation: breathe 1.2s var(--ease) infinite; pointer-events: none; }
-@keyframes breathe { 50% { transform: scale(0.9); filter: brightness(0.9); } }
 main.job { max-width: 620px; padding-top: 28px; }
 .line-wrap { position: relative; padding-left: 34px; }
 .line-wrap::before { content: ""; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 1.5px; background: var(--line-strong); }
@@ -359,6 +369,7 @@ main.job { max-width: 620px; padding-top: 28px; }
 .field { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 8px 12px; }
 .field label { color: var(--faint); font-size: 14px; }
 .field a { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.field .hint { grid-column: 2 / -1; margin: -2px 0 0; color: var(--faint); font-size: 13px; }
 .field input, .field select { width: 100%; min-width: 0; height: 42px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--bg-sunk); color: var(--ink); font: inherit; font-family: var(--mono); font-size: 14px; transition: border-color var(--quick) ease, box-shadow var(--quick) ease; }
 .field input:focus, .field select:focus { outline: none; border-color: var(--brass); box-shadow: 0 0 0 3px var(--brass-soft); }
 .check { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; }
@@ -395,10 +406,12 @@ main.job { max-width: 620px; padding-top: 28px; }
   .hot-list li { grid-template-columns: minmax(0, 1fr) 60px 28px; }
   .writer { padding: 18px; margin-top: 20px; }
   .field { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .field .hint { grid-column: auto; }
   .src .pop { position: fixed; left: 12px; right: 12px; top: auto; bottom: 12px; max-width: none; width: auto; max-height: 50vh; overflow-y: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  form[aria-busy="true"] .go::after { animation: none; border-right-color: currentColor; opacity: 0.6; }
   *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; transition-delay: 0ms !important; scroll-behavior: auto !important; }
   .plumb .swing { animation: none; }
 }
