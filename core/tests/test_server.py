@@ -36,6 +36,10 @@ def api(store: JobStore, settings: Settings | None = None) -> httpx.Client:
     return TestClient(create_app(store, settings))
 
 
+def api_with_worker(store: JobStore, alive: bool) -> httpx.Client:
+    return TestClient(create_app(store, None, lambda: alive))
+
+
 @pytest.fixture
 def store(tmp_path: Path) -> Iterator[JobStore]:
     jobs = JobStore(tmp_path / "jobs.sqlite")
@@ -224,6 +228,9 @@ def test_api(store: JobStore) -> None:
     client = api(store)
     health = client.get("/api/health").json()
     assert health["ok"] is True and health["server_reports_left_today"] == 0
+    assert health["worker_running"] is None
+    dead = api_with_worker(store, alive=False)
+    assert dead.get("/api/health").json()["worker_running"] is False
 
     created = client.post("/api/jobs", json={"repo": "https://github.com/Encode/httpx"})
     assert created.status_code == 202

@@ -23,6 +23,7 @@ from __future__ import annotations
 import hashlib
 import re
 import secrets
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
 from typing import Annotated
@@ -111,7 +112,11 @@ def _view(job: Job, waiting: int | None = None) -> JobView:
     )
 
 
-def create_app(store: JobStore, settings: Settings | None = None) -> FastAPI:
+def create_app(
+    store: JobStore,
+    settings: Settings | None = None,
+    worker_alive: Callable[[], bool] | None = None,
+) -> FastAPI:
     config = settings or Settings()
     app = FastAPI(title="Plumb", version=__version__, docs_url="/api/docs", redoc_url=None)
     app.add_middleware(
@@ -149,6 +154,8 @@ def create_app(store: JobStore, settings: Settings | None = None) -> FastAPI:
             "queued": store.waiting(),
             "server_model": config.server_model,
             "server_reports_left_today": left if config.server_model else 0,
+            # None when this process does not run the worker itself.
+            "worker_running": worker_alive() if worker_alive else None,
         }
 
     @app.post("/api/jobs", status_code=status.HTTP_202_ACCEPTED)

@@ -256,19 +256,23 @@ def serve(
     import multiprocessing
 
     from plumb.server.config import server_settings
+    from plumb.server.keeper import WorkerKeeper
 
     settings = server_settings(os.environ)
-    process = None
+    keeper = None
     if with_worker:
-        process = multiprocessing.Process(
-            target=_worker_process, args=(database, workdir), daemon=True, name="plumb-worker"
+        keeper = WorkerKeeper(
+            lambda: multiprocessing.Process(
+                target=_worker_process, args=(database, workdir), daemon=True, name="plumb-worker"
+            )
         )
-        process.start()
+        keeper.start()
     try:
-        uvicorn.run(create_app(JobStore(database), settings), host=host, port=port)
+        app_ = create_app(JobStore(database), settings, keeper.alive if keeper else None)
+        uvicorn.run(app_, host=host, port=port)
     finally:
-        if process is not None:
-            process.terminate()
+        if keeper is not None:
+            keeper.stop()
 
 
 def _worker_process(database: Path, workdir: Path) -> None:
