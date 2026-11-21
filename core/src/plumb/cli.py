@@ -259,6 +259,9 @@ def serve(
     from plumb.server.keeper import WorkerKeeper
 
     settings = server_settings(os.environ)
+    # Set up the job table before the worker opens it, so the two processes
+    # never race to create it.
+    store = JobStore(database)
     keeper = None
     if with_worker:
         keeper = WorkerKeeper(
@@ -268,7 +271,7 @@ def serve(
         )
         keeper.start()
     try:
-        app_ = create_app(JobStore(database), settings, keeper.alive if keeper else None)
+        app_ = create_app(store, settings, keeper.alive if keeper else None)
         uvicorn.run(app_, host=host, port=port)
     finally:
         if keeper is not None:

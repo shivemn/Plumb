@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import sqlite3
 import threading
+import time
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -46,6 +47,8 @@ _LATER_COLUMNS = ("stage", "report", "client", "views", "note")
 
 # A running job not finished in this time is taken to be from a worker that died.
 STALE_AFTER = timedelta(minutes=15)
+# Attempts at opening the table while another process is setting it up.
+SETUP_TRIES = 12
 # A request without a commit reuses an analysis of the newest commit this recent.
 FRESH_FOR = timedelta(hours=1)
 
@@ -124,7 +127,24 @@ class JobStore:
         )
         self._db.row_factory = sqlite3.Row
         self._lock = threading.RLock()
-        self._db.execute("PRAGMA journal_mode=WAL")
+        # Switching to WAL can be refused at once with "database is locked",
+        # without the 30-second wait, while another process opens the file;
+        # that crashed the worker when a sleeping server woke. The mode is
+        # kept in the file, so it is set only when not set already, and a
+        # refused setup is tried again.
+        for attempt in range(SETUP_TRIES):
+            try:
+                self._setup()
+                break
+            except sqlite3.OperationalError as error:
+                if "locked" not in str(error) or attempt == SETUP_TRIES - 1:
+                    raise
+                time.sleep(0.2 * (attempt + 1))
+
+    def _setup(self) -> None:
+        mode = self._db.execute("PRAGMA journal_mode").fetchone()
+        if mode is None or str(mode[0]).lower() != "wal":
+            self._db.execute("PRAGMA journal_mode=WAL")
         self._db.executescript(SCHEMA)
         have = {row[1] for row in self._db.execute("PRAGMA table_info(jobs)")}
         for column in _LATER_COLUMNS:

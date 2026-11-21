@@ -427,3 +427,22 @@ def _open_and_add(path: str) -> int:
     job = store.add(f"o/{uuid.uuid4().hex[:8]}")
     store.close()
     return 1 if job.status is Status.QUEUED else 0
+
+
+def test_opening_waits_out_a_lock_held_by_another_process(tmp_path: Path) -> None:
+    import sqlite3
+    import threading
+
+    path = tmp_path / "busy.sqlite"
+    holder = sqlite3.connect(path, isolation_level=None, check_same_thread=False)
+    holder.execute("BEGIN EXCLUSIVE")
+    release = threading.Timer(1.0, lambda: holder.execute("COMMIT"))
+    release.start()
+    store = JobStore(path)  # waits, or tries again, until the lock is gone
+    assert store.waiting() == 0
+    store.close()
+    release.join()
+    holder.close()
+    again = JobStore(path)  # already in WAL: not switched a second time
+    assert again._db.execute("PRAGMA journal_mode").fetchone()[0] == "wal"  # pyright: ignore[reportPrivateUsage]
+    again.close()
