@@ -195,6 +195,12 @@ function wireSources() {
     const opened = event.target;
     if (!(opened instanceof HTMLDetailsElement) || !opened.classList.contains("src") || !opened.open) return;
     for (const other of document.querySelectorAll("details.src[open]")) if (other !== opened) other.open = false;
+    // Keep the list on screen: near the end of a line it would run off the right edge.
+    const pop = opened.querySelector(".pop");
+    if (!pop || getComputedStyle(pop).position === "fixed") return;
+    pop.style.left = "";
+    const over = pop.getBoundingClientRect().right - (document.documentElement.clientWidth - 16);
+    if (over > 0) pop.style.left = `${-8 - over}px`;
   }, true);
   document.addEventListener("click", (event) => {
     if (!event.target.closest("details.src")) for (const d of document.querySelectorAll("details.src[open]")) d.open = false;
@@ -450,8 +456,17 @@ function systemFigure(ctx, view) {
     );
     canvas.append(box);
   }
-  const figure = h("div", { class: "diagram", role: "group", "aria-label": "System diagram. Select a part to see where it was found." }, canvas);
+  const figure = h("div", { class: "diagram", role: "group", "aria-label": "Diagram of how the parts connect. Select a part to see where it was found." }, canvas);
+  // Wider than a phone: fade the cut edge until it has been scrolled to.
+  const edges = () => {
+    const more = figure.scrollWidth - figure.clientWidth;
+    figure.classList.toggle("more-right", more > 2 && figure.scrollLeft < more - 2);
+    figure.classList.toggle("more-left", figure.scrollLeft > 2);
+  };
+  figure.addEventListener("scroll", edges, { passive: true });
+  addEventListener("resize", edges);
   queueMicrotask(() => {
+    edges();
     for (const path of layer.querySelectorAll("path[d]")) if (path.getTotalLength) path.style.setProperty("--len", String(Math.ceil(path.getTotalLength())));
     whenSeen(figure, () => figure.classList.add("drawn"));
   });
@@ -459,7 +474,7 @@ function systemFigure(ctx, view) {
     "div",
     { class: "figure" },
     figure,
-    h("div", { class: "legend" }, h("span", {}, h("i"), "Runs from this repo"), h("span", {}, h("i", { class: "store" }), "Stores data"), h("span", {}, h("i", { class: "outside" }), "Outside this repo"), h("span", { text: "Select a part to see where it was found." })),
+    h("div", { class: "legend" }, h("span", {}, h("i"), "Runs from this repo"), h("span", {}, h("i", { class: "store" }), "Stores data"), h("span", {}, h("i", { class: "outside" }), "Outside this repo"), h("span", { class: "legend-hint", text: "Select a part to see where it was found." }), h("span", { class: "swipe-hint", text: "Swipe the diagram sideways to see all of it." })),
     view.links_known ? null : h("p", { class: "note", text: "No file says which service uses which store, so no arrows are drawn between them." }),
     detail,
   );

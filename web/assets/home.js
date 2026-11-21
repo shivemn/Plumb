@@ -51,6 +51,7 @@ function hero() {
     autocomplete: "off",
     spellcheck: "false",
     placeholder: "github.com/owner/name",
+    oninput: nudge,
   });
   const form = h(
     "form",
@@ -140,6 +141,15 @@ async function submit(text) {
 function showWaking(answer) {
   if (answer.querySelector(".waking")) return;
   answer.replaceChildren(h("div", { class: "notice waking reveal-in" }, h("strong", { text: "Waking Plumb's server." }), " It sleeps when nobody has used it for a while, and takes about a minute to start. Your repo goes in as soon as it is up."));
+}
+
+// Typing knocks the plumb line: the bob swings, then settles back to true.
+function nudge() {
+  const hero = document.getElementById("hero");
+  if (!hero || reducedMotion() || hero.classList.contains("dropping")) return;
+  hero.classList.remove("nudge");
+  void hero.offsetWidth; // restart the swing on every keystroke
+  hero.classList.add("nudge");
 }
 
 // The bob drops into the box, then the next page opens.
