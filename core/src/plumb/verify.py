@@ -9,6 +9,11 @@ A claim is kept only if all of these hold:
 - every well-known technology it names (PostgreSQL, Kafka, React...)
   appears in a cited fact.
 
+A supported sentence that only tallies files or lines ("a library of 8
+source files") is also left out: the page shows those counts already, and
+the sentence says nothing about how the repo works. It is not listed as
+removed, since it is not wrong.
+
 These checks catch invented files, routes and figures, the commonest ways
 a generated explanation goes wrong. They cannot catch a wrong reading of
 a fact that uses only the fact's own words; the evaluation's answer keys
@@ -33,6 +38,12 @@ _NOT_A_PATH = re.compile(r"[A-Z]+(?:/[A-Z]+)+|and/or|either/or|read/write|input/
 _ROUTE = re.compile(r"(?<![\w/.])/[\w{}:.\[\]-]+(?:/[\w{}:.\[\]-]*)*")
 _CODE = re.compile(r"`([^`]+)`")
 _NUMBER = re.compile(r"(?<![\w./-])\d[\d,]*(?:\.\d+)?(?![\w/])")
+# A count of files, lines and the like: "8 source files", "230,028 lines of code".
+_TALLY = re.compile(
+    r"\b\d[\d,]*\s+(?:[\w-]+\s+){0,2}"
+    r"(?:files?|scripts?|lines|modules?|packages|classes|functions|folders|directories)\b",
+    re.IGNORECASE,
+)
 
 
 _FRAMEWORKS = (
@@ -144,6 +155,8 @@ def verify(drafts: list[Draft], facts: FactSet, model: str) -> Report:
         for claim in draft.claims:
             result = check_claim(claim, given, all_ids)
             if result.ok:
+                if _TALLY.search(claim.text):
+                    continue  # true, but only repeats a count the page shows
                 if len(kept) < spec.max_claims:
                     cited.update(claim.fact_ids)
                 kept.append(Claim(text=claim.text.strip(), fact_ids=claim.fact_ids))

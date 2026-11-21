@@ -120,3 +120,32 @@ def test_generic_terms_and_implied_tools_are_not_rejected() -> None:
     ).ok
     unrelated = claim("It deploys to Kubernetes.", "f8")
     assert not check_claim(unrelated, given, set(given)).ok
+
+
+def test_sentences_that_only_count_files_are_left_out() -> None:
+    tally = Fact(
+        id="f4",
+        topic=Topic.LANGUAGES,
+        statement="Python: 8 source files, 1,204 lines; Shell: 1 script",
+        evidence=[FileEvidence(path="pyproject.toml")],
+    )
+    facts = FactSet(
+        repo=RepoRef(owner="o", name="shop", commit="4f2a91c"),
+        kind=RepoKind.SERVICE,
+        facts=[*FACTS, tally],
+    )
+    tasks = {t.section.id: t for t in plan_report(facts)}
+    task = tasks["overview"]
+    drafts = [
+        Draft(
+            task,
+            [
+                claim("It is a Python library of 8 source files and 1 shell script.", "f4"),
+                claim("It has 1,204 lines of code.", "f4"),
+                claim("It is written in Python.", "f4"),
+            ],
+        )
+    ]
+    report = verify(drafts, facts, "fake:test")
+    assert [c.text for c in report.sections[0].claims] == ["It is written in Python."]
+    assert report.removed == []  # not wrong, so not listed as removed
