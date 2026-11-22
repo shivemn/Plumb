@@ -5,19 +5,18 @@
 import {
   append,
   bobShape,
-  footer,
   getJSON,
   githubCommit,
   githubFile,
   githubFolder,
   githubIssue,
   h,
-  header,
   lines,
   modelName,
   niceDate,
   pathText,
   plural,
+  shell,
   rich,
   whenSeen,
 } from "./common.js";
@@ -43,7 +42,7 @@ const root = document.getElementById("app");
 
 start().catch((error) => {
   console.error(error);
-  root.replaceChildren(h("div", { class: "wrap" }, header(), h("p", { class: "status" }, "This report could not be loaded. ", h("a", { href: "./", text: "Explain another repo" }))));
+  root.replaceChildren(shell(h("div", { class: "wrap" }, h("p", { class: "status" }, "This report could not be loaded. ", h("a", { href: "./", text: "Explain another repo" })))));
 });
 
 async function start() {
@@ -86,10 +85,9 @@ export function render(report, options = {}) {
   const stats = ctx.views.stats.filter((s) => statsWanted.includes(s.label));
   const overview = claimsBy.get("overview") || [];
 
-  return h(
+  return shell(h(
     "div",
     { class: "wrap" },
-    header(),
     h(
       "section",
       { class: "report-top" },
@@ -137,8 +135,7 @@ export function render(report, options = {}) {
         sections.map((s) => h("section", { class: "section", id: s.id, "aria-labelledby": `${s.id}-h` }, h("h2", { id: `${s.id}-h`, text: s.title }), s.node)),
       ),
     ),
-    footer(),
-  );
+  ));
 }
 
 function titleFor(id, kind) {

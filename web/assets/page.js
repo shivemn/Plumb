@@ -1,5 +1,5 @@
 // Plain pages: the shared header and footer around static text.
-import { footer, header } from "./common.js";
+import { h, shell } from "./common.js";
 
-document.getElementById("header")?.replaceWith(header());
-document.getElementById("footer")?.replaceWith(footer());
+const main = document.querySelector("main");
+if (main) document.body.replaceChildren(shell(h("div", { class: "wrap" }, main)));

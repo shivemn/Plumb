@@ -73,6 +73,8 @@ def write_index(reports_dir: Path, order: list[SiteRepo]) -> Path:
             continue
         report = Report.model_validate_json(path.read_text(encoding="utf-8"))
         kept = sum(len(s.claims) for s in report.sections)
+        stats = report.views.stats if report.views else []
+        language = next((s.value for s in stats if s.label == "Language"), None)
         removed = sum(1 for r in report.removed if r.text)
         entries.append(
             {
@@ -80,6 +82,7 @@ def write_index(reports_dir: Path, order: list[SiteRepo]) -> Path:
                 "repo": f"{report.repo.owner}/{report.repo.name}",
                 "commit": report.repo.commit,
                 "kind": report.kind.value,
+                "language": language,
                 "summary": summary_of(report),
                 "kept": kept,
                 "removed": removed,

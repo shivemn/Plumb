@@ -105,29 +105,32 @@ export function bobShape() {
   return svg('<path d="M6.5 0 L13 7 L6.5 17 L0 7 Z"/>', { width: "13", height: "17", viewBox: "0 0 13 17", "aria-hidden": "true" });
 }
 
-// The mark: a plumb line, with a branch that leaves it and merges back
-// before the bob, on a tile.
-export function mark(size = 28) {
+// The mark: a plumb line with its bob. `hero` is the large one that swings.
+export function plumbMark(hero = false) {
   return svg(
-    '<rect x="1" y="1" width="46" height="46" rx="12" fill="var(--mark-tile)" stroke="var(--mark-edge)" stroke-width="1.5"/><path d="M10 24h28" stroke="#e6ede9" stroke-opacity="0.32" stroke-width="2.6" stroke-linecap="round"/><path d="M21 1.75V29" stroke="#e6ede9" stroke-width="2.6" stroke-linecap="round"/><path d="M21 8c0 5.5 9 4.5 9 9.5s-9 5.5-9 10.5" fill="none" stroke="#e6ede9" stroke-width="2.4" stroke-linecap="round"/><circle cx="30" cy="17" r="3" fill="#e6ede9"/><path d="M21 28.5l5.5 6.5L21 43l-5.5-8z" fill="#d4a72c"/>',
-    { width: String(size), height: String(size), viewBox: "0 0 48 48", "aria-hidden": "true" },
+    `<g class="${hero ? "plumb-swing" : ""}"><line class="plumb-string" x1="20" y1="0" x2="20" y2="103"/>` +
+      '<path class="plumb-bob" d="M20 99 29 111 20 129 11 111Z"/></g>',
+    { class: hero ? "plumb-mark" : "plumb-mark-small", viewBox: "0 0 40 132", "aria-hidden": "true" },
   );
 }
 
 export function brand() {
-  return h("a", { class: "brand", href: "./" }, mark(), "Plumb");
+  return h("a", { class: "brand", href: "./", "aria-label": "Plumb home" }, plumbMark(), h("span", { text: "Plumb" }));
 }
 
 export function header() {
+  // On the home page the links scroll; elsewhere they lead back to it.
+  const home = /\/(index\.html)?$/.test(location.pathname) ? "" : "./";
   return h(
     "header",
-    { class: "site-header" },
+    { class: "site-header page-wrap" },
     brand(),
     h(
       "nav",
-      { class: "site-nav", "aria-label": "Site" },
-      h("a", { href: "./#recent", text: "Reports" }),
-      h("a", { href: "https://github.com/shivemn/Plumb", text: "GitHub" }),
+      { class: "nav-links", "aria-label": "Main navigation" },
+      h("a", { href: `${home}#preview`, text: "See a report" }),
+      h("a", { href: `${home}#how`, text: "How it works" }),
+      h("a", { href: `${home}#recent`, text: "Recent" }),
       themeSwitch(),
     ),
   );
@@ -144,10 +147,10 @@ function currentTheme() {
 function themeSwitch() {
   const button = h(
     "button",
-    { class: "theme-switch", type: "button" },
-    svg('<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/>', { viewBox: "0 0 24 24", "aria-hidden": "true" }),
+    { class: "theme-toggle", type: "button" },
+    svg('<circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>', { viewBox: "0 0 24 24", "aria-hidden": "true" }),
   );
-  const label = () => button.setAttribute("aria-label", currentTheme() === "dark" ? "Switch to light mode" : "Switch to dark mode");
+  const label = () => button.setAttribute("aria-label", currentTheme() === "dark" ? "Switch to light theme" : "Switch to dark theme");
   label();
   button.addEventListener("click", () => {
     const next = currentTheme() === "dark" ? "light" : "dark";
@@ -184,12 +187,26 @@ function themeSwitch() {
 export function footer() {
   return h(
     "footer",
-    { class: "site-footer" },
-    h("span", { text: "Plumb explains a repo from its code, and every sentence links to the lines it came from." }),
-    h("a", { href: "https://github.com/shivemn/Plumb", text: "Source" }),
-    h("a", { href: "https://github.com/shivemn/Plumb/blob/main/docs/design.md", text: "How sentences are checked" }),
-    h("a", { href: "privacy.html", text: "Privacy" }),
+    {},
+    h(
+      "div",
+      { class: "page-wrap footer-inner" },
+      h("div", { class: "brand" }, plumbMark(), h("span", { text: "Plumb" })),
+      h("p", { text: "Know where to look before you start reading." }),
+      h(
+        "div",
+        {},
+        h("a", { href: "https://github.com/shivemn/Plumb", text: "GitHub" }),
+        h("a", { href: "https://github.com/shivemn/Plumb/blob/main/docs/design.md", text: "Method" }),
+        h("a", { href: "privacy.html", text: "Privacy" }),
+      ),
+    ),
   );
+}
+
+// The page frame: header, the page's own content, and the footer.
+export function shell(...content) {
+  return h("div", { class: "site-shell" }, header(), ...content, footer());
 }
 
 // Run `onEnter` once when the node scrolls into view (at once if motion is reduced).

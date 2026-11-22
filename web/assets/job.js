@@ -4,7 +4,7 @@
 // diagrams and tables with a panel to write the explanation with the
 // visitor's own key.
 import { ApiError, checkAnswers, getHealth, getJob, getJobPart, startJob } from "./api.js";
-import { bobShape, footer, h, header, plural } from "./common.js";
+import { bobShape, h, plural, shell } from "./common.js";
 import { complete, isFree, ModelError, openRouterModels, PROVIDERS, readable } from "./models.js";
 import { render, show } from "./report.js";
 
@@ -24,13 +24,13 @@ export async function showJob(id) {
   const line = plumbLine(STAGES);
   const message = h("div", { "aria-live": "polite" });
   root.replaceChildren(
-    h(
-      "div",
-      { class: "wrap" },
-      header(),
-      h("section", { class: "report-top" }, title, h("p", { class: "commit", text: "Plumb is reading the code. This usually takes under a minute." })),
-      h("main", { class: "job" }, line.node, message),
-      footer(),
+    shell(
+      h(
+        "div",
+        { class: "wrap" },
+        h("section", { class: "report-top" }, title, h("p", { class: "commit", text: "Plumb is reading the code. This usually takes under a minute." })),
+        h("main", { class: "job" }, line.node, message),
+      ),
     ),
   );
 
